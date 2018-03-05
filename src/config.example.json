@@ -1,0 +1,16 @@
+{
+  "discord": {
+    "commandCategories": [],
+    "defaultPrefixes": [],
+    "token": ""
+  },
+  "database": {
+    "db": "",
+    "host": "",
+    "port": 1234
+  },
+  "dashboard": {
+    "port": 1234,
+    "sessionSecret": ""
+  }
+}
