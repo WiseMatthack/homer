@@ -14,6 +14,7 @@ const client = new Client();
 /* i18n configuration */
 i18n.configure({
   autoReload: true,
+  cookie: 'locale',
   directory: `${__dirname}/Production/Locales`,
 });
 
@@ -23,3 +24,6 @@ client.loadEvents();
 /* Client login */
 client.login(client.config.discord.token)
   .catch(console.error);
+
+/* Module exporting */
+module.exports = client;

@@ -24,7 +24,7 @@ class CommandsManager extends Manager {
      * @type {Map<String, String[]>}
      */
     this.gps = new Map();
-    _map();
+    this._map();
   }
 
   /**
@@ -34,7 +34,7 @@ class CommandsManager extends Manager {
     for (const category of this.client.config.discord.commandCategories) {
       let categoryGPS = [];
 
-      readdir(`${path}/${category}`, (err, files) => {
+      readdir(`${this.path}/${category}`, (err, files) => {
         if (err) throw err;
         files.forEach(file => categoryGPS.push(file.split('.')[0]));
       });
@@ -58,7 +58,7 @@ class CommandsManager extends Manager {
     });
 
     if (category) {
-      return require(`${path}/${gpsCategory}/${cmd}.js`);
+      return require(`${this.path}/${gpsCategory}/${cmd}.js`);
     } else {
       return null;
     }

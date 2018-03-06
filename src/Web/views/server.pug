@@ -1,0 +1,36 @@
+//- Server - Represents a guild presentation page.
+
+<!DOCTYPE html>
+html(lang=`${locale}`)
+  head
+    include modules/head.pug
+  body
+    include modules/header.pug
+
+    div(class="jumbotron jumbotron-fluid")
+      div(class="container text-center")
+        img(src=`${guild.iconURL}` alt="" class="rounded-circle" height="150" width="150")
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center")
+          strong #{guild.name}
+        hr
+        p
+          strong #{__('dashboard.server.id')}: 
+          text #{guild.id}
+          br
+          strong #{__('dashboard.server.creationDate')}: 
+          text #{guild.creationDate}
+          br
+          strong #{__('dashboard.server.members')}: 
+          text #{__('dashboard.server.members-value', { total: guild.members, bots: guild.bots, online: guild.online, })}
+          br
+          strong #{__('dashboard.server.channels')}: 
+          text #{__('dashboard.server.channels-value', { text: guild.textChannels, voice: guild.voiceChannels, })}
+          br
+          strong #{__('dashboard.server.owner')}: 
+            span(class="nav-item")
+              a(href=`/user/${guild.ownerID}` style="color: grey;")
+                strong #{guild.ownerTag}
+
+    include modules/footer.pug
+
+    include modules/javascript.pug

@@ -1,0 +1,34 @@
+//- User - Represents a user page.
+
+<!DOCTYPE html>
+html(lang=`${locale}`)
+  head
+    include modules/head.pug
+  body
+    include modules/header.pug
+
+    div(class="jumbotron jumbotron-fluid")
+      div(class="container text-center")
+        img(src=`${user.avatarURL}` alt="" class="rounded-circle" height="150" width="150")
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center")
+          strong #{user.tag}
+        hr
+        p
+          strong #{__('dashboard.user.id')}: 
+          text #{user.id}
+          br
+          strong #{__('dashboard.user.presence')}: 
+          text #{user.presenceStatus}
+          img(src=`${user.presenceIcon}` height="20" width="20")
+          if user.presenceGame
+            em (#{user.presenceGame})
+          br
+          strong #{__('dashboard.user.creationDate')}: 
+          text #{user.creationDate}
+          br
+          strong #{__('dashboard.user.premium')}: 
+          text #{user.premium}
+
+    include modules/footer.pug
+
+    include modules/javascript.pug

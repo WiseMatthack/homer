@@ -1,7 +1,8 @@
 const { Client } = require('discord.js');
 const Dashboard = require('../Web/Dashboard');
 const { readdir } = require('fs');
-const config = require('../../config/config.json');
+const config = require('../config.json');
+const Constants = require('./Constants');
 
 /* Managers */
 const DatabaseManager = require('./Managers/DatabaseManager');
@@ -23,6 +24,12 @@ class ExtendedClient extends Client {
      * @type {Object}
      */
     this.config = config;
+
+    /**
+     * Constants for the client.
+     * @type {Constants}
+     */
+    this.constants = Constants;
 
     /**
      * Database manager associated to the client.
@@ -52,7 +59,7 @@ class ExtendedClient extends Client {
 
       for (const event of files) {
         const eventFile = new (require(`${__dirname}/../Production/Events/${event}`))(this);
-        client.on(eventFile.name, eventFile.handle);
+        this.on(eventFile.name, (...args) => eventFile.handle(...args));
         delete require.cache[require.resolve(`${__dirname}/../Production/Events/${event}`)];
       }
     });

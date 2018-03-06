@@ -1,11 +1,13 @@
 const Client = require('../Core/Client');
 const express = require('express');
 const { readdir } = require('fs');
+const i18n = require('i18n');
 
 /* Express modules */
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const expressSession = require('express-session');
+const auth = require('./modules/auth');
 
 /**
  * Represents an instance of the dashboard.
@@ -32,8 +34,8 @@ class Dashboard {
      * Express application which handles the dashboard.
      */
     this.app = express();
-    _initApp();
-    _loadRoutes();
+    this._initApp();
+    this._loadRoutes();
 
     /**
      * Express server (inherited from the `this.app.listen` method).
@@ -59,6 +61,10 @@ class Dashboard {
         saveUninitialized: true,
         proxy: true,
       }))
+      .use(auth.initialize())
+      .use(auth.session())
+      .use(i18n.init)
+      .use(this.globalVars)
       .set('view engine', 'pug')
       .set('views', `${__dirname}/views`);
   }
@@ -73,9 +79,37 @@ class Dashboard {
 
       for (const route of files) {
         const routeFile = require(`./routes/${route}`);
-        this.app.use(route, routeFile);
+        this.app.use(`/${route.split('.')[0]}`, routeFile);
       }
     });
+
+    this.app.get('/', (req, res) => res.render('index.pug'));
+  }
+
+  /**
+   * Implements global variables.
+   * @param {*} request Express request
+   * @param {*} response Express response
+   * @param {*} next Next
+   */
+  globalVars(request, response, next) {
+    const data = {
+      authenticated: request.isAuthenticated(),
+      locale: request.language,
+      nameDisplay: request.isAuthenticated() ? request.__('dashboard.nameDisplay.connected', {
+        username: request.user.username,
+        discriminator: request.user.discriminator,
+      }) : request.__('dashboard.nameDisplay.visitor'),
+    };
+
+    Object.keys(data).forEach((key) => {
+      request[key] = data[key];
+      request.res[key] = data[key];
+      response[key] = data[key];
+      response.locals[key] = data[key];
+    });
+
+    next();
   }
 
   /**
@@ -86,7 +120,7 @@ class Dashboard {
   listen(port) {
     return this.app.listen(port, (err) => {
       if (err) console.error(err);
-      console.loh(`[Express] Listening on ${port}.`);
+      console.log(`[Express] Listening on ${port}.`);
     });
   }
 
