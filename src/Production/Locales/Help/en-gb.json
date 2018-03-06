@@ -1,0 +1,39 @@
+{
+  "about": {
+    "description": "Information about the bot",
+    "usage": "about"
+  },
+  "help": {
+    "description": "Get help on using the bot",
+    "usage": "help"
+  },
+  "invite": {
+    "description": "Invite the bot on your server",
+    "usage": "invite"
+  },
+  "ping": {
+    "description": "Pong!",
+    "usage": "ping"
+  },
+
+  "afk": {
+    "description": "Marks you as absent (AFK)",
+    "usage": "afk [reason]"
+  },
+  "choose": {
+    "description": "Select between the given choices",
+    "usage": "choose <choice A> <choice B> [choice C] etc."
+  },
+  "say": {
+    "description": "Repeat what you told to the bot",
+    "usage": "say <text>"
+  },
+  "translate": {
+    "description": "Translate the provided text into the given language",
+    "usage": "translate <target language (ISO 639-1)> <text>"
+  },
+  "weather": {
+    "description": "Get the current weather or the tomorrow's forecast for the given location",
+    "usage": "weather [tomorrow] <location>"
+  }
+}

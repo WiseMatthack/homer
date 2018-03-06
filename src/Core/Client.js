@@ -3,10 +3,12 @@ const Dashboard = require('../Web/Dashboard');
 const { readdir } = require('fs');
 const config = require('../config.json');
 const Constants = require('./Constants');
+const snekfetch = require('snekfetch');
 
 /* Managers */
 const DatabaseManager = require('./Managers/DatabaseManager');
 const CommandsManager = require('./Managers/CommandsManager');
+const AbsenceManager = require('./Managers/AbsenceManager');
 
 /**
  * The main hub for interacting with the Discord API.
@@ -18,6 +20,12 @@ class ExtendedClient extends Client {
    */
   constructor(options) {
     super(options || config.clientOptions || {});
+
+    /**
+     * Date when the instance was created.
+     * @type {Date}
+     */
+    this.initiated = new Date();
 
     /**
      * Configuration object associated to the client.
@@ -44,6 +52,12 @@ class ExtendedClient extends Client {
     this.commands = new CommandsManager(this);
 
     /**
+     * Absence manager associated to the client.
+     * @type {AbsenceManager}
+     */
+    this.absence = new AbsenceManager(this);
+
+    /**
      * Dashboard associated to the client.
      * @type {Dashboard}
      */
@@ -63,6 +77,18 @@ class ExtendedClient extends Client {
         delete require.cache[require.resolve(`${__dirname}/../Production/Events/${event}`)];
       }
     });
+  }
+
+  /**
+   * Initiate cleverbot.
+   */
+  initiateCleverbot() {
+    snekfetch.post('http://cleverbot.io/1.0/create')
+      .send({
+        user: this.config.api.cleverbotUser,
+        key: this.config.api.cleverbotKey,
+        nick: this.user.username,
+      });
   }
 }
 

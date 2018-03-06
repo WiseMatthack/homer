@@ -26,7 +26,7 @@ class Context {
      * Guild configuration object.
      * @type {?DataGuild}
      */
-    this.settings = new DataGuild(this.client, this.guild.id);
+    this.settings = new DataGuild(client, message.guild.id);
 
     /**
      * Translation module for the context

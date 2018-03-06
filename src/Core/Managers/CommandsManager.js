@@ -1,5 +1,6 @@
 const Manager = require('./Manager');
 const Client = require('../Client');
+const Command = require('../Structures/Command');
 const { readdir } = require('fs');
 
 /**

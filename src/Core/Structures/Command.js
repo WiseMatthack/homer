@@ -1,13 +1,21 @@
-const Context = require('../Context');
+const Client = require('../Client');
+const Context = require('./Context');
 
 /**
  * Represents the base of a command.
  */
 class Command {
   /**
+   * @param {Client} client Client that initiated the command
    * @param {CommandProperties} commandProp Properties of the command
    */
-  constructor(commandProp) {
+  constructor(client, commandProp) {
+    /**
+     * Client that initiated the command.
+     * @type {Client}
+     */
+    this.client = client;
+
     /**
      * Name of the command.
      * @type {String}

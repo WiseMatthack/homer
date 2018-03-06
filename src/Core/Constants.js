@@ -1,3 +1,9 @@
+exports.statusEmotes = {
+  success: '<:success:420529118417780747>',
+  warning: '<:warn:420529189658034187>',
+  error: '<:error:420529091280633856>',
+};
+
 exports.presenceIcons = {
   online: '420522894570029056',
   idle: '420522947531374593',
