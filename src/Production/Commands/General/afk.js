@@ -13,8 +13,7 @@ class Afk extends Command {
     const reason = ctx.args.join(' ') || null;
     
     this.client.absence.markAbsent(ctx.author.id, reason)
-      .then(() => ctx.channel.send(ctx.__('afk.marked')))
-      .catch(e => ctx.channel.send(e, { code: 'js' }));
+      .then(() => ctx.channel.send(ctx.__('afk.marked')));
   }
 }
 

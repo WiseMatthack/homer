@@ -29,7 +29,9 @@ class Help extends Command {
     } else {
       const embed = new RichEmbed()
         .setColor(ctx.guild.me.displayHexColor)
-        .setFooter(ctx.__('help.global.embed.footer'));
+        .setFooter(ctx.__('help.global.embed.footer', {
+          defaultPrefix: this.client.config.discord.defaultPrefixes[0],
+        }));
 
       this.client.commands.gps.forEach((commandsList, category) => {
         embed.addField(ctx.__('help.global.embed.category', {

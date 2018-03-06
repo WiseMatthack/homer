@@ -15,6 +15,10 @@
     "description": "Pong!",
     "usage": "ping"
   },
+  "support": {
+    "description": "Join the support server to get help on using the bot",
+    "usage": "support"
+  },
 
   "afk": {
     "description": "Marks you as absent (AFK)",

@@ -40,6 +40,8 @@ class DataGuild extends DataBase {
       misc: {
         timezone: 'UTC',
         locale: 'en-gb',
+        dateFormat: 'DD/MM/YYYY',
+        timeFormat: 'HH:mm:ss',
         customPrefixes: [],
         importedTags: [],
       }
@@ -65,6 +67,8 @@ module.exports = DataGuild;
  * @property {Object} misc Miscallenous settings
  * @property {String} misc.timezone Timezone of the guild
  * @property {String} misc.locale Language of the guild
+ * @property {String} misc.dateFormat Format for the dates (`moment-timezone`)
+ * @property {String} misc.timeFormat Format for the times (`moment-timezone`)
  * @property {String[]} misc.customPrefixes Array of custom prefixes
  * @property {String[]} misc.importedTags Array of imported tags
  */
