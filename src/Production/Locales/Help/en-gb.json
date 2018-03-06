@@ -28,6 +28,10 @@
     "description": "Select between the given choices",
     "usage": "choose <choice A> <choice B> [choice C] etc."
   },
+  "google": {
+    "description": "Search for content on Google",
+    "usage": "google <search>"
+  },
   "say": {
     "description": "Repeat what you told to the bot",
     "usage": "say <text>"
@@ -36,8 +40,12 @@
     "description": "Translate the provided text into the given language",
     "usage": "translate <target language (ISO 639-1)> <text>"
   },
+  "youtube": {
+    "description": "Search for content on YouTube",
+    "usage": "youtube <search>"
+  },
   "weather": {
-    "description": "Get the current weather or the tomorrow's forecast for the given location",
+    "description": "Get the current weather for the given location",
     "usage": "weather [tomorrow] <location>"
   }
 }

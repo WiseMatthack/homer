@@ -35,12 +35,39 @@ class Context {
   }
 
   /**
+   * Command arguments.
+   * @type {String[]}
+   */
+  get args() {
+    return this.content.split(/ +/g).slice(1);
+  }
+
+  get guild() {
+    return this.channel.guild;
+  }
+
+  /**
    * Get the configuration associated to the guild.
    * @returns {DataGuild}
    */
   async getGuildSettings() {
     await this.settings.getData();
     return this.settings;
+  }
+
+  /**
+   * Is the message a command.
+   * @returns {String} Prefix or `null` if not a command
+   */
+  isCommand() {
+    const prefixes = this.client.config.discord.defaultPrefixes.concat(this.settings.data.misc.customPrefixes);
+
+    let prefix = null;
+    for (const p of prefixes) {
+      if (this.content.startsWith(p)) prefix = p;
+    }
+
+    return prefix;
   }
 }
 

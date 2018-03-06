@@ -16,7 +16,7 @@ class Shutdown extends Command {
     this.client.removeAllListeners();
     await this.client.database.provider.getPoolMaster().drain();
     await msg.edit(`${this.client.constants.botEmote} Services stopped! Goodbye.`);
-    client.destroy().then(() => process.exit(ctx.cmd === 'reboot' ? 1 : 0));
+    this.client.destroy().then(() => process.exit(ctx.args[0] === 'reboot' ? 1 : 0));
   }
 }
 

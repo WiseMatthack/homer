@@ -10,9 +10,13 @@ class Help extends Command {
   }
 
   async run(ctx) {
-    const found = this.client.commands.getCommand(ctx.args[0]);
+    const isFound = this.client.commands.getCommand(ctx.args[0]);
+    let found;
+    if (isFound) found = new isFound(this.client);
+
+    console.log(ctx)
     
-    if (found && !found.private) {
+    if (isFound && !found.private) {
       const help = require(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)[found.name];
       
       const embed = new RichEmbed()

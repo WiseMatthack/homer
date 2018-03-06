@@ -52,6 +52,32 @@ class Message extends Event {
           });
       }
     }
+
+    /* Commands handling */
+    const prefix = ctx.isCommand();
+    if (!prefix) return;
+
+    const args = ctx.content.split(/ +/g);
+    const command = args.shift().slice(prefix.length).toLowerCase();
+
+    const cmdFile = this.client.commands.getCommand(command);
+    if (cmdFile) {
+      const cmd = new cmdFile(this.client);
+
+      if (cmd.private) {
+        if (!this.client.config.owners.includes(ctx.author.id)) return;
+      }
+
+      for (const permission of cmd.botPermissions) {
+        if (!ctx.guild.me.permissions.has(permission)) return;
+      }
+
+      for (const permission of cmd.userPermissions) {
+        if (!ctx.member.permissions.has(permission)) return;
+      }
+
+      cmd.run(ctx);
+    }
   }
 }
 

@@ -13,11 +13,11 @@ class Exec extends Command {
 
   async run(ctx) {
     const code = ctx.args.join(' ');
-    if (!code) return ctx.channel.send(`${this.client.constants.statusEmotes.error} You can't run the command, you need to provide a code.`);
+    if (!code) return ctx.channel.send(`${this.client.constants.statusEmotes.error} You must provide a code to run.`);
 
     exec(code, (err, stdout, stderr) => {
       if (err) return ctx.channel.send(err, { code: 'xl' });
-      ctx.channel.send(`${stdout}\n${stderr}`, { code: 'js' });
+      ctx.channel.send(`${stdout}\n${stderr}`, { code: 'xl' });
     });
   }
 }

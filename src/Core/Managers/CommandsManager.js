@@ -49,17 +49,17 @@ class CommandsManager extends Manager {
    * @param {String} cmd Command to find
    * @returns {?Command} Command or `null` if not found
    */
-  async getCommand(cmd) {
+  getCommand(cmd) {
     let category = null;
 
-    this.gps.forEach((commands, gpsCategory) => {
+    this.gps.forEach((commands, categoryName) => {
       if (commands.includes(cmd)) {
-        category = gpsCategory;
+        category = categoryName;
       }
     });
 
     if (category) {
-      return require(`${this.path}/${gpsCategory}/${cmd}.js`);
+      return require(`${this.path}/${category}/${cmd}.js`);
     } else {
       return null;
     }

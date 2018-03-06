@@ -5,7 +5,6 @@ class About extends Command {
   constructor(client) {
     super(client, {
       name: 'about',
-      aliases: ['homer'],
       category: 1,
     });
   }
@@ -21,11 +20,10 @@ class About extends Command {
       .addField(ctx.__('about.embed.stats.title'), ctx.__('about.embed.stats.value'))
       .setFooter(ctx.__('about.embed.footer'))
       .setTimestamp(this.client.initiated)
-      .setColor(ctx.guild.me.highestRole.hexColor);
+      .setThumbnail(this.client.user.avatarURL)
+      .setColor(ctx.guild.me.displayHexColor);
 
-    ctx.channel.send(ctx.__('about.title', {
-      name: this.client.user.username,
-    }), { embed });
+    ctx.channel.send({ embed });
   }
 }
 

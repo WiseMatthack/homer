@@ -13,3 +13,5 @@ exports.presenceIcons = {
 };
 
 exports.nitroIcon = '420522857785720832';
+
+exports.botEmote = '<:ibot:420656561493377024>';
