@@ -13,8 +13,6 @@ class Help extends Command {
     const isFound = this.client.commands.getCommand(ctx.args[0]);
     let found;
     if (isFound) found = new isFound(this.client);
-
-    console.log(ctx)
     
     if (isFound && !found.private) {
       const help = require(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)[found.name];

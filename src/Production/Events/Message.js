@@ -32,21 +32,21 @@ class Message extends Event {
             text: question,
           })
           .then(async (response) => {
-            const parsed = JSON.parse(response.text);
+            const parsed = response.body;
             if (parsed.status !== 'success') return ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed.message,
+              message: parsed.status,
             }));
 
             await ctx.channel.send(parsed.response);
             ctx.channel.stopTyping();
           })
           .catch(async (response) => {
-            const parsed = JSON.parse(response.text);
+            const parsed = response.body;
 
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed.message,
+              message: parsed.status,
             }));
             ctx.channel.stopTyping(true);
           });

@@ -20,7 +20,7 @@ class Google extends Command {
     snekfetch
       .get(`https://www.googleapis.com/customsearch/v1?key=${this.client.config.api.googleKey}&cx=${this.client.config.api.googleCx}&lr=lang_${ctx.settings.data.misc.locale.split('-')[0]}&num=1&filter=0&fields=queries(request(totalResults)),items(link)&q=${query}`)
       .then((response) => {
-        const parsed = JSON.parse(response.text);
+        const parsed = response.body;
 
         if (!parsed.queries) return ctx.channel.send(ctx.__('google.error.unknown', {
           errorIcon: this.client.constants.statusEmotes.error,
@@ -36,9 +36,9 @@ class Google extends Command {
           link: parsed.items[0].link,
         }));
       })
-      .catch(() => ctx.channel.send(ctx.__('google.error.unknown', {
+      /*.catch(() => ctx.channel.send(ctx.__('google.error.unknown', {
         errorIcon: this.client.constants.statusEmotes.error,
-      })));
+      })));*/
   }
 }
 

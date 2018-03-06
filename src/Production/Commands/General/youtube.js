@@ -20,7 +20,7 @@ class YouTube extends Command {
     snekfetch
       .get(`https://www.googleapis.com/youtube/v3/search?key=${this.client.config.api.youtube}&part=snippet&regionCode=${ctx.settings.data.misc.locale.split('-')[1]}&maxResults=1&q=${query}`)
       .then((response) => {
-        const parsed = JSON.parse(response.text);
+        const parsed = response.body;
 
         if (!parsed.items) return ctx.channel.send(ctx.__('youtube.error.unknown', {
           errorIcon: this.client.constants.statusEmotes.error,
@@ -43,6 +43,9 @@ class YouTube extends Command {
           result,
         }));
       })
+      .catch(() => ctx.channel.send(ctx.__('youtube.error.unknown', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      })));
   }
 }
 

@@ -10,6 +10,9 @@ const DatabaseManager = require('./Managers/DatabaseManager');
 const CommandsManager = require('./Managers/CommandsManager');
 const AbsenceManager = require('./Managers/AbsenceManager');
 
+/* Helpers */
+const FinderHelper = require('./Helpers/FinderHelper');
+
 /**
  * The main hub for interacting with the Discord API.
  * @extends {Client}
@@ -62,6 +65,12 @@ class ExtendedClient extends Client {
      * @type {Dashboard}
      */
     this.dashboard = new Dashboard(this, config.dashboard);
+
+    /**
+     * Finder helper associated to the client.
+     * @type {FinderHelper}
+     */
+    this.finder = new FinderHelper(this);
   }
 
   /**

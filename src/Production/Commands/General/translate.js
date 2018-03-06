@@ -14,11 +14,11 @@ class Translate extends Command {
     const targetLanguage = ctx.args[0];
     const textToTranslate = ctx.args.slice(1).join(' ');
 
-    if (!targetLanguage || !textToTranslate) return ctx.channel.send(ctx.__('translate.not_enough_parameters', {
+    if (!targetLanguage || !textToTranslate) return ctx.channel.send(ctx.__('translate.notEnoughParameters', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (textToTranslate.length > 1024) return ctx.channel.send(ctx.__('translate.text_too_long', {
+    if (textToTranslate.length > 1024) return ctx.channel.send(ctx.__('translate.textTooLong', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
@@ -30,12 +30,11 @@ class Translate extends Command {
           .setFooter(ctx.__('translate.embed.footer'), `http://${this.client.config.dashboard.baseDomain}/images/services/translate.png`);
 
         ctx.channel.send(ctx.__('translate.translated', {
-          translateIcon: this.client.constants.servicesIcon.translate,
+          translateIcon: this.client.constants.serviceIcons.translate,
         }), { embed });
       })
-      .catch(e => ctx.channel.send(ctx.__('translate.error', {
+      .catch(() => ctx.channel.send(ctx.__('translate.error', {
         errorIcon: this.client.constants.statusEmotes.error,
-        error: e,
       })));
   }
 }

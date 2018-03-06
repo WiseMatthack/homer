@@ -13,7 +13,7 @@ class Eval extends Command {
   async run(ctx) {
     const code = ctx.args.join(' ');
     try {
-      let evaled = eval(code);
+      let evaled = await eval(code);
       if (typeof evaled !== 'string') evaled = inspect(evaled);
       ctx.channel.send(evaled, { code: 'js' })
         .catch(e => ctx.channel.send(e, { code: 'js' }));
