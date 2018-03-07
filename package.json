@@ -11,7 +11,13 @@
     "email": "biojoutk1106@gmail.com",
     "url": "https://github.com/iDroid27210/homer/issues"
   },
-  "keywords": ["iDroid27210", "bot", "discord", "homer", "simpson"],
+  "keywords": [
+    "iDroid27210",
+    "bot",
+    "discord",
+    "homer",
+    "simpson"
+  ],
   "author": "iDroid27210",
   "license": "AGPL-3.0",
   "dependencies": {
@@ -27,8 +33,8 @@
     "moment-timezone": "^0.5.14",
     "passport": "^0.4.0",
     "passport-discord": "^0.1.3",
-    "pug": "^2.0.0-rc.4",
+    "pug": "^2.0.0",
     "rethinkdbdash": "^2.3.31",
-    "snekfetch": "^4.0.0-beta.0"
+    "snekfetch": "^4.0.0-rc.0"
   }
 }

@@ -10,7 +10,7 @@ class GuildDelete extends Event {
     this.client.database.deleteDocument('guild', guild.id)
       .catch(() => {});
 
-    appendFile(`${__dirname}/../../logs/guilds.txt`, `[${Date.now()}] Leave - ${guild.name} (ID:${guild.id}) - Owner: ${guild.ownerID}`, (err) => {
+    appendFile(`${__dirname}/../../../logs/guilds.txt`, `[${Date.now()}] Leave - ${guild.name} (ID:${guild.id}) - Owner: ${guild.ownerID}\r\n`, (err) => {
       if (err) console.error(err);
     });
   }

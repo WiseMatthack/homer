@@ -3,6 +3,7 @@ const Context = require('../../Core/Structures/Context');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
 const mtz = require('moment-timezone');
+const { appendFile } = require('fs');
 
 class Message extends Event {
   constructor(client) {
@@ -96,6 +97,12 @@ class Message extends Event {
       if (cmdFile) {
         const cmd = new cmdFile(this.client);
 
+        /* Logging */
+        appendFile(`${__dirname}/../../../logs/commands.txt`, `[${Date.now()}] Author: ${ctx.author.id} - Channel: ${ctx.channel.id} - Guild: ${ctx.guild.id} - Content: ${ctx.content}\r\n`, (err) => {
+          if (err) console.error(err);
+        });
+        
+        /* Can the user and bot run the command */
         if (cmd.private) {
           if (!this.client.config.owners.includes(ctx.author.id)) return;
         }
