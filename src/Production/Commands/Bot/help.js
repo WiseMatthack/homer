@@ -23,6 +23,7 @@ class Help extends Command {
           description: help.description,
           usage: `${prefix}${help.usage}`,
           examples: help.examples ? help.examples.map(ex => `\`${prefix}${ex}\``).join(' - ') : ctx.__('global.none'),
+          requiredPermissions: found.userPermissions.map(p => `\`${p}\``).join(', ') || ctx.__('global.none'),
         }))
         .setColor(ctx.guild.me.displayHexColor)
         .setFooter(ctx.__('help.command.footer'));
@@ -38,9 +39,11 @@ class Help extends Command {
         }));
 
       this.client.commands.gps.forEach((commandsList, category) => {
-        embed.addField(ctx.__('help.global.embed.category', {
-          category,
-        }), commandsList.map(cmd => `\`${cmd}\``).join(' - '));
+        if (category !== 'Owner') {
+          embed.addField(ctx.__('help.global.embed.category', {
+            category,
+          }), commandsList.map(cmd => `\`${cmd}\``).join(' - '));
+        }
       });
 
       ctx.channel.send(ctx.__('help.global.title'), { embed });

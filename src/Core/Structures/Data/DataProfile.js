@@ -10,7 +10,7 @@ class DataProfile extends DataBase {
    * @param {String} id User ID associated to the data structure
    */
   constructor(client, id) {
-    super(client, 'guild', id);
+    super(client, 'profile', id);
 
     /**
      * Typedef of a guild document.

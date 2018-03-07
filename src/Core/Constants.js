@@ -22,3 +22,17 @@ exports.serviceIcons = {
 exports.nitroIcon = '420522857785720832';
 
 exports.botEmote = '<:ibot:420656561493377024>';
+
+exports.profileFields = {
+  birthday: '🎂',
+  email: '📧',
+  instagram: '<:instagram:420886984140259329>',
+  minecraft: '<:minecraft:420885989628575744>',
+  nnid: '<:nnid:420886250581393408>',
+  skype: '<:skype:420886428793307136>',
+  snapchat: '<:snapchat:420886848202866698>',
+  steam: '<:steam:420885590804791307>',
+  twitch: '<:twitch:420891463031717888>',
+  twitter: '<:twitter:420885434697252874>',
+  youtube: '<:youtube:420659693531168790>',
+};

@@ -52,6 +52,7 @@ class Context {
    */
   async getGuildSettings() {
     await this.settings.getData();
+    this.setLocale(this.settings.data.misc.locale);
     return this.settings;
   }
 

@@ -3,6 +3,11 @@
     "description": "Information about the bot",
     "usage": "about"
   },
+  "feedback": {
+    "description": "Tell me what do you think of the bot, report bugs, etc...",
+    "usage": "feedback <message>",
+    "examples": ["feedback Your bot is amazing!", "feedback There is a bug when we run the support command :x"]
+  },
   "help": {
     "description": "Get help on using the bot",
     "usage": "help"
@@ -20,25 +25,45 @@
     "usage": "support"
   },
 
+  "avatar": {
+    "description": "Get the avatar of someone",
+    "usage": "avatar [User]",
+    "examples": ["avatar", "avatar b1nzy#1337"]
+  },
+  "checkdbans": {
+    "description": "Checks if a user ID is listed on the Discord Bans list (unofficial)",
+    "usage": "checkdbans ([User]|[UserID)",
+    "examples": ["checkdbans", "checkdbans b1nzy#1337", "checkdbans 657385946273049384"]
+  },
   "google": {
     "description": "Search for content on Google",
     "usage": "google <search>",
     "examples": ["google What's the best way to import a Python module ?"]
+  },
+  "server": {
+    "description": "Get information about the server",
+    "usage": "server",
+    "examples": [],
   },
   "translate": {
     "description": "Translate the provided text into the given language",
     "usage": "translate <target language (ISO 639-1)> <text>",
     "examples": ["translate en Bonjour, comment allez-vous ?"]
   },
-  "youtube": {
-    "description": "Search for content on YouTube",
-    "usage": "youtube <search>",
-    "examples": ["youtube Logan Paul amazing videos"]
+  "user": {
+    "description": "Get information about someone",
+    "usage": "user [User]",
+    "examples": ["user", "user b1nzy#1337"]
   },
   "weather": {
     "description": "Get the current weather for the given location",
     "usage": "weather <location>",
     "examples": ["weather Paris, France"]
+  },
+  "youtube": {
+    "description": "Search for content on YouTube",
+    "usage": "youtube <search>",
+    "examples": ["youtube Logan Paul amazing videos"]
   },
 
   "afk": {
@@ -51,6 +76,11 @@
     "usage": "choose <choice A> <choice B> [choice C] etc.",
     "examples": ["choose iDroid Artuto iBot Endless"]
   },
+  "profile": {
+    "description": "Displays information about someone",
+    "usage": "profile ([User]|set <fieldName> <fieldContent>|clear <fieldName>)",
+    "examples": ["profile iDroid#4441", "profile", "profile set twitter iDroid27210", "profile clear twitter"]
+  },
   "say": {
     "description": "Repeat what you told to the bot",
     "usage": "say <text>",
@@ -60,5 +90,16 @@
     "description": "What time is it there ?",
     "usage": "timezone (set <timezone>)|([member])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
+  },
+
+  "ignore": {
+    "description": "Make the bot ignore or listen to a channel",
+    "usage": "ignore [Channel]",
+    "examples": ["ignore #trash", "ignore partOfChannelName"]
+  },
+  "prefix": {
+    "description": "Manage your custom prefixes",
+    "usage": "prefix [prefix]",
+    "examples": ["prefix bot!", "prefix homer::"]
   }
 }

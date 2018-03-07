@@ -15,6 +15,7 @@ const client = new Client();
 i18n.configure({
   autoReload: true,
   cookie: 'locale',
+  defaultLocale: 'en-gb',
   directory: `${__dirname}/Production/Locales`,
 });
 
