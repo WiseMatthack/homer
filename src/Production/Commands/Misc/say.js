@@ -5,7 +5,7 @@ class Say extends Command {
     super(client, {
       name: 'say',
       aliases: ['repeat'],
-      category: 2,
+      category: 3,
     });
   }
 

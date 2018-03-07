@@ -24,6 +24,19 @@ class DatabaseManager extends Manager {
   }
 
   /**
+   * Get documents from the database.
+   * @param {String} table Table where the document to get is stored
+   * @returns {Promise<*[]>} Array of documents
+   */
+  async getDocuments(table) {
+    const data = await this.provider
+      .table(table)
+      .run();
+
+    return data || [];
+  }
+
+  /**
    * Get a document from the database.
    * @param {String} table Table where the document to get is stored
    * @param {String} key Key of the document to get

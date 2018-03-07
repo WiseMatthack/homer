@@ -51,8 +51,12 @@ class Dashboard {
     this.app
       .enable('trust proxy')
       .use(express.static(`${__dirname}/public`))
+      .use(bodyParser.json({
+        limit: '20mb',
+      }))
       .use(bodyParser.urlencoded({
-        extended: false,
+        extended: true,
+        limit: '20mb'
       }))
       .use(cookieParser(this.dashboardSettings.sessionSecret))
       .use(expressSession({
@@ -83,7 +87,14 @@ class Dashboard {
       }
     });
 
-    this.app.get('/', (req, res) => res.render('index.pug'));
+    this.app.get('/', async (req, res) => {
+      const latestArticles = await this.client.database.getDocuments('articles')
+        .then(articles => articles.sort((a, b) => b.published - a.published).slice(0, 4));
+
+      res.render('index.pug', {
+        latestArticles,
+      });
+    });
   }
 
   /**

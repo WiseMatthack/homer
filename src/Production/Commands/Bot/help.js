@@ -16,11 +16,13 @@ class Help extends Command {
     
     if (isFound && !found.private) {
       const help = require(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)[found.name];
+      const prefix = this.client.config.discord.defaultPrefixes[0];
       
       const embed = new RichEmbed()
         .setDescription(ctx.__('help.command.embed.description', {
           description: help.description,
-          usage: `${this.client.config.discord.defaultPrefixes[0]}${help.usage}`,
+          usage: `${prefix}${help.usage}`,
+          examples: help.examples ? help.examples.map(ex => `\`${prefix}${ex}\``).join(' - ') : ctx.__('global.none'),
         }))
         .setColor(ctx.guild.me.displayHexColor)
         .setFooter(ctx.__('help.command.footer'));

@@ -5,7 +5,7 @@ class Choose extends Command {
     super(client, {
       name: 'choose',
       aliases: ['select'],
-      category: 2,
+      category: 3,
     });
   }
 

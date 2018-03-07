@@ -5,7 +5,7 @@ class Afk extends Command {
     super(client, {
       name: 'afk',
       aliases: ['absent', 'absence'],
-      category: 2,
+      category: 3,
     });
   }
 

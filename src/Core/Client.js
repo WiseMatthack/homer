@@ -12,6 +12,7 @@ const AbsenceManager = require('./Managers/AbsenceManager');
 
 /* Helpers */
 const FinderHelper = require('./Helpers/FinderHelper');
+const LastactiveHelper = require('./Helpers/LastactiveHelper');
 
 /**
  * The main hub for interacting with the Discord API.
@@ -71,6 +72,12 @@ class ExtendedClient extends Client {
      * @type {FinderHelper}
      */
     this.finder = new FinderHelper(this);
+
+    /**
+     * Lastactive helper associated to the client.
+     * @type {LastactiveHelper}
+     */
+    this.lastactive = new LastactiveHelper(this);
   }
 
   /**

@@ -8,18 +8,18 @@ nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
     button(class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toogle navigation")
       span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="navbarNav")
-      ul(class="navbar-nav")
-        li(class="nav-item")
+      ul(class="navbar-nav mr-auto")
+        li(class="navbar-item")
           a(class="nav-link" href="/") #{__('dashboard.header.home')}
         if authenticated
-          li(class="nav-item")
+          li(class="navbar-item")
             a(class="nav-link" href="/servers") #{__('dashboard.header.servers')}
-        li(class="nav-item")
+        li(class="navbar-item")
           a(class="nav-link" href="/invite") #{__('dashboard.header.invite')}
-        li(class="nav-item")
+        li(class="navbar-item")
           a(class="nav-link" href="/support") #{__('dashboard.header.support')}
         if !authenticated
-          li(class="nav-item")
+          li(class="navbar-item")
             a(class="nav-link" href="/auth/login") #{__('dashboard.header.login')}
         else
           li(class="nav-item")

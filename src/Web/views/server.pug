@@ -20,11 +20,11 @@ html(lang=`${locale}`)
           strong #{__('dashboard.server.creationDate')}: 
           text #{guild.creationDate}
           br
-          strong #{__('dashboard.server.members')}: 
-          text #{__('dashboard.server.members-value', { total: guild.members, bots: guild.bots, online: guild.online, })}
+          strong #{__('dashboard.server.members.title')}: 
+          text #{__('dashboard.server.members.value', { total: guild.members, bots: guild.bots, online: guild.online, })}
           br
-          strong #{__('dashboard.server.channels')}: 
-          text #{__('dashboard.server.channels-value', { text: guild.textChannels, voice: guild.voiceChannels, })}
+          strong #{__('dashboard.server.channels.title')}: 
+          text #{__('dashboard.server.channels.value', { text: guild.textChannels, voice: guild.voiceChannels, })}
           br
           strong #{__('dashboard.server.owner')}: 
             span(class="nav-item")

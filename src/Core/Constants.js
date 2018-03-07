@@ -16,6 +16,7 @@ exports.serviceIcons = {
   google: '<:google:420659833356812319>',
   youtube: '<:youtube:420659693531168790>',
   translate: '<:translate:420659720727298054>',
+  discordBans: '<:discordbans:420715963718041641>',
 };
 
 exports.nitroIcon = '420522857785720832';

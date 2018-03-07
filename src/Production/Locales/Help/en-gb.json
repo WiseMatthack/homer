@@ -20,32 +20,45 @@
     "usage": "support"
   },
 
-  "afk": {
-    "description": "Marks you as absent (AFK)",
-    "usage": "afk [reason]"
-  },
-  "choose": {
-    "description": "Select between the given choices",
-    "usage": "choose <choice A> <choice B> [choice C] etc."
-  },
   "google": {
     "description": "Search for content on Google",
-    "usage": "google <search>"
-  },
-  "say": {
-    "description": "Repeat what you told to the bot",
-    "usage": "say <text>"
+    "usage": "google <search>",
+    "examples": ["google What's the best way to import a Python module ?"]
   },
   "translate": {
     "description": "Translate the provided text into the given language",
-    "usage": "translate <target language (ISO 639-1)> <text>"
+    "usage": "translate <target language (ISO 639-1)> <text>",
+    "examples": ["translate en Bonjour, comment allez-vous ?"]
   },
   "youtube": {
     "description": "Search for content on YouTube",
-    "usage": "youtube <search>"
+    "usage": "youtube <search>",
+    "examples": ["youtube Logan Paul amazing videos"]
   },
   "weather": {
     "description": "Get the current weather for the given location",
-    "usage": "weather [tomorrow] <location>"
+    "usage": "weather <location>",
+    "examples": ["weather Paris, France"]
+  },
+
+  "afk": {
+    "description": "Marks you as absent (AFK)",
+    "usage": "afk [reason]",
+    "examples": ["afk I'm doing my homework, see you later!"]
+  },
+  "choose": {
+    "description": "Select between the given choices",
+    "usage": "choose <choice A> <choice B> [choice C] etc.",
+    "examples": ["choose iDroid Artuto iBot Endless"]
+  },
+  "say": {
+    "description": "Repeat what you told to the bot",
+    "usage": "say <text>",
+    "examples": ["say I am the best bot ever created, pst.. it's wrong but don't tell anyone!"]
+  },
+  "timezone": {
+    "description": "What time is it there ?",
+    "usage": "timezone (set <timezone>)|([member])",
+    "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
   }
 }
