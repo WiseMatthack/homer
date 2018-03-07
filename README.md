@@ -7,10 +7,10 @@ Homer uses [discord.js](https://discord.js.org) as Discord API wrapper.
   
 ## Translations
 
-Language (code)                           | State      | Translator(s)
-------------------------------------------|------------|------------------------------------------------
-English (United Kingdom)                  | Finished   | [@iDroid27210](https://github.com/iDroid27210)
-Français (France)                         | W.I.P      | [@iDroid27210](https://github.com/iDroid27210)
+Language                                  | Code    | State      | Translator(s)
+------------------------------------------|---------|------------|------------------------------------------------
+English (United Kingdom)                  | en-gb   | Finished   | [@iDroid27210](https://github.com/iDroid27210)
+Français (France)                         | fr-fr   | W.I.P      | [@iDroid27210](https://github.com/iDroid27210)
 
 ## Contributing
 If you wanna contribute to the project, you can fork the repository and make your edits.  
