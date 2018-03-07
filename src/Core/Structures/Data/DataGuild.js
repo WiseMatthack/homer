@@ -47,6 +47,20 @@ class DataGuild extends DataBase {
       }
     });
   }
+
+  /**
+   * Generate a telephone number.
+   * @returns {String} Number
+   */
+  generateNumber() {
+    const array = Math.floor(Math.random() * 10**6).toString().split('');
+    array.splice(3, 0, '-');
+
+    const number = array.join('');
+    this.data.phone.number = number;
+    this.saveData();
+    return number;
+  }
 }
 
 module.exports = DataGuild;

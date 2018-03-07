@@ -106,5 +106,31 @@
     "description": "Manage your custom prefixes",
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
+  },
+
+  "call": {
+    "description": "Call a telephone number",
+    "usage": "call <number>",
+    "examples": ["call 111-222"]
+  },
+  "hangup": {
+    "description": "Hangup a call",
+    "usage": "hangup",
+    "examples": []
+  },
+  "number": {
+    "description": "Shows your telephone number",
+    "usage": "number [reset]",
+    "examples": ["number", "number reset"]
+  },
+  "pickup": {
+    "description": "Pickup a pending call",
+    "usage": "pickup",
+    "examples": []
+  },
+  "telephone": {
+    "description": "Sets the telephone channel",
+    "usage": "telephone",
+    "examples": []
   }
 }

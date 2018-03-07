@@ -9,6 +9,7 @@ const snekfetch = require('snekfetch');
 const DatabaseManager = require('./Managers/DatabaseManager');
 const CommandsManager = require('./Managers/CommandsManager');
 const AbsenceManager = require('./Managers/AbsenceManager');
+const PhoneManager = require('./Managers/PhoneManager');
 
 /* Helpers */
 const FinderHelper = require('./Helpers/FinderHelper');
@@ -74,6 +75,12 @@ class ExtendedClient extends Client {
     this.absence = new AbsenceManager(this);
 
     /**
+     * Telephone manager associated to the client.
+     * @type {PhoneManager}
+     */
+    this.phone = new PhoneManager(this);
+
+    /**
      * Dashboard associated to the client.
      * @type {Dashboard}
      */
@@ -112,12 +119,22 @@ class ExtendedClient extends Client {
    */
   initiateCleverbot() {
     snekfetch
-      .post('http://cleverbot.io/1.0/create')
+      .post('https://cleverbot.io/1.0/create')
       .set({ 'Content-Type': 'application/x-www-form-urlencoded' })
       .send({
         user: this.config.api.cleverbotUser,
         key: this.config.api.cleverbotKey,
         nick: this.user.username,
+      })
+      .then((response) => {
+        const parsed = response.body.toString();
+        console.log(`[Cleverbot] Instance created under the nickname ${this.user.username}.`);
+        this.cleverbot = true;
+      })
+      .catch((response) => {
+        const parsed = response.body.toString();
+        console.log(`[Cleverbot] Failed to create the instance! Message: ${parsed.status}`);
+        this.cleverbot = false;
       });
   }
 }

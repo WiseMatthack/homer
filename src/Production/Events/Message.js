@@ -88,36 +88,44 @@ class Message extends Event {
 
     /* Commands handling */
     const prefix = ctx.isCommand();
-    if (!prefix) return;
+    if (prefix) {
+      const args = ctx.content.split(/ +/g);
+      const command = args.shift().slice(prefix.length).toLowerCase();
 
-    const args = ctx.content.split(/ +/g);
-    const command = args.shift().slice(prefix.length).toLowerCase();
+      const cmdFile = this.client.commands.getCommand(command);
+      if (cmdFile) {
+        const cmd = new cmdFile(this.client);
 
-    const cmdFile = this.client.commands.getCommand(command);
-    if (cmdFile) {
-      const cmd = new cmdFile(this.client);
+        if (cmd.private) {
+          if (!this.client.config.owners.includes(ctx.author.id)) return;
+        }
 
-      if (cmd.private) {
-        if (!this.client.config.owners.includes(ctx.author.id)) return;
+        if (!cmd.private && this.client.disabledCommands[cmd.name]) {
+          return ctx.channel.send(ctx.__('message.disabledCommand', {
+            errorIcon: this.client.constants.statusEmotes.error,
+            cmdName: cmd.name,
+            reason: this.client.disabledCommands[cmd.name].reason || ctx.__('global.none'),
+          }));
+        }
+
+        for (const permission of cmd.botPermissions) {
+          if (!ctx.guild.me.permissions.has(permission)) return;
+        }
+
+        for (const permission of cmd.userPermissions) {
+          if (!ctx.member.permissions.has(permission)) return;
+        }
+
+        cmd.run(ctx);
       }
-
-      if (!cmd.private && this.client.disabledCommands[cmd.name]) {
-        return ctx.channel.send(ctx.__('message.disabledCommand', {
-          errorIcon: this.client.constants.statusEmotes.error,
-          cmdName: cmd.name,
-          reason: this.client.disabledCommands[cmd.name].reason || ctx.__('global.none'),
-        }));
+    } else {
+      const phone = this.client.phone.calls.find(c => c.sender === ctx.guild.id || c.receiver === ctx.guild.id);
+      if (phone && phone.state === 1) {
+        const distantSettings = phone.sender === ctx.guild.id ? await this.client.database.getDocument('guild', phone.receiver) : await this.client.database.getDocument('guild', phone.sender);
+        const channel = this.client.channels.get(distantSettings.phone.channel);
+        if (!channel) return this.client.phone.interruptCall(ctx.guild.id);
+        channel.send(`☎ **${ctx.author.tag}**: ${message.cleanContent}`);
       }
-
-      for (const permission of cmd.botPermissions) {
-        if (!ctx.guild.me.permissions.has(permission)) return;
-      }
-
-      for (const permission of cmd.userPermissions) {
-        if (!ctx.member.permissions.has(permission)) return;
-      }
-
-      cmd.run(ctx);
     }
   }
 }
