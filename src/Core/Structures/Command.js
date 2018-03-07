@@ -61,6 +61,49 @@ class Command {
     console.log(`[Warn] Command ${this.name} does not have a run method!`);
     context.channel.send(context.__('error.unknown'));
   }
+
+  /**
+   * Parses a content and returns title and flags.
+   * @param {String} string String to parse
+   * @param {Object} flags Flags to use
+   * @returns {ParsedString}
+   */
+  parseString(string, flags) {
+    let title = '';
+    let finishedTitle = false;
+    let options = [];
+
+    for (let i = 0; i < string.length; i++) {
+      if (string[i].startsWith('-')) {
+        const filter = flags.filter(f => f.flag === string[i].substring(1).toLowerCase());
+        if (filter.length > 0) {
+          finishedTitle = true;
+          const current = filter[0].flag;
+          options.push({
+            flag: current,
+            value: '',
+          });
+        }
+      } else {
+        if (options.length === 0 && finishedTitle === false) { // eslint-disable-line no-lonely-if
+          if (title.length === 0) title += string[i];
+          else title += ` ${string[i]}`;
+        } else {
+          const index = options.length - 1;
+          if (options[index].value.length === 0) {
+            options[index].value = string[i];
+          } else {
+            options[index].value += ` ${string[i]}`;
+          }
+        }
+      }
+    }
+
+    return {
+      title,
+      options,
+    };
+  }
 }
 
 module.exports = Command;
@@ -74,4 +117,16 @@ module.exports = Command;
  * @property {String[]} botPermissions Required bot permissions
  * @property {Argument[]} args Arguments of the command
  * @property {Boolean} private Private state of the command
+ */
+
+/**
+ * @typedef ParsedString
+ * @property {String} title Before options string (usually a title)
+ * @property {Option[]} options Options
+ */
+
+/**
+ * @typedef Option
+ * @property {String} flag Option name
+ * @property {String} value Option value
  */

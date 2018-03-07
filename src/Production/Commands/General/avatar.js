@@ -21,7 +21,7 @@ class Avatar extends Command {
     }
 
     const embed = new RichEmbed()
-      .setImage(member.user.avatarURL)
+      .setImage(member.user.displayAvatarURL)
       .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('avatar.title', {

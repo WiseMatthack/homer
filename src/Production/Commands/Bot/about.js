@@ -20,7 +20,7 @@ class About extends Command {
       .addField(ctx.__('about.embed.stats.title'), ctx.__('about.embed.stats.value'))
       .setFooter(ctx.__('about.embed.footer'))
       .setTimestamp(this.client.initiated)
-      .setThumbnail(this.client.user.avatarURL)
+      .setThumbnail(this.client.user.displayAvatarURL)
       .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send({ embed });

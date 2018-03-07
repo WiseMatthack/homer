@@ -1,5 +1,6 @@
 const Command = require('../../../Core/Structures/Command');
 const snekfetch = require('snekfetch');
+const tpm = require('to-pure-markdown');
 const { RichEmbed } = require('discord.js');
 
 class Checkdbans extends Command {
@@ -42,13 +43,18 @@ class Checkdbans extends Command {
         const status = resp === 'False' ? ctx.__('checkdbans.embed.status.isNot') : ctx.__('checkdbans.embed.status.is');
         const color = resp === 'False' ? 'GREEN' : 'RED';
         const reason = resp === 'False' ? null : JSON.parse(resp)[3];
+        const proof = resp === 'False' ? null : JSON.parse(resp)[4];
 
         const embed = new RichEmbed()
           .addField(ctx.__('checkdbans.embed.status.title'), status)
           .setColor(color)
-          .setThumbnail(user.avatarURL);
+          .setThumbnail(user.displayAvatarURL);
 
-        if (reason) embed.addField(ctx.__('checkdbans.embed.reason'), reason);
+        if (reason) {
+          embed
+            .addField(ctx.__('checkdbans.embed.reason'), reason)
+            .addField(ctx.__('checkdbans.embed.reason'), tpm(proof));
+        }
 
         ctx.channel.send(ctx.__('checkdbans.title', { dbansIcon: this.client.constants.serviceIcons.discordBans, name: user.tag }), { embed });
       })

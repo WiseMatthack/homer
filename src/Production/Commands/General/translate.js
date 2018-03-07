@@ -25,7 +25,7 @@ class Translate extends Command {
     translate(textToTranslate, { to: targetLanguage })
       .then((translated) => {
         const embed = new RichEmbed()
-          .setDescription(translated.text)
+          .addField(ctx.__('translate.embed.translatedText', { locale: targetLanguage }), translated.text)
           .setColor(ctx.guild.me.displayHexColor)
           .setFooter(ctx.__('translate.embed.footer'), `http://${this.client.config.dashboard.baseDomain}/images/services/translate.png`);
 
