@@ -91,6 +91,11 @@
     "usage": "say <text>",
     "examples": ["say I am the best bot ever created, pst.. it's wrong but don't tell anyone!"]
   },
+  "tag": {
+    "description": "Play with advanced custom commands!",
+    "usage": "tag (subcommand <args>)|<tag name>",
+    "examples": ["tag create <tagName> <tagContent>", "tag delete <tagName>", "tag edit <tagName> <newContent>", "tag owner <tagName>", "tag search <tagSearch>", "tag random", "tag raw <tagName>", "tag <tagName>"]
+  },
   "timezone": {
     "description": "What time is it there ?",
     "usage": "timezone (set <timezone>)|([member])",
