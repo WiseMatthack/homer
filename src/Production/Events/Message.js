@@ -1,6 +1,8 @@
 const Event = require('../../Core/Structures/Event');
 const Context = require('../../Core/Structures/Context');
+const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
+const mtz = require('moment-timezone');
 
 class Message extends Event {
   constructor(client) {
@@ -8,14 +10,42 @@ class Message extends Event {
   }
 
   async handle(message) {
+    /* Last active register */
+    this.client.lastactive.updateLastactive(message.author.id);
+
+    /* Prevent shit */
     if (message.author.bot || !message.guild) return;
 
     /* We initiate the context for commands, etc. */
     const ctx = new Context(this.client, message);
     await ctx.getGuildSettings();
 
+    /* AFK remover */
+    const afkRemoving = await this.client.absence.getAbsence(ctx.author.id);
+    if (afkRemoving) {
+      await this.client.absence.removeAbsence(ctx.author.id);
+    }
+
     /* We stop here if the channel has to be ignored */
     if (ctx.settings.data.ignoredChannels.includes(ctx.channel.id)) return;
+
+    /* AFK warner */
+    ctx.mentions.users.forEach(async (mention) => {
+      const afkObject = await this.client.absence.getAbsence(mention.id);
+      if (!afkObject) return;
+
+      let embed = null;
+      if (afkObject.reason) {
+        embed = new RichEmbed()
+          .setDescription(afkObject.reason)
+          .setColor(ctx.guild.me.displayHexColor);
+      }
+
+      ctx.channel.send(ctx.__('message.afk.warn', {
+        name: mention.tag,
+        since: mtz(afkObject.time).locale(ctx.settings.data.misc.locale).fromNow(true),
+      }), { embed });
+    });
 
     /* Handle Cleverbot */
     if (ctx.content.startsWith(`<@${this.client.user.id}>`) || ctx.content.startsWith(`<@${this.client.user.id}>`)) {

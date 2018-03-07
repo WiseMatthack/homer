@@ -84,11 +84,11 @@ class DatabaseManager extends Manager {
    * @param {String} key Key of the document to delete
    */
   async deleteDocument(table, key) {
-    await this.provider
+    return (await this.provider
       .table(table)
       .get(key)
       .delete()
-      .run();
+      .run());
   }
 }
 

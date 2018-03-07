@@ -111,7 +111,9 @@ class ExtendedClient extends Client {
    * Initiate cleverbot.
    */
   initiateCleverbot() {
-    snekfetch.post('http://cleverbot.io/1.0/create')
+    snekfetch
+      .post('http://cleverbot.io/1.0/create')
+      .set({ 'Content-Type': 'application/x-www-form-urlencoded' })
       .send({
         user: this.config.api.cleverbotUser,
         key: this.config.api.cleverbotKey,

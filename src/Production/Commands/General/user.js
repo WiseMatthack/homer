@@ -74,13 +74,22 @@ class User extends Command {
       .addField(ctx.__('user.embed.nitro', { nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString() }), premium, true)
       .addField(ctx.__('user.embed.roles'), sortedRoles)
       .addField(ctx.__('user.embed.joinorder', { index: (thisIndex + 1) }), joinOrder)
-      .addField(ctx.__('user.embed.lastactive'), lastactiveStatus, true)
+      .addField(ctx.__('user.embed.lastactive'), this.capitalizeFirstLetter(lastactiveStatus), true)
       .addField(ctx.__('user.embed.afk'), afkStatus, true)
       .addField(ctx.__('user.embed.creation'), mtz(member.user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`))
       .setColor(ctx.guild.me.displayHexColor)
       .setThumbnail(member.user.displayAvatarURL);
 
     ctx.channel.send(ctx.__('user.title', { emote, name: member.user.tag }), { embed });
+  }
+
+  /**
+   * Capitalize the first letter of a string and returns it.
+   * @param {String} text String to process
+   * @returns {String}
+   */
+  capitalizeFirstLetter(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
   }
 }
 

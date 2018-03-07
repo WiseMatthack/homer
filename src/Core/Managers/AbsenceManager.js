@@ -27,6 +27,14 @@ class AbsenceManager extends Manager {
   }
 
   /**
+   * Removes the absence of someone.
+   * @param {String} id ID of the user
+   */
+  async removeAbsence(id) {
+    await this.client.database.deleteDocument('afk', id);
+  }
+
+  /**
    * Get the object of an absence.
    * @param {String} id ID of the user
    * @returns {AFKObject}
