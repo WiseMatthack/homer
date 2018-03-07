@@ -37,6 +37,7 @@ class Weather extends Command {
             speedKph: parsed.current.wind_kph,
             speedMph: parsed.current.wind_mph,
             dir: parsed.current.wind_dir,
+            angle: parsed.current.wind_degree,
           }), true)
           .addField(ctx.__('weather.embed.misc.title'), ctx.__('weather.embed.misc.value', {
             precipMm: parsed.current.precip_mm,

@@ -1,12 +1,17 @@
 {
   "name": "homer",
   "version": "0.0.1",
-  "description": "A community bot for all Discord guilds.",
+  "description": "A community bot for all Discord servers.",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js"
   },
-  "keywords": [],
+  "repository": "https://github.com/iDroid27210/homer",
+  "bugs": {
+    "email": "biojoutk1106@gmail.com",
+    "url": "https://github.com/iDroid27210/homer/issues"
+  },
+  "keywords": ["iDroid27210", "bot", "discord", "homer", "simpson"],
   "author": "iDroid27210",
   "license": "AGPL-3.0",
   "dependencies": {

@@ -22,8 +22,11 @@ class Message extends Event {
       const question = ctx.content.split(/ +/g).slice(1).join(' ');
 
       if (question) {
-        ctx.channel.startTyping();
+        if (!this.client.cleverbot) return ctx.channel.send(ctx.__('message.cleverbot.disabled', {
+          errorIcon: this.client.constants.statusEmotes.error,
+        }));
 
+        ctx.channel.startTyping();
         snekfetch.post('http://cleverbot.io/1.0/ask')
           .send({
             user: this.client.config.api.cleverbotUser,
@@ -66,6 +69,14 @@ class Message extends Event {
 
       if (cmd.private) {
         if (!this.client.config.owners.includes(ctx.author.id)) return;
+      }
+
+      if (!cmd.private && this.client.disabledCommands[cmd.name]) {
+        return ctx.channel.send(ctx.__('message.disabledCommand', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          cmdName: cmd.name,
+          reason: this.client.disabledCommands[cmd.name].reason || ctx.__('global.none'),
+        }));
       }
 
       for (const permission of cmd.botPermissions) {

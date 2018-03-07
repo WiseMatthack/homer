@@ -1,16 +1,35 @@
 {
   "discord": {
-    "commandCategories": [],
-    "defaultPrefixes": [],
-    "token": ""
+    "commandCategories": ["Bot", "Configuration", "General", "Misc", "Owner"],
+    "defaultPrefixes": ["ib:"],
+    "token": "Mzc5MjI5NDc4MjUxMTM0OTc2.DX9N5Q.3zOiNIUY8FcosybQRA5RZed77Dk"
+  },
+  "api": {
+    "cleverbotUser": "FlHP2WTPb5KcxmyT",
+    "cleverbotKey": "jno5HZL1jKlqBVJFiCfHiX5kSvopyeEd",
+    "discordBans": "Vycs9Fz3sK",
+    "googleKey": "AIzaSyAxiQP8Z3rs4aHYhpNayRc3pV4GrKszcHI",
+    "googleCx": "007191231086761736718:poe5qffl1uq",
+    "weather": "5806dbc7863d4d7aa56113450180703",
+    "youtube": "AIzaSyAxiQP8Z3rs4aHYhpNayRc3pV4GrKszcHI"
+   },
+   "support": {
+    "channel": "",
+    "guild": ""
   },
   "database": {
     "db": "",
     "host": "",
     "port": 1234
   },
+  "clientOptions": {},
   "dashboard": {
+    "baseDomain": "",
+    "clientID": "",
+    "clientSecret": "",
     "port": 1234,
+    "redirectURL": "",
     "sessionSecret": ""
-  }
+  },
+  "owners": []
 }

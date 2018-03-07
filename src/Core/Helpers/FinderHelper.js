@@ -82,11 +82,11 @@ class FinderHelper extends Helper {
 
   /**
    * Format for user list.
-   * @param {User[]} members Collection of User
+   * @param {User[]} users Collection of User
    * @param {String} locale Guild's locale
    * @returns {String}
    */
-  formatUsers(members, locale) {
+  formatUsers(users, locale) {
     i18n.setLocale(locale);
 
     let msg = i18n.__('finder.users.first', {

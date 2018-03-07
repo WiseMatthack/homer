@@ -44,6 +44,18 @@ class ExtendedClient extends Client {
     this.constants = Constants;
 
     /**
+     * Cleverbot feature status (enabled or disabled).
+     * @type {Boolean}
+     */
+    this.cleverbot = true;
+
+    /**
+     * Disabled commands.
+     * @type {Object}
+     */
+    this.disabledCommands = {};
+
+    /**
      * Database manager associated to the client.
      * @type {DatabaseManager}
      */
