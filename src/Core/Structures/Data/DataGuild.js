@@ -26,7 +26,14 @@ class DataGuild extends DataBase {
   get template() {
     return ({
       id: this.key,
-      memberLogs: [],
+      welcome: {
+        channel: null,
+        message: null,
+      },
+      leave: {
+        channel: null,
+        message: null,
+      },
       disabledCategories: [],
       ignoredChannels: [],
       autoRole: [],

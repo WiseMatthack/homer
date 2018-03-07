@@ -102,10 +102,20 @@
     "usage": "ignore [Channel]",
     "examples": ["ignore #trash", "ignore partOfChannelName"]
   },
+  "leave": {
+    "description": "Set-up the leave feed",
+    "usage": "leave <message>",
+    "examples": ["leave Oh no, {user.tag} has left!"]
+  },
   "prefix": {
     "description": "Manage your custom prefixes",
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
+  },
+  "welcome": {
+    "description": "Set-up the welcome feed",
+    "usage": "welcome <message>",
+    "examples": ["welcome Oh yeah, {user.tag} just entered the place!"]
   },
 
   "call": {

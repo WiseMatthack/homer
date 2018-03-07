@@ -14,6 +14,7 @@ const PhoneManager = require('./Managers/PhoneManager');
 /* Helpers */
 const FinderHelper = require('./Helpers/FinderHelper');
 const LastactiveHelper = require('./Helpers/LastactiveHelper');
+const LisaHelper = require('./Helpers/LisaHelper');
 
 /**
  * The main hub for interacting with the Discord API.
@@ -97,6 +98,12 @@ class ExtendedClient extends Client {
      * @type {LastactiveHelper}
      */
     this.lastactive = new LastactiveHelper(this);
+
+    /**
+     * Lisa scripting language helper associated to the client.
+     * @type {LisaHelper}
+     */
+    this.lisa = new LisaHelper(this);
   }
 
   /**
@@ -136,6 +143,13 @@ class ExtendedClient extends Client {
         console.log(`[Cleverbot] Failed to create the instance! Message: ${parsed.status}`);
         this.cleverbot = false;
       });
+  }
+
+  /**
+   * Update the bot game.
+   */
+  updateGame() {
+    this.user.setActivity(`Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
   }
 }
 

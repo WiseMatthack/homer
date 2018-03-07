@@ -7,7 +7,7 @@ class Ready extends Event {
 
   async handle() {
     console.log(`[Discord] Connected as ${this.client.user.tag}. On ${this.client.guilds.size} servers with ${this.client.users.size} users.`);
-    this.client.user.setActivity(`Type ${this.client.config.discord.defaultPrefixes[0]}help! On ${this.client.guilds.size} servers with ${this.client.users.size} users. Note: BETA version, may be buggy.`);
+    this.client.updateGame();
 
     this.client.initiateCleverbot();
   }
