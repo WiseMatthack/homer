@@ -7,6 +7,7 @@
 
 const Client = require('./Core/Client');
 const i18n = require('i18n');
+const { DiscordAPIError } = require('discord.js');
 
 /* Client */
 const client = new Client();
@@ -29,3 +30,28 @@ client.login(client.config.discord.token)
 
 /* Module exporting */
 module.exports = client;
+
+/* Process stuff */
+process.on('unhandledRejection', (error) => {
+  if (error instanceof DiscordAPIError) return;
+  console.error(error instanceof Error ? error : `[Error] Unhandled rejection:\n${error}`);
+});
+
+process.on('uncaughtException', async (err) => {
+  console.error(err);
+
+  // For security reasons we shutdown everything related to the bot here
+  await client.dashboard.shutdown();
+  await client.database.provider.getPoolMaster().drain();
+  await client.destroy();
+
+  process.exit(0);
+});
+
+process.on('SIGINT', () => {
+  await client.dashboard.shutdown();
+  await client.database.provider.getPoolMaster().drain();
+  await client.destroy();
+
+  process.exit(0);
+});
