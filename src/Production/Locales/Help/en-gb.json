@@ -102,6 +102,11 @@
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
   },
 
+  "format": {
+    "description": "Set a date or a time format for the guild",
+    "usage": "format <type> <format>",
+    "examples": ["format date DD/MM/YYYY", "format time HH:mm:ss"]
+  },
   "ignore": {
     "description": "Make the bot ignore or listen to a channel",
     "usage": "ignore [Channel]",
@@ -116,16 +121,6 @@
     "description": "Manage your custom prefixes",
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
-  },
-  "setdate": {
-    "description": "Set a date format for the guild",
-    "usage": "setdate <date format>",
-    "examples": ["setdate DD/MM/YYYY"]
-  },
-  "settime": {
-    "description": "Set a time format for the guild",
-    "usage": "settime <time format>",
-    "examples": ["settime HH:mm:ss"]
   },
   "settimezone": {
     "description": "Set a timezone for the guild",
