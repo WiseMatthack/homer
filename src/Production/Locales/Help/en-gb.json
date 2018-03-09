@@ -117,6 +117,21 @@
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
   },
+  "setdate": {
+    "description": "Set a date format for the guild",
+    "usage": "setdate <date format>",
+    "examples": ["setdate DD/MM/YYYY"]
+  },
+  "settime": {
+    "description": "Set a time format for the guild",
+    "usage": "settime <time format>",
+    "examples": ["settime HH:mm:ss"]
+  },
+  "settimezone": {
+    "description": "Set a timezone for the guild",
+    "usage": "timezone <timezone>",
+    "examples": ["timezone Europe/Paris", "timezone America/Mexico_City"]
+  },
   "welcome": {
     "description": "Set-up the welcome feed",
     "usage": "welcome <message>",
