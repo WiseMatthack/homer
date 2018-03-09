@@ -157,5 +157,11 @@
     "description": "Sets the telephone channel",
     "usage": "telephone",
     "examples": []
+  },
+
+  "moderation": {
+    "description": "No description available",
+    "usage": "moderation",
+    "examples": []
   }
 }

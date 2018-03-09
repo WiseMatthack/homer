@@ -7,7 +7,9 @@ const router = Router()
     else return res.render('error.pug', { errorCode: '403' });
   })
   .get('/', async (req, res) => {
-    const articles = await client.database.getDocuments('articles');
+    const articles = await client.database.getDocuments('articles')
+      .then((articles) => articles.sort((a, b) => b.published - a.published));    
+
     res.render('admin_articles.pug', {
       articles,
       success: req.query.success || false,
