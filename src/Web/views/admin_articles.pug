@@ -30,11 +30,12 @@ html(lang=`${locale}`)
           div(class="card")
             div(class="card-body")
             span(class="row")
-              span(class="text-left")
-                a(href=`/articles/${article.id}` class="nav-link" style="color: inherit;") #{article.title}
-              span(class="text-right")
-                a(href=`/admin/articles/edit/${article.id}` class="btn btn-primary") Edit
-                a(href=`/admin/articles/delete/${article.id}` class="btn btn-danger") Delete
+              div(class="d-flex justify-content-between")
+                div
+                  a(href=`/articles/${article.id}` class="nav-link" style="color: inherit;") #{article.title}
+                div
+                  a(href=`/admin/articles/edit/${article.id}` class="btn btn-primary") Edit
+                  a(href=`/admin/articles/delete/${article.id}` class="btn btn-danger") Delete
         
     include modules/footer.pug
 
