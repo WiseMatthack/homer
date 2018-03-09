@@ -10,6 +10,7 @@ const router = Router()
     const articles = await client.database.getDocuments('articles');
     res.render('admin_articles.pug', {
       articles,
+      success: req.query.success || false,
     });
   })
   .post('/post', async (req, res) => {

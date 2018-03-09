@@ -23,6 +23,8 @@ const router = Router()
 
     res.render('admin_guilds.pug', {
       guilds,
+      success: req.query.success || false,
+      guildName: req.query.guildName || null,
     });
   })
   .get('/leave', (req, res) => {
