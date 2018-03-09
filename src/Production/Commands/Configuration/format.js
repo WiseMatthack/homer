@@ -23,7 +23,7 @@ class DateFormat extends Command {
 
       ctx.channel.send(ctx.__('format.date.set', {
         successIcon: this.client.constants.statusEmotes.success,
-        demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(newFormat),
+        demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(format),
       }));
     } else if (ctx.args[0] === 'time') {
       if (!format) return ctx.channel.send(ctx.__('format.error.noFormat', {
@@ -35,7 +35,7 @@ class DateFormat extends Command {
 
       ctx.channel.send(ctx.__('format.time.set', {
         successIcon: this.client.constants.statusEmotes.success,
-        demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(newFormat),
+        demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(format),
       }));
     } else {
       ctx.channel.send(ctx.__('format.list', {
