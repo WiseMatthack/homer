@@ -12,11 +12,12 @@ class DateFormat extends Command {
 
   async run(ctx) {
     const format = ctx.args[1];
-    if (!format) return ctx.channel.send(ctx.__('format.error.noFormat', {
-      errorIcon: this.client.constants.statusEmotes.error,
-    }));
 
     if (ctx.args[0] === 'date') {
+      if (!format) return ctx.channel.send(ctx.__('format.error.noFormat', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
       ctx.settings.data.misc.dateFormat = format;
       await ctx.settings.saveData();
 
@@ -25,12 +26,21 @@ class DateFormat extends Command {
         demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(newFormat),
       }));
     } else if (ctx.args[0] === 'time') {
+      if (!format) return ctx.channel.send(ctx.__('format.error.noFormat', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
       ctx.settings.data.misc.timeFormat = format;
       await ctx.settings.saveData();
 
       ctx.channel.send(ctx.__('format.time.set', {
         successIcon: this.client.constants.statusEmotes.success,
         demo: mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(newFormat),
+      }));
+    } else {
+      ctx.channel.send(ctx.__('format.list', {
+        date: ctx.settings.data.misc.dateFormat,
+        time: ctx.settings.data.misc.timeFormat,
       }));
     }
   }
