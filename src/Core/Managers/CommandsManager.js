@@ -63,20 +63,23 @@ class CommandsManager extends Manager {
   getCommand(cmd) {
     let category = null;
 
-    this.gps.forEach((commands, categoryName) => {
-      if (categoryName === 'aliases') {
-        if (commands[cmd]) return this.getCommand(commands[cmd]);
-      } else {
-        if (commands.includes(cmd)) {
-          category = categoryName;
-        }
-      }
-    });
-
-    if (category) {
-      return require(`${this.path}/${category}/${cmd}.js`);
+    const aliases = this.gps.get('aliases');
+    if (aliases[cmd]) {
+      return this.getCommand(aliases[cmd]);
     } else {
-      return null;
+      this.gps.forEach((commands, categoryName) => {
+        if (categoryName !== 'aliases') {
+          if (commands.includes(cmd)) {
+            category = categoryName;
+          }
+        }
+      });
+
+      if (category) {
+        return require(`${this.path}/${category}/${cmd}.js`);
+      } else {
+        return null;
+      }
     }
   }
 }
