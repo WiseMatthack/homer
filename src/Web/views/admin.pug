@@ -9,16 +9,30 @@ html(lang=`${locale}`)
 
     div(class="jumbotron jumbotron-fluid")
       div(class="container text-center")
-        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") 📰 Manage articles
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") 📰 Administration panel
         hr
-        form(action="/admin/sendArticle" method="POST")
-          p
-            input(type="text" id="title" name="title" placeholder="Title of the article")
-          p
-            textarea(id="content" name="content" rows="5")
-
-          input(type="submit" value="Send article")
-
+        div(class="row")
+          div(class="col-sm-6")
+            div(class="card" style="width: 18rem;")
+              img(class="card-img-top" src="http://www.prologicwebdesign.com/wp-content/uploads/2015/07/Oracle-Database-support.png" alt="")
+              div(class="card-body")
+                h5(class="card-title") Database
+                p(class="card-text") Manage the bot database on the RethinkDB administration panel.
+                  em Requires a standard Linux authentication.
+                a(href="https://rethinkdb.idroid.me" class="btn btn-primary") Access to the database
+              div(class="card" style="width: 18rem;")
+                img(class="card-img-top" src="https://png.icons8.com/color/1600/discord-new-logo.png" alt="")
+                div(class="card-body")
+                  h5(class="card-title") Servers
+                  p(class="card-text") Get the list of guilds the bot is on and make it leave them if needed.
+                  a(href="/admin/guilds" class="btn btn-primary") Access to the guilds list
+              div(class="card" style="width: 18rem;")
+                img(class="card-img-top" src="http://www.prologicwebdesign.com/wp-content/uploads/2015/07/Oracle-Database-support.png" alt="")
+                div(class="card-body")
+                  h5(class="card-title") Articles
+                  p(class="card-text") Post, edit or delete articles shown on the dashboard home page.
+                  a(href="/admin/guilds" class="btn btn-primary") Access to the articles
+        
     include modules/footer.pug
 
     include modules/javascript.pug
