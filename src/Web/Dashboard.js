@@ -1,4 +1,5 @@
 const Client = require('../Core/Client');
+const client = require('../index');
 const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
@@ -103,7 +104,7 @@ class Dashboard {
    * @param {*} response Express response
    * @param {*} next Next
    */
-  static globalVars(request, response, next) {
+  globalVars(request, response, next) {
     const data = {
       authenticated: request.isAuthenticated(),
       locale: request.language,
@@ -111,7 +112,7 @@ class Dashboard {
         username: request.user.username,
         discriminator: request.user.discriminator,
       }) : request.__('dashboard.nameDisplay.visitor'),
-      admin: request.isAuthenticated() ? this.client.config.owners.includes(request.user.id) : false,
+      admin: request.isAuthenticated() ? client.config.owners.includes(request.user.id) : false,
     };
 
     Object.keys(data).forEach((key) => {
