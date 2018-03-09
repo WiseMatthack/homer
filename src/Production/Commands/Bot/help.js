@@ -39,7 +39,7 @@ class Help extends Command {
         }));
 
       this.client.commands.gps.forEach((commandsList, category) => {
-        if (category !== 'Owner') {
+        if (category !== 'Owner' || category !== 'aliases') {
           embed.addField(ctx.__('help.global.embed.category', {
             category,
           }), commandsList.map(cmd => `\`${cmd}\``).join(' - '));

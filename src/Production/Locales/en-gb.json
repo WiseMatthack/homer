@@ -29,6 +29,7 @@
 	"choose.not_enough_choices": "{{{ errorIcon }}} You must provide at least **2** choices.",
 	"choose.chosen": "🤔 I've chosen **{{{ choice }}}**!",
 	"dashboard.article.footer": "Article made by <a href=\"/user/{{{ authorID }}}\">{{{ authorTag }}}</a> on {{{ published }}}.",
+	"dashboard.google.description": "Homer is a Discord bot designed for community servers. Easy to use, it will suit all your needs.",
 	"dashboard.head.title": "Homer - Dashboard",
 	"dashboard.header.home": "🏠 Home",
 	"dashboard.header.servers": "🌐 Servers",
