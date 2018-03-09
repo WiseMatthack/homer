@@ -2,6 +2,7 @@
 html(lang=`${locale}`)
   head
     include modules/head.pug
+    link(rel="stylesheet" href="/js/trumbowyg/dist/ui/trumbowyg.min.css")
   body
     include modules/header.pug
 
@@ -23,4 +24,5 @@ html(lang=`${locale}`)
     include modules/footer.pug
 
     include modules/javascript.pug
-    include modules/articles_editor.pug
+    script(src="/js/trumbowyg/dist/trumbowyg.js")
+    script(defer) $('#content').trumbowyg();
