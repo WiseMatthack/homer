@@ -48,7 +48,7 @@ process.on('uncaughtException', async (err) => {
   process.exit(0);
 });
 
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   await client.dashboard.shutdown();
   await client.database.provider.getPoolMaster().drain();
   await client.destroy();
