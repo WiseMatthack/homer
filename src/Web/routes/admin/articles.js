@@ -27,8 +27,9 @@ const router = Router()
     if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
 
     client.database.updateDocument('articles', req.query.id, {
-      title,
-      content,
+      title: req.body.title,
+      content: req.body.content,
+      lastEdit: Date.now(),
     })
       .then(() => res.redirect('/admin/articles?success=editedArticle'))
       .catch(() => res.render('error.pug', { errorCode: '500' }));
