@@ -6,7 +6,7 @@ const router = Router()
     if (req.isAuthenticated() && client.config.owners.includes(req.user.id)) return next();
     else return res.render('error.pug', { errorCode: '403' });
   })
-  .get('/', (req, res) => {
+  .get('/', async (req, res) => {
     const articles = await client.database.getDocuments('articles');
     res.render('admin_articles.pug', {
       articles,
@@ -23,7 +23,7 @@ const router = Router()
 
     res.redirect('/admin?success=article');
   })
-  .get('/delete', async (req, res) => {
+  .get('/delete', (req, res) => {
     if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
 
     client.database.deleteDocument('articles', req.query.id)
