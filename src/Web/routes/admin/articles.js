@@ -23,6 +23,26 @@ const router = Router()
 
     res.redirect('/admin/articles?success=postedArticle');
   })
+  .post('/edit', async (req, res) => {
+    if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
+
+    client.database.updateDocument('articles', req.query.id, {
+      title,
+      content,
+    })
+      .then(() => res.redirect('/admin/articles?success=editedArticle'))
+      .catch(() => res.render('error.pug', { errorCode: '500' }));
+  })
+  .get('/edit', async (req, res) => {
+    if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
+
+    const article = await client.database.getDocument('articles', req.query.id);
+    if (!article) return res.redirect('/admin/articles');
+
+    res.render('admin_articles_edit.pug', {
+      article,
+    });
+  })
   .get('/delete', (req, res) => {
     if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
 
