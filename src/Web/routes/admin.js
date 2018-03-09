@@ -3,8 +3,8 @@ const client = require('../../index');
 
 const router = Router()
   .use((req, res, next) => {
-    if (req.isAuthenticated() && client.config.owners.includes(req.user.id)) return res.render('error.pug', { errorCode: '403' });
-    else return res.redirect('/');
+    if (req.isAuthenticated() && client.config.owners.includes(req.user.id)) return next();
+    else return res.render('error.pug', { errorCode: '403' });
   })
   .get('/', (req, res) => {
     res.render('admin.pug');
