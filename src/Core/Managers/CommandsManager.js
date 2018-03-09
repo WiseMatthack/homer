@@ -39,6 +39,12 @@ class CommandsManager extends Manager {
         if (err) throw err;
         files.forEach((file) => {
           delete require.cache[require.resolve(`${this.path}/${category}/${file}`)];
+          const cmd = new (require(`../../Production/Commands/${category}/${file}`))(this.client);
+          const aliases = this.gps.get('aliases');
+          cmd.aliases.forEach(a => {
+            aliases[a] = cmd.name;
+          });
+          
           categoryGPS.push(file.split('.')[0]);
         });
       });
@@ -56,8 +62,12 @@ class CommandsManager extends Manager {
     let category = null;
 
     this.gps.forEach((commands, categoryName) => {
-      if (commands.includes(cmd)) {
-        category = categoryName;
+      if (categoryName === 'aliases') {
+        if (commands[cmd]) return this.getCommand(commands[cmd]);
+      } else {
+        if (commands.includes(cmd)) {
+          category = categoryName;
+        }
       }
     });
 
