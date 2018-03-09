@@ -45,6 +45,7 @@ class CommandsManager extends Manager {
           cmd.aliases.forEach(a => {
             aliases[a] = cmd.name;
           });
+          this.gps.set('aliases', aliases);
           
           categoryGPS.push(file.split('.')[0]);
         });
