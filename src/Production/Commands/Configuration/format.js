@@ -12,7 +12,7 @@ class DateFormat extends Command {
 
   async run(ctx) {
     const format = ctx.args.slice(1).join(' ');
-    console.log(format)
+
     if (ctx.args[0] === 'date') {
       if (!format) return ctx.channel.send(ctx.__('format.error.noFormat', {
         errorIcon: this.client.constants.statusEmotes.error,

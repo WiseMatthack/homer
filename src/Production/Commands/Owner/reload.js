@@ -16,9 +16,9 @@ class Reload extends Command {
       this.client.commands.gps.clear();
       await this.client.commands._map();
 
-      ctx.channel.send('🚸 Reloaded commands list!');
+      msg.edit('🚸 Reloaded commands list!');
     } catch (e) {
-      ctx.channel.send(e, { code: 'js' });
+      msg.edit(e, { code: 'js' });
     }
   }
 }
