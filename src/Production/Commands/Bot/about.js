@@ -17,7 +17,6 @@ class About extends Command {
         discord: version,
         defaultPrefix: this.client.config.discord.defaultPrefixes[0],
       }))
-      .addField(ctx.__('about.embed.stats.title'), ctx.__('about.embed.stats.value'))
       .setFooter(ctx.__('about.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }))
       .setTimestamp(this.client.initiated)
       .setThumbnail(this.client.user.displayAvatarURL)

@@ -52,6 +52,8 @@
 	"dashboard.user.presence": "👀 Presence",
 	"dashboard.user.creationDate": "📆 Account creation date",
 	"dashboard.user.premium": "🏅 Special ranks",
+	"donators.hasDonated": "",
+	"donators.text": "💰 Donations for Homer:\n```{{{ donators }}}```\n\nYou can donate for the project at this address: <https://paypal.me/ibotandidroid>.",
 	"feedback.invalidText": "{{{ errorIcon }}} The message length must not exceed 512 characters.",
 	"feedback.sent": "{{{ successIcon }}} Your feedback has been sent!",
 	"finder.members.first": "{{{ warningIcon }}} **{{{ total }}}** members found:\n{{{ list }}}",
