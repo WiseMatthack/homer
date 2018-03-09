@@ -31,5 +31,6 @@
     "redirectURL": "",
     "sessionSecret": ""
   },
-  "owners": []
+  "owners": [],
+  "donators": []
 }
