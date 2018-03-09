@@ -112,7 +112,7 @@ class Dashboard {
         username: request.user.username,
         discriminator: request.user.discriminator,
       }) : request.__('dashboard.nameDisplay.visitor'),
-      admin: request.isAuthenticated() ? client.config.owners.includes(request.user.id) : false,
+      admin: request.isAuthenticated() ? owners.includes(request.user.id) : false,
     };
 
     Object.keys(data).forEach((key) => {
