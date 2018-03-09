@@ -110,7 +110,7 @@ class Dashboard {
       authenticated: request.isAuthenticated(),
       locale: request.language,
       nameDisplay: request.isAuthenticated() ? pug.render(request.__('dashboard.nameDisplay.connected', {
-        username: request.user.username,
+        username: request.user.username.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'), // HTML escaping
         discriminator: request.user.discriminator,
       })) : request.__('dashboard.nameDisplay.visitor'),
       admin: request.isAuthenticated() ? owners.includes(request.user.id) : false,
