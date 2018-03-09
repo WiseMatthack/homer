@@ -7,7 +7,7 @@ html(lang=`${locale}`)
 
     div(class="jumbotron jumbotron-fluid")
       div(class="container text-center")
-        div(class="mbr-section-title mbr-bold mbr-fonts-style text-center") 🏙 Servers
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") 🏙 Servers
         hr
         if success === 'guildLeft'
           div(class="alert alert-primary alert-dismissible fade show" role="alert")
@@ -19,9 +19,9 @@ html(lang=`${locale}`)
           thead
             tr
               th(data-field="code" data-sortable="true") Name
-              th Members
-              th Bots
-              th Owner
+              th(data-sortable="true") Members
+              th(data-sortable="true") Bots
+              th(data-sortable="true") Owner
               th(data-sortable="true") Join
               th Actions
           tbody
