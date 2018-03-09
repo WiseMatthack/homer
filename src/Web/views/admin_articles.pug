@@ -11,11 +11,9 @@ html(lang=`${locale}`)
         if success
           div(class="alert alert-primary alert-dismissible fade show" role="alert")
             if success === 'postedArticle'
-              | Article posted
-              strong successfully
+              | Article posted successfully!
             else if success === 'editedArticle'
-              | Article edited
-              strong successfully
+              | Article edited successfully!
             button(type="button" class="close" data-dismiss="alert" aria-label="Close")
               span(aria-hidden="true") &times;
 
