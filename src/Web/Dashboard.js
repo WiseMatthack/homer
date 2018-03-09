@@ -43,6 +43,10 @@ class Dashboard {
     this.server = this.listen(this.dashboardSettings.port);
   }
 
+  get client() {
+    return this.client;
+  }
+
   /**
    * Imports all modules, etc. for the express application.
    * @private
