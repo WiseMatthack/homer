@@ -21,13 +21,13 @@ const router = Router()
       author: req.user.id,
     });
 
-    res.redirect('/admin?success=article');
+    res.redirect('/admin/articles?success=postedArticle');
   })
   .get('/delete', (req, res) => {
     if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
 
     client.database.deleteDocument('articles', req.query.id)
-      .then(() => res.redirect('/admin?success=article'))
+      .then(() => res.redirect('/admin/articles?success=deletedArticle'))
       .catch(() => res.render('error.pug', { errorCode: '500' }));
   });
 

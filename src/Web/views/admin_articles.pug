@@ -29,7 +29,7 @@ html(lang=`${locale}`)
         each article in articles
           div(class="card")
             div(class="card-body")
-              #{article.title}
+              a(href=`/articles/${article.id}` class="nav-link" style="color: inherit;") #{article.title}
               span(style="text-right")
                 a(href=`/admin/articles/edit/${article.id}` class="btn btn-primary")
                 a(href=`/admin/articles/delete/${article.id}` class="btn btn-danger")
