@@ -1,5 +1,5 @@
 const Client = require('../Core/Client');
-const client = require('../index');
+const { owners } = require('../config.json');
 const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
