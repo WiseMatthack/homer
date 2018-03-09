@@ -1,0 +1,39 @@
+//- Admin - Represents the admin section.
+
+<!DOCTYPE html>
+html(lang=`${locale}`)
+  head
+    include modules/head.pug
+  body
+    include modules/header.pug
+
+    div(class="jumbotron jumbotron-fluid")
+      div(class="container text-center")
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") ✏ Write an article
+        hr
+        form(action="/admin/articles/post" method="POST")
+          div(class="form-group")
+            label(for="title") Title
+            input(type="text" class="form-control" id="title")
+          br
+          div(class="form-group")
+            label(for="content") Content
+            textarea(class="form-control" rows="5" id="content")
+          br
+          button(type="submit" class="btn btn-success") Post an article
+        
+    div(class="jumbotron jumbotron-fluid")
+      div(class="container text-center")
+        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") 📰 Articles
+        hr
+        each article in articles
+          div(class="card")
+            div(class="card-body")
+              #{article.title}
+              span(style="text-right")
+                a(href=`/admin/articles/edit/${article.id}` class="btn btn-primary")
+                a(href=`/admin/articles/delete/${article.id}` class="btn btn-danger")
+        
+    include modules/footer.pug
+
+    include modules/javascript.pug
