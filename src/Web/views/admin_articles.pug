@@ -16,7 +16,7 @@ html(lang=`${locale}`)
           br
           div(class="form-group")
             label(for="content") Content
-            textarea(class="form-control" rows="5" name="content" id="content")
+            div(name="content" id="content")
           br
           button(type="submit" class="btn btn-success") Post an article
         
@@ -37,3 +37,4 @@ html(lang=`${locale}`)
     include modules/footer.pug
 
     include modules/javascript.pug
+    include modules/articles_editor.pug
