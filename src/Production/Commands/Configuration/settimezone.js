@@ -21,7 +21,7 @@ class SetTimezone extends Command {
       timezone,
     }));
 
-    ctx.settings.data.misc.timzone = timzone;
+    ctx.settings.data.misc.timzone = timezone;
     await ctx.settings.saveData();
 
     const newFormat = mtz().locale(ctx.settings.data.misc.locale).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`);
