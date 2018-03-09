@@ -15,7 +15,7 @@ class Donators extends Command {
     
     for (const donation of this.client.config.donators) {
       donators.push(ctx.__('donators.hasDonated', {
-        user: `**${await this.client.fetchUser(donation.user).then(user => user.tag)}**`,
+        user: await this.client.fetchUser(donation.user).then(user => user.tag),
         amount: donation.amount,
       }));
     }
