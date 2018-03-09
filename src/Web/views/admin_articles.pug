@@ -12,11 +12,13 @@ html(lang=`${locale}`)
         hr
         form(action="/admin/articles/post" method="POST")
           div(class="form-group")
-            label(for="title") Title
+            label(for="title")
+              strong Title
             input(type="text" class="form-control" name="title" id="title")
           br
           div(class="form-group")
-            label(for="content") Content
+            label(for="content")
+              strong Content
             div(name="content" id="content")
           br
           button(type="submit" class="btn btn-success") Post an article

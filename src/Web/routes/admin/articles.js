@@ -13,6 +13,8 @@ const router = Router()
     });
   })
   .post('/post', async (req, res) => {
+    if (!req.body.title || !req.body.content) return res.render('error.pug', { errorCode: '500' });
+
     await client.database.insertDocument('articles', {
       title: req.body.title,
       content: req.body.content,
@@ -25,6 +27,7 @@ const router = Router()
   })
   .post('/edit', async (req, res) => {
     if (!req.query.id) return res.render('error.pug', { errorCode: '500' });
+    if (!req.body.title || !req.body.content) return res.render('error.pug', { errorCode: '500' });
 
     client.database.updateDocument('articles', req.query.id, {
       title: req.body.title,

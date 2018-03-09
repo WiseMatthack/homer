@@ -12,11 +12,13 @@ html(lang=`${locale}`)
         hr
         form(action=`/admin/articles/edit?id=${article.id}` method="POST")
           div(class="form-group")
-            label(for="title") Title
+            label(for="title")
+              strong Title
             input(type="text" class="form-control" name="title" id="title" value=`${article.title}`)
           br
           div(class="form-group")
-            label(for="content") Content
+            label(for="content")
+              strong Content
             textarea(class="form-control" rows="5" name="content" id="content") #{article.content}
           br
           button(type="submit" class="btn btn-success") Edit the article
