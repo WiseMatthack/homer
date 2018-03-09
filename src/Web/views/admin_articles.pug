@@ -14,11 +14,11 @@ html(lang=`${locale}`)
         form(action="/admin/articles/post" method="POST")
           div(class="form-group")
             label(for="title") Title
-            input(type="text" class="form-control" id="title")
+            input(type="text" class="form-control" name="title" id="title")
           br
           div(class="form-group")
             label(for="content") Content
-            textarea(class="form-control" rows="5" id="content")
+            textarea(class="form-control" rows="5" name="content" id="content")
           br
           button(type="submit" class="btn btn-success") Post an article
         
