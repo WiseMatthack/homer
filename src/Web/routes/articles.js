@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const client = require('../../index');
 
-const markdownToPug = new (require('markdown-to-pug'))();
 const pug = require('pug');
 const moment = require('moment');
 
@@ -10,7 +9,7 @@ const router = Router()
     const article = await client.database.getDocument('articles', req.params.uuid);
     if (!article) return res.render('error.pug', { errorCode: '404' });
 
-    article.content = pug.render(markdownToPug.render(article.content));
+    article.content = pug.render(article.content);
 
     const articleAuthor = await client.fetchUser(article.author);
 
