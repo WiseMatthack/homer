@@ -43,10 +43,6 @@ class Dashboard {
     this.server = this.listen(this.dashboardSettings.port);
   }
 
-  get client() {
-    return this.client;
-  }
-
   /**
    * Imports all modules, etc. for the express application.
    * @private
@@ -107,7 +103,7 @@ class Dashboard {
    * @param {*} response Express response
    * @param {*} next Next
    */
-  globalVars(request, response, next) {
+  static globalVars(request, response, next) {
     const data = {
       authenticated: request.isAuthenticated(),
       locale: request.language,
