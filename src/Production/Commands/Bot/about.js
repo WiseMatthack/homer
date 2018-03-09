@@ -18,7 +18,7 @@ class About extends Command {
         defaultPrefix: this.client.config.discord.defaultPrefixes[0],
       }))
       .addField(ctx.__('about.embed.stats.title'), ctx.__('about.embed.stats.value'))
-      .setFooter(ctx.__('about.embed.footer'))
+      .setFooter(ctx.__('about.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }))
       .setTimestamp(this.client.initiated)
       .setThumbnail(this.client.user.displayAvatarURL)
       .setColor(ctx.guild.me.displayHexColor);

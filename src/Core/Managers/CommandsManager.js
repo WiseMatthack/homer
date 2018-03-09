@@ -37,7 +37,10 @@ class CommandsManager extends Manager {
 
       readdir(`${this.path}/${category}`, (err, files) => {
         if (err) throw err;
-        files.forEach(file => categoryGPS.push(file.split('.')[0]));
+        files.forEach((file) => {
+          delete require.cache[require.resolve(`${this.path}/${category}/${file}`)];
+          categoryGPS.push(file.split('.')[0]);
+        });
       });
 
       this.gps.set(category, categoryGPS);
