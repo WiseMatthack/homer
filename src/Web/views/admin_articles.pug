@@ -13,7 +13,7 @@ html(lang=`${locale}`)
             if success === 'postedArticle'
               | Article posted
               strong successfully
-            else if === 'editedArticle'
+            else if success === 'editedArticle'
               | Article edited
               strong successfully
             button(type="button" class="close" data-dismiss="alert" aria-label="Close")
