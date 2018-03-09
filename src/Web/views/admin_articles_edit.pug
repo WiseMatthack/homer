@@ -9,7 +9,7 @@ html(lang=`${locale}`)
       div(class="container text-center")
         h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") ✏ Edit an article
         hr
-        form(action="/admin/articles/post" method="POST")
+        form(action=`/admin/articles/edit?id=${article.id}` method="POST")
           div(class="form-group")
             label(for="title") Title
             input(type="text" class="form-control" name="title" id="title" value=`${article.title}`)

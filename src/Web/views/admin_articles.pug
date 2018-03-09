@@ -31,8 +31,8 @@ html(lang=`${locale}`)
                 p
                   a(href=`/articles/${article.id}` class="nav-link" style="color: inherit;") #{article.title}
                 p
-                  a(href=`/admin/articles/edit/${article.id}` class="btn btn-primary") Edit
-                  a(href=`/admin/articles/delete/${article.id}` class="btn btn-danger") Delete
+                  a(href=`/admin/articles/edit?id=${article.id}` class="btn btn-primary") Edit
+                  a(href=`/admin/articles/delete?id=${article.id}` class="btn btn-danger") Delete
         
     include modules/footer.pug
 
