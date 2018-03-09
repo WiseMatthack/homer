@@ -18,7 +18,7 @@ i18n.configure({
   cookie: 'locale',
   defaultLocale: 'en-gb',
   directory: `${__dirname}/Production/Locales`,
-  syncFiles: false,
+  updateFiles: false,
 });
 
 /* Loading events */
