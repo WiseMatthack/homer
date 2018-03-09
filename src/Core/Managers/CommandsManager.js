@@ -25,6 +25,7 @@ class CommandsManager extends Manager {
      * @type {Map<String, String[]>}
      */
     this.gps = new Map();
+    this.gps.set('aliases', {});
     this._map();
   }
 
