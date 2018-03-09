@@ -25,7 +25,6 @@ class CommandsManager extends Manager {
      * @type {Map<String, String[]>}
      */
     this.gps = new Map();
-    this.gps.set('aliases', {});
     this._map();
   }
 
@@ -41,7 +40,7 @@ class CommandsManager extends Manager {
         files.forEach((file) => {
           delete require.cache[require.resolve(`${this.path}/${category}/${file}`)];
           const cmd = new (require(`../../Production/Commands/${category}/${file}`))(this.client);
-          const aliases = this.gps.get('aliases');
+          const aliases = this.gps.get('aliases') || {};
           cmd.aliases.forEach(a => {
             aliases[a] = cmd.name;
           });
