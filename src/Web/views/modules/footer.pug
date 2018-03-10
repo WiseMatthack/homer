@@ -22,7 +22,7 @@ footer(class="footer")
 
       li(class="nav-item dropdown")
         a(class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-          img(src=`${locales[activeLocale].img}` height="50" width="37.5")
+          img(src=`${locales.find(l => l.code === activeLocale).img}` height="50" width="37.5")
         div(class="dropdown-menu")
           each locale in locales
             a(class="dropdown-item" href=`/locale/${locale.code}`)
