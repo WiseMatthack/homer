@@ -3,7 +3,6 @@ const { owners } = require('../config.json');
 const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
-const pug = require('pug');
 
 /* Express modules */
 const cookieParser = require('cookie-parser');
@@ -123,10 +122,10 @@ class Dashboard {
     const data = {
       authenticated: request.isAuthenticated(),
       locale: request.language,
-      nameDisplay: request.isAuthenticated() ? pug.render(request.__('dashboard.nameDisplay.connected', {
-        username: request.user.username.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'), // HTML escaping
+      nameDisplay: request.isAuthenticated() ? request.__('dashboard.nameDisplay.connected', {
+        username: request.user.username,
         discriminator: request.user.discriminator,
-      })) : request.__('dashboard.nameDisplay.visitor'),
+      }) : request.__('dashboard.nameDisplay.visitor'),
       admin: request.isAuthenticated() ? owners.includes(request.user.id) : false,
       activeLocale: {
         code: request.__('lang.code'),
