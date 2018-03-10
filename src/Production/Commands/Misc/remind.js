@@ -24,7 +24,7 @@ class Remind extends Command {
       const reminds = profile.data.reminds.map(remind => ctx.__('remind.list.remind', {
           content: remind.content,
           set: mtz(remind.set).locale(ctx.settings.data.misc.locale).fromNow(),
-          expires: mtz(remind.end).locale(ctx.settings.data.misc.locale).toNow(),
+          expires: mtz().locale(ctx.settings.data.misc.locale).to(remind.end),
           index: remind.index,
         })).join('\n');
 
@@ -80,7 +80,7 @@ class Remind extends Command {
       ctx.channel.send(ctx.__('remind.set', {
         successIcon: this.client.constants.statusEmotes.success,
         index: remind.index,
-        set: mtz(remind.end).locale(ctx.settings.data.misc.locale).toNow(),
+        set: mtz().locale(ctx.settings.data.misc.locale).to(remind.end),
       }));
     }
   }
