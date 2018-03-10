@@ -24,6 +24,10 @@
     "description": "Join the support server to get help on using the bot",
     "usage": "support"
   },
+  "translations": {
+    "description": "Get the list of available languages for Homer",
+    "usage": "translations"
+  },
 
   "avatar": {
     "description": "Get the avatar of someone",
@@ -47,8 +51,7 @@
   },
   "server": {
     "description": "Get information about the server",
-    "usage": "server",
-    "examples": []
+    "usage": "server"
   },
   "translate": {
     "description": "Translate the provided text into the given language",
@@ -122,6 +125,11 @@
     "usage": "leave <message>",
     "examples": ["leave Oh no, {user.tag} has left!"]
   },
+  "locale": {
+    "description": "Set a locale for the guild",
+    "usage": "locale <code>",
+    "examples": ["locale en-gb", "locale de-de", "locale fr-fr"]
+  },
   "prefix": {
     "description": "Manage your custom prefixes",
     "usage": "prefix [prefix]",
@@ -145,8 +153,7 @@
   },
   "hangup": {
     "description": "Hangup a call",
-    "usage": "hangup",
-    "examples": []
+    "usage": "hangup"
   },
   "number": {
     "description": "Shows your telephone number",
