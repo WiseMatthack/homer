@@ -153,7 +153,7 @@
 	"profile.for": "✒ Profile for **{{{ name }}}**:\n{{{ fields }}}",
 	"profile.noProfile": "{{{ errorIcon }}} **{{{ name }}}** does not have a profile.",
 	"profile.list": "✒ Available profile fields:\n{{{ fields }}}",
-	"remind.set": "{{{ successIcon }}} Remind for `{{{ content }}}` set!",
+	"remind.set": "{{{ successIcon }}} Remind (`{{{ index }}}`) set to expire {{{ set }}}.",
 	"remind.list.remind": "`{{{ index }}}`: {{{ content }}} - Set {{{ set }}} - Expires {{{ expires }}}",
 	"remind.list": "🗒 Reminds set:\n{{{ reminds }}}",
 	"remind.removed": "{{{ successIcon }}} The remind n°{{{ remind }}} has been removed.",

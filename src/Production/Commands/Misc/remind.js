@@ -40,7 +40,7 @@ class Remind extends Command {
         const remind = profile.data.reminds.find(remind => remind.index === ctx.args[1]);
         if (!remind) return ctx.channel.send(ctx.__('remind.error.noRemindFound', {
           errorIcon: this.client.constants.statusEmotes.error,
-          index,
+          index: ctx.args[1],
         }));
 
         profile.data.reminds.splice(profile.data.reminds.findIndex(remind), 1);
@@ -78,6 +78,7 @@ class Remind extends Command {
       setTimeout(this.client.stuffHandler.handleRemind, remind.expires, this.client, ctx.author.id, remind.index);
 
       ctx.channel.send(ctx.__('remind.set', {
+        successIcon: this.client.constants.statusEmotes.success,
         index: remind.index,
         set: mtz(remind.end).locale(ctx.settings.data.misc.locale).toNow(),
       }));
