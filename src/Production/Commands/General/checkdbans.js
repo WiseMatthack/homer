@@ -7,6 +7,7 @@ class Checkdbans extends Command {
   constructor(client) {
     super(client, {
       name: 'checkdbans',
+      aliases: ['dbans', 'checkbans'],
       category: 2,
     });
   }
