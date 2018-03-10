@@ -47,7 +47,7 @@
 	"dashboard.header.login": "🔑 Login",
 	"dashboard.header.logout": "🔑 Logout",
 	"dashboard.home.articles": "📰 Latest articles",
-	"dashboard.nameDisplay.connected": "Logged in as <strong>{{{ username }}}#{{{ discriminator }}}</strong>",
+	"dashboard.nameDisplay.connected": "Logged in as {{{ username }}}#{{{ discriminator }}}",
 	"dashboard.nameDisplay.visitor": "Visitor",
 	"dashboard.servers.title": "🏙 Guilds shared with you",
 	"dashboard.server.id": "🔢 Guild ID",

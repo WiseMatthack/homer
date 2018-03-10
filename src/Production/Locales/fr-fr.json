@@ -47,7 +47,7 @@
 	"dashboard.header.login": "🔑 Connexion",
 	"dashboard.header.logout": "🔑 Déconnexion",
 	"dashboard.home.articles": "📰 Derniers articles",
-	"dashboard.nameDisplay.connected": "Connecté en tant que <strong>{{{ username }}}#{{{ discriminator }}}</strong>",
+	"dashboard.nameDisplay.connected": "Connecté en tant que {{{ username }}}#{{{ discriminator }}}",
 	"dashboard.nameDisplay.visitor": "Visiteur",
 	"dashboard.servers.title": "🏙 Serveurs partagés avec vous",
 	"dashboard.server.id": "🔢 ID du serveur",
