@@ -90,8 +90,22 @@ class Dashboard {
     });
 
     this.app.get('/', async (req, res) => {
-      const latestArticles = await this.client.database.getDocuments('articles')
+      const articles = await this.client.database.getDocuments('articles')
         .then(articles => articles.sort((a, b) => b.published - a.published).slice(0, 4));
+
+      let latestArticles = [];
+
+      for (const article of articles) {
+        const user = await this.client.fetchUser(article.author)
+          .then(u => u.tag);
+
+        latestArticles.push({
+          id: article.id,
+          title: article.title,
+          published: article.published,
+          author: user,
+        });
+      }
 
       res.render('index.pug', {
         latestArticles,
