@@ -92,7 +92,7 @@
 	"leave.set": "{{{ successIcon }}} Flux de départs configuré sur <#{{{ channel }}}> !",
 	"leave.cleared": "{{{ successIcon }}} Paramètres du flux de départs réinitialisés !",
 	"leave.invalidMessage": "{{{ errorIcon }}} La longueur du message pour le flux de départs ne doit excéder 256 caractères.",
-	"locale.set": "{{{ successIcon }}} Langue configuré sur **{{{ fullName }}}** (`{{{ code }}}`).",
+	"locale.set": "{{{ successIcon }}} Langue configurée sur **{{{ fullName }}}** (`{{{ code }}}`).",
 	"locale.localeSet": "{{{ emote }}} La langue active est **{{{ fullName }}}** (`{{{ code }}}`).",
 	"locale.unknownLocale": "{{{ errorIcon }}} La langue `{{{ locale }}}` n'est pas reconnu. Tapez `{{{ prefix }}}translations` pour obtenir la liste des langues disponibles.",
 	"lookup.noLookup": "{{{ errorIcon }}} Vous devez fournir un ID à chercher.",
