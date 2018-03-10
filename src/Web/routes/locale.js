@@ -7,7 +7,12 @@ const router = Router()
     if (!req.params.locale) return res.render('error.pug', { errorCode: '404' });
     if (!i18n.getLocales().includes(req.params.locale)) return res.render('error.pug', { errorCode: '500' });
 
-    res.cookie('locale', req.params.locale, { maxAge: 900000, httpOnly: true });
+    res.cookie('locale', req.params.locale, {
+      expires: (Date.now() + 7257600000), // I think 3 months is enough
+      signed: true,
+      httpOnly: true,
+    });
+
     res.redirect('/');
   });
 

@@ -67,11 +67,11 @@ class HandlerHelper extends Helper {
               emote: reactions[0].emote,
               count: reactions[0].count,
             },
-            otherVotes: reactions.slice(1).map(r => `${r.emote} (${r.count} ${i18n.__('poll.handler.votes')})`).join(', ') || i18n.__('global.none'),
+            otherVotes: reactions.slice(1).map(r => `${r.emote} (${r.count})`).join(', ') || i18n.__('global.none'),
           });
         } else {
           description = i18n.__('poll.handler.description.equality', {
-            votes: reactions.map(r => `${r.emote} (${r.count} ${i18n.__('poll.handler.votes')})`).join(', ') || i18n.__('global.none'),
+            votes: reactions.map(r => `${r.emote} (${r.count})`).join(', ') || i18n.__('global.none'),
           });
         }
 
