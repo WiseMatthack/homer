@@ -128,6 +128,11 @@ class Dashboard {
         discriminator: request.user.discriminator,
       })) : request.__('dashboard.nameDisplay.visitor'),
       admin: request.isAuthenticated() ? owners.includes(request.user.id) : false,
+      locales: i18n.getLocales().map(l => ({
+        code: i18n.getCatalog(l)['lang.code'],
+        img: i18n.getCatalog(l)['lang.flagImage'],
+      })),
+      activeLocale: request.__('lang.code'),
     };
 
     Object.keys(data).forEach((key) => {
