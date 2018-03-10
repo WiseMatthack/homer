@@ -39,7 +39,7 @@ class HandlerHelper extends Helper {
         let reactions = [];
         message.reactions.forEach((reaction) => {
           reactions.push({
-            emote: reaction.emoji.toString(),
+            emote: `<:${reaction.emoji.name}:${reaction.emoji.id}>`,
             count: (reaction.me ? reaction.count - 1 : reaction.count),
           });
         });
