@@ -31,7 +31,7 @@ class Translations extends Command {
     }
 
     const embed = new RichEmbed()
-      .setDescription(locales)
+      .setDescription(translations.join('\n'))
       .setFooter(ctx.__('translations.footer', {
         prefix: this.client.config.discord.defaultPrefixes[0],
       }))
