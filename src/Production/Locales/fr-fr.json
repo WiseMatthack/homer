@@ -244,7 +244,7 @@
 	"weather.embed.temperatures.title": "🌡 Températures",
 	"weather.embed.temperatures.value": "**Actuellement:** {{{ realC }}}°C ({{{ realF }}}°F)\n**Ressenti:** {{{ feelsC }}}°C ({{{ feelsF }}}°F)",
 	"weather.embed.wind.title": "🌬 Vent",
-	"weather.embed.wind.value": "**Vitesse:** {{{ speedKph }}}kph ({{{ speedMph }}}mph)\n**Direction:** {{{ dir }}} ({{{ angle }}}°)",
+	"weather.embed.wind.value": "**Vitesse:** {{{ speedKph }}}km/h ({{{ speedMph }}}mph)\n**Direction:** {{{ dir }}} ({{{ angle }}}°)",
 	"weather.embed.misc.title": "☁ Divers",
 	"weather.embed.misc.value": "💦 Humidité: {{{ humidity }}}%\n☁ Nébulosité: {{{ nebulosity }}}%",
 	"weather.embed.footer": "Informations fournies par Apixu. Mise à jour",
