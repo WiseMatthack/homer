@@ -39,7 +39,7 @@ class Translations extends Command {
 
     ctx.channel.send(ctx.__('translations.locales', {
       locales: translations.join('\n'),
-    }));
+    }), { embed });
   }
 }
 
