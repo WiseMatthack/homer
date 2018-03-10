@@ -34,7 +34,7 @@ module.exports = client;
 /* Process stuff */
 process.on('unhandledRejection', (error) => {
   if (error instanceof DiscordAPIError) return;
-  console.error(error instanceof Error ? error : `[Error] Unhandled rejection:\n${error}`);
+  console.error(error);
 });
 
 process.on('uncaughtException', async (err) => {

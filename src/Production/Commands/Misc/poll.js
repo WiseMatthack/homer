@@ -42,7 +42,7 @@ class Poll extends Command {
             if (customEmotes[i].length > 6) {
               const e = customEmotes[i].split(':');
               if (e.length === 3) {
-                customEmotes[i] = client.emojis.get(e[2].replace('>', ''));
+                customEmotes[i] = this.client.emojis.get(e[2].replace('>', ''));
               }
             }
           }
