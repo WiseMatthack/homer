@@ -5,20 +5,19 @@ footer(class="footer")
     p(class="text-muted text-center")
       a(href="https://github.com/iDroid27210/homer")
         i(class="fa fa-github-square fa-3x social")
-
       a(href="https://twitter.com/iDroid27210")
         i(class="fa fa-twitter fa-3x social")
 
-      hr
+    hr
       
-      div(class="dropdown text-center")
-        button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-          img(src=`${activeLocale.img}` height="30")
-        if locales.length > 0
-          div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-            each locale in locales
-              a(class="dropdown-item" href=`/locales/${locale.code}`)
-                img(src=`${locale.img}` height="30")
+    div(class="dropdown text-center")
+      button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
+        img(src=`${activeLocale.img}` height="30")
+      if locales.length > 0
+        div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
+          each locale in locales
+            a(class="dropdown-item" href=`/locales/${locale.code}`)
+              img(src=`${locale.img}` height="30")
       
-      br
-      text #{__('dashboard.footer.copyright')}
+    br
+    p(class="text-center") #{__('dashboard.footer.copyright')}
