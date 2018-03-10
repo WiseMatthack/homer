@@ -8,9 +8,7 @@ const router = Router()
     if (!i18n.getLocales().includes(req.params.locale)) return res.render('error.pug', { errorCode: '500' });
 
     res.cookie('locale', req.params.locale, {
-      expires: (Date.now() + 7257600000), // I think 3 months is enough
-      signed: true,
-      httpOnly: true,
+      maxAge: 7257600000, // I think 3 months is enough
     });
 
     res.redirect('/');
