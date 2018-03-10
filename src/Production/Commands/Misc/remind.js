@@ -21,11 +21,11 @@ class Remind extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      const reminds = profile.data.reminds.map((remind, index) => ctx.__('remind.list.remind', {
+      const reminds = profile.data.reminds.map(remind => ctx.__('remind.list.remind', {
           content: remind.content,
           set: mtz(remind.set).locale(ctx.settings.data.misc.locale).fromNow(),
           expires: mtz(remind.end).locale(ctx.settings.data.misc.locale).toNow(),
-          index: (index + 1),
+          index: remind.index,
         })).join('\n');
 
       ctx.channel.send(ctx.__('remind.list', {
@@ -37,14 +37,13 @@ class Remind extends Command {
       }));
 
       if (ctx.args[1]) {
-        const index = ctx.args[1] - 1;
-        const remind = profile.data.reminds[index];
-        if (!remind) return ctx.channel.sen(ctx.__('remind.error.noRemindFound', {
+        const remind = profile.data.reminds.find(remind => remind.index === ctx.args[1]);
+        if (!remind) return ctx.channel.send(ctx.__('remind.error.noRemindFound', {
           errorIcon: this.client.constants.statusEmotes.error,
           index,
         }));
 
-        profile.data.reminds.splice(index, 1);
+        profile.data.reminds.splice(profile.data.reminds.findIndex(remind), 1);
         await profile.saveData();
 
         ctx.channel.send(ctx.__('remind.removed', {
@@ -62,8 +61,9 @@ class Remind extends Command {
 
       const timeout = durationParser(duration) || 60000;
 
+      const end = profile.data.reminds.sort((a, b) => b.index - a.index)[profile.data.reminds.length - 1];
       const remind = {
-        index: profile.data.reminds.length,
+        index: end ? end.index : 1,
         content,
         guild: ctx.guild.id,
         channel: ctx.channel.id,

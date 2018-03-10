@@ -98,9 +98,9 @@ class HandlerHelper extends Helper {
     const profile = new DataProfile(client, user);
     await profile.getData();
 
-    const remind = profile.data.reminds[index - 1];
+    const remind = profile.data.reminds.find(remind => remind.index === index);
     if (!remind) return;
-    profile.data.reminds.splice((index - 1), 1);
+    profile.data.reminds.splice(profile.data.reminds.findIndex(remind), 1);
     await profile.saveData();
 
     const settings = new DataGuild(client, remind.guild);
