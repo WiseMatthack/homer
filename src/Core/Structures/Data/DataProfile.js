@@ -28,6 +28,8 @@ class DataProfile extends DataBase {
       id: this.key,
       fields: [],
       timezone: 'UTC',
+      locale: 'en-gb',
+      reminds: [],
     });
   }
 }
