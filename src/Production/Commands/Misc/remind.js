@@ -24,10 +24,8 @@ class Remind extends Command {
       const reminds = profile.data.reminds.map((remind, index) => ctx.__('remind.list.remind', {
           content: remind.content,
           set: mtz(remind.set).locale(ctx.settings.data.misc.locale).fromNow(),
-          expires: mtz(remind.expires).locale(ctx.settings.data.misc.locale).toNow(),
+          expires: mtz(remind.end).locale(ctx.settings.data.misc.locale).toNow(),
           index: (index + 1),
-          guild: ctx.guild.id,
-          channel: ctx.channel.id,
         })).join('\n');
 
       ctx.channel.send(ctx.__('remind.list', {

@@ -16,6 +16,12 @@ class Ready extends Event {
         polls.forEach(poll => setTimeout(this.client.stuffHandler.handlePoll, (poll.endTime - Date.now()), this.client, poll.id));
       })
       .catch(() => console.log('[Poll] Unable to get the polls from the database!'));
+
+    this.client.database.getDocuments('profile')
+      .then((profiles) => {
+        profiles.forEach(profile => profile.reminds.forEach(remind => setTimeout(this.client.stuffHandler.handleRemind, (remind.end - Date.now()), this.client, profile.id, remind.index)));
+      })
+      .catch(() => console.log('[Profile] Unable to get profiles from the database!'));
   }
 }
 
