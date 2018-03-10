@@ -43,7 +43,7 @@ class Remind extends Command {
           index: ctx.args[1],
         }));
 
-        profile.data.reminds.splice(profile.data.reminds.findIndex(remind), 1);
+        profile.data.reminds.splice(profile.data.reminds.indexOf(remind), 1);
         await profile.saveData();
 
         ctx.channel.send(ctx.__('remind.removed', {
