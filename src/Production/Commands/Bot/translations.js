@@ -26,6 +26,7 @@ class Translations extends Command {
       translations.push(ctx.__('translations.locale', {
         fullName: catalog['lang.fullName'],
         emote: catalog['lang.flagEmote'],
+        code: catalog['lang.code'],
         authors: authorTags.join(', '),
       }));
     }
