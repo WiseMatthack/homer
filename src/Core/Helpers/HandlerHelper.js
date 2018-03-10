@@ -1,15 +1,18 @@
 const Helper = require('./Helper');
 const Client = require('../Client');
 const { RichEmbed } = require('discord.js');
+const DataGuild = require('../Structures/Data/DataGuild');
+const DataProfile = require('../Structures/Data/DataProfile');
+const mtz = require('moment-timezone');
 const i18n = require('i18n');
 
 /**
- * Represents a poll helper.
+ * Represents a handler helper.
  * @extends {Helper}
  */
-class PollHelper extends Helper {
+class HandlerHelper extends Helper {
   /**
-   * @param {Client} client Client that initiated the poll helper
+   * @param {Client} client Client that initiated the handler helper
    */
   constructor(client) {
     super(client);
@@ -80,10 +83,43 @@ class PollHelper extends Helper {
 
         channel.send({ embed });
       })
-      /*.catch(() => channel.send(ctx.__('poll.handler.unknownMessage', {
+      .catch(() => channel.send(ctx.__('poll.handler.unknownMessage', {
         errorIcon: client.constants.statusEmotes.error,
-      })));*/
+      })));
+  }
+
+  /**
+   * Handles a remind.
+   * @param {Client} client Client that initiated the remind
+   * @param {String} user ID of the user who initiated the remind
+   * @param {String} index Index of the remind object
+   */
+  async handleRemind(client, user, index) {
+    const profile = new DataProfile(client, user);
+    await profile.getData();
+
+    const remind = profile.data.reminds[index];
+    if (!remind) return;
+
+    const settings = new DataGuild(client, remind.guild);
+    await settings.getData();
+    i18n.setLocale(settings.data.misc.locale);
+
+    const message = i18n.__('remind.reminded', {
+      user,
+      set: mtz(remind.set).locale(settings.data.misc.locale).fromNow(),
+      content: remind.content,
+    });
+
+    const channel = client.channels.get(remind.channel);
+    if (channel) channel.send(message);
+    else {
+      const user = client.users.get(user);
+      if (!user) return;
+
+      user.send(message);
+    }
   }
 }
 
-module.exports = PollHelper;
+module.exports = HandlerHelper;

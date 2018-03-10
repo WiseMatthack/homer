@@ -13,7 +13,7 @@ class Ready extends Event {
 
     this.client.database.getDocuments('poll')
       .then((polls) => {
-        polls.forEach(poll => setTimeout(this.client.poll.handlePoll, (poll.endTime - Date.now()), this.client, poll.id));
+        polls.forEach(poll => setTimeout(this.client.stuffHandler.handlePoll, (poll.endTime - Date.now()), this.client, poll.id));
       })
       .catch(() => console.log('[Poll] Unable to get the polls from the database!'));
   }

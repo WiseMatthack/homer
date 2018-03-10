@@ -86,6 +86,11 @@
     "usage": "profile ([User]|set <fieldName> <fieldContent>|clear <fieldName>)",
     "examples": ["profile iDroid#4441", "profile", "profile set twitter iDroid27210", "profile clear twitter"]
   },
+  "remind": {
+    "description": "Reminds you of tasks you set",
+    "usage": "remind (<duration> <description>|list|remove <index>)",
+    "examples": ["remind 1h Taking shower", "remind list", "remind remove 2"]
+  },
   "say": {
     "description": "Repeat what you told to the bot",
     "usage": "say <text>",

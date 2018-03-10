@@ -68,7 +68,7 @@ class Poll extends Command {
     };
 
     await this.client.database.insertDocument('poll', pollObject);
-    setTimeout(this.client.poll.handlePoll, expiration, this.client, pollObject.id);
+    setTimeout(this.client.stuffHandler.handlePoll, expiration, this.client, pollObject.id);
   }
 
   get flags() {

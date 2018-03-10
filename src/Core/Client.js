@@ -15,7 +15,7 @@ const PhoneManager = require('./Managers/PhoneManager');
 const FinderHelper = require('./Helpers/FinderHelper');
 const LastactiveHelper = require('./Helpers/LastactiveHelper');
 const LisaHelper = require('./Helpers/LisaHelper');
-const PollHelper = require('./Helpers/PollHelper');
+const HandlerHelper = require('./Helpers/HandlerHelper');
 
 /**
  * The main hub for interacting with the Discord API.
@@ -107,10 +107,10 @@ class ExtendedClient extends Client {
     this.lisa = new LisaHelper(this);
 
     /**
-     * Poll helper associated to the client.
-     * @type {PollHelper}
+     * Handler helper associated to the client.
+     * @type {HandlerHelper}
      */
-    this.poll = new PollHelper(this);
+    this.stuffHandler = new HandlerHelper(this);
   }
 
   /**
