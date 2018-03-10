@@ -16,7 +16,7 @@ footer(class="footer")
       if locales.length > 0
         div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
           each locale in locales
-            a(class="dropdown-item" href=`/locales/${locale.code}`)
+            a(class="dropdown-item" href=`/locale/${locale.code}`)
               img(src=`${locale.img}` height="30")
       
     br
