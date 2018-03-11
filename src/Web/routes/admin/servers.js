@@ -7,19 +7,19 @@ const router = Router()
     else return res.render('error.pug', { errorCode: '403' });
   })
   .get('/', (req, res) => {
-    const guilds = client.guilds.map((guild) => {
-      return ({
-        name: guild.name,
-        id: guild.id,
-        owner: {
-          id: guild.ownerID,
-          tag: guild.owner.user.tag,
-        },
-        members: guild.memberCount,
-        bots: Math.floor((guild.members.filter(m => m.user.bot).size / guild.memberCount) * 100),
-        join: guild.joinedTimestamp,
-      });
-    });
+    const guilds = client.guilds
+      .sort((a, b) => a.name - b.name)
+      .map(guild => ({
+          name: guild.name,
+          id: guild.id,
+          owner: {
+            id: guild.ownerID,
+            tag: guild.owner.user.tag,
+          },
+          members: guild.memberCount,
+          bots: Math.floor((guild.members.filter(m => m.user.bot).size / guild.memberCount) * 100),
+          join: guild.joinedTimestamp,
+      }));
 
     res.render('admin_guilds.pug', {
       guilds,
