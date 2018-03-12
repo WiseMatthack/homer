@@ -8,10 +8,10 @@ const router = Router()
     if (!i18n.getLocales().includes(req.params.locale)) return res.render('error.pug', { errorCode: '500' });
 
     res.cookie('locale', req.params.locale, {
-      maxAge: 7257600000, // I think 3 months is enough
+      maxAge: 7257600000,
     });
 
-    res.redirect('/');
+    res.redirect(req.query.redirectURI || '/');
   });
 
 module.exports = router;
