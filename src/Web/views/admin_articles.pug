@@ -7,7 +7,7 @@ html(lang=`${locale}`)
     include modules/header.pug
 
     div(class="jumbotron jumbotron-fluid")
-      div(class="container")
+      div(class="container text-center")
         if success
           div(class="alert alert-primary alert-dismissible fade show" role="alert")
             if success === 'postedArticle'
@@ -22,17 +22,15 @@ html(lang=`${locale}`)
         form(action="/admin/articles/post" method="POST")
           div(class="form-group")
             label(for="title")
-              span(class="text-center")
-                strong Title
+              strong Title
             input(type="text" class="form-control" name="title" id="title")
           br
           div(class="form-group")
             label(for="content" class="text-center")
-              span(class="text-center")
-                strong Content
-            div(name="content" id="content")
+              strong Content
+            textarea(class="form-control text-left" rows="5" name="content" id="content")
           br
-          button(type="submit" class="btn btn-success text-center") Post an article
+          button(type="submit" class="btn btn-success") Post an article
         
     div(class="jumbotron jumbotron-fluid")
       div(class="container text-center")
