@@ -16,8 +16,12 @@ footer(class="footer")
       if locales.length > 0
         div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
           each locale in locales
-            a(class="dropdown-item" href=`/locale/${locale.code}?redirectURI=${window.location.pathname}`)
+            a(class="dropdown-item" id="locale" href=`/locale/${locale.code}`)
               img(src=`${locale.img}` height="30")
       
     br
     p(class="text-center") #{__('dashboard.footer.copyright')}
+  
+script
+  | const link = document.getElementById('locale');
+  | link.href = `${link.href}?redirectURI=${window.location.pathname}`;
