@@ -21,13 +21,15 @@ html(lang=`${locale}`)
         hr
         form(action="/admin/articles/post" method="POST")
           div(class="form-group")
-            label(for="title" class="text-center")
-              strong Title
+            label(for="title")
+              span(class="text-center")
+                strong Title
             input(type="text" class="form-control" name="title" id="title")
           br
           div(class="form-group")
             label(for="content" class="text-center")
-              strong Content
+              span(class="text-center")
+                strong Content
             div(name="content" id="content")
           br
           button(type="submit" class="btn btn-success text-center") Post an article
