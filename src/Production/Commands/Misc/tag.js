@@ -41,7 +41,9 @@ class Tag extends Command {
       }));
 
       tag.incrementUses();
-      const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag }, 0);
+      const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag }, 0, {
+        args,
+      });
 
       ctx.channel.send(proceeded);
     }
@@ -67,14 +69,14 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-      tag.data.author = ctx.author.id;
-      tag.data.content = tagContent;
+    tag.data.author = ctx.author.id;
+    tag.data.content = tagContent;
       
-      await tag.saveData();
-      ctx.channel.send(ctx.__('tag.create.created', {
-        successIcon: this.client.constants.statusEmotes.success,
-        tag: tagName,
-      }));
+    await tag.saveData();
+    ctx.channel.send(ctx.__('tag.create.created', {
+      successIcon: this.client.constants.statusEmotes.success,
+      tag: tagName,
+    }));
   }
 
   async sub_edit(ctx) {
