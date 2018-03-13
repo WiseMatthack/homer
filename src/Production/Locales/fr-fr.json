@@ -122,7 +122,7 @@
 	"message.cleverbot.disabled": "{{{ errorIcon }}} La fonctionnalité cleverbot a été désactivée.",
 	"message.cleverbot.error": "{{{ errorIcon }}} Une erreur est survenue lors de la requête vers Cleverbot : `{{{ message }}}`.",
 	"message.disabledCommand": "{{{ errorIcon }}} La commande `{{{ cmdName }}}` a été désactivée. Raison donnée :\n```{{{ reason }}}```",
-	"moderation.announcement": "{{{ warningIcon }}} **Annonce importante**\n\nDû à une récente décision, Homer (ex-iBot) n'aura plus de commandes liées à la modération.\nNous vous recommandons de basculer sur Vortex qui est un bot (auto-)modération très simple à utiliser par jagrosh.\nVous pouvez voir l'article lié à cette décision ici : <{{{ articleLink }}}>.\n\nMerci, iDroid.",
+	"moderation.announcement": "{{{ warningIcon }}} **Annonce importante**\n\nLes commandes de modération sont en cours de développment. Vous pouvez consulter l'article là: <{{{ articleLink }}}>.",
 	"number.is": "☎ Votre numéro de téléphone est `{{{ number }}}`.",
 	"number.reset.done": "☎ Votre nouveau numéro de téléphone est `{{{ number }}}`.",
 	"phone.calling": "☎ Appel de `{{{ number }}}` en cours...",

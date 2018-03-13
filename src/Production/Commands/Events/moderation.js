@@ -4,7 +4,7 @@ class Moderation extends Command {
   constructor(client) {
     super(client, {
       name: 'moderation',
-      aliases: ['ban', 'kick', 'warn', 'unwarn', 'unban', 'tempban', 'mod'],
+      aliases: ['ban', 'kick', 'warn', 'unwarn', 'unban', 'tempban', 'mod', 'clear', 'hackban'],
       category: 10,
     });
   }
@@ -12,7 +12,7 @@ class Moderation extends Command {
   async run(ctx) {
     ctx.channel.send(ctx.__('moderation.announcement', {
       warningIcon: this.client.constants.statusEmotes.warning,
-      articleLink: 'https://homer.idroid.me/articles/58f56d3a-9246-4371-825a-d25274a93fd5',
+      articleLink: 'https://homer.idroid.me/articles/411095da-afab-4d1c-a078-29bd0602a8c7',
     }));
   }
 }

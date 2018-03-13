@@ -122,7 +122,7 @@
 	"message.cleverbot.disabled": "{{{ errorIcon }}} The cleverbot feature has been disabled.",
 	"message.cleverbot.error": "{{{ errorIcon }}} An error has occured while querying Cleverbot: `{{{ message }}}`.",
 	"message.disabledCommand": "{{{ errorIcon }}} The command `{{{ cmdName }}}` was disabled. Given reason:\n```{{{ reason }}}```",
-	"moderation.announcement": "{{{ warningIcon }}} **Important announcement**\n\nDue to a recent decision, Homer (ex-iBot) will no longer have moderation commands.\nWe recommand you switching to Vortex (for example) which is a easy-to-use and a very good moderation bot by jagrosh.\nYou can see the article related to this decision here: <{{{ articleLink }}}>.\n\nSincerly, iDroid.",
+	"moderation.announcement": "{{{ warningIcon }}} **Important announcement**\n\nModeration commands are currently being developed, you can check the article there: <{{{ articleLink }}}>.",
 	"number.is": "☎ Your telephone number `{{{ number }}}`.",
 	"number.reset.done": "☎ Your new telephone number is `{{{ number }}}`.",
 	"phone.calling": "☎ Calling `{{{ number }}}`...",
