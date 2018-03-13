@@ -22,7 +22,7 @@ class LisaHelper extends Helper {
    */
   process(string, context, contextType) {
     let newString = this.replaceStatic(string, context, contextType);
-    if (contextType === 0) newString = this.replaceDynamic(string, context, contextType);
+    if (contextType === 0) newString = this.replaceDynamic(newString, context, contextType);
     return newString;
   }
 
