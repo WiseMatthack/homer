@@ -5,6 +5,7 @@ class Tag extends Command {
   constructor(client) {
     super(client, {
       name: 'tag',
+      aliases: ['t'],
       category: 3,
     });
   }
