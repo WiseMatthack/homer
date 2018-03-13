@@ -42,7 +42,7 @@ exports.dynamicTags = [
     name: 'choose',
     pattern: /choose\{(?:(.*?))\}/g,
     run: (str) => {
-      const match = dynamicTags.find(dyn => dyn.name === 'choose').pattern.exec(str)[1];
+      const match = /choose\{(?:(.*?))\}/g.exec(str)[1];
       const array = match.split(':');
       if (array.length < 2) throw 'choose.tooFewChoices';
 
@@ -54,7 +54,7 @@ exports.dynamicTags = [
     name: 'random',
     pattern: /random\{(?:(.*?))\}/g,
     run: (str) => {
-      const match = dynamicTags.find(dyn => dyn.name === 'random').pattern.exec(str)[1];
+      const match = /random\{(?:(.*?))\}/g.exec(str)[1];
       const array = match.split(':');
       if (array.length !== 2) throw 'random.invalidParameters';
       if (isNaN(array[0]) || isNaN(array[1])) throw 'random.NaN';
