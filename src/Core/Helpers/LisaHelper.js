@@ -79,11 +79,10 @@ class LisaHelper extends Helper {
   replaceDynamic(string, context, contextType) {
     let newString = string;
 
-    const processArray = /\[(.*?)\]/g.exec(newString);
+    const processArray = /(?:(\[.*?\]))/g.exec(newString);
 
     if (processArray) {
       processArray.forEach((part) => {
-        console.log(part);
         const possiblePattern = this.client.constants.dynamicTags.find(dyn => dyn.pattern.test(part.replace('[', '').replace(']', '')));
         if (possiblePattern) {
           try {
