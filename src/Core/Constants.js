@@ -36,3 +36,31 @@ exports.profileFields = {
   twitter: '<:twitter:420885434697252874>',
   youtube: '<:youtube:420659693531168790>',
 };
+
+exports.dynamicTags = [
+  {
+    name: 'choose',
+    pattern: /choose\{(?:(.*?))\}/g,
+    run: (str) => {
+      const match = dynamicTags.find(dyn => dyn.name === 'choose').pattern.exec(str)[1];
+      const array = match.split(':');
+      if (array.length < 2) throw 'choose.tooFewChoices';
+
+      const chosen = array[Math.floor(Math.random() * array.length)];
+      return chosen;
+    },
+  },
+  {
+    name: 'random',
+    pattern: /random\{(?:(.*?))\}/g,
+    run: (str) => {
+      const match = dynamicTags.find(dyn => dyn.name === 'random').pattern.exec(str)[1];
+      const array = match.split(':');
+      if (array.length !== 2) throw 'random.invalidParameters';
+      if (isNaN(array[0]) || isNaN(array[1])) throw 'random.NaN';
+
+      const generated = Math.floor(Math.random() * (array[1] - array[0] + 1)) + array[0];
+      return generated;
+    },
+  },
+];

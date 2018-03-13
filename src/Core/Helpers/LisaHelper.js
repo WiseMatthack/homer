@@ -14,6 +14,19 @@ class LisaHelper extends Helper {
   }
 
   /**
+   * Process a string (usually a tag).
+   * @param {String} string String to process
+   * @param {*} context Context of the process
+   * @param {Number} contextType Type of the context (0: Tag - 1: Welcome/Leave)
+   * @returns {String} Proceeded string
+   */
+  process(string, context, contextType) {
+    let newString = this.replaceStatic(string, context, contextType);
+    if (contextType === 0) newString = this.replaceDynamic(string, context, contextType);
+    return newString;
+  }
+
+  /**
    * Replaces static content.
    * @param {String} string String to process
    * @param {*} context Context of the process
@@ -54,6 +67,25 @@ class LisaHelper extends Helper {
     }
 
     return newString;
+  }
+
+  /**
+   * Replaces dynamic content.
+   * @param {String} string String to process
+   * @param {*} context Context of the process
+   * @param {Number} contextType Type of the context (0: Tag - 1: Welcome/Leave)
+   * @returns {String} Proceeded string
+   */
+  replaceDynamic(string, context, contextType) {
+    const processArray = string.split(' ');
+    processArray.forEach((part, index) => {
+      const possiblePattern = this.client.constants.dynamicTags.find(dyn => dyn.pattern.test(part));
+      if (possiblePattern) {
+        processArray[index] = possiblePattern.run(part);
+      }
+    });
+
+    return processArray.join(' ');
   }
 }
 
