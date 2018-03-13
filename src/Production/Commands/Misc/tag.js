@@ -41,7 +41,7 @@ class Tag extends Command {
       }));
 
       tag.incrementUses();
-      const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag, ags }, 0);
+      const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag, args }, 0);
 
       ctx.channel.send(proceeded);
     }
