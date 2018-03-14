@@ -59,7 +59,7 @@ exports.dynamicTags = [
       if (array.length !== 2) throw 'random.invalidParameters';
       if (isNaN(array[0]) || isNaN(array[1])) throw 'random.NaN';
 
-      const generated = Math.floor(Math.random() * (array[1] - array[0] + 1)) + array[0];
+      const generated = Math.floor(Math.random() * (array[1] - array[0] + 1) + array[0]);
       return generated;
     },
   },
