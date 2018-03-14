@@ -245,7 +245,7 @@
 	"weather.embed.temperatures.value": "**Current:** {{{ realC }}}°C ({{{ realF }}}°F)\n**Feels like:** {{{ feelsC }}}°C ({{{ feelsF }}}°F)",
 	"weather.embed.wind.title": "🌬 Wind",
 	"weather.embed.wind.value": "**Speed:** {{{ speedKph }}}kph ({{{ speedMph }}}mph)\n**Direction:** {{{ dir }}} ({{{ angle }}}°)",
-	"weather.embed.misc.title": "☁ Miscallenous",
+	"weather.embed.misc.title": "☁ Miscellaneous",
 	"weather.embed.misc.value": "💦 Humidity: {{{ humidity }}}%\n☁ Nebulosity: {{{ nebulosity }}}%",
 	"weather.embed.footer": "Weather information provided by Apixu. Last update",
 	"weather.error": "{{{ errorIcon }}} An error has occured while querying Apixu. Code: `{{{ code }}}` - Message: `{{{ message }}}`",
