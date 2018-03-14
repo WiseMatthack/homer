@@ -239,7 +239,10 @@ class Tag extends Command {
       member = members.first();
     }
 
-    const mappedTags = await this.client.database.getDocuments('tag').then(tags => tags.map(t => `\`${t.id}\``));
+    const mappedTags = await this.client.database.getDocuments('tag').then(tags => tags
+      .filter(t => t.author === member.id)
+      .map(t => `\`${t.id}\``));
+
     ctx.channel.send(ctx.__('tag.list', {
       tag: member.user.tag,
       list: mappedTags.join(', '),
