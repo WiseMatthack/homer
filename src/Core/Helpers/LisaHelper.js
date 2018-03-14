@@ -84,12 +84,12 @@ class LisaHelper extends Helper {
     if (processArray) {
       processArray.forEach((part) => {
         const possiblePattern = this.client.constants.dynamicTags.find(dyn => dyn.pattern.test(part.replace('[', '').replace(']', '')));
-        if (possiblePattern) {
-          try {
-            newString = newString.replace(part, possiblePattern.run(part));
-          } catch (e) {
-            newString = newString.replace(part, e);
-          }
+        try { 
+          const ranPattern = possiblePattern.run(part);
+          console.log(`Part to replace: "${part}" - Ran pattern: "${ranPattern}"`);
+          newString = newString.replace(part, ranPattern);
+        } catch (e) {
+          newString = newString.replace(part, e);
         }
       });
     }
