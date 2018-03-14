@@ -209,6 +209,7 @@
 	"tag.edit.edited": "{{{ successIcon }}} Le tag `{{{ tag }}}` a été édité.",
 	"tag.delete.deleted": "{{{ successIcon }}} Le tag `{{{ tag }}}` a été supprimé.",
 	"tag.owner.ownerIs": "✏ Le propriétaire du tag `{{{ tag }}}` est **{{{ owner.tag }}}** (ID:{{{ owner.id }}}).",
+	"tag.list": "✏ Liste des tags créés par **{{{ tag }}}**:\n\n{{{ list }}}.",
 	"tag.raw.rawTag": "✏ Version brute du tag `{{{ tag }}}`:\n\n```{{{ rawTag }}}```",
 	"tag.search.nothingFound": "{{{ errorIcon }}} Aucun tag trouvé correspondant à `{{{ query }}}`.",
 	"tag.search.found": "🔎 Tags trouvés correspondants à `{{{ query }}}`:\n\n{{{ list }}}",

@@ -25,6 +25,8 @@ class Tag extends Command {
       this.sub_search(ctx);
     } else if (ctx.args[0] === 'random') {
       this.sub_random(ctx);
+    } else if (ctx.args[0] === 'list') {
+      this.sub_list(ctx);
     } else {
       const tagName = ctx.args[0];
       const args = ctx.args.slice(1).join(' ');
@@ -84,108 +86,108 @@ class Tag extends Command {
 
   async sub_edit(ctx) {
     const tagName = ctx.args[1];
-      const tagContent = ctx.args.slice(2).join(' ');
+    const tagContent = ctx.args.slice(2).join(' ');
 
-      if (!tagName || !tagContent) return ctx.channel.send(ctx.__('tag.common.invalidParameters', {
-        errorIcon: this.client.constants.statusEmotes.error,
-      }));
+    if (!tagName || !tagContent) return ctx.channel.send(ctx.__('tag.common.invalidParameters', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
-      if (tagContent.length > 1024) return ctx.channel.send(ctx.__('tag.common.contentTooLong', {
-        errorIcon: this.client.constants.statusEmotes.error,
-      }));
+    if (tagContent.length > 1024) return ctx.channel.send(ctx.__('tag.common.contentTooLong', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
-      const tag = new DataTag(this.client, tagName);
-      await tag.getData();
+    const tag = new DataTag(this.client, tagName);
+    await tag.getData();
 
-      if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      if (tag.data.author !== ctx.author.id) return ctx.channel.send(ctx.__('tag.common.notOwner', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (tag.data.author !== ctx.author.id) return ctx.channel.send(ctx.__('tag.common.notOwner', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      tag.data.content = tagContent;
-      tag.data.edit = Date.now();
+    tag.data.content = tagContent;
+    tag.data.edit = Date.now();
 
-      await tag.saveData();
-      ctx.channel.send(ctx.__('tag.edit.edited', {
-        successIcon: this.client.constants.statusEmotes.success,
-        tag: tagName,
-      }));
+    await tag.saveData();
+    ctx.channel.send(ctx.__('tag.edit.edited', {
+      successIcon: this.client.constants.statusEmotes.success,
+      tag: tagName,
+    }));
   }
 
   async sub_delete(ctx) {
     const tagName = ctx.args[1];
 
-      if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
-        errorIcon: this.client.constants.statusEmotes.error,
-      }));
+    if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
-      const tag = new DataTag(this.client, tagName);
-      await tag.getData();
+    const tag = new DataTag(this.client, tagName);
+    await tag.getData();
 
-      if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      if (tag.data.author !== ctx.author.id) return ctx.channel.send(ctx.__('tag.common.notOwner', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (tag.data.author !== ctx.author.id) return ctx.channel.send(ctx.__('tag.common.notOwner', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      await this.client.database.deleteDocument('tag', tagName);
-      ctx.channel.send(ctx.__('tag.delete.deleted', {
-        successIcon: this.client.constants.statusEmotes.success,
-        tag: tagName,
-      }));
+    await this.client.database.deleteDocument('tag', tagName);
+    ctx.channel.send(ctx.__('tag.delete.deleted', {
+      successIcon: this.client.constants.statusEmotes.success,
+      tag: tagName,
+    }));
   }
 
   async sub_owner(ctx) {
     const tagName = ctx.args[1];
 
-      if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
-        errorIcon: this.client.constants.statusEmotes.error,
-      }));
+    if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
-      const tag = new DataTag(this.client, tagName);
-      await tag.getData();
+    const tag = new DataTag(this.client, tagName);
+    await tag.getData();
 
-      if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      const owner = await this.client.fetchUser(tag.data.author).then(user => ({ id: user.id, tag: user.tag }));
+    const owner = await this.client.fetchUser(tag.data.author).then(user => ({ id: user.id, tag: user.tag }));
 
-      ctx.channel.send(ctx.__('tag.owner.ownerIs', {
-        tag: tagName,
-        owner,
-      }));
+    ctx.channel.send(ctx.__('tag.owner.ownerIs', {
+      tag: tagName,
+      owner,
+    }));
   }
 
   async sub_raw(ctx) {
     const tagName = ctx.args[1];
 
-      if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
-        errorIcon: this.client.constants.statusEmotes.error,
-      }));
+    if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
-      const tag = new DataTag(this.client, tagName);
-      await tag.getData();
+    const tag = new DataTag(this.client, tagName);
+    await tag.getData();
 
-      if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      ctx.channel.send(ctx.__('tag.raw.rawTag', {
-        tag: tagName,
-        rawTag: tag.data.content,
-      }));
+    ctx.channel.send(ctx.__('tag.raw.rawTag', {
+      tag: tagName,
+      rawTag: tag.data.content,
+    }));
   }
 
   async sub_search(ctx) {
@@ -213,17 +215,35 @@ class Tag extends Command {
     const random = await this.client.database.getDocuments('tag').then(tags => tags[Math.floor(Math.random() * tags.length)]);
     
     const tag = new DataTag(this.client, random.id);
-      await tag.getData();
+    await tag.getData();
 
-      if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
-        errorIcon: this.client.constants.statusEmotes.error,
-        tag: tagName,
-      }));
+    if (!tag.data.content) return ctx.channel.send(ctx.__('tag.common.doesNotExist', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: tagName,
+    }));
 
-      tag.incrementUses();
-      const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag }, 0);
+    tag.incrementUses();
+    const proceeded = this.client.lisa.replaceStatic(tag.data.content, { ctx, tag }, 0);
 
-      ctx.channel.send(proceeded);
+    ctx.channel.send(proceeded);
+  }
+
+  async sub_list(ctx) {
+    let member = ctx.member;
+    const search = ctx.args.join(' ');
+    if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();
+    else if (search) {
+      const members = this.client.finder.findMembers(search, ctx.guild.id);
+      if (members.size === 0) return ctx.channel.send(ctx.__('finder.members.noResult', { errorIcon: this.client.constants.statusEmotes.error, search }));
+      else if (members.size > 1) return ctx.channel.send(this.client.finder.formatMembers(members, ctx.settings.data.misc.locale));
+      member = members.first();
+    }
+
+    const mappedTags = await this.client.database.getDocuments('tag').then(tags => tags.map(t => `\`${t.id}\``));
+    ctx.channel.send(ctx.__('tag.list', {
+      tag: member.user.tag,
+      list: mappedTags.join(', '),
+    }));
   }
 
   /**
