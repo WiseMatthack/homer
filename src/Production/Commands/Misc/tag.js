@@ -56,6 +56,10 @@ class Tag extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
+    if (['create', 'edit', 'delete', 'owner', 'search', 'list', 'random', 'row'].some(tagName)) return ctx.channel.send(ctx.__('tag.create.reservedName', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
+
     if (tagContent.length > 1024) return ctx.channel.send(ctx.__('tag.common.contentTooLong', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));

@@ -205,6 +205,7 @@
 	"tag.common.notOwner": "{{{ errorIcon }}} Vous n'êtes pas le propriétaire du tag `{{{ tag }}}`.",
 	"tag.create.alreadyExists": "{{{ errorIcon }}} Le tag `{{{ tag }}}` existe déjà.",
 	"tag.create.created": "{{{ successIcon }}} Le tag `{{{ tag }}}` a été créé.",
+	"tag.create.reservedName": "{{{ errorIcon }}} Ce nom de tag est réservé par une sous-commande.",
 	"tag.edit.edited": "{{{ successIcon }}} Le tag `{{{ tag }}}` a été édité.",
 	"tag.delete.deleted": "{{{ successIcon }}} Le tag `{{{ tag }}}` a été supprimé.",
 	"tag.owner.ownerIs": "✏ Le propriétaire du tag `{{{ tag }}}` est **{{{ owner.tag }}}** (ID:{{{ owner.id }}}).",
