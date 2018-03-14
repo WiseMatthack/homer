@@ -21,7 +21,7 @@ class Prefix extends Command {
       await ctx.settings.saveData();
 
       ctx.channel.send(ctx.__('prefix.removed', {
-        succesIcon: this.client.constants.statusEmotes.success,
+        successIcon: this.client.constants.statusEmotes.success,
         prefix,
       }));
     } else {
@@ -33,7 +33,7 @@ class Prefix extends Command {
       await ctx.settings.saveData();
 
       ctx.channel.send(ctx.__('prefix.added', {
-        succesIcon: this.client.constants.statusEmotes.success,
+        successIcon: this.client.constants.statusEmotes.success,
         prefix,
       }));
     }
