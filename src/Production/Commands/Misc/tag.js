@@ -56,7 +56,7 @@ class Tag extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (['create', 'edit', 'delete', 'owner', 'search', 'list', 'random', 'row'].some(tagName)) return ctx.channel.send(ctx.__('tag.create.reservedName', {
+    if (['create', 'edit', 'delete', 'owner', 'search', 'list', 'random', 'row'].some(a => a === tagName)) return ctx.channel.send(ctx.__('tag.create.reservedName', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
