@@ -89,6 +89,7 @@ class LisaHelper extends Helper {
           console.log(`Part to replace: "${part}" - Ran pattern: "${ranPattern}"`);
           newString = newString.replace(part, ranPattern);
         } catch (e) {
+          console.log(`Part to replace: "${part}" - Error: "${e}"`);
           newString = newString.replace(part, e);
         }
       });
