@@ -243,6 +243,11 @@ class Tag extends Command {
       .filter(t => t.author === member.id)
       .map(t => `\`${t.id}\``));
 
+    if (mappedTags.length === 0) return ctx.channel.send(ctx.__('tag.list.noTags', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      tag: member.user.tag,
+    }));
+
     ctx.channel.send(ctx.__('tag.list', {
       tag: member.user.tag,
       list: mappedTags.join(', '),

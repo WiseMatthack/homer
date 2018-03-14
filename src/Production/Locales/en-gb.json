@@ -210,6 +210,7 @@
 	"tag.delete.deleted": "{{{ successIcon }}} The tag `{{{ tag }}}` has been deleted.",
 	"tag.owner.ownerIs": "✏ The owner of the tag `{{{ tag }}}` is **{{{ owner.tag }}}** (ID:{{{ owner.id }}}).",
 	"tag.list": "✏ List of tags created by **{{{ tag }}}**:\n\n{{{ list }}}.",
+	"tag.list.noTags": "{{{ errorIcon }}} **{{{ tag }}}** does not own any tag.",
 	"tag.raw.rawTag": "✏ Raw version of tag `{{{ tag }}}`:\n\n```{{{ rawTag }}}```",
 	"tag.search.nothingFound": "{{{ errorIcon }}} No tag found matching `{{{ query }}}`.",
 	"tag.search.found": "🔎 Found tags matching `{{{ query }}}`:\n\n{{{ list }}}",
