@@ -79,7 +79,7 @@ class LisaHelper extends Helper {
   replaceDynamic(string, context, contextType) {
     let newString = string;
 
-    const processArray = newString.match(/(\[.*?\])/g);
+    const processArray = newString.match(/\[(.*?)\]/g);
 
     if (processArray) {
       processArray.forEach((part) => {
