@@ -65,7 +65,7 @@ class Context {
 
     let prefix = null;
     for (const p of prefixes) {
-      if (this.content.startsWith(p)) prefix = p;
+      if (this.content.toLowerCase().startsWith(p.toLowerCase())) prefix = p;
     }
 
     return prefix;
