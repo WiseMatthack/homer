@@ -230,7 +230,7 @@ class Tag extends Command {
 
   async sub_list(ctx) {
     let member = ctx.member;
-    const search = ctx.args.join(' ');
+    const search = ctx.args.slice(1).join(' ');
     if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();
     else if (search) {
       const members = this.client.finder.findMembers(search, ctx.guild.id);
