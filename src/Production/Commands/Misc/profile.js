@@ -68,6 +68,24 @@ class Profile extends Command {
       ctx.channel.send(ctx.__('profile.list', {
         fields: Object.keys(this.client.constants.profileFields).map(field => `\`${field}\``).join(' - '),
       }));
+    } else if (ctx.args[0] === 'locale') {
+      const locale = ctx.args[1];
+      if (!locale) return ctx.channel.send(ctx.__('profile.locale.noLocale', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
+      if (!ctx.getLocales().includes(locale)) return ctx.channel.send(ctx.__('profile.locale.unknownLocale', {
+        errorIcon: this.client.constants.statusEmotes.error,
+        locale,
+      }));
+
+      profile.data.locale = locale;
+      await profile.saveData();
+
+      ctx.channel.send(ctx.__('profile.locale.localeSet', {
+        successIcon: this.client.constants.statusEmotes.success,
+        locale,
+      }));
     } else {
       let member = ctx.member;
       const search = ctx.args.join(' ');
