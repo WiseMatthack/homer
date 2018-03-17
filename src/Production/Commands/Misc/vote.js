@@ -39,7 +39,7 @@ class Vote extends Command {
         { time: 15000 })
         .then(async () => {
           const data = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?token=${this.client.config.api.discordBots}&onlyids=true&days=1`);
-          const parsed = JSON.parse(data.text);
+          const parsed = data.body;
 
           if (!parsed.includes(ctx.author.id)) return ctx.channel.send(ctx.__('vote.error.noVoted', {
             errorIcon: this.client.constants.statusEmotes.error,
