@@ -12,6 +12,7 @@ class GuildCreate extends Event {
     });
 
     this.client.updateGame();
+    this.client.misc.updateCount(this.client.guilds.size);
   }
 }
 
