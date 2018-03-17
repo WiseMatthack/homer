@@ -54,11 +54,9 @@ class Vote extends Command {
             latestVote: null,
           };
 
-          if (entry.latestVote === `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`) {
-            ctx.channel.send(ctx.__('vote.error.alreadyVoted', {
-              errorIcon: this.client.constants.statusEmotes.error,
-            }));
-          }
+          if (entry.latestVote === `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`) return ctx.channel.send(ctx.__('vote.error.alreadyVoted', {
+            errorIcon: this.client.constants.statusEmotes.error,
+          }));
 
           entry.count += 1;
           entry.latestVote = `${date.getUTCDate()}/${date.getUTCMonth()}/${date.getUTCFullYear()}`;
