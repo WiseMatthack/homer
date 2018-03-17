@@ -39,7 +39,10 @@ class ModHelper extends Helper {
 
     let messages = [];
     for (const channel of settings.moderation.channels.filter(c => c.type === 1)) {
-      const sentMessage = await channel.send(msg.join('\n'));
+      const textChannel = this.client.channels.get(channel.id);
+      if (!textChannel) return;
+
+      const sentMessage = await textChannel.send(msg.join('\n'));
       messages.push({
         channel: channel.id,
         message: sentMessage.id,
