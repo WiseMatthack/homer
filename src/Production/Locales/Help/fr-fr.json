@@ -195,5 +195,10 @@
     "description": "Expulse un membre du serveur",
     "usage": "kick <@user|ID> [raison]",
     "examples": ["kick @iDroid", "kick @b1nzy Dehors !"]
+  },
+  "reason": {
+    "description": "Edite la raison d'un cas de modération",
+    "usage": "reason <ID cas> <raison>",
+    "examples": ["reason 4 Finalement c'est parce qu'il n'était pas intelligent"]
   }
 }
