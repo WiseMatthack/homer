@@ -23,7 +23,8 @@ class Feed extends Command {
     } else if (ctx.args[0] === 'remove') {
       let channel = ctx.channel;
       const search = ctx.args.slice(1).join(' ');
-      if (search) {
+      if (ctx.mentions.channels.size > 0) channel = ctx.mentions.channels.first();
+      else if (search) {
         const channels = this.client.finder.findTextChannels(search, ctx.guild.id);
         if (channels.size === 0) return ctx.channel.send(ctx.__('finder.channels.noFound', { errorIcon: this.client.constants.statusEmotes.error, search }));
         channel = channels.first();
@@ -43,14 +44,15 @@ class Feed extends Command {
         channel: channel.id,
       }));
     } else {
-      const type = ctx.args[1];
+      const type = ctx.args[0];
       if (!type) return ctx.channel.send(ctx.__('feed.noType', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
       let channel = ctx.channel;
       const search = ctx.args.slice(1).join(' ');
-      if (search) {
+      if (ctx.mentions.channels.size > 0) channel = ctx.mentions.channels.first();
+      else if (search) {
         const channels = this.client.finder.findTextChannels(search, ctx.guild.id);
         if (channels.size === 0) return ctx.channel.send(ctx.__('finder.channels.noFound', { errorIcon: this.client.constants.statusEmotes.error, search }));
         channel = channels.first();
