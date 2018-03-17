@@ -28,7 +28,7 @@ class Ban extends Command {
 
     targetMember.ban({
       days: 7,
-      reason: `[BAN] ${ctx.author.tag}: ${reason}`,
+      reason: `${ctx.author.tag}: ${reason}`,
     })
       .then(() => {
         this.client.moderation.registerCase(ctx.guild.id, 1, ctx.author.id, targetMember.id, reason);
