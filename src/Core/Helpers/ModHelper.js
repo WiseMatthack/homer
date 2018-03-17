@@ -35,7 +35,7 @@ class ModHelper extends Helper {
       author: this.client.users.get(author).tag,
       target: this.client.channels.has(target) ? this.client.channels.get(target).id : (await this.client.fetchUser(target).then(u => u.tag)),
       targetID: target,
-      time: mtz(time).tz(settings.data.misc.timezone).format(settings.data.misc.timeFormat),
+      time: mtz(time).tz(settings.misc.timezone).format(settings.misc.timeFormat),
     }), i18n.__('moderation.log.reason', { reason })];
 
     let messages = [];
