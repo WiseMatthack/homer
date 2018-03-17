@@ -36,7 +36,7 @@ class Hackban extends Command {
         this.client.moderation.registerCase(ctx.guild.id, 3, ctx.author.id, targetUser.id, reason);
         ctx.channel.send(ctx.__('hackban.success', {
           successIcon: this.client.constants.statusEmotes.success,
-          tag: targetUser.user.tag,
+          tag: targetUser.tag,
         }));
       })
       .catch(error => ctx.channel.send(ctx.__('hackban.error', {
