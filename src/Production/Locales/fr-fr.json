@@ -245,7 +245,7 @@
 	"user.afk.status": "{{{ reason }}} *(depuis {{{ since }}})*",
 	"vote.memberVote": "- **{{{ tag }}}** a voté {{{ count }}} fois.",
 	"vote.embed.footer": "Tapez {{{ prefix }}}vote pour obtenir les instructions pour voter.",
-	"vote.top": "📊 Meilleurs voteurs du mois :",
+	"vote.top": "🎖 Meilleurs voteurs du mois :",
 	"vote.instructions": "🗳 Votez sur DiscordBots.org pour soutenir Homer !\n1) Accédez à ce site web: <{{{ voteLink }}}>.\n2) Appuyez sur le bouton de vote.\n3) Réagissez avec {{{ validateIcon }}} juste en-dessous.",
 	"vote.error.noVoted": "{{{ errorIcon }}} Nous n'avons pas trouvé votre vote !",
 	"vote.error.alreadyVoted": "{{{ errorIcon }}} Vous avez déjà voté aujourd'hui... Revenez demain.",

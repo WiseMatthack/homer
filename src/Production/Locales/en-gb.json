@@ -245,7 +245,7 @@
 	"user.afk.status": "{{{ reason }}} *(since {{{ since }}})*",
 	"vote.memberVote": "- **{{{ tag }}}** has voted {{{ count }}} time(s).",
 	"vote.embed.footer": "Run {{{ prefix }}}vote to get instructions for voting.",
-	"vote.top": "📊 Monthly best voters:",
+	"vote.top": "🎖 Monthly best voters:",
 	"vote.instructions": "🗳 Vote on DiscordBots.org to support Homer!\n1) Visit this website: <{{{ voteLink }}}>.\n2) Push the vote button.\n3) React with {{{ validateIcon }}} just below.",
 	"vote.error.noVoted": "{{{ errorIcon }}} We did not find your vote!",
 	"vote.error.alreadyVoted": "{{{ errorIcon }}} You have already voted today... Come back tomorrow.",
