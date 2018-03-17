@@ -37,7 +37,7 @@ class Vote extends Command {
       message.awaitReactions(
         (reaction, user) => reaction.emoji.toString() === this.client.constants.statusEmotes.success & user.id === ctx.author.id,
         { time: 60000 })
-        .then(() => {
+        .then(async () => {
           const data = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?token=${this.client.config.api.discordBots}&onlyids=true&days=1`);
           const parsed = JSON.parse(data.text);
 
