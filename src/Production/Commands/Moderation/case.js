@@ -2,7 +2,7 @@ const Command = require('../../../Core/Structures/Command');
 const { RichEmbed } = require('discord.js');
 const mtz = require('moment-timezone');
 
-class Hackban extends Command {
+class Case extends Command {
   constructor(client) {
     super(client, {
       name: 'case',
