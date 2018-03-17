@@ -66,8 +66,7 @@ class Vote extends Command {
             successIcon: this.client.constants.statusEmotes.success,
           }));
         })
-        .catch((e) => {
-          console.error(e);
+        .catch(() => {
           ctx.channel.send(ctx.__('vote.unknownError', {
             errorIcon: this.client.constants.statusEmotes.error,
           }));
