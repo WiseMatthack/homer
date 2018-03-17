@@ -38,7 +38,9 @@ class Vote extends Command {
         (reaction, user) => reaction.emoji.id === '420529118417780747' & user.id === ctx.author.id,
         { max: 1 })
         .then(async () => {
-          const data = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?onlyids=true&limit=0&token=${this.client.config.api.discordBots}`);
+          const data = await snekfetch
+            .set({ Authorization: this.client.config.api.discordBots })
+            .get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?onlyids=true&limit=0`);
           const parsed = data.body;
 
           if (!parsed.includes(ctx.author.id)) return ctx.channel.send(ctx.__('vote.error.noVoted', {
