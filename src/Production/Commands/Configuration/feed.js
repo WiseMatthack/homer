@@ -49,7 +49,7 @@ class Feed extends Command {
       }));
 
       let channel = ctx.channel;
-      const search = ctx.args.slice(2).join(' ');
+      const search = ctx.args.slice(1).join(' ');
       if (search) {
         const channels = this.client.finder.findTextChannels(search, ctx.guild.id);
         if (channels.size === 0) return ctx.channel.send(ctx.__('finder.channels.noFound', { errorIcon: this.client.constants.statusEmotes.error, search }));
