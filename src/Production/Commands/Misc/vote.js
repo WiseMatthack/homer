@@ -39,8 +39,8 @@ class Vote extends Command {
         { max: 1 })
         .then(async () => {
           const data = await snekfetch
-            .set({ Authorization: this.client.config.api.discordBots })
-            .get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?onlyids=true&limit=0`);
+            .get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?onlyids=true&limit=0`)
+            .set({ Authorization: this.client.config.api.discordBots });
           const parsed = data.body;
 
           if (!parsed.includes(ctx.author.id)) return ctx.channel.send(ctx.__('vote.error.noVoted', {
