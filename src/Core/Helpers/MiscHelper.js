@@ -30,6 +30,12 @@ class MiscHelper extends Helper {
       .set({ Authorization: this.client.config.api.discordBots })
       .send({ server_count: guild })
       .catch(() => console.log('[Error] Unable to update guild count on discordbots.org.'));
+
+    snekfetch
+      .post(`https://bots.discord.pw/api/bots/${this.client.user.id}/stats`)
+      .set({ Authorization: this.client.config.api.discordPw })
+      .send({ server_count: guild })
+      .catch(() => console.log('[Error] Unable to update guild count on bots.discord.pw.'));
   }
 }
 
