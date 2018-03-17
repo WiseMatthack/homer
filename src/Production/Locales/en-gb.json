@@ -146,7 +146,6 @@
 	"message.cleverbot.disabled": "{{{ errorIcon }}} The cleverbot feature has been disabled.",
 	"message.cleverbot.error": "{{{ errorIcon }}} An error has occured while querying Cleverbot: `{{{ message }}}`.",
 	"message.disabledCommand": "{{{ errorIcon }}} The command `{{{ cmdName }}}` was disabled. Given reason:\n```{{{ reason }}}```",
-	"moderation.announcement": "{{{ warningIcon }}} **Important announcement**\n\nModeration commands are currently being developed, you can check the article there: <{{{ articleLink }}}>.",
 	"moderation.action.1": "Ban",
 	"moderation.action.2": "Kick",
 	"moderation.action.3": "Hackban",

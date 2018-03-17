@@ -176,9 +176,24 @@
     "examples": []
   },
 
-  "moderation": {
-    "description": "No description available",
-    "usage": "moderation",
-    "examples": []
+  "ban": {
+    "description": "Bans a member from the server",
+    "usage": "ban <@user|ID> [reason]",
+    "examples": ["ban @iDroid", "ban @b1nzy Not a nice guy (jk)"]
+  },
+  "case": {
+    "description": "Get infomation about a moderation case",
+    "usage": "case <case ID>",
+    "examples": ["case 3"]
+  },
+  "hackban": {
+    "description": "Hackbans a member from the server",
+    "usage": "hackban <ID> [reason]",
+    "examples": ["hackban 1234", "hackban 1234 Get out of here"]
+  },
+  "kick": {
+    "description": "Kicks a member from the server",
+    "usage": "kick <@user|ID> [reason]",
+    "examples": ["kick @iDroid", "kick @b1nzy Not a nice guy (jk)"]
   }
 }
