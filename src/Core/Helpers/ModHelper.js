@@ -72,8 +72,8 @@ class ModHelper extends Helper {
    * @returns {Boolean}
    */
   canInteract(author, target, bot) {
-    if (target.roles.highest.comparePositionTo(bot.roles.highest) >= 0) return false;
-    else if (author.roles.highest.comparePositionTo(target.roles.highest) <= 0) return false;
+    if (target.highestRole.comparePositionTo(bot.highestRole) >= 0) return false;
+    else if (author.highestRole.comparePositionTo(target.highestRole) <= 0) return false;
     else return true;
   }
 }
