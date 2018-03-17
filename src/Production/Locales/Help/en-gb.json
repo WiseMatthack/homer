@@ -109,6 +109,11 @@
     "usage": "timezone (set <timezone>)|([member])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
   },
+  "vote": {
+    "description": "Support Homer on DiscordBots.org",
+    "usage": "vote [top]",
+    "examples": ["vote", "vote top"]
+  },
 
   "format": {
     "description": "Set a date or a time format for the guild",

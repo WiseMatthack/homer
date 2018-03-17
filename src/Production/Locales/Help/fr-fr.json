@@ -109,6 +109,11 @@
     "usage": "timezone (set <fuseau horaire>)|([Membre])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
   },
+  "vote": {
+    "description": "Soutenez Homer sur DiscordBots.org",
+    "usage": "vote [top]",
+    "examples": ["vote", "vote top"]
+  },
 
   "format": {
     "description": "Configure le format de la date et de l'heure pour le serveur",
