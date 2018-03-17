@@ -32,10 +32,10 @@ class Vote extends Command {
         voteLink: `https://discordbots.org/bot/${this.client.user.id}/vote`,
       }));
 
-      await message.react(this.client.constants.statusEmotes.success);
+      await message.react(this.client.emojis.get('420529118417780747'));
 
       message.awaitReactions(
-        (reaction, user) => reaction.emoji.toString() === this.client.constants.statusEmotes.success & user.id === ctx.author.id,
+        (reaction, user) => reaction.emoji.id === '420529118417780747' & user.id === ctx.author.id,
         { time: 60000 })
         .then(async () => {
           const data = await snekfetch.get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?token=${this.client.config.api.discordBots}&onlyids=true&days=1`);
