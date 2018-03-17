@@ -115,6 +115,11 @@
     "examples": ["vote", "vote top"]
   },
 
+  "feed": {
+    "description": "Manage feeds on the server",
+    "usage": "feed (list|remove <channel>|<type> <channel>)",
+    "examples": ["feed list", "feed remove #announcements", "feed 1 #mod-log"]
+  },
   "format": {
     "description": "Set a date or a time format for the guild",
     "usage": "format <type> <format>",

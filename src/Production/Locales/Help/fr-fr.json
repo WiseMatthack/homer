@@ -115,6 +115,11 @@
     "examples": ["vote", "vote top"]
   },
 
+  "feed": {
+    "description": "Gère les flux de logs sur le serveur",
+    "usage": "feed (list|remove <salon>|<type> <salon>)",
+    "examples": ["feed list", "feed remove #announcements", "feed 1 #mod-log"]
+  },
   "format": {
     "description": "Configure le format de la date et de l'heure pour le serveur",
     "usage": "format <type> <format>",
