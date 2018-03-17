@@ -17,7 +17,7 @@ class Feed extends Command {
 
       const message = ctx.settings.data.moderation.channels.map(f => ctx.__('feed.list.entry', { id: f.id, type: f.type })).join('\n');
       ctx.channel.send(ctx.__('feed.list.msg', {
-        name: ctx.guild.id,
+        name: ctx.guild.name,
         list: message,
       }));
     } else if (ctx.args[0] === 'remove') {
