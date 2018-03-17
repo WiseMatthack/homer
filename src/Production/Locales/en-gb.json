@@ -144,6 +144,7 @@
 	"moderation.log.reason": "`[ Reason ]` {{{ reason }}}",
 	"moderation.log.1": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🔨 **{{{ author }}}** banned **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.2": "`[{{{ time }}}]` `[{{{ caseID }}}]` 👢 **{{{ author }}}** kicked **{{{ target }}}** ({{{ targetID }}}).",
+	"moderation.log.3": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🛠 **{{{ author }}}** hackbanned **{{{ target }}}** ({{{ targetID }}}).",
 	"number.is": "☎ Your telephone number `{{{ number }}}`.",
 	"number.reset.done": "☎ Your new telephone number is `{{{ number }}}`.",
 	"phone.calling": "☎ Calling `{{{ number }}}`...",
