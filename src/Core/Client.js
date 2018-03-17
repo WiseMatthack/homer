@@ -17,6 +17,7 @@ const LastactiveHelper = require('./Helpers/LastactiveHelper');
 const LisaHelper = require('./Helpers/LisaHelper');
 const HandlerHelper = require('./Helpers/HandlerHelper');
 const MiscHelper = require('./Helpers/MiscHelper');
+const ModHelper = require('./Helpers/ModHelper');
 
 /**
  * The main hub for interacting with the Discord API.
@@ -118,6 +119,12 @@ class ExtendedClient extends Client {
      * @type {MiscHelper}
      */
     this.misc = new MiscHelper(this);
+
+    /**
+     * Moderation helper associated to the client.
+     * @type {ModHelper}
+     */
+    this.moderation = new ModHelper(this);
   }
 
   /**
