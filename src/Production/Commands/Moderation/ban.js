@@ -16,7 +16,7 @@ class Ban extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    const targetMember = ctx.mentions.users.first() || ctx.guild.members.get(search) || null;
+    const targetMember = ctx.mentions.members.first() || ctx.guild.members.get(search) || null;
     if (!targetMember) return ctx.channel.send(ctx.__('ban.error.noMember', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
