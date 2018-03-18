@@ -165,7 +165,7 @@
 	"moderation.log.1": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🔨 **{{{ author }}}** a banni **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.2": "`[{{{ time }}}]` `[{{{ caseID }}}]` 👢 **{{{ author }}}** a expulsé **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.3": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🛠 **{{{ author }}}** a hackbanni **{{{ target }}}** ({{{ targetID }}}).",
-	"moderation.log.4": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** a débanni **{{{ target }}}** ({{{ targetID }}}) qui était banni pour `{{{ extra.reason }}}`.",
+	"moderation.log.4": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** a débanni **{{{ target }}}** ({{{ targetID }}}).",
 	"number.is": "☎ Votre numéro de téléphone est `{{{ number }}}`.",
 	"number.reset.done": "☎ Votre nouveau numéro de téléphone est `{{{ number }}}`.",
 	"phone.calling": "☎ Appel de `{{{ number }}}` en cours...",
