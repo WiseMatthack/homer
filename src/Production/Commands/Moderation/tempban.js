@@ -44,7 +44,7 @@ class Tempban extends Command {
       days: 7,
       reason: `${ctx.author.tag}: ${reason}`,
     })
-      .then(() => {
+      .then(async () => {
         await this.client.moderation.registerCase(ctx.guild.id, 6, ctx.author.id, targetMember.id, reason, {
           end: (Date.now() + timeout),
           finished: false,
