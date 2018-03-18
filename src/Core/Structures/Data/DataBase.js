@@ -56,6 +56,9 @@ class DataBase {
    * Save the document associated to the data structure.
    */
   async saveData() {
+    // We do not need to save if it is exactly the same scheme than default (saving some space)
+    if (this.data === this.template) return;
+
     await this.client.database.insertDocument(this.table, this.data, {
       conflict: 'update',
     });
