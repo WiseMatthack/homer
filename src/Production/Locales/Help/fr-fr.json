@@ -206,6 +206,11 @@
     "usage": "reason <ID cas> <raison>",
     "examples": ["reason 4 Finalement c'est parce qu'il n'était pas intelligent"]
   },
+  "tempban": {
+    "description": "Bannis un membre du serveur suivant le temps fourni",
+    "usage": "tempban <durée> <@user|ID> [raison]",
+    "examples": ["tempban 1d @b1nzy Calme-toi"]
+  },
   "unban": {
     "description": "Débannis un utilisateur du serveur",
     "usage": "unban <Tag|ID> [raison]",

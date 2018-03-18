@@ -122,6 +122,43 @@ class HandlerHelper extends Helper {
       user.send(message);
     }
   }
+
+  /**
+   * Handles a unban.
+   * @param {Client} client Client that initiated the unban
+   * @param {String} guildID Guild ID
+   * @param {String} userID User ID
+   */
+  async handleUnban(client, guildID, userID) {
+    const guild = client.guilds.get(guildID);
+    if (!guild) return;
+
+    const settings = new DataGuild(client, guildID);
+    await settings.getData();
+    i18n.setLocale(settings.data.misc.locale);
+
+    const caseObject = settings.data.moderation.cases.find(c => c.action === 6 && c.target === userID);
+    if (!caseObject) return;
+    const caseIndex = settings.data.moderation.cases.indexOf(caseObject);
+
+    guild.unban(userID, `Case ${caseIndex}`)
+      .then((user) => {
+        caseObject.extra.finished = true;
+        for (const log of caseObject.messages) {
+          const channel = client.channels.get(log.channel);
+          if (!channel) return;
+
+          const msg = await channel.fetchMessage(log.message);
+          if (!msg) return;
+
+          msg.edit(msg.content + '\n' + i18n.__('tempban.unbannedEdit'));
+        }
+
+        settings.data.moderation.cases[caseIndex] = caseObject;
+        await settings.saveData();
+      })
+      .catch(() => {});
+  }
 }
 
 module.exports = HandlerHelper;

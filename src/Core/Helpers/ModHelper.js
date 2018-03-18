@@ -59,6 +59,7 @@ class ModHelper extends Helper {
       reason,
       messages,
       time,
+      extra,
     };
 
     settings.moderation.cases.push(moderationCase);
