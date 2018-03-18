@@ -160,6 +160,7 @@
 	"moderation.action.3": "Hackban",
 	"moderation.action.4": "Unban",
 	"moderation.action.5": "Clear",
+	"moderation.action.6": "Tempban",
 	"moderation.common.noReason": "No reason provided",
 	"moderation.common.cannotInteract": "{{{ errorIcon }}} Cannot interact with **{{{ tag }}}**.",
 	"moderation.log.reason": "`[ Reason ]` {{{ reason }}}",

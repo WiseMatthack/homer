@@ -159,6 +159,7 @@
 	"moderation.action.3": "Hackban",
 	"moderation.action.4": "Unban",
 	"moderation.action.5": "Nettoyage",
+	"moderation.action.6": "Ban temporaire",
 	"moderation.common.noReason": "Aucune raison fournie",
 	"moderation.common.cannotInteract": "{{{ errorIcon }}} Impossible d'intéragir avec **{{{ tag }}}**.",
 	"moderation.log.reason": "`[ Raison ]` {{{ reason }}}",
