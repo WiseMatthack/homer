@@ -83,7 +83,7 @@ class HandlerHelper extends Helper {
 
         channel.send({ embed });
       })
-      .catch(() => channel.send(ctx.__('poll.handler.unknownMessage', {
+      .catch(() => channel.send(i18n.__('poll.handler.unknownMessage', {
         errorIcon: client.constants.statusEmotes.error,
       })));
   }

@@ -10,7 +10,7 @@
 	"global.no": "No",
 	"global.by": "by",
 	"global.unknown": "Unknown",
-	"about.embed.description": "Hey! I'm **{{{ name }}}**, a community bot designed for Discord.\nI provide everything a community needs, brings needed utility content and keeps your place fun!\n\nI was made by **iDroid27210** using [node.js](https://nodejs.org) ({{{ node }}}) with the API wrapper [discord.js](https://discord.js.org) ({{{ discord }}}).\nYou can check my commands using the `{{{ defaultPrefix }}}help` command.\nStar my repository and contribute to my development on [GitHub](https://github.com/iDroid27210/homer)!\n\nYou can join the support server if you wanna get some assistance, just type `{{{ defaultPrefix }}}support` and follow the link.\nSincerly, iDroid.",
+	"about.embed.description": "Hey! I'm **{{{ name }}}**, a community bot designed for Discord.\nI provide everything a community needs, bring needed utility content and keep your place fun!\n\nI was made by **iDroid27210** using [node.js](https://nodejs.org) ({{{ node }}}) with the API wrapper [discord.js](https://discord.js.org) ({{{ discord }}}).\nYou can check my commands using the `{{{ defaultPrefix }}}help` command.\nStar my repository and contribute to my development on [GitHub](https://github.com/iDroid27210/homer)!\n\nYou can join the support server if you wanna get some assistance, just type `{{{ defaultPrefix }}}support` and follow the link.\nSincerly, iDroid.",
 	"about.embed.footer": "Get statistics using {{{ prefix }}}stats! - Last reboot",
 	"afk.marked": "👋 You're marked as absent, goodbye!",
 	"avatar.title": "🖼 Avatar for **{{{ name }}}**:",
