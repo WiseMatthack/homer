@@ -137,7 +137,7 @@ class HandlerHelper extends Helper {
     await settings.getData();
     i18n.setLocale(settings.data.misc.locale);
 
-    const caseObject = settings.data.moderation.cases.sort((a, b) => b - a).find(c => c.action === 6 && c.target === userID);
+    const caseObject = settings.data.moderation.cases.sort((a, b) => b.time - a.time).find(c => c.action === 6 && c.target === userID);
     if (!caseObject) return;
     const caseIndex = settings.data.moderation.cases.indexOf(caseObject);
 
