@@ -22,8 +22,9 @@ class ModHelper extends Helper {
    * @param {String} author Action author ID
    * @param {String} target User or channel ID
    * @param {String} reason Reason
+   * @param {Object} extra Extra stuff (mostly used by the translation module)
    */
-  async registerCase(guild, action, author, target, reason) {
+  async registerCase(guild, action, author, target, reason, extra = {}) {
     const settings = await this.client.database.getDocument('guild', guild);
     if (!settings) return;
 
@@ -36,6 +37,7 @@ class ModHelper extends Helper {
       target: this.client.channels.has(target) ? this.client.channels.get(target).id : (await this.client.fetchUser(target).then(u => u.tag)),
       targetID: target,
       time: mtz(time).tz(settings.misc.timezone).format(settings.misc.timeFormat),
+      extra,
     }), i18n.__('moderation.log.reason', { reason })];
 
     let messages = [];

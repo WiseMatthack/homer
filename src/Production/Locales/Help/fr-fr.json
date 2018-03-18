@@ -205,5 +205,10 @@
     "description": "Edite la raison d'un cas de modération",
     "usage": "reason <ID cas> <raison>",
     "examples": ["reason 4 Finalement c'est parce qu'il n'était pas intelligent"]
+  },
+  "unban": {
+    "description": "Débannis un utilisateur du serveur",
+    "usage": "unban <Tag|ID> [raison]",
+    "examples": ["unban b1nzy#1337 Il était sympa en fait", "unban 1234"]
   }
 }

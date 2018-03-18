@@ -205,5 +205,10 @@
     "description": "Edits the reason of a moderation case",
     "usage": "reason <case ID> <reason>",
     "examples": ["reason 4 Actually it's because he wasn't clever"]
+  },
+  "unban": {
+    "description": "Unbans a user from the server",
+    "usage": "unban <Tag|ID> [reason]",
+    "examples": ["unban b1nzy#1337 He was nice actually", "unban 1234"]
   }
 }
