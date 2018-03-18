@@ -19,7 +19,7 @@ class Google extends Command {
 
     const query = encodeURIComponent(search);
     snekfetch
-      .get(`https://www.googleapis.com/customsearch/v1?key=${this.client.config.api.googleKey}&cx=${this.client.config.api.googleCx}&lr=lang_${ctx.settings.data.misc.locale.split('-')[0]}&num=1&filter=1&safe=${ctw.channel.nsfw ? 'off' : 'high'}&fields=queries(request(totalResults)),items(link)&q=${query}`)
+      .get(`https://www.googleapis.com/customsearch/v1?key=${this.client.config.api.googleKey}&cx=${this.client.config.api.googleCx}&lr=lang_${ctx.settings.data.misc.locale.split('-')[0]}&num=1&filter=1&safe=${ctx.channel.nsfw ? 'off' : 'high'}&fields=queries(request(totalResults)),items(link)&q=${query}`)
       .then((response) => {
         const parsed = response.body;
 
