@@ -41,7 +41,7 @@ class ModHelper extends Helper {
     }), i18n.__('moderation.log.reason', { reason })];
 
     let messages = [];
-    for (const channel of settings.moderation.channels.filter(c => c.type === 1)) {
+    for (const channel of settings.moderation.channels.filter(c => Number(c.type) === 1)) {
       const textChannel = this.client.channels.get(channel.id);
       if (!textChannel) return;
 
