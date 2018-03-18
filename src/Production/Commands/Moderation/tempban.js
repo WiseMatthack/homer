@@ -6,6 +6,8 @@ class Tempban extends Command {
   constructor(client) {
     super(client, {
       name: 'tempban',
+      userPermissions: ['BAN_MEMBERS'],
+      botPermissions: ['BAN_MEMBERS'],
       category: 5,
     });
   }

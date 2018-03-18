@@ -4,6 +4,8 @@ class Ban extends Command {
   constructor(client) {
     super(client, {
       name: 'ban',
+      userPermissions: ['BAN_MEMBERS'],
+      botPermissions: ['BAN_MEMBERS'],
       category: 5,
     });
   }
