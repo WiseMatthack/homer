@@ -45,11 +45,14 @@ class Tempban extends Command {
       reason: `${ctx.author.tag}: ${reason}`,
     })
       .then(() => {
-        this.client.moderation.registerCase(ctx.guild.id, 6, ctx.author.id, targetMember.id, reason, {
+        await this.client.moderation.registerCase(ctx.guild.id, 6, ctx.author.id, targetMember.id, reason, {
           end: (Date.now() + timeout),
           finished: false,
           duration,
         });
+
+        this.client.setTimeout(this.client.stuffHandler.handleUnban, timeout, this.client, ctx.guild.id, targetMember.id);
+
         ctx.channel.send(ctx.__('tempban.success', {
           successIcon: this.client.constants.statusEmotes.success,
           tag: targetMember.user.tag,
