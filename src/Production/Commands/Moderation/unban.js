@@ -25,10 +25,9 @@ class Unban extends Command {
       search,
     }));
 
-    const auditEntry = await ctx.guild.fetchAuditLogs().then(audit => audit.entries.find(entry => entry.targetType === 'USER' && entry.target.id === targetUser.id && entry.action === 'MEMBER_BAN_ADD'));
     ctx.guild.unban(targetUser.id, `${ctx.author.tag}: ${reason}`)
       .then(() => {
-        this.client.moderation.registerCase(ctx.guild.id, 4, ctx.author.id, targetUser.id, reason, { originalReason: (auditEntry && auditEntry.reason) ? auditEntry.reason : ctx.__('global.unknown') });
+        this.client.moderation.registerCase(ctx.guild.id, 4, ctx.author.id, targetUser.id, reason);
         ctx.channel.send(ctx.__('unban.success', {
           successIcon: this.client.constants.statusEmotes.success,
           tag: targetUser.tag,
