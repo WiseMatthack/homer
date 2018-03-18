@@ -142,7 +142,7 @@ class HandlerHelper extends Helper {
     const caseIndex = settings.data.moderation.cases.indexOf(caseObject);
 
     guild.unban(userID, `Case ${caseIndex}`)
-      .then((user) => {
+      .then(async (user) => {
         caseObject.extra.finished = true;
         for (const log of caseObject.messages) {
           const channel = client.channels.get(log.channel);
