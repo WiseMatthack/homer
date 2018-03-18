@@ -65,6 +65,10 @@ class Dashboard {
         resave: true,
         saveUninitialized: true,
         proxy: true,
+        cookie: {
+          secure: true,
+          maxAge: ((60000 * 60) * 24),
+        },
       }))
       .use(auth.initialize())
       .use(auth.session())
