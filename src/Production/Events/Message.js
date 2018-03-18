@@ -121,7 +121,7 @@ class Message extends Event {
           missingPermissions: missingBotPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
-        const missingUserPermissions = cmd.botPermissions.filter(perm => !ctx.member.permissions.has(perm));
+        const missingUserPermissions = cmd.userPermissions.filter(perm => !ctx.member.permissions.has(perm));
         if (missingUserPermissions.length > 0) return ctx.channel.send(ctx.__('command.missingPerm.user', {
           errorIcon: this.client.constants.statusEmotes.error,
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
