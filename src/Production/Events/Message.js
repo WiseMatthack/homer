@@ -115,13 +115,17 @@ class Message extends Event {
           }));
         }
 
-        for (const permission of cmd.botPermissions) {
-          if (!ctx.guild.me.permissions.has(permission)) return;
-        }
+        const missingBotPermissions = cmd.botPermissions.filter(perm => !ctx.guild.me.permissions.has(perm));
+        if (missingBotPermissions.size > 0) return ctx.channel.send(ctx.__('command.missingPerm.bot', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          missingPermissions: missingBotPermissions.map(perm => `\`${perm}\``).join(', '),
+        }));
 
-        for (const permission of cmd.userPermissions) {
-          if (!ctx.member.permissions.has(permission)) return;
-        }
+        const missingUserPermissions = cmd.botPermissions.filter(perm => !ctx.member.permissions.has(perm));
+        if (missingUserPermissions.size > 0) return ctx.channel.send(ctx.__('command.missingPerm.user', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
+        }));
 
         cmd.run(ctx);
       }

@@ -47,6 +47,8 @@
 	"checkdbans.error": "{{{ errorIcon }}} An error has occured while querying Discord Bans.",
 	"choose.not_enough_choices": "{{{ errorIcon }}} You must provide at least **2** choices.",
 	"choose.chosen": "🤔 I've chosen **{{{ choice }}}**!",
+	"command.missingPerm.bot": "{{{ errorIcon }}} The bot needs the following permission(s) to run this command: {{{ missingPermissions }}}.",
+	"command.missingPerm.user": "{{{ errorIcon }}} You need the following permission(s) to run this command: {{{ missingPermissions }}}.",
 	"dashboard.article.footer": "Article made by <a href=\"/user/{{{ authorID }}}\">{{{ authorTag }}}</a> on {{{ published }}}.",
 	"dashboard.cookies.dismiss": "Ok",
 	"dashboard.cookies.link": "Learn more about cookies.",
