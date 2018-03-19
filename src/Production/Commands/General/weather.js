@@ -70,7 +70,7 @@ class Weather extends Command {
   getDirection(angle) {
     const arrayIndex = Number((angle / 22.5) + 0.5)
     const windArray = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
-    return windArray[arrayIndex % 16];
+    return windArray[Math.round(arrayIndex % 16)];
   }
 }
 
