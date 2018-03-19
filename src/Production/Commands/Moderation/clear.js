@@ -34,6 +34,7 @@ class Clear extends Command {
       filteredMessages = fetchedMessages.first(Number(patternResults[1]) + 1);
     } else {
       const filter = (message) => {
+        console.log(patternResults[1]);
         switch (patternResults[1]) {
           case 'bots':
             return message.author.bot;
@@ -69,12 +70,12 @@ class Clear extends Command {
 
     const deletedMessages = await ctx.channel.bulkDelete(filteredMessages, true);
     this.client.moderation.registerCase(ctx.guild.id, 5, ctx.author.id, ctx.channel.id, reason, {
-      count: deletedMessages.size,
+      count: deletedMessages.size - 1,
       criteria: patternResults[1],
     });
     ctx.channel.send(ctx.__('clear.success', {
       successIcon: this.client.constants.statusEmotes.success,
-      count: deletedMessages.size,
+      count: deletedMessages.size - 1,
       criteria: patternResults[1],
     }));
   }
