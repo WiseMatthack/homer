@@ -49,7 +49,7 @@ html(lang=`${locale}`)
         },
       });
 
-      const request = new XHRHttpRequest();
+      const request = new XMLHttpRequest();
 
       request.onreadystatechange = (event) => {
         if (request.readystate === 4) {
