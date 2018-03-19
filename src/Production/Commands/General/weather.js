@@ -26,8 +26,8 @@ class Weather extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
       location,
     }));
-    // https://api.darksky.net/forecast/ec7c115a73a71008e8bf7eb1e32984ee/37.8267,-122.4233?exclude=minutely,hourly,daily,alerts,flags&lang=fr&units=si
-    const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry.lat},${locationData.geometry.lng}?exclude=minutely,hourly,daily,alerts,flags&lang=fr&units=si`)
+    
+    const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry.lat},${locationData.geometry.lng}?exclude=minutely,hourly,daily,alerts,flags&lang=${ctx.settings.data.misc.locale.split('-')[0]}&units=si`)
       .then(res => res.body)
       .catch(() => null);
 
