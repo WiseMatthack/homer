@@ -42,7 +42,7 @@ class Clear extends Command {
             return message.attachments.size > 0;
             break;
           case 'links':
-            return message.content.test(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+            return message.content.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
             break;
           case ((!isNaN(patternResults[1])) && patternResults[1].length >= 17):
             return message.author.id === patternResults[1];
@@ -55,7 +55,7 @@ class Clear extends Command {
             return message.content.includes(patternResults[1].slice(1, patternResults[1].length - 1));
             break;
           case (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')):
-            return message.content.test(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
+            return message.content.match(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
             break;
         }
       };
