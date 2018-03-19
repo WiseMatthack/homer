@@ -56,7 +56,7 @@ class Weather extends Command {
       .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('weather.title', {
-      city: locationData.components.city,
+      city: locationData.components.city || locationData.components.town,
       region: locationData.components.state || ctx.__('global.unknown'),
       country: locationData.components.country || ctx.__('global.unknown'),
     }), { embed });
