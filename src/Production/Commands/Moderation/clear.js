@@ -31,7 +31,7 @@ class Clear extends Command {
     let filteredMessages = null;
   
     if (!isNaN(patternResults[1]) && patternResults[1] > 1 && patternResults[1] < 101) {
-      filteredMessages = fetchedMessages.first(patternResults[1] + 1);
+      filteredMessages = fetchedMessages.first(Number(patternResults[1]) + 1);
     } else {
       const filter = (message) => {
         switch (patternResults[1]) {
