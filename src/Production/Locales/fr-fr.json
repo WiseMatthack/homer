@@ -173,7 +173,7 @@
 	"moderation.log.2": "`[{{{ time }}}]` `[{{{ caseID }}}]` 👢 **{{{ author }}}** a expulsé **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.3": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🛠 **{{{ author }}}** a hackbanni **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.4": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** a débanni **{{{ target }}}** ({{{ targetID }}}).",
-	"moderation.log.5": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🚮 **{{{ author }}}** a supprimé {{{ extra.count }}} messages (critère: `{{{ extra.criteria }}}`) dans {{{ target }}} ({{{ targetID }}}).",
+	"moderation.log.5": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🚮 **{{{ author }}}** a supprimé {{{ extra.count }}} messages (critère: `{{{ extra.criteria }}}`) dans {{{ target }}}.",
 	"moderation.log.6": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** a temporairement banni **{{{ target }}}** ({{{ targetID }}}) pendant {{{ extra.duration }}}.",
 	"number.is": "☎ Votre numéro de téléphone est `{{{ number }}}`.",
 	"number.reset.done": "☎ Votre nouveau numéro de téléphone est `{{{ number }}}`.",

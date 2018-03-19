@@ -174,7 +174,7 @@
 	"moderation.log.2": "`[{{{ time }}}]` `[{{{ caseID }}}]` 👢 **{{{ author }}}** kicked **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.3": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🛠 **{{{ author }}}** hackbanned **{{{ target }}}** ({{{ targetID }}}).",
 	"moderation.log.4": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** unbanned **{{{ target }}}** ({{{ targetID }}}).",
-	"moderation.log.5": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🚮 **{{{ author }}}** cleared {{{ extra.count }}} messages (criteria: `{{{ extra.criteria }}}`) in {{{ target }}} ({{{ targetID }}}).",
+	"moderation.log.5": "`[{{{ time }}}]` `[{{{ caseID }}}]` 🚮 **{{{ author }}}** cleared {{{ extra.count }}} messages (criteria: `{{{ extra.criteria }}}`) in {{{ target }}}.",
 	"moderation.log.6": "`[{{{ time }}}]` `[{{{ caseID }}}]` ⚙ **{{{ author }}}** tempbanned **{{{ target }}}** ({{{ targetID }}}) for {{{ extra.duration }}}.",
 	"number.is": "☎ Your telephone number `{{{ number }}}`.",
 	"number.reset.done": "☎ Your new telephone number is `{{{ number }}}`.",

@@ -42,7 +42,7 @@ class Clear extends Command {
           const id = patternResults[1].replace('<@!', '').replace('<@', '').replace('>', '');
           return message.author.id === id;
         } else if (patternResults[1].startsWith('"') && patternResults[1].endsWith('"')) return message.content.includes(patternResults[1].substring(1, patternResults[1].length - 1));
-        else if (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')) return message.content.match(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
+        else if (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')) return message.content.match(new RegExp(patternResults[1].substring(1, patternResults[1].length - 1)));
       };
 
       filteredMessages = fetchedMessages.filter(filter);
