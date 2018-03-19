@@ -60,6 +60,7 @@ html(lang=`${locale}`)
             chart.data.labels.push(new Date(entry.time).getDate());
             chart.data.datasets[0].push(entry.count);
           });
+          chart.update();
         }
       };
 
