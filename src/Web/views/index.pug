@@ -52,13 +52,12 @@ html(lang=`${locale}`)
       const request = new XMLHttpRequest();
 
       request.onreadystatechange = (event) => {
-        if (request.readystate === 4) {
+        if (request.readyState === 4) {
           if (request.status !== 200) throw 'Error';
 
           const parsed = JSON.parse(request.responseText);
           parsed.list.forEach((entry) => {
-            chart.data.labels.push(new Date(entry.time).getDate());
-            chart.data.datasets[0].push(entry.count);
+            chart.data.datasets[0].data.push(entry.count);
           });
           chart.update();
         }
