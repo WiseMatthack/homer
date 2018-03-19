@@ -67,7 +67,7 @@ class Weather extends Command {
         .then(res => res.body);
 
       const meta = alertData.meta.find(m => m.zone === 'FR');
-      const dept = alertData.data.find(d => d.department === locationData.components.postalCode.slice(0, 2));
+      const dept = alertData.data.find(d => d.department === locationData.components.postcode.substring(0, 2));
       if (!dept || dept.level < 2) return;
 
       const embedColors = {
