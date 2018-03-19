@@ -53,7 +53,7 @@ class Clear extends Command {
             return message.author.id === id;
             break;
           case (patternResults[1].startsWith('"') && patternResults[1].endsWith('"')):
-            return message.content.includes(patternResults[1].slice(1, patternResults[1].length - 1));
+            return message.content.includes(patternResults[1].substring(1, patternResults[1].length - 1));
             break;
           case (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')):
             return message.content.match(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
