@@ -78,6 +78,8 @@ class Message extends Event {
           .catch(async (response) => {
             const parsed = response.body;
 
+            console.log(parsed)
+
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
               message: parsed.status,
