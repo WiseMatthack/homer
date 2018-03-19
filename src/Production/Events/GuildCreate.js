@@ -11,6 +11,13 @@ class GuildCreate extends Event {
       if (err) console.error(err);
     });
 
+    const guildChart = await this.client.database.getDocument('misc', 'guildChart');
+    guildChart.list.push({
+      count: this.client.guilds.size,
+      time: Date.now(),
+    });
+    this.client.database.insertDocument('misc', guildChart, { conflict: 'update' });
+
     this.client.updateGame();
     this.client.misc.updateCount(this.client.guilds.size);
   }
