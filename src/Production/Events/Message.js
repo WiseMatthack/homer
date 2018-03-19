@@ -66,7 +66,7 @@ class Message extends Event {
             text: question,
           })
           .then(async (response) => {
-            const parsed = response.body;
+            const parsed = JSON.parse(response.body.toString());
             if (parsed.status !== 'success') return ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
               message: parsed.status,
@@ -76,9 +76,7 @@ class Message extends Event {
             ctx.channel.stopTyping();
           })
           .catch(async (response) => {
-            const parsed = response.body;
-
-            console.log(parsed)
+            const parsed = JSON.parse(response.body.toString());
 
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
