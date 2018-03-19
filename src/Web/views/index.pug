@@ -38,6 +38,15 @@ html(lang=`${locale}`)
             borderWidth: 1,
           }],
         },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero:true
+              },
+            }],
+          },
+        },
       });
 
       const request = new XHRHttpRequest();
