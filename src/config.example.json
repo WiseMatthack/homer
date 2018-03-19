@@ -7,13 +7,14 @@
   "api": {
     "cleverbotUser": "",
     "cleverbotKey": "",
+    "darkSky": "",
     "discordBans": "",
     "discordBots": "",
     "discordPw": "",
     "googleKey": "",
     "googleCx": "",
     "lsTerminal": "",
-    "weather": "",
+    "openCageData": "",
     "youtube": ""
    },
    "support": {
