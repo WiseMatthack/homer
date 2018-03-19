@@ -191,6 +191,11 @@
     "usage": "case <case ID>",
     "examples": ["case 3"]
   },
+  "clear": {
+    "description": "Clear messages using the given criteria",
+    "usage": "clear (num|bots|links|files|@user|ID|\"string\"|`expression`) [reason]",
+    "examples": ["clear 1", "clear \"fuck\"", "clear @iDroid Stop that please"]
+  },
   "hackban": {
     "description": "Hackbans a member from the server",
     "usage": "hackban <ID> [reason]",

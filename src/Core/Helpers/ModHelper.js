@@ -34,7 +34,7 @@ class ModHelper extends Helper {
     const msg = [i18n.__(`moderation.log.${action}`, {
       caseID: (settings.moderation.cases.length + 1),
       author: this.client.users.get(author).tag,
-      target: this.client.channels.has(target) ? this.client.channels.get(target).id : (await this.client.fetchUser(target).then(u => u.tag)),
+      target: this.client.channels.has(target) ? `<#${target}>` : (await this.client.fetchUser(target).then(u => u.tag)),
       targetID: target,
       time: mtz(time).tz(settings.misc.timezone).format(settings.misc.timeFormat),
       extra,
