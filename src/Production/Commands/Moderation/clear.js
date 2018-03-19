@@ -12,7 +12,7 @@ class Clear extends Command {
   }
 
   get cleanPattern() {
-    return /(\d{1,3}|bots|files|links|\d{17,19}|<@!?\d{17,19}>|".*"|`.*`)( .*)?/g;
+    return /(bots|files|links|\d{17,19}|<@!?\d{17,19}>|\d{1,3}|".*"|`.*`)( .*)?/g;
   }
 
   async run(ctx) {
