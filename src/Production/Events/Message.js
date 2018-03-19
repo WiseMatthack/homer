@@ -49,7 +49,7 @@ class Message extends Event {
     });
 
     /* Handle Cleverbot */
-    if (ctx.content.startsWith(`<@${this.client.user.id}>`) || ctx.content.startsWith(`<@${this.client.user.id}>`)) {
+    if (ctx.content.startsWith(`<@${this.client.user.id}>`) || ctx.content.startsWith(`<@!${this.client.user.id}>`)) {
       const question = ctx.content.split(/ +/g).slice(1).join(' ');
 
       if (question) {
