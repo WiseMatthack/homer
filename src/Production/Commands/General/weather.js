@@ -18,62 +18,59 @@ class Weather extends Command {
     }));
 
     const query = encodeURIComponent(location);
-    snekfetch
-      .get(`https://api.apixu.com/v1/current.json?key=${this.client.config.api.weather}&q=${query}&lang=${ctx.settings.data.misc.locale.split('-')[0]}`)
-      .then((response) => {
-        const parsed = response.body;
+    const locationData = await snekfetch.get(`https://api.opencagedata.com/geocode/v1/json?key=${this.client.config.api.openCageData}&q=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}&limit=1&no_annotations=1`)
+      .then(res => res.body.results[0])
+      .catch(() => null);
 
-        const embed = new RichEmbed()
-          .addField(ctx.__('weather.embed.weather.title'), ctx.__('weather.embed.weather.value', {
-            text: parsed.current.condition.text,
-          }), true)
-          .addField(ctx.__('weather.embed.temperatures.title'), ctx.__('weather.embed.temperatures.value', {
-            realC: parsed.current.temp_c,
-            realF: parsed.current.temp_f,
-            feelsC: parsed.current.feelslike_c,
-            feelsF: parsed.current.feelslike_f,
-          }), true)
-          .addField(ctx.__('weather.embed.wind.title'), ctx.__('weather.embed.wind.value', {
-            speedKph: parsed.current.wind_kph,
-            speedMph: parsed.current.wind_mph,
-            dir: parsed.current.wind_dir,
-            angle: parsed.current.wind_degree,
-          }), true)
-          .addField(ctx.__('weather.embed.misc.title'), ctx.__('weather.embed.misc.value', {
-            precipMm: parsed.current.precip_mm,
-            precipIn: parsed.current.precip_in,
-            humidity: parsed.current.humidity,
-            nebulosity: parsed.current.cloud,
-          }), true)
-          .setThumbnail(`https:${parsed.current.condition.icon}`)
-          .setFooter(ctx.__('weather.embed.footer'), `http://${this.client.config.dashboard.baseDomain}/images/services/apixu.png`)
-          .setTimestamp(new Date(Number(`${parsed.current.last_updated_epoch}000`)))
-          .setColor(ctx.guild.me.displayHexColor);
+    if (!locationData) return ctx.channel.send(ctx.__('weather.notFound', {
+      errorIcon: this.client.constants.statusEmotes.error,
+      location,
+    }));
+    // https://api.darksky.net/forecast/ec7c115a73a71008e8bf7eb1e32984ee/37.8267,-122.4233?exclude=minutely,hourly,daily,alerts,flags&lang=fr&units=si
+    const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry.lat},${locationData.geometry.lng}?exclude=minutely,hourly,daily,alerts,flags&lang=fr&units=si`)
+      .then(res => res.body)
+      .catch(() => null);
 
-        ctx.channel.send(ctx.__('weather.title', {
-          city: parsed.location.name,
-          region: parsed.location.region || ctx.__('global.unknown'),
-          country: parsed.location.country || ctx.__('global.unknown'),
-        }), { embed });
-      })
-      .catch((response) => {
-        const parsed = response.body;
+    const embed = new RichEmbed()
+      .addField(ctx.__('weather.embed.weather.title'), ctx.__('weather.embed.weather.value', {
+        text: weatherData.currently.summary,
+      }), true)
+      .addField(ctx.__('weather.embed.temperatures.title'), ctx.__('weather.embed.temperatures.value', {
+        realC: Math.floor(weatherData.currently.temperature),
+        realF: Math.floor(weatherData.currently.temperature * 1.8 + 32),
+        feelsC: Math.floor(weatherData.currently.apparentTemperature),
+        feelsF: Math.floor(weatherData.currently.apparentTemperature * 1.8 + 32),
+      }), true)
+      .addField(ctx.__('weather.embed.wind.title'), ctx.__('weather.embed.wind.value', {
+        speedKph: Math.floor(weatherData.currently.windSpeed),
+        speedMph: Math.floor(weatherData.currently.windSpeed / 1.609),
+        dir: this.getDirection(weatherData.currently.windBearing),
+        angle: weatherData.currently.windBearing,
+      }), true)
+      .addField(ctx.__('weather.embed.misc.title'), ctx.__('weather.embed.misc.value', {
+        humidity: weatherData.currently.humidity * 100,
+        nebulosity: weatherData.currently.cloudCover * 100,
+      }), true)
+      .setThumbnail(`https://${this.client.config.dashboard.baseDomain}/images/services/weather_icons/${weatherData.currently.icon}.png`)
+      .setFooter(ctx.__('weather.embed.footer'), `https://${this.client.config.dashboard.baseDomain}/images/services/darksky.png`)
+      .setColor(ctx.guild.me.displayHexColor);
 
-        if (parsed.error.code === 1006) {
-          ctx.channel.send(ctx.__('weather.notFound', {
-            errorIcon: this.client.constants.statusEmotes.error,
-            location,
-          }));
-        } else {
-          ctx.channel.send(ctx.__('weather.error', {
-            errorIcon: this.client.constants.statusEmotes.error,
-            code: parsed.error.code,
-            message: parsed.error.message,
-          }));
-          
-          console.error(`[Weather] An error has occured! Code: ${parsed.error.code} - Message: ${parsed.error.message}`);
-        }
-      });
+    ctx.channel.send(ctx.__('weather.title', {
+      city: locationData.components.city,
+      region: locationData.components.state || ctx.__('global.unknown'),
+      country: locationData.components.country || ctx.__('global.unknown'),
+    }), { embed });
+  }
+
+  /**
+   * Transforms the wind direction in degrees in a human readable format
+   * @param {Number} angle 
+   * @returns {String} Direction
+   */
+  getDirection(angle) {
+    const arrayIndex = Number((angle / 22.5) + 0.5)
+    const windArray = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+    return windArray[arrayIndex % 16];
   }
 }
 
