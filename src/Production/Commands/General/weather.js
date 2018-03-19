@@ -1,6 +1,7 @@
 const Command = require('../../../Core/Structures/Command');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
+const mtz = require('moment-timezone');
 
 class Weather extends Command {
   constructor(client) {
@@ -60,6 +61,34 @@ class Weather extends Command {
       region: locationData.components.state || ctx.__('global.unknown'),
       country: locationData.components.country || ctx.__('global.unknown'),
     }), { embed });
+
+    if (locationData.components['ISO_3166-1_alpha-2'] === 'FR') {
+      const alertData = await snekfetch.get('http://api.meteofrance.com/files/vigilance/vigilance.json')
+        .then(res => res.body);
+
+      const meta = alertData.meta.find(m => m.zone === 'FR');
+      const dept = alertData.data.find(d => d.department === locationData.components.postalCode.slice(0, 2));
+      if (!dept || dept.level < 2) return;
+
+      const embedColors = {
+        2: 0xFFFF00,
+        3: 0xFF8000,
+        4: 0xFF0000,
+      };
+
+      const alerts = dept.risk
+        .filter(level => level >= 2)
+        .map((level, index) => meta.riskNames[index])
+        .join(' - ');
+
+      const alertEmbed = new RichEmbed()
+        .setDescription(`**ALERTE ${meta.colLevels[dept.level - 1]}**\nPhénomènes dangereux en cours dans ce département.\n${alerts}\n\nPour plus d'informations consultez la carte de vigilance.`)
+        .setThumbnail(`http://api.meteofrance.com/files/vigilance/${meta.vignette}?anticache=${Date.now()}`)
+        .setFooter(`Émission: ${mtz(meta.dates.dateInsertion).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Début: ${mtz(meta.dates.dateRun).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Fin: ${mtz(meta.dates.datePrevue).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)}`, `https://${this.client.config.dashboard.baseDomain}/images/services/meteofrance.png`)
+        .setColor(embedColors[dept.level]);
+
+      ctx.channel.send({ embed: alertEmbed });
+    }
   }
 
   /**
