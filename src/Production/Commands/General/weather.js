@@ -77,8 +77,11 @@ class Weather extends Command {
       };
 
       const alerts = dept.risk
-        .filter(level => level >= 2)
-        .map((level, index) => meta.riskNames[index])
+        .map((level, index) => {
+          if (level < 2) return;
+          return meta.riskNames[index];
+        })
+        .filter(a => a)
         .join(' - ');
 
       const alertEmbed = new RichEmbed()
