@@ -34,32 +34,15 @@ class Clear extends Command {
       filteredMessages = fetchedMessages.first(Number(patternResults[1]) + 1);
     } else {
       const filter = (message) => {
-        console.log(patternResults[1]);
-        switch (patternResults[1]) {
-          case 'bots':
-            return message.author.bot;
-            break;
-          case 'files':
-            return message.attachments.size > 0;
-            break;
-          case 'links':
-            return message.content.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
-            break;
-          case ((!isNaN(patternResults[1])) && patternResults[1].length >= 17):
-            return message.author.id === patternResults[1];
-            break;
-          case (patternResults[1].startsWith('<@') && patternResults[1].endsWith('>')):
-            const id = patternResults[1].replace('<@!', '').replace('<@', '').replace('>', '');
-            return message.author.id === id;
-            break;
-          case (patternResults[1].startsWith('"') && patternResults[1].endsWith('"')):
-            console.log(message.content.includes(patternResults[1].substring(1, patternResults[1].length - 1)));
-            return message.content.includes(patternResults[1].substring(1, patternResults[1].length - 1));
-            break;
-          case (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')):
-            return message.content.match(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
-            break;
-        }
+        if (patternResults[1] === 'bots') return message.author.bot;
+        else if (patternResults[1] === 'files') return message.attachments.size > 0;
+        else if (patternResults[1] === 'links') return message.content.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
+        else if ((!isNaN(patternResults[1])) && patternResults[1].length >= 17) return message.author.id === patternResults[1];
+        else if (patternResults[1].startsWith('<@') && patternResults[1].endsWith('>')) {
+          const id = patternResults[1].replace('<@!', '').replace('<@', '').replace('>', '');
+          return message.author.id === id;
+        } else if (patternResults[1].startsWith('"') && patternResults[1].endsWith('"')) return message.content.includes(patternResults[1].substring(1, patternResults[1].length - 1));
+        else if (patternResults[1].startsWith('`') && patternResults[1].endsWith('`')) return message.content.match(new RegExp(patternResults[1].slice(1, patternResults[1].length - 1)));
       };
 
       filteredMessages = fetchedMessages.filter(filter);
