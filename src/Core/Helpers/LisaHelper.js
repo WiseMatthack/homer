@@ -81,7 +81,7 @@ class LisaHelper extends Helper {
 
     for (const fn of foundFunctions) {
       const parsedInput = this.client.constants.functionPattern.exec(fn);
-      if (!parsedInput[1] || !parsedInput[2]) return;
+      if (!parsedInput || !parsedInput[1] || !parsedInput[2]) return;
 
       try {
         const customFunction = new (require(`../../Production/Tags/${parsedInput[1]}`))(this.client, context, contextType);
