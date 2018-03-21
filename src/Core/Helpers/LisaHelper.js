@@ -48,7 +48,7 @@ class LisaHelper extends Helper {
         .replace(/{servercount}/g, context.ctx.guild.memberCount)
         .replace(/{channel}/g, context.ctx.channel.name)
         .replace(/{channelid}/g, context.ctx.channel.id)
-        .replace(/{args}/g, context.args)
+        .replace(/{args}/g, context.args.join(' '))
         .replace(/{argslen}/g, context.args.length);
     } else if (contextType === 1) {
       newString = newString
@@ -88,14 +88,11 @@ class LisaHelper extends Helper {
 
         const result = customFunction.run(parsedInput[2].split('|'));
         newString = newString.replace(fn, result);
-        console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
       } catch (e) {
         newString = newString.replace(fn, e);
-        console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
       }
     }
 
-    console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
     return newString;
   }
 }
