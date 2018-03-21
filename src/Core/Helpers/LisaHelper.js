@@ -39,32 +39,28 @@ class LisaHelper extends Helper {
 
     if (contextType === 0) {
       newString = newString
-        .replace(/{user.tag}/g, context.ctx.author.tag)
-        .replace(/{user.id}/g, context.ctx.author.id)
-        .replace(/{user.username}/g, context.ctx.author.username)
-        .replace(/{user.discriminator}/g, context.ctx.author.discriminator)
-        .replace(/{user.mention}/g, `<@${context.ctx.author.id}>`)
-        .replace(/{channel.id}/g, context.ctx.channel.id)
-        .replace(/{channel.name}/g, context.ctx.channel.name)
-        .replace(/{channel.mention}/g, `<#${context.ctx.channel.id}>`)
-        .replace(/{guild.name}/g, context.ctx.guild.name)
-        .replace(/{guild.id}/g, context.ctx.guild.id)
-        .replace(/{guild.owner.id}/g, context.ctx.guild.ownerID)
-        .replace(/{guild.owner.tag}/g, context.ctx.guild.owner.user.tag)
-        .replace(/{guild.memberCount}/g, context.ctx.guild.memberCount)
-        .replace(/{args}/g, context.args);
+        .replace(/{atuser}/g, context.author.toString())
+        .replace(/{user}/g, context.author.username)
+        .replace(/{userid}/g, context.author.id)
+        .replace(/{nick}/g, context.member.nickname || context.author.username)
+        .replace(/{discrim}/g, context.author.discriminator)
+        .replace(/{server}/g, context.guild.name)
+        .replace(/{serverid}/g, context.guild.id)
+        .replace(/{servercount}/g, context.guild.memberCount)
+        .replace(/{channel}/g, context.channel.name)
+        .replace(/{channelid}/g, context.channel.id)
+        .replace(/{args}/g, context.args)
+        .replace(/{argslen}/g, context.args.length);
     } else if (contextType === 1) {
       newString = newString
-        .replace(/{user.tag}/g, context.user.tag)
-        .replace(/{user.id}/g, context.id)
-        .replace(/{user.username}/g, context.user.username)
-        .replace(/{user.discriminator}/g, context.user.discriminator)
-        .replace(/{user.mention}/g, `<@${context.id}>`)
-        .replace(/{guild.name}/g, context.guild.name)
-        .replace(/{guild.id}/g, context.guild.id)
-        .replace(/{guild.owner.id}/g, context.guild.ownerID)
-        .replace(/{guild.owner.tag}/g, context.guild.owner.user.tag)
-        .replace(/{guild.memberCount}/g, context.guild.memberCount);
+      .replace(/{atuser}/g, context.user.toString())
+      .replace(/{user}/g, context.user.username)
+      .replace(/{userid}/g, context.user.id)
+      .replace(/{nick}/g, context.member.nickname || context.user.username)
+      .replace(/{discrim}/g, context.user.discriminator)
+      .replace(/{server}/g, context.guild.name)
+      .replace(/{serverid}/g, context.guild.id)
+      .replace(/{servercount}/g, context.guild.memberCount);
     }
 
     return newString;
@@ -78,20 +74,24 @@ class LisaHelper extends Helper {
    * @returns {String} Proceeded string
    */
   replaceDynamic(string, context, contextType) {
+    const foundFunctions = string.match(this.client.constants.functionPattern);
+    if (!foundFunctions) return string;
+
     let newString = string;
 
-    const processArray = newString.match(/\[(.*?)\]/g);
+    for (const fn of foundFunctions) {
+      const parsedInput = this.client.constants.functionPattern.exec(fn);
+      if (!parsedInput[0] || !parsedInput[1]) return;
 
-    if (processArray) {
-      processArray.forEach((part) => {
-        const possiblePattern = this.client.constants.dynamicTags.find(dyn => part.replace('[', '').replace(']', '').match(dyn.pattern));
-        try { 
-          const ranPattern = possiblePattern.run(part);
-          newString = newString.replace(part, ranPattern);
-        } catch (e) {
-          newString = newString.replace(part, e);
-        }
-      });
+      try {
+        const customFunction = new (require(`../../Production/Tags/${parsedInput[0]}`))(this.client, context, contextType);
+        if (!customFunction) return;
+
+        const result = customFunction.run(parsedInput[1].split('|'));
+        newString = newString.replace(fn, result);
+      } catch (e) {
+        newString = newString.replace(fn, e);
+      }
     }
 
     return newString;
