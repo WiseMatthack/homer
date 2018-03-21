@@ -88,12 +88,14 @@ class LisaHelper extends Helper {
 
         const result = customFunction.run(parsedInput[2].split('|'));
         newString = newString.replace(fn, result);
+        console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
       } catch (e) {
-        console.log(`Fn: ${fn}`)
         newString = newString.replace(fn, e);
+        console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
       }
     }
 
+    console.log(`Fn: ${fn}\nOriginal one: ${string}\nFinal string: ${newString}`)
     return newString;
   }
 }
