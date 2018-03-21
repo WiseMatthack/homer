@@ -39,16 +39,16 @@ class LisaHelper extends Helper {
 
     if (contextType === 0) {
       newString = newString
-        .replace(/{atuser}/g, context.author.toString())
-        .replace(/{user}/g, context.author.username)
-        .replace(/{userid}/g, context.author.id)
-        .replace(/{nick}/g, context.member.nickname || context.author.username)
-        .replace(/{discrim}/g, context.author.discriminator)
-        .replace(/{server}/g, context.guild.name)
-        .replace(/{serverid}/g, context.guild.id)
-        .replace(/{servercount}/g, context.guild.memberCount)
-        .replace(/{channel}/g, context.channel.name)
-        .replace(/{channelid}/g, context.channel.id)
+        .replace(/{atuser}/g, context.ctx.author.toString())
+        .replace(/{user}/g, context.ctx.author.username)
+        .replace(/{userid}/g, context.ctx.author.id)
+        .replace(/{nick}/g, context.ctx.member.nickname || context.ctx.author.username)
+        .replace(/{discrim}/g, context.ctx.author.discriminator)
+        .replace(/{server}/g, context.ctx.guild.name)
+        .replace(/{serverid}/g, context.ctx.guild.id)
+        .replace(/{servercount}/g, context.ctx.guild.memberCount)
+        .replace(/{channel}/g, context.ctx.channel.name)
+        .replace(/{channelid}/g, context.ctx.channel.id)
         .replace(/{args}/g, context.args)
         .replace(/{argslen}/g, context.args.length);
     } else if (contextType === 1) {
