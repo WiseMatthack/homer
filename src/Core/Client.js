@@ -55,6 +55,12 @@ class ExtendedClient extends Client {
     this.cleverbot = true;
 
     /**
+     * Conversation strings (base64 text).
+     * @type {Object}
+     */
+    this.cleverbotConversations = {};
+
+    /**
      * Disabled commands.
      * @type {Object}
      */
