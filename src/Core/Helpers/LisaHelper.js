@@ -21,10 +21,9 @@ class LisaHelper extends Helper {
    * @returns {String} Proceeded string
    */
   process(string, context, contextType) {
-    let newString = this.replaceStatic(string, context, contextType);
-        newString = this.replaceDynamic(newString, context, contextType);
+    const newString = this.replaceStatic(string, context, contextType);
 
-    return newString;
+    return this.replaceDynamic(newString, context, contextType);
   }
 
   /**
@@ -90,6 +89,7 @@ class LisaHelper extends Helper {
         const result = customFunction.run(parsedInput[2].split('|'));
         newString = newString.replace(fn, result);
       } catch (e) {
+        console.log(`Fn: ${fn}`)
         newString = newString.replace(fn, e);
       }
     }
