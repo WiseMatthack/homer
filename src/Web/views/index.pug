@@ -16,52 +16,6 @@ html(lang=`${locale}`)
             footer(class="blockquote-footer") #{new Date(article.published).toLocaleString()}
           hr
 
-    div(class="jumbotron jumbotron-fluid")
-      div(class="container")
-        h1(class="mbr-section-title mbr-bold mbr-fonts-style text-center") #{__('dashboard.home.guildChart')}
-        hr
-        canvas(id="guildChart" height="90" width="90")
-
     include modules/footer.pug
 
     include modules/javascript.pug
-    script(src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js")
-    script.
-      const ctx = document.getElementById("guildChart");
-      const chart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: [],
-          datasets: [{
-            label: 'Evolution',
-            data: [],
-            borderWidth: 1,
-          }],
-        },
-        options: {
-          scales: {
-            yAxes: [{
-              ticks: {
-                beginAtZero:true
-              },
-            }],
-          },
-        },
-      });
-
-      const request = new XMLHttpRequest();
-
-      request.onreadystatechange = (event) => {
-        if (request.readyState === 4) {
-          if (request.status !== 200) throw 'Error';
-
-          const parsed = JSON.parse(request.responseText);
-          parsed.list.forEach((entry) => {
-            chart.data.datasets[0].data.push(entry.count);
-          });
-          chart.update();
-        }
-      };
-
-      request.open('GET', '/api/guildChart', true);
-      request.send(null);
