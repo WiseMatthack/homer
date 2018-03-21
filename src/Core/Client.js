@@ -143,30 +143,6 @@ class ExtendedClient extends Client {
   }
 
   /**
-   * Initiate cleverbot.
-   */
-  initiateCleverbot() {
-    snekfetch
-      .post('https://cleverbot.io/1.0/create')
-      .set({ 'Content-Type': 'application/x-www-form-urlencoded' })
-      .send({
-        user: this.config.api.cleverbotUser,
-        key: this.config.api.cleverbotKey,
-        nick: this.user.username,
-      })
-      .then((response) => {
-        const parsed = response.body.toString();
-        console.log(`[Cleverbot] Instance created under the nickname ${this.user.username}.`);
-        this.cleverbot = true;
-      })
-      .catch((response) => {
-        const parsed = response.body.toString();
-        console.log(`[Cleverbot] Failed to create the instance! Message: ${parsed.status}`);
-        this.cleverbot = false;
-      });
-  }
-
-  /**
    * Update the bot game.
    */
   updateGame() {

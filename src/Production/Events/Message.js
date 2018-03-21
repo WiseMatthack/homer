@@ -58,29 +58,20 @@ class Message extends Event {
         }));
 
         ctx.channel.startTyping();
-        snekfetch.post('http://cleverbot.io/1.0/ask')
-          .send({
-            user: this.client.config.api.cleverbotUser,
-            key: this.client.config.api.cleverbotKey,
-            nick: this.client.user.username,
-            text: question,
-          })
+        snekfetch.get(`http://www.cleverbot.com/getreply?key=${this.client.config.api.cleverbot}&input=${question}&cx=${this.client.cleverbotConversations[ctx.author.id] || '0'}`)
           .then(async (response) => {
-            const parsed = response.body.toString();
-            if (parsed.status !== 'success') return ctx.channel.send(ctx.__('message.cleverbot.error', {
-              errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed.status,
-            }));
+            const parsed = response.body;
 
-            await ctx.channel.send(parsed.response);
+            this.client.cleverbotConversations[ctx.author.id] = parsed.cs;
+            await ctx.channel.send(parsed.output);
             ctx.channel.stopTyping();
           })
           .catch(async (response) => {
-            const parsed = response.body.toString();
+            const parsed = response.body;
 
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed.status,
+              message: parsed.error,
             }));
             ctx.channel.stopTyping(true);
           });
