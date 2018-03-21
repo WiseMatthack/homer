@@ -49,8 +49,8 @@ class Weather extends Command {
         angle: weatherData.currently.windBearing,
       }), true)
       .addField(ctx.__('weather.embed.misc.title'), ctx.__('weather.embed.misc.value', {
-        humidity: weatherData.currently.humidity * 100,
-        nebulosity: weatherData.currently.cloudCover * 100,
+        humidity: Math.floor(weatherData.currently.humidity * 100),
+        nebulosity: Math.floor(weatherData.currently.cloudCover * 100),
       }), true)
       .setThumbnail(`https://${this.client.config.dashboard.baseDomain}/images/services/weather_icons/${weatherData.currently.icon}.png`)
       .setFooter(ctx.__('weather.embed.footer'), `https://${this.client.config.dashboard.baseDomain}/images/services/darksky.png`)
