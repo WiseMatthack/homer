@@ -81,13 +81,13 @@ class LisaHelper extends Helper {
 
     for (const fn of foundFunctions) {
       const parsedInput = this.client.constants.functionPattern.exec(fn);
-      if (!parsedInput[0] || !parsedInput[1]) return;
+      if (!parsedInput[1] || !parsedInput[2]) return;
 
       try {
-        const customFunction = new (require(`../../Production/Tags/${parsedInput[0]}`))(this.client, context, contextType);
+        const customFunction = new (require(`../../Production/Tags/${parsedInput[1]}`))(this.client, context, contextType);
         if (!customFunction) return;
 
-        const result = customFunction.run(parsedInput[1].split('|'));
+        const result = customFunction.run(parsedInput[2].split('|'));
         newString = newString.replace(fn, result);
       } catch (e) {
         newString = newString.replace(fn, e);
