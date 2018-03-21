@@ -29,7 +29,7 @@ class Tag extends Command {
       this.sub_list(ctx);
     } else {
       const tagName = ctx.args[0];
-      const args = ctx.args.slice(1).join(' ');
+      const args = ctx.args.slice(1);
 
       if (!tagName) return ctx.channel.send(ctx.__('tag.common.noTag', {
         errorIcon: this.client.constants.statusEmotes.error,
