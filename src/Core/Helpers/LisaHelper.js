@@ -80,12 +80,12 @@ class LisaHelper extends Helper {
 
     console.log(`Length: ${foundFunctions.length}`)
     foundFunctions.forEach((fn) => {
-      console.log('Debug 0: ', fn)
+      console.log(`Debug 0: "${fn}"`)
       const parsedInput = this.client.constants.functionPattern.exec(fn);
-      console.log(parsedInput);
+      console.log(`Result: "${parsedInput}"`);
       if (!parsedInput || !parsedInput[1] || !parsedInput[2]) return;
 
-      console.log(`Debug 1:\nFN: ${fn}`);
+      console.log(`Debug 1:\nFN: "${fn}"`);
       try {
         const customFunction = new (require(`../../Production/Tags/${parsedInput[1]}`))(this.client, context, contextType);
         if (!customFunction) return;
