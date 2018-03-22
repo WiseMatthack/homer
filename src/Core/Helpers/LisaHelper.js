@@ -80,6 +80,7 @@ class LisaHelper extends Helper {
 
     console.log(`Length: ${foundFunctions.length}`)
     foundFunctions.forEach((fn) => {
+      console.log('Debug 0: ', fn)
       const parsedInput = this.client.constants.functionPattern.exec(fn);
       if (!parsedInput || !parsedInput[1] || !parsedInput[2]) return;
 
