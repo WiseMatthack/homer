@@ -76,10 +76,11 @@ class LisaHelper extends Helper {
     const foundFunctions = string.match(this.client.constants.functionPattern);
     if (!foundFunctions) return string;
 
+    const pattern = this.client.constants.functionPattern;
     let newString = string;
 
     foundFunctions.forEach((fn) => {
-      const parsedInput = this.client.constants.functionPattern.exec(fn);
+      const parsedInput = pattern.exec(fn);
       if (!parsedInput || !parsedInput[1] || !parsedInput[2]) return;
 
       try {
@@ -88,8 +89,10 @@ class LisaHelper extends Helper {
 
         const result = customFunction.run(parsedInput[2].split('|'));
         newString = newString.replace(fn, result);
+        pattern.lastIndex = 0;
       } catch (e) {
         newString = newString.replace(fn, e);
+        pattern.lastIndex = 0;
       }
     });
 
