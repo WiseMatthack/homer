@@ -20,7 +20,7 @@ class Weather extends Command {
 
     const query = encodeURIComponent(location);
     const locationData = await snekfetch.get(`https://api.opencagedata.com/geocode/v1/json?key=${this.client.config.api.openCageData}&q=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}&limit=1&no_annotations=1`)
-      .then(res => res.body.results.filter(a => ['village', 'neighbourhood', 'city', 'islet'].some(b => b === a.components._type))[0])
+      .then(res => res.body.results.filter(a => ['village', 'neighbourhood', 'city', 'county', 'islet'].some(b => b === a.components._type))[0])
       .catch(() => null);
 
     if (!locationData) return ctx.channel.send(ctx.__('weather.notFound', {
