@@ -222,6 +222,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
+    const args = ctx.args.slice(1).join(' ');
     tag.incrementUses();
     const proceeded = this.client.lisa.process(tag.data.content, { ctx, tag, args }, 0);
 
