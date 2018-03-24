@@ -26,11 +26,12 @@ class Weather extends Command {
 
         const foundLoc = parsed.results[0];
         return ({
-          city: foundLoc.addressComponents.find(c => c.types.includes('locality')) || null,
-          department: foundLoc.addressComponents.find(c => c.types.includes('administrative_area_level_2')) || null,
-          region: foundLoc.addressComponents.find(c => c.types.includes('administrative_area_level_1')) || null,
-          country: foundLoc.addressComponents.find(c => c.types.includes('country')) || null,
-          postalcode: foundLoc.addressComponents.find(c => c.types.includes('postal_code')) || null,
+          city: foundLoc.address_components.find(c => c.types.includes('locality')) || null,
+          department: foundLoc.address_components.find(c => c.types.includes('administrative_area_level_2')) || null,
+          region: foundLoc.address_components.find(c => c.types.includes('administrative_area_level_1')) || null,
+          country: foundLoc.address_components.find(c => c.types.includes('country')) || null,
+          postalcode: foundLoc.address_components.find(c => c.types.includes('postal_code')) || null,
+          geometry: `${foundLoc.geometry.location.lat},${foundLoc.geometry.location.lng}`,
         });
       })
       .catch((e) => console.error(e));
@@ -40,7 +41,7 @@ class Weather extends Command {
       location,
     }));
     
-    const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry.lat},${locationData.geometry.lng}?exclude=minutely,hourly,daily,alerts,flags&lang=${ctx.settings.data.misc.locale.split('-')[0]}&units=si`)
+    const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry}?exclude=minutely,hourly,daily,alerts,flags&lang=${ctx.settings.data.misc.locale.split('-')[0]}&units=si`)
       .then(res => res.body)
       .catch(() => null);
 
