@@ -34,9 +34,9 @@ class Weather extends Command {
           geometry: `${foundLoc.geometry.location.lat},${foundLoc.geometry.location.lng}`,
         });
       })
-      .catch((e) => console.error(e));
+      .catch(() => null));
 
-    if (!locationData.city) return ctx.channel.send(ctx.__('weather.notFound', {
+    if (!locationData) return ctx.channel.send(ctx.__('weather.notFound', {
       errorIcon: this.client.constants.statusEmotes.error,
       location,
     }));
