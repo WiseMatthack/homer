@@ -19,7 +19,7 @@ class Weather extends Command {
     }));
 
     const query = encodeURIComponent(location);
-    const locationData = await snekfetch.get(`https://api.opencagedata.com/geocode/v1/json?key=${this.client.config.api.openCageData}&q=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}&limit=1&no_annotations=1`)
+    const locationData = await snekfetch.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.client.config.api.googleGeocode}&address=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}`)
       .then((res) => {
         const parsed = res.body;
         if (parsed.results.length === 0) return;
