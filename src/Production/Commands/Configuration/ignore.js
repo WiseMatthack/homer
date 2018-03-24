@@ -16,7 +16,7 @@ class Ignore extends Command {
         list,
       }));
     } else {
-      let channel = ctx.channel;
+      let { channel } = ctx;
       const search = ctx.args.join(' ');
       if (search) {
         const channels = this.client.finder.findTextChannels(search, ctx.guild.id);

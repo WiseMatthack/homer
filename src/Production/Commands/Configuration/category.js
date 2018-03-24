@@ -21,7 +21,7 @@ class Category extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      if (catgeory === 'Bot' || category === 'Configuration' || category === 'Owner') return ctx.channel.send(ctx.__('category.criticCat', {
+      if (category === 'Bot' || category === 'Configuration' || category === 'Owner') return ctx.channel.send(ctx.__('category.criticCat', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 

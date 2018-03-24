@@ -1,6 +1,4 @@
 const Command = require('../../../Core/Structures/Command');
-const { RichEmbed } = require('discord.js');
-const mtz = require('moment-timezone');
 
 class Reason extends Command {
   constructor(client) {
@@ -14,7 +12,7 @@ class Reason extends Command {
   async run(ctx) {
     const caseID = ctx.args[0];
     const reason = ctx.args.slice(1).join(' ');
-    if (!caseID || isNaN(caseID)) return ctx.channel.send(ctx.__('reason.error.invalidCase', {
+    if (!caseID || Number.isNaN(parseInt(caseID, 10))) return ctx.channel.send(ctx.__('reason.error.invalidCase', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 

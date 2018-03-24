@@ -29,15 +29,17 @@ class Clear extends Command {
 
     const fetchedMessages = await ctx.channel.fetchMessages({ limit: 100 });
     let filteredMessages = null;
-  
-    if (!isNaN(patternResults[1]) && patternResults[1] > 1 && patternResults[1] < 101) {
+
+    if (!Number.isNaN(parseInt(patternResults[1], 10)) &&
+      patternResults[1] > 1 && patternResults[1] < 101) {
       filteredMessages = fetchedMessages.first(Number(patternResults[1]) + 1);
     } else {
       const filter = (message) => {
         if (patternResults[1] === 'bots') return message.author.bot;
         else if (patternResults[1] === 'files') return message.attachments.size > 0;
-        else if (patternResults[1] === 'links') return message.content.match(/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/);
-        else if ((!isNaN(patternResults[1])) && patternResults[1].length >= 17) return message.author.id === patternResults[1];
+        else if (patternResults[1] === 'links') return message.content.match(/^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/);
+        else if ((!Number.isNaN(parseInt(patternResults[1], 10))) &&
+          patternResults[1].length >= 17) return message.author.id === patternResults[1];
         else if (patternResults[1].startsWith('<@') && patternResults[1].endsWith('>')) {
           const id = patternResults[1].replace('<@!', '').replace('<@', '').replace('>', '');
           return message.author.id === id;

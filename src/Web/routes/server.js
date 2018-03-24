@@ -22,7 +22,7 @@ const router = Router()
         textChannels: guild.channels.filter(c => c.type === 'text').size,
         voiceChannels: guild.channels.filter(c => c.type === 'voice').size,
       },
-    })
+    });
   });
 
 module.exports = router;

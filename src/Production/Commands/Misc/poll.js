@@ -18,7 +18,7 @@ class Poll extends Command {
 
     let emotes = ['👍', '👎'];
     const expiration = durationParser(options.find(o => o.flag === 't') ? options.find(o => o.flag === 't').value : '1m');
-    
+
     const embed = new RichEmbed()
       .setTitle(title)
       .setAuthor(ctx.author.username, ctx.author.displayAvatarURL)
@@ -38,7 +38,7 @@ class Poll extends Command {
       if (option.flag === 'e') {
         const customEmotes = option.value.split(' ');
         if (customEmotes.length >= 2) {
-          for (let i = 0; i < customEmotes.length; i++) {
+          for (let i = 0; i < customEmotes.length; i += 1) {
             if (customEmotes[i].length > 6) {
               const e = customEmotes[i].split(':');
               if (e.length === 3) {

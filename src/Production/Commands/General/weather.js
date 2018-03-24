@@ -40,7 +40,7 @@ class Weather extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
       location,
     }));
-    
+
     const weatherData = await snekfetch.get(`https://api.darksky.net/forecast/${this.client.config.api.darkSky}/${locationData.geometry}?exclude=minutely,hourly,daily,alerts,flags&lang=${ctx.settings.data.misc.locale.split('-')[0]}&units=si`)
       .then(res => res.body)
       .catch(() => null);
@@ -51,9 +51,9 @@ class Weather extends Command {
       }), true)
       .addField(ctx.__('weather.embed.temperatures.title'), ctx.__('weather.embed.temperatures.value', {
         realC: Math.floor(weatherData.currently.temperature),
-        realF: Math.floor(weatherData.currently.temperature * 1.8 + 32),
+        realF: Math.floor((weatherData.currently.temperature * 1.8) + 32),
         feelsC: Math.floor(weatherData.currently.apparentTemperature),
-        feelsF: Math.floor(weatherData.currently.apparentTemperature * 1.8 + 32),
+        feelsF: Math.floor((weatherData.currently.apparentTemperature * 1.8) + 32),
       }), true)
       .addField(ctx.__('weather.embed.wind.title'), ctx.__('weather.embed.wind.value', {
         speedKph: Math.floor(weatherData.currently.windSpeed),
@@ -80,7 +80,8 @@ class Weather extends Command {
         .then(res => res.body);
 
       const meta = alertData.meta.find(m => m.zone === 'FR');
-      const dept = alertData.data.find(d => d.department === locationData.postalcode.short_name.slice(0, 2));
+      const dept = alertData.data
+        .find(d => d.department === locationData.postalcode.short_name.slice(0, 2));
       if (!dept || dept.level < 2) return;
 
       const embedColors = {
@@ -90,10 +91,7 @@ class Weather extends Command {
       };
 
       const alerts = dept.risk
-        .map((level, index) => {
-          if (level < 2) return;
-          return meta.riskNames[index];
-        })
+        .map((level, index) => (level >= 2 ? meta.riskNames[index] : null))
         .filter(a => a)
         .join(' - ');
 
@@ -109,12 +107,12 @@ class Weather extends Command {
 
   /**
    * Transforms the wind direction in degrees in a human readable format
-   * @param {Number} angle 
+   * @param {Number} angle
    * @returns {String} Direction
    */
   getDirection(angle) {
-    const arrayIndex = Number((angle / 22.5) + 0.5)
-    const windArray = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+    const arrayIndex = Number((angle / 22.5) + 0.5);
+    const windArray = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
     return windArray[Math.round(arrayIndex % 16)];
   }
 }

@@ -1,4 +1,3 @@
-const Client = require('../Core/Client');
 const { owners } = require('../config.json');
 const express = require('express');
 const { readdir } = require('fs');
@@ -57,7 +56,7 @@ class Dashboard {
       }))
       .use(bodyParser.urlencoded({
         extended: true,
-        limit: '20mb'
+        limit: '20mb',
       }))
       .use(cookieParser(this.dashboardSettings.sessionSecret))
       .use(expressSession({
@@ -94,9 +93,9 @@ class Dashboard {
 
     this.app.get('/', async (req, res) => {
       const articles = await this.client.database.getDocuments('articles')
-        .then(articles => articles.sort((a, b) => b.published - a.published).slice(0, 4));
+        .then(ar => ar.sort((a, b) => b.published - a.published).slice(0, 4));
 
-      let latestArticles = [];
+      const latestArticles = [];
 
       for (const article of articles) {
         const user = await this.client.fetchUser(article.author)

@@ -1,18 +1,10 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 
 /**
  * Represents a last active helper.
  * @extends {Helper}
  */
 class LastactiveHelper extends Helper {
-  /**
-   * @param {Client} client Client that initiated the last active helper
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Gets the last active timestamp of a user.
    * @param {String} id User ID

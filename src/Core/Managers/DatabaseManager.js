@@ -1,4 +1,3 @@
-const Client = require('../Client');
 const Manager = require('./Manager');
 const rdb = require('rethinkdbdash');
 
@@ -84,11 +83,13 @@ class DatabaseManager extends Manager {
    * @param {String} key Key of the document to delete
    */
   async deleteDocument(table, key) {
-    return (await this.provider
+    const result = (await this.provider
       .table(table)
       .get(key)
       .delete()
       .run());
+
+    return result;
   }
 }
 

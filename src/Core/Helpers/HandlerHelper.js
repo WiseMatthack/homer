@@ -1,5 +1,4 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 const { RichEmbed } = require('discord.js');
 const DataGuild = require('../Structures/Data/DataGuild');
 const DataProfile = require('../Structures/Data/DataProfile');
@@ -11,13 +10,6 @@ const i18n = require('i18n');
  * @extends {Helper}
  */
 class HandlerHelper extends Helper {
-  /**
-   * @param {Client} client Client that initiated the handler helper
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Handles a poll.
    * @param {Client} client Client instance to use
@@ -52,7 +44,8 @@ class HandlerHelper extends Helper {
 
         let description = null;
         if (reactions.length === 0 ||
-          ((reactions[0] && reactions[0].count === 0) && (reactions[1] && reactions[1].count === 0))) {
+          ((reactions[0] && reactions[0].count === 0) &&
+          (reactions[1] && reactions[1].count === 0))) {
           description = i18n.__('poll.handler.noReaction');
         } else if (reactions.length === 1) {
           description = i18n.__('poll.handler.description.wonAlone', {
@@ -98,7 +91,7 @@ class HandlerHelper extends Helper {
     const profile = new DataProfile(client, user);
     await profile.getData();
 
-    const remind = profile.data.reminds.find(remind => remind.index == index);
+    const remind = profile.data.reminds.find(r => r.index === index);
     if (!remind) return;
     profile.data.reminds.splice(profile.data.reminds.indexOf(remind), 1);
     await profile.saveData();
@@ -116,10 +109,10 @@ class HandlerHelper extends Helper {
     const channel = client.channels.get(remind.channel);
     if (channel) channel.send(message);
     else {
-      const user = client.users.get(user);
-      if (!user) return;
+      const user2 = client.users.get(user);
+      if (!user2) return;
 
-      user.send(message);
+      user2.send(message);
     }
   }
 
@@ -137,12 +130,14 @@ class HandlerHelper extends Helper {
     await settings.getData();
     i18n.setLocale(settings.data.misc.locale);
 
-    const caseObject = settings.data.moderation.cases.sort((a, b) => b.time - a.time).find(c => c.action === 6 && c.target === userID);
+    const caseObject = settings.data.moderation.cases
+      .sort((a, b) => b.time - a.time)
+      .find(c => c.action === 6 && c.target === userID);
     if (!caseObject) return;
     const caseIndex = settings.data.moderation.cases.indexOf(caseObject);
 
     guild.unban(userID, `Case ${caseIndex}`)
-      .then(async (user) => {
+      .then(async () => {
         caseObject.extra.finished = true;
         for (const log of caseObject.messages) {
           const channel = client.channels.get(log.channel);
@@ -151,7 +146,7 @@ class HandlerHelper extends Helper {
           const msg = await channel.fetchMessage(log.message);
           if (!msg) return;
 
-          msg.edit(msg.content + '\n' + i18n.__('tempban.unbannedEdit'));
+          msg.edit(`${msg.content}\n${i18n.__('tempban.unbannedEdit')}`);
         }
 
         settings.data.moderation.cases[caseIndex] = caseObject;

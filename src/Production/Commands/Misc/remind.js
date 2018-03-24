@@ -22,11 +22,11 @@ class Remind extends Command {
       }));
 
       const reminds = profile.data.reminds.map(remind => ctx.__('remind.list.remind', {
-          content: remind.content,
-          set: mtz(remind.set).locale(ctx.settings.data.misc.locale).fromNow(),
-          expires: mtz().locale(ctx.settings.data.misc.locale).to(remind.end),
-          index: remind.index,
-        })).join('\n');
+        content: remind.content,
+        set: mtz(remind.set).locale(ctx.settings.data.misc.locale).fromNow(),
+        expires: mtz().locale(ctx.settings.data.misc.locale).to(remind.end),
+        index: remind.index,
+      })).join('\n');
 
       ctx.channel.send(ctx.__('remind.list', {
         reminds,
@@ -37,7 +37,7 @@ class Remind extends Command {
       }));
 
       if (ctx.args[1]) {
-        const remind = profile.data.reminds.find(remind => remind.index == ctx.args[1]);
+        const remind = profile.data.reminds.find(r => r.index === ctx.args[1]);
         if (!remind) return ctx.channel.send(ctx.__('remind.error.noRemindFound', {
           errorIcon: this.client.constants.statusEmotes.error,
           index: ctx.args[1],
@@ -61,7 +61,8 @@ class Remind extends Command {
 
       const timeout = durationParser(duration) || 60000;
 
-      const end = profile.data.reminds.sort((a, b) => b.index - a.index)[profile.data.reminds.length - 1];
+      const end = profile.data.reminds
+        .sort((a, b) => b.index - a.index)[profile.data.reminds.length - 1];
       const remind = {
         index: end ? end.index : 1,
         content,
@@ -75,7 +76,13 @@ class Remind extends Command {
       profile.data.reminds.push(remind);
       await profile.saveData();
 
-      setTimeout(this.client.stuffHandler.handleRemind, remind.expires, this.client, ctx.author.id, remind.index);
+      setTimeout(
+        this.client.stuffHandler.handleRemind,
+        remind.expires,
+        this.client,
+        ctx.author.id,
+        remind.index,
+      );
 
       ctx.channel.send(ctx.__('remind.set', {
         successIcon: this.client.constants.statusEmotes.success,

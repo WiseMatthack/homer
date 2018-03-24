@@ -1,5 +1,3 @@
-const Client = require('../Client');
-
 /**
  * Represents a custom function that can be used in tags.
  */
@@ -35,7 +33,7 @@ class TagFunction {
    * @param {String[]} args Arguments to use with the function
    * @returns {String}
    */
-  run(args) {
+  run() {
     throw new Error('An unknown error has occured while processing this function, please contact a bot owner.');
   }
 }

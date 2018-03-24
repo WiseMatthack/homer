@@ -1,7 +1,5 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 const i18n = require('i18n');
-const { GuildMember, User, GuildChannel } = require('discord.js');
 
 /**
  * Represents a finder helper.
@@ -9,24 +7,17 @@ const { GuildMember, User, GuildChannel } = require('discord.js');
  */
 class FinderHelper extends Helper {
   /**
-   * @param {Client} client Client that initiated the database manager
-   */
-  constructor(client) {
-    super(client);
-  }
-
-  /**
    * Finds members.
    * @param {String} search Search terms
    * @param {String} id Guild ID
    * @returns {GuildMember[]}
    */
   findMembers(search, id) {
-    search = search.toLowerCase();
+    const search2 = search.toLowerCase();
     return this.client.guilds.get(id).members.filter(m =>
-      m.user.tag.toLowerCase().includes(search) ||
-      m.displayName.toLowerCase().includes(search) ||
-      m.id === search);
+      m.user.tag.toLowerCase().includes(search2) ||
+      m.displayName.toLowerCase().includes(search2) ||
+      m.id === search2);
   }
 
   /**
@@ -35,10 +26,10 @@ class FinderHelper extends Helper {
    * @returns {User[]}
    */
   findUsers(search) {
-    search = search.toLowerCase();
+    const search2 = search.toLowerCase();
     return this.client.users.filter(u =>
-      u.tag.toLowerCase().includes(search) ||
-      u.id === search);
+      u.tag.toLowerCase().includes(search2) ||
+      u.id === search2);
   }
 
   /**
@@ -48,12 +39,12 @@ class FinderHelper extends Helper {
    * @returns {GuildChannel[]}
    */
   findTextChannels(search, id) {
-    search = search.toLowerCase();
+    const search2 = search.toLowerCase();
     return this.client.guilds.get(id).channels
       .filter(c => c.type === 'text')
       .filter(c =>
-        c.name.toLowerCase().includes(search) ||
-        c.id === search);
+        c.name.toLowerCase().includes(search2) ||
+        c.id === search2);
   }
 
   /**

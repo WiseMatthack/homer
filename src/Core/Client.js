@@ -3,7 +3,6 @@ const Dashboard = require('../Web/Dashboard');
 const { readdir } = require('fs');
 const config = require('../config.json');
 const Constants = require('./Constants');
-const snekfetch = require('snekfetch');
 
 /* Managers */
 const DatabaseManager = require('./Managers/DatabaseManager');
@@ -157,34 +156,3 @@ class ExtendedClient extends Client {
 }
 
 module.exports = ExtendedClient;
-
-/**
- * @typedef ClientOptions
- * @property {String} apiRequestMethod
- * @property {Number} shardId
- * @property {Number} shardCount
- * @property {Number} messageCacheMaxSize
- * @property {Number} messageCacheLifetime
- * @property {Number} messageSweepInterval
- * @property {Boolean} fetchAllMembers
- * @property {Boolean} disableEveryone
- * @property {Boolean} sync
- * @property {Number} restWsBridgeTimeout
- * @property {Number} restTimeOffset
- * @property {WSEventType[]} disabledEvents
- * @property {WebSocketOptions} ws
- * @property {HTTPOptions} http
- */
-
-/**
- * @typedef WebSocketOptions
- * @property {Number} large_threshold
- * @property {Boolean} compress 
- */
-
-/**
- * @typedef HTTPOptions
- * @property {Number} version
- * @property {String} host
- * @property {String}
- */

@@ -13,19 +13,22 @@ class User extends Command {
   }
 
   async run(ctx) {
-    let member = ctx.member;
+    let { member } = ctx;
     const search = ctx.args.join(' ');
     if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();
     else if (search) {
       const members = this.client.finder.findMembers(search, ctx.guild.id);
       if (members.size === 0) return ctx.channel.send(ctx.__('finder.members.noResult', { errorIcon: this.client.constants.statusEmotes.error, search }));
-      else if (members.size > 1) return ctx.channel.send(this.client.finder.formatMembers(members, ctx.settings.data.misc.locale));
+      else if (members.size > 1) return ctx.channel.send(this.client.finder.formatMembers(
+        members,
+        ctx.settings.data.misc.locale,
+      ));
       member = members.first();
     }
 
     let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)}`;
     if (member.user.presence.game) presence += `\n${ctx.__('presence.game', { game: member.user.presence.game.name })}`;
-  
+
     const emote = member.user.bot ? '<:bot:420699407344730122>' : '👤';
     const premium = (member.user.avatar && member.user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
 
@@ -35,29 +38,29 @@ class User extends Command {
       .map(r => r.toString())
       .join(', ')) || ctx.__('global.none');
 
-      const arrayMembers = ctx.guild.members
-        .sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)
-        .array();
-      const thisIndex = arrayMembers.findIndex(m => m.id === member.id);
-  
-      let joinOrder;
-      switch (thisIndex) {
-        case 0:
-          joinOrder = `**${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username} > ${arrayMembers[thisIndex + 4].user.username}`;
-          break;
-        case 1:
-          joinOrder = `${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username}`;
-          break;
-        case (ctx.guild.memberCount - 1):
-          joinOrder = `${arrayMembers[thisIndex - 4].user.username} > ${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}**`;
-          break;
-        case (ctx.guild.memberCount - 2):
-          joinOrder = `${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username}`;
-          break;
-        default:
-          joinOrder = `${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username}`;
-          break;
-      }
+    const arrayMembers = ctx.guild.members
+      .sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)
+      .array();
+    const thisIndex = arrayMembers.findIndex(m => m.id === member.id);
+
+    let joinOrder;
+    switch (thisIndex) {
+      case 0:
+        joinOrder = `**${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username} > ${arrayMembers[thisIndex + 4].user.username}`;
+        break;
+      case 1:
+        joinOrder = `${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username}`;
+        break;
+      case (ctx.guild.memberCount - 1):
+        joinOrder = `${arrayMembers[thisIndex - 4].user.username} > ${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}**`;
+        break;
+      case (ctx.guild.memberCount - 2):
+        joinOrder = `${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username}`;
+        break;
+      default:
+        joinOrder = `${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username}`;
+        break;
+    }
 
     const lastactiveTimestamp = await this.client.lastactive.getLastactive(member.id);
     const lastactiveStatus = lastactiveTimestamp ? moment(lastactiveTimestamp).locale(ctx.settings.data.misc.locale.split('-')[0]).fromNow() : ctx.__('global.unknown');
@@ -65,7 +68,7 @@ class User extends Command {
     const afkObject = await this.client.absence.getAbsence(member.id);
     const afkStatus = afkObject ? ctx.__('user.afk.status', {
       reason: afkObject.reason,
-      since: mtz(afkObject.time).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`), 
+      since: mtz(afkObject.time).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
     }) : ctx.__('global.no');
 
     const embed = new RichEmbed()

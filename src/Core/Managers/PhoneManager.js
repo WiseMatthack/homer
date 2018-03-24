@@ -1,5 +1,4 @@
 const Manager = require('./Manager');
-const Client = require('../Client');
 const DataGuild = require('../Structures/Data/DataGuild');
 const i18n = require('i18n');
 
@@ -53,7 +52,7 @@ class PhoneManager extends Manager {
     const callingMsg = await this.client.channels
       .get(senderSettings.data.phone.channel)
       .send(i18n.__('phone.calling', { number: receiverSettings.data.phone.number }));
-  
+
     i18n.setLocale(receiverSettings.data.misc.locale);
     const incomingCallMsg = await this.client.channels
       .get(receiverSettings.data.phone.channel)
@@ -61,16 +60,16 @@ class PhoneManager extends Manager {
         number: senderSettings.data.phone.number,
         prefix: this.client.config.discord.defaultPrefixes[0],
       }));
-  
+
     setTimeout(async () => {
       const callObject = this.calls.find(c => c.sender === sender && c.receiver === receiver);
       if (!callObject || callObject.state !== 0) return;
 
       i18n.setLocale(senderSettings.data.misc.locale);
       await callingMsg.edit(i18n.__('phone.noAnswer', { number: receiverSettings.data.phone.number }));
-    
+
       i18n.setLocale(receiverSettings.data.misc.locale);
-      await incomingCallMsg.edit(i18n.__('phone.missedCall', { number: senderSettings.data.phone.number }));  
+      await incomingCallMsg.edit(i18n.__('phone.missedCall', { number: senderSettings.data.phone.number }));
     }, 30000);
   }
 
@@ -86,7 +85,7 @@ class PhoneManager extends Manager {
 
     const senderSettings = await this.client.database.getDocument('guild', call.sender);
     const receiverSettings = await this.client.database.getDocument('guild', call.receiver);
-  
+
     i18n.setLocale(senderSettings.misc.locale);
     this.client.channels
       .get(senderSettings.phone.channel)
@@ -103,13 +102,13 @@ class PhoneManager extends Manager {
    * @param {String} id Sender or receiver ID
    */
   async interruptCall(id) {
-    const call = this.calls.find(call => call.sender === id || call.receiver === id);
+    const call = this.calls.find(c => c.sender === id || c.receiver === id);
     if (!call) return;
     this.calls.splice(this.calls.indexOf(call), 1);
 
     const senderSettings = await this.client.database.getDocument('guild', call.sender);
     const receiverSettings = await this.client.database.getDocument('guild', call.receiver);
-  
+
     i18n.setLocale(senderSettings.misc.locale);
     this.client.channels
       .get(senderSettings.phone.channel)

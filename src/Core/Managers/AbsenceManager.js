@@ -1,4 +1,3 @@
-const Client = require('../Client');
 const Manager = require('./Manager');
 
 /**
@@ -6,13 +5,6 @@ const Manager = require('./Manager');
  * @extends {Manager}
  */
 class AbsenceManager extends Manager {
-  /**
-   * @param {Client} client Client that initiated the database manager
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Marks someone as absent.
    * @param {String} id ID of the user
@@ -40,7 +32,8 @@ class AbsenceManager extends Manager {
    * @returns {AFKObject}
    */
   async getAbsence(id) {
-    return (await this.client.database.getDocument('afk', id));
+    const data = await this.client.database.getDocument('afk', id);
+    return data || null;
   }
 }
 

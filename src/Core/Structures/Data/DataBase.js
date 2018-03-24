@@ -1,5 +1,3 @@
-const Client = require('../../Client');
-
 /**
  * Base of any data structure used by the bot.
  */

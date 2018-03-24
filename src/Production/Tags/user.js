@@ -1,10 +1,6 @@
 const TagFunction = require('../../Core/Structures/TagFunction');
 
 class UserFunction extends TagFunction {
-  constructor(client, context, contextType) {
-    super(client, context, contextType);
-  }
-
   run(args) {
     const search = args[0];
     if (!search) throw new Error('You must provide the (part of) a username or tag to search for.');

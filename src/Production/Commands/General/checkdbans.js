@@ -17,17 +17,20 @@ class Checkdbans extends Command {
     const search = ctx.args.join(' ');
 
     if (ctx.mentions.users.size > 0) user = ctx.mentions.users.first();
-    else if (search.length === 18 && !isNaN(search)) {
+    else if (search.length === 18 && !Number.isNaN(parseInt(search, 10))) {
       await this.client.fetchUser(search)
-        .then(fetchedUser => {
+        .then((fetchedUser) => {
           user = fetchedUser;
         })
         .catch(() => {});
     } else if (search) {
       const users = this.client.finder.findUsers(search);
       if (users.size === 0) return ctx.channel.send(ctx.__('finder.users.noResult', { errorIcon: this.client.constants.statusEmotes.error, search }));
-      else if (users.size > 1) return ctx.channel.send(this.client.finder.formatUsers(users, ctx.settings.data.misc.locale));
-      else user = users.first();
+      else if (users.size > 1) return ctx.channel.send(this.client.finder.formatUsers(
+        users,
+        ctx.settings.data.misc.locale,
+      ));
+      user = users.first();
     }
 
     snekfetch
@@ -40,7 +43,7 @@ class Checkdbans extends Command {
       })
       .then((response) => {
         const resp = response.body.toString();
-  
+
         const status = resp === 'False' ? ctx.__('checkdbans.embed.status.isNot') : ctx.__('checkdbans.embed.status.is');
         const color = resp === 'False' ? 'GREEN' : 'RED';
         const reason = resp === 'False' ? null : JSON.parse(resp)[3];

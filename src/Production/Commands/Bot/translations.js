@@ -14,11 +14,11 @@ class Translations extends Command {
   async run(ctx) {
     const locales = i18n.getLocales();
 
-    let translations = [];
+    const translations = [];
     for (const locale of locales) {
       const catalog = i18n.getCatalog(locale);
 
-      let authorTags = [];
+      const authorTags = [];
       for (const author of catalog['lang.authors']) {
         authorTags.push(await this.client.fetchUser(author).then(u => u.tag));
       }

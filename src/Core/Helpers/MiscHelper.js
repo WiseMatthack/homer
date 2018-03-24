@@ -1,5 +1,4 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 const snekfetch = require('snekfetch');
 
 /**
@@ -7,13 +6,6 @@ const snekfetch = require('snekfetch');
  * @extends {Helper}
  */
 class MiscHelper extends Helper {
-  /**
-   * @param {Client} client Client that initiated the misc helper
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Update the guild count on every bot list.
    * @param {Number} guild Guild count

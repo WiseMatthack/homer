@@ -1,5 +1,3 @@
-const Client = require('../Client');
-const { Message } = require('discord.js');
 const DataGuild = require('./Data/DataGuild');
 const i18n = require('i18n');
 
@@ -61,7 +59,8 @@ class Context {
    * @returns {String} Prefix or `null` if not a command
    */
   isCommand() {
-    const prefixes = this.client.config.discord.defaultPrefixes.concat(this.settings.data.misc.customPrefixes);
+    const prefixes = this.client.config.discord.defaultPrefixes
+      .concat(this.settings.data.misc.customPrefixes);
 
     let prefix = null;
     for (const p of prefixes) {

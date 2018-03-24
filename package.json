@@ -39,5 +39,10 @@
     "snekfetch": "^3.6.4",
     "to-pure-markdown": "^3.0.1",
     "uws": "^9.14.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0"
   }
 }

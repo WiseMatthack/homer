@@ -53,7 +53,7 @@ class DataGuild extends DataBase {
         timeFormat: 'HH:mm:ss',
         customPrefixes: [],
         importedTags: [],
-      }
+      },
     });
   }
 
@@ -62,7 +62,7 @@ class DataGuild extends DataBase {
    * @returns {String} Number
    */
   generateNumber() {
-    const array = Math.floor(Math.random() * 10**6).toString().split('');
+    const array = Math.floor(Math.random() * (10 ** 6)).toString().split('');
     array.splice(3, 0, '-');
 
     const number = array.join('');

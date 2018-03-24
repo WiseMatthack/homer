@@ -1,5 +1,4 @@
 const { Router } = require('express');
-const client = require('../../index');
 const i18n = require('i18n');
 
 const router = Router()

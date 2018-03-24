@@ -19,7 +19,7 @@ const router = Router()
         presenceGame: user.presence.game ? user.presence.game.name : null,
         premium: user.avatar.startsWith('a_') ? `${client.emojis.get(client.constants.nitroIcon).url} Discord Nitro` : req.__('global.none'),
       },
-    })
+    });
   });
 
 module.exports = router;

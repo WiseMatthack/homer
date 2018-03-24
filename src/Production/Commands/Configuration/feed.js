@@ -21,7 +21,7 @@ class Feed extends Command {
         list: message,
       }));
     } else if (ctx.args[0] === 'remove') {
-      let channel = ctx.channel;
+      let { channel } = ctx;
       const search = ctx.args.slice(1).join(' ');
       if (ctx.mentions.channels.size > 0) channel = ctx.mentions.channels.first();
       else if (search) {
@@ -36,7 +36,8 @@ class Feed extends Command {
         channel: channel.id,
       }));
 
-      ctx.settings.data.moderation.channels.splice(ctx.settings.data.moderation.channels.indexOf(feed), 1);
+      ctx.settings.data.moderation.channels
+        .splice(ctx.settings.data.moderation.channels.indexOf(feed), 1);
       await ctx.settings.saveData();
 
       ctx.channel.send(ctx.__('feed.remove.removed', {
@@ -49,7 +50,7 @@ class Feed extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      let channel = ctx.channel;
+      let { channel } = ctx;
       const search = ctx.args.slice(1).join(' ');
       if (ctx.mentions.channels.size > 0) channel = ctx.mentions.channels.first();
       else if (search) {

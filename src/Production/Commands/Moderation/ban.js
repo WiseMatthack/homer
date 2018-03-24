@@ -33,7 +33,13 @@ class Ban extends Command {
       reason: `${ctx.author.tag}: ${reason}`,
     })
       .then(() => {
-        this.client.moderation.registerCase(ctx.guild.id, 1, ctx.author.id, targetMember.id, reason);
+        this.client.moderation.registerCase(
+          ctx.guild.id,
+          1,
+          ctx.author.id,
+          targetMember.id,
+          reason,
+        );
         ctx.channel.send(ctx.__('ban.success', {
           successIcon: this.client.constants.statusEmotes.success,
           tag: targetMember.user.tag,

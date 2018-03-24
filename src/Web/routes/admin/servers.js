@@ -4,21 +4,21 @@ const client = require('../../../index');
 const router = Router()
   .use((req, res, next) => {
     if (req.isAuthenticated() && client.config.owners.includes(req.user.id)) return next();
-    else return res.render('error.pug', { errorCode: '403' });
+    return res.render('error.pug', { errorCode: '403' });
   })
   .get('/', (req, res) => {
     const guilds = client.guilds
       .sort((a, b) => a.name - b.name)
       .map(guild => ({
-          name: guild.name,
-          id: guild.id,
-          owner: {
-            id: guild.ownerID,
-            tag: guild.owner.user.tag,
-          },
-          members: guild.memberCount,
-          bots: Math.floor((guild.members.filter(m => m.user.bot).size / guild.memberCount) * 100),
-          join: guild.joinedTimestamp,
+        name: guild.name,
+        id: guild.id,
+        owner: {
+          id: guild.ownerID,
+          tag: guild.owner.user.tag,
+        },
+        members: guild.memberCount,
+        bots: Math.floor((guild.members.filter(m => m.user.bot).size / guild.memberCount) * 100),
+        join: guild.joinedTimestamp,
       }));
 
     res.render('admin_guilds.pug', {

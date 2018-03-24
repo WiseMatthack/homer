@@ -2,7 +2,6 @@ const { Router } = require('express');
 const client = require('../../index');
 
 const pug = require('pug');
-const moment = require('moment');
 
 const router = Router()
   .get('/:uuid', async (req, res) => {

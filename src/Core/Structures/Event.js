@@ -1,5 +1,3 @@
-const Client = require('../Client');
-
 /**
  * Represents a bot event.
  */
@@ -25,7 +23,9 @@ class Event {
   /**
    * Handle the event.
    */
-  async handle() {}
+  async handle() {
+    return null;
+  }
 }
 
 module.exports = Event;

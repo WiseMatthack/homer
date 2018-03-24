@@ -10,14 +10,14 @@ class Help extends Command {
   }
 
   async run(ctx) {
-    const isFound = this.client.commands.getCommand(ctx.args[0]);
+    const IsFound = this.client.commands.getCommand(ctx.args[0]);
     let found;
-    if (isFound) found = new isFound(this.client);
-    
-    if (isFound && !found.private) {
+    if (IsFound) found = new IsFound(this.client);
+
+    if (IsFound && !found.private) {
       const help = require(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)[found.name];
       const prefix = this.client.config.discord.defaultPrefixes[0];
-      
+
       const embed = new RichEmbed()
         .setDescription(ctx.__('help.command.embed.description', {
           description: help.description,
@@ -27,7 +27,7 @@ class Help extends Command {
         }))
         .setColor(ctx.guild.me.displayHexColor)
         .setFooter(ctx.__('help.command.footer'));
-      
+
       ctx.channel.send(ctx.__('help.command.title', {
         name: found.name,
       }), { embed });

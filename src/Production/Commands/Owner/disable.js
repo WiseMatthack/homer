@@ -17,7 +17,7 @@ class Disable extends Command {
     if (reason && reason.length > 256) return ctx.channel.send(`${this.client.constants.statusEmotes.error} The reason length must not exceed 256 characters.`);
 
     if (!this.client.commands.getCommand(cmdName)) return ctx.channel.send(`${this.client.constants.statusEmotes.error} The command \`${cmdName}\` does not exist.`);
-    
+
     if (this.client.disabledCommands[cmdName]) {
       delete this.client.disabledCommands[cmdName];
       ctx.channel.send(`${this.client.constants.statusEmotes.success} Command \`${cmdName}\` re-enabled!`);

@@ -13,7 +13,7 @@ class Case extends Command {
 
   async run(ctx) {
     const caseID = ctx.args[0];
-    if (!caseID || isNaN(caseID)) return ctx.channel.send(ctx.__('case.error.invalidCase', {
+    if (!caseID || Number.isNaN(parseInt(caseID, 10))) return ctx.channel.send(ctx.__('case.error.invalidCase', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 

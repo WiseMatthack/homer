@@ -1,5 +1,4 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 const i18n = require('i18n');
 const mtz = require('moment-timezone');
 
@@ -8,13 +7,6 @@ const mtz = require('moment-timezone');
  * @extends {Helper}
  */
 class ModHelper extends Helper {
-  /**
-   * @param {Client} client Client that initiated the mod helper
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Register a moderation case.
    * @param {String} guild Guild ID
@@ -40,7 +32,7 @@ class ModHelper extends Helper {
       extra,
     }), i18n.__('moderation.log.reason', { reason })];
 
-    let messages = [];
+    const messages = [];
     for (const channel of settings.moderation.channels.filter(c => Number(c.type) === 1)) {
       const textChannel = this.client.channels.get(channel.id);
       if (!textChannel) return;
@@ -78,7 +70,7 @@ class ModHelper extends Helper {
   canInteract(author, target, bot) {
     if (target.highestRole.comparePositionTo(bot.highestRole) >= 0) return false;
     else if (author.highestRole.comparePositionTo(target.highestRole) <= 0) return false;
-    else return true;
+    return true;
   }
 }
 

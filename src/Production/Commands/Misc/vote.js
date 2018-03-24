@@ -12,19 +12,19 @@ class Vote extends Command {
 
   async run(ctx) {
     if (ctx.args[0] === 'top') {
-      const list = await this.client.database.getDocuments('votes').then(list => list.slice(0, 5));
+      const list = await this.client.database.getDocuments('votes').then(l => l.slice(0, 5));
 
-      let message = [];
+      const message = [];
       for (const l of list) {
         const userTag = await this.client.fetchUser(l.id).then(user => user.tag);
-        message.push(ctx.__('vote.memberVote', { tag: userTag, count: l.count, }));
+        message.push(ctx.__('vote.memberVote', { tag: userTag, count: l.count }));
       }
 
       const embed = new RichEmbed()
         .setDescription(message.join('\n'))
         .setColor(ctx.guild.me.displayHexColor)
         .setFooter(ctx.__('vote.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }));
-      
+
       ctx.channel.send(ctx.__('vote.top'), { embed });
     } else {
       const message = await ctx.channel.send(ctx.__('vote.instructions', {
@@ -35,8 +35,9 @@ class Vote extends Command {
       await message.react(this.client.emojis.get('420529118417780747'));
 
       message.awaitReactions(
-        (reaction, user) => reaction.emoji.id === '420529118417780747' & user.id === ctx.author.id,
-        { max: 1 })
+        (reaction, user) => reaction.emoji.id === '420529118417780747' && user.id === ctx.author.id,
+        { max: 1 },
+      )
         .then(async () => {
           const data = await snekfetch
             .get(`https://discordbots.org/api/bots/${this.client.user.id}/votes?onlyids=true&limit=0`)

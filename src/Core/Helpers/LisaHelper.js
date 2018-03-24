@@ -1,18 +1,10 @@
 const Helper = require('./Helper');
-const Client = require('../Client');
 
 /**
  * Represents a Lisa helper.
  * @extends {Helper}
  */
 class LisaHelper extends Helper {
-  /**
-   * @param {Client} client Client that initiated the Lisa helper
-   */
-  constructor(client) {
-    super(client);
-  }
-
   /**
    * Process a string (usually a tag).
    * @param {String} string String to process
@@ -52,14 +44,14 @@ class LisaHelper extends Helper {
         .replace(/{argslen}/g, context.args.length);
     } else if (contextType === 1) {
       newString = newString
-      .replace(/{atuser}/g, context.user.toString())
-      .replace(/{user}/g, context.user.username)
-      .replace(/{userid}/g, context.user.id)
-      .replace(/{nick}/g, context.member.nickname || context.user.username)
-      .replace(/{discrim}/g, context.user.discriminator)
-      .replace(/{server}/g, context.guild.name)
-      .replace(/{serverid}/g, context.guild.id)
-      .replace(/{servercount}/g, context.guild.memberCount);
+        .replace(/{atuser}/g, context.user.toString())
+        .replace(/{user}/g, context.user.username)
+        .replace(/{userid}/g, context.user.id)
+        .replace(/{nick}/g, context.member.nickname || context.user.username)
+        .replace(/{discrim}/g, context.user.discriminator)
+        .replace(/{server}/g, context.guild.name)
+        .replace(/{serverid}/g, context.guild.id)
+        .replace(/{servercount}/g, context.guild.memberCount);
     }
 
     return newString;

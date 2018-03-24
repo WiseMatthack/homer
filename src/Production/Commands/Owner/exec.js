@@ -17,7 +17,8 @@ class Exec extends Command {
 
     exec(code, (err, stdout, stderr) => {
       if (err) return ctx.channel.send(err, { code: 'xl' });
-      ctx.channel.send(`${stdout}\n${stderr}`, { code: 'xl' });
+      ctx.channel.send(`${stdout}\n${stderr}`, { code: 'xl' })
+        .catch(e => ctx.channel.send(`\`\`\`${e}\`\`\``));
     });
   }
 }

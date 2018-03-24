@@ -30,7 +30,8 @@ class Profile extends Command {
       }));
 
       const doesFieldExists = profile.data.fields.find(field => field.name === fieldName);
-      if (doesFieldExists) profile.data.fields.splice(profile.data.fields.indexOf(doesFieldExists), 1);
+      if (doesFieldExists) profile.data.fields
+        .splice(profile.data.fields.indexOf(doesFieldExists), 1);
 
       profile.data.fields.push({
         name: fieldName,
@@ -56,8 +57,9 @@ class Profile extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
         field: fieldName,
       }));
-      
-      profile.data.fields.splice(profile.data.fields.findIndex(field => field.name === fieldName), 1);
+
+      profile.data.fields
+        .splice(profile.data.fields.findIndex(field => field.name === fieldName), 1);
       await profile.saveData();
 
       ctx.channel.send(ctx.__('profile.clear.done', {
@@ -79,6 +81,9 @@ class Profile extends Command {
         locale,
       }));
 
+      const profile = new DataProfile(this.client, ctx.author.id);
+      await profile.getData();
+
       profile.data.locale = locale;
       await profile.saveData();
 
@@ -87,13 +92,16 @@ class Profile extends Command {
         locale,
       }));
     } else {
-      let member = ctx.member;
+      let { member } = ctx;
       const search = ctx.args.join(' ');
       if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();
       else if (search) {
         const members = this.client.finder.findMembers(search, ctx.guild.id);
         if (members.size === 0) return ctx.channel.send(ctx.__('finder.members.noResult', { errorIcon: this.client.constants.statusEmotes.error, search }));
-        else if (members.size > 1) return ctx.channel.send(this.client.finder.formatMembers(members, ctx.settings.data.misc.locale));
+        else if (members.size > 1) return ctx.channel.send(this.client.finder.formatMembers(
+          members,
+          ctx.settings.data.misc.locale,
+        ));
         member = members.first();
       }
 

@@ -18,14 +18,14 @@ class ChannelDelete extends Event {
         message: null,
       };
     }
-    
+
     if (settings.data.leave.channel === channel.id) {
       settings.data.leave = {
         channel: null,
         message: null,
       };
     }
-    
+
     if (settings.data.phone.channel === channel.id) {
       settings.data.phone.channel = null;
     }

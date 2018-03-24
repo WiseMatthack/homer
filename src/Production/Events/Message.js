@@ -84,15 +84,15 @@ class Message extends Event {
       const args = ctx.content.split(/ +/g);
       const command = args.shift().slice(prefix.length).toLowerCase();
 
-      const cmdFile = this.client.commands.getCommand(command);
-      if (cmdFile) {
-        const cmd = new cmdFile(this.client);
+      const CmdFile = this.client.commands.getCommand(command);
+      if (CmdFile) {
+        const cmd = new CmdFile(this.client);
 
         /* Logging */
         appendFile(`${__dirname}/../../../logs/commands.txt`, `[${Date.now()}] Author: ${ctx.author.id} - Channel: ${ctx.channel.id} - Guild: ${ctx.guild.id} - Content: ${ctx.content}\r\n`, (err) => {
           if (err) console.error(err);
         });
-        
+
         /* Can the user and bot run the command */
         if (cmd.private) {
           if (!this.client.config.owners.includes(ctx.author.id)) return;
@@ -106,13 +106,17 @@ class Message extends Event {
           }));
         }
 
-        const missingBotPermissions = cmd.botPermissions.filter(perm => !ctx.guild.me.permissions.has(perm));
+        const missingBotPermissions = cmd.botPermissions
+          .filter(perm => !ctx.guild.me.permissions.has(perm));
+
         if (missingBotPermissions.length > 0) return ctx.channel.send(ctx.__('command.missingPerm.bot', {
           errorIcon: this.client.constants.statusEmotes.error,
           missingPermissions: missingBotPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
-        const missingUserPermissions = cmd.userPermissions.filter(perm => !ctx.member.permissions.has(perm));
+        const missingUserPermissions = cmd.userPermissions
+          .filter(perm => !ctx.member.permissions.has(perm));
+
         if (missingUserPermissions.length > 0) return ctx.channel.send(ctx.__('command.missingPerm.user', {
           errorIcon: this.client.constants.statusEmotes.error,
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
@@ -121,7 +125,9 @@ class Message extends Event {
         cmd.run(ctx);
       }
     } else {
-      const phone = this.client.phone.calls.find(c => c.sender === ctx.guild.id || c.receiver === ctx.guild.id);
+      const phone = this.client.phone.calls
+        .find(c => c.sender === ctx.guild.id || c.receiver === ctx.guild.id);
+
       if (phone && phone.state === 1) {
         const distantSettings = phone.sender === ctx.guild.id ? await this.client.database.getDocument('guild', phone.receiver) : await this.client.database.getDocument('guild', phone.sender);
         const channel = this.client.channels.get(distantSettings.phone.channel);

@@ -1,6 +1,4 @@
 const Manager = require('./Manager');
-const Client = require('../Client');
-const Command = require('../Structures/Command');
 const { readdir } = require('fs');
 
 /**
@@ -33,7 +31,7 @@ class CommandsManager extends Manager {
    */
   _map() {
     for (const category of this.client.config.discord.commandCategories) {
-      let categoryGPS = [];
+      const categoryGPS = [];
 
       readdir(`${this.path}/${category}`, (err, files) => {
         if (err) throw err;
@@ -41,11 +39,11 @@ class CommandsManager extends Manager {
           delete require.cache[require.resolve(`${this.path}/${category}/${file}`)];
           const cmd = new (require(`../../Production/Commands/${category}/${file}`))(this.client);
           const aliases = this.gps.get('aliases') || {};
-          cmd.aliases.forEach(a => {
+          cmd.aliases.forEach((a) => {
             aliases[a] = cmd.name;
           });
           this.gps.set('aliases', aliases);
-          
+
           categoryGPS.push(file.split('.')[0]);
         });
       });
@@ -65,21 +63,20 @@ class CommandsManager extends Manager {
     const aliases = this.gps.get('aliases');
     if (aliases[cmd]) {
       return this.getCommand(aliases[cmd]);
-    } else {
-      this.gps.forEach((commands, categoryName) => {
-        if (categoryName !== 'aliases') {
-          if (commands.includes(cmd)) {
-            category = categoryName;
-          }
-        }
-      });
-
-      if (category) {
-        return require(`${this.path}/${category}/${cmd}.js`);
-      } else {
-        return null;
-      }
     }
+
+    this.gps.forEach((commands, categoryName) => {
+      if (categoryName !== 'aliases') {
+        if (commands.includes(cmd)) {
+          category = categoryName;
+        }
+      }
+    });
+
+    if (category) {
+      return require(`${this.path}/${category}/${cmd}.js`);
+    }
+    return null;
   }
 }
 

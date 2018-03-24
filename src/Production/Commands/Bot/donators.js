@@ -1,5 +1,4 @@
 const Command = require('../../../Core/Structures/Command');
-const { RichEmbed } = require('discord.js');
 
 class Donators extends Command {
   constructor(client) {
@@ -12,7 +11,7 @@ class Donators extends Command {
 
   async run(ctx) {
     const donators = [];
-    
+
     for (const donation of this.client.config.donators) {
       donators.push(ctx.__('donators.hasDonated', {
         user: await this.client.fetchUser(donation.user).then(user => user.tag),

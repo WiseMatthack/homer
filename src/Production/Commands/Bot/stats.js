@@ -15,7 +15,9 @@ class Stats extends Command {
       .setDescription(ctx.__('stats.embed.description', {
         guilds: this.client.guilds.size,
         users: this.client.users.size,
-        uptime: mtz(this.client.initiated.getTime()).locale(ctx.settings.data.misc.locale).fromNow(true),
+        uptime: mtz(this.client.initiated.getTime())
+          .locale(ctx.settings.data.misc.locale)
+          .fromNow(true),
         ram: Math.floor(process.memoryUsage().rss / 1000000),
       }))
       .setFooter(ctx.__('stats.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }))

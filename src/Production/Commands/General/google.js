@@ -1,6 +1,5 @@
 const Command = require('../../../Core/Structures/Command');
 const snekfetch = require('snekfetch');
-const { RichEmbed } = require('discord.js');
 
 class Google extends Command {
   constructor(client) {

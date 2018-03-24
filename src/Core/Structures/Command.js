@@ -1,6 +1,3 @@
-const Client = require('../Client');
-const Context = require('./Context');
-
 /**
  * Represents the base of a command.
  */
@@ -71,9 +68,9 @@ class Command {
   parseString(string, flags) {
     let title = '';
     let finishedTitle = false;
-    let options = [];
+    const options = [];
 
-    for (let i = 0; i < string.length; i++) {
+    for (let i = 0; i < string.length; i += 1) {
       if (string[i].startsWith('-')) {
         const filter = flags.filter(f => f.flag === string[i].substring(1).toLowerCase());
         if (filter.length > 0) {

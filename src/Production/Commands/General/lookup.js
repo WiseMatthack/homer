@@ -44,7 +44,7 @@ class Lookup extends Command {
     } else {
       let user = null;
       await this.client.fetchUser(lookup, false)
-        .then(fetched => {
+        .then((fetched) => {
           user = fetched;
         })
         .catch(() => {});

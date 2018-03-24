@@ -30,7 +30,10 @@ class Tempban extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
       duration,
     }));
-    const durationMessage = mtz().tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).to((Date.now() + timeout), false);
+    const durationMessage = mtz()
+      .tz(ctx.settings.data.misc.timezone)
+      .locale(ctx.settings.data.misc.locale)
+      .to((Date.now() + timeout), false);
 
     const targetMember = ctx.mentions.members.first() || ctx.guild.members.get(search) || null;
     if (!targetMember) return ctx.channel.send(ctx.__('tempban.error.noMember', {
@@ -47,13 +50,26 @@ class Tempban extends Command {
       reason: `${ctx.author.tag}: ${reason}`,
     })
       .then(async () => {
-        await this.client.moderation.registerCase(ctx.guild.id, 6, ctx.author.id, targetMember.id, reason, {
-          end: (Date.now() + timeout),
-          finished: false,
-          duration,
-        });
+        await this.client.moderation.registerCase(
+          ctx.guild.id,
+          6,
+          ctx.author.id,
+          targetMember.id,
+          reason,
+          {
+            end: (Date.now() + timeout),
+            finished: false,
+            duration,
+          },
+        );
 
-        this.client.setTimeout(this.client.stuffHandler.handleUnban, timeout, this.client, ctx.guild.id, targetMember.id);
+        this.client.setTimeout(
+          this.client.stuffHandler.handleUnban,
+          timeout,
+          this.client,
+          ctx.guild.id,
+          targetMember.id,
+        );
 
         ctx.channel.send(ctx.__('tempban.success', {
           successIcon: this.client.constants.statusEmotes.success,

@@ -11,7 +11,7 @@ class Afk extends Command {
 
   async run(ctx) {
     const reason = ctx.args.join(' ') || null;
-    
+
     this.client.absence.markAbsent(ctx.author.id, reason)
       .then(() => ctx.channel.send(ctx.__('afk.marked')));
   }
