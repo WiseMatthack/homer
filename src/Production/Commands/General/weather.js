@@ -66,8 +66,11 @@ class Weather extends Command {
       const alertData = await snekfetch.get('http://api.meteofrance.com/files/vigilance/vigilance.json')
         .then(res => res.body);
 
+      const deptCode = this.frenchPostalCodes[locationData.components.city] || locationData.components.postcode;
+      if (!deptCode) return;
+
       const meta = alertData.meta.find(m => m.zone === 'FR');
-      const dept = alertData.data.find(d => d.department === (locationData.components.city === 'Paris' ? '75' : locationData.components.postcode.substring(0, 2)));
+      const dept = alertData.data.find(d => d.department === deptCode.slice(0, 2));
       if (!dept || dept.level < 2) return;
 
       const embedColors = {
@@ -103,6 +106,18 @@ class Weather extends Command {
     const arrayIndex = Number((angle / 22.5) + 0.5)
     const windArray = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
     return windArray[Math.round(arrayIndex % 16)];
+  }
+
+  /**
+   * French postal codes for known cities
+   * @type {Object}
+   */
+  get frenchPostalCodes() {
+    return ({
+      'Ajaccio': '2A',
+      'Bastia': '2B',
+      'Paris': '75',
+    });
   }
 }
 
