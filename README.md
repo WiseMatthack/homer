@@ -15,6 +15,12 @@ The bot uses [discord.js](https://discord.js.org) as API wrapper and runs on the
 - Translated into multiple languages : English and French. Yes ok it's not a lot but if you wanna get it in your language you can start translating ^_^ (see GitHub).
 - A telephone, yes, get your number and start calling people around Discord (*note: they must have the bot and set-up the telephone, of course*). *Notice: we transmit your calls to the NSA by the way... no jk*
 - A dashboard where you can check the latest news about the bot and soon make some cool stuff from here (still in development).
+
+## Important notice
+To avoid overload due to bot collections, a purge is executed every week. If your guild does not fit the following requirements:
+- 5 minimum members (human accounts)
+- maximum 60% of bots
+the bot will leave your guild.
   
 ## Translations
 
