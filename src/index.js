@@ -38,7 +38,7 @@ process.on('unhandledRejection', (error) => {
 
   for (const ownerID of client.config.owners) {
     const user = client.users.get(ownerID);
-    user.send(`https://www.youtube.com/watch?v=mOYZaiDZ7BM :musical_note:\nIf it hadn't been for cotton-eye Joe\nI'd been married long time ago\nWhere did you come from. Where did you go ?\nWhere did you come from cotton-eye Joe ?\n\n\`\`\`js\n${error.message}\`\`\``)
+    user.send(`https://www.youtube.com/watch?v=mOYZaiDZ7BM :musical_note:\nIf it hadn't been for cotton-eye Joe\nI'd been married long time ago\nWhere did you come from. Where did you go ?\nWhere did you come from cotton-eye Joe ?\n\n\`\`\`js\n${error.message}\n${error.stack}\`\`\``)
       .catch(() => {}); // No but shit I won't handle the error of an error
   }
 });
