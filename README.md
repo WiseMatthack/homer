@@ -20,6 +20,7 @@ The bot uses [discord.js](https://discord.js.org) as API wrapper and runs on the
 To avoid overload due to bot collections, a purge is executed every week. If your guild does not fit the following requirements:
 - 5 minimum members (human accounts)
 - maximum 60% of bots
+
 the bot will leave your guild.
   
 ## Translations
