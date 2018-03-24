@@ -22,15 +22,15 @@ class Weather extends Command {
     const locationData = await snekfetch.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.client.config.api.googleGeocode}&address=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}`)
       .then((res) => {
         const parsed = res.body;
-        if (parsed.results.length === 0) return;
+        if (parsed.results.length === 0) return null;
 
         const foundLoc = parsed.results[0];
         return ({
-          city: foundLoc.addressComponents.find(c => c.types.has('locality')) || null,
-          department: foundLoc.addressComponents.find(c => c.types.has('administrative_area_level_2')) || null,
-          region: foundLoc.addressComponents.find(c => c.types.has('administrative_area_level_1')) || null,
-          country: foundLoc.addressComponents.find(c => c.types.has('country')) || null,
-          postalcode: foundLoc.addressComponents.find(c => c.types.has('postal_code')) || null,
+          city: foundLoc.addressComponents.find(c => c.types.includes('locality')) || null,
+          department: foundLoc.addressComponents.find(c => c.types.includes('administrative_area_level_2')) || null,
+          region: foundLoc.addressComponents.find(c => c.types.includes('administrative_area_level_1')) || null,
+          country: foundLoc.addressComponents.find(c => c.types.includes('country')) || null,
+          postalcode: foundLoc.addressComponents.find(c => c.types.includes('postal_code')) || null,
         });
       })
       .catch(() => null);
