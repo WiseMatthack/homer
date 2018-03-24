@@ -33,7 +33,7 @@ class Weather extends Command {
           postalcode: foundLoc.addressComponents.find(c => c.types.includes('postal_code')) || null,
         });
       })
-      .catch(() => null);
+      .catch((e) => console.error(e));
 
     if (!locationData.city) return ctx.channel.send(ctx.__('weather.notFound', {
       errorIcon: this.client.constants.statusEmotes.error,
