@@ -20,10 +20,22 @@ class Weather extends Command {
 
     const query = encodeURIComponent(location);
     const locationData = await snekfetch.get(`https://api.opencagedata.com/geocode/v1/json?key=${this.client.config.api.openCageData}&q=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}&limit=1&no_annotations=1`)
-      .then(res => res.body.results.filter(a => ['village', 'neighbourhood', 'city', 'county', 'islet', 'state'].some(b => b === a.components._type))[0])
+      .then((res) => {
+        const parsed = res.body;
+        if (parsed.results.length === 0) return;
+
+        const foundLoc = parsed.results[0];
+        return ({
+          city: foundLoc.addressComponents.find(c => c.types.has('locality')) || null,
+          department: foundLoc.addressComponents.find(c => c.types.has('administrative_area_level_2')) || null,
+          region: foundLoc.addressComponents.find(c => c.types.has('administrative_area_level_1')) || null,
+          country: foundLoc.addressComponents.find(c => c.types.has('country')) || null,
+          postalcode: foundLoc.addressComponents.find(c => c.types.has('postal_code')) || null,
+        });
+      })
       .catch(() => null);
 
-    if (!locationData) return ctx.channel.send(ctx.__('weather.notFound', {
+    if (!locationData.city) return ctx.channel.send(ctx.__('weather.notFound', {
       errorIcon: this.client.constants.statusEmotes.error,
       location,
     }));
@@ -57,20 +69,17 @@ class Weather extends Command {
       .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('weather.title', {
-      city: locationData.components[locationData.components._type],
-      region: locationData.components.state || ctx.__('global.unknown'),
-      country: locationData.components.country || ctx.__('global.unknown'),
+      city: locationData.city ? locationData.city.long_name : ctx.__('global.unknown'),
+      region: locationData.region ? locationData.region.long_name : ctx.__('global.unknown'),
+      country: locationData.country ? locationData.country.long_name : ctx.__('global.unknown'),
     }), { embed });
 
-    if (locationData.components['ISO_3166-1_alpha-2'] === 'FR') {
+    if (locationData.country && locationData.country.short_name === 'FR' && locationData.postalcode) {
       const alertData = await snekfetch.get('http://api.meteofrance.com/files/vigilance/vigilance.json')
         .then(res => res.body);
 
-      const deptCode = this.frenchPostalCodes[locationData.components.city] || locationData.components.postcode;
-      if (!deptCode) return;
-
       const meta = alertData.meta.find(m => m.zone === 'FR');
-      const dept = alertData.data.find(d => d.department === deptCode.slice(0, 2));
+      const dept = alertData.data.find(d => d.department === locationData.postalcode.short_name.slice(0, 2));
       if (!dept || dept.level < 2) return;
 
       const embedColors = {
@@ -88,7 +97,7 @@ class Weather extends Command {
         .join(' - ');
 
       const alertEmbed = new RichEmbed()
-        .setDescription(`**ALERTE ${meta.colLevels[dept.level - 1]}**\nPhénomènes dangereux en cours dans ce département.\n${alerts}\n\nPour plus d'informations consultez la carte de vigilance.`)
+        .setDescription(`**ALERTE ${meta.colLevels[dept.level - 1]}**\nPhénomènes dangereux en cours dans le département **${locationData.department ? locationData.department.long_name : ctx.__('global.unknown')}**.\n${alerts}\n\nPour plus d'informations consultez la carte de vigilance.`)
         .setThumbnail(`http://api.meteofrance.com/files/vigilance/${meta.vignette}?anticache=${Date.now()}`)
         .setFooter(`Émission: ${mtz(meta.dates.dateInsertion).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Début: ${mtz(meta.dates.dateRun).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Fin: ${mtz(meta.dates.datePrevue).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)}`, `https://${this.client.config.dashboard.baseDomain}/images/services/meteofrance.png`)
         .setColor(embedColors[dept.level]);
@@ -106,18 +115,6 @@ class Weather extends Command {
     const arrayIndex = Number((angle / 22.5) + 0.5)
     const windArray = ['N','NNE','NE','ENE','E','ESE', 'SE', 'SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
     return windArray[Math.round(arrayIndex % 16)];
-  }
-
-  /**
-   * French postal codes for known cities
-   * @type {Object}
-   */
-  get frenchPostalCodes() {
-    return ({
-      'Ajaccio': '2A',
-      'Bastia': '2B',
-      'Paris': '75',
-    });
   }
 }
 
