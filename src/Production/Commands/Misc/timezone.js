@@ -50,7 +50,7 @@ class Timezone extends Command {
       const profile = new DataProfile(this.client, member.id);
       await profile.getData();
 
-      if (profile.data === profile.template) return ctx.channel.send(ctx.__('timezone.noProfile', {
+      if (!profile.data.timezone) return ctx.channel.send(ctx.__('timezone.noProfile', {
         errorIcon: this.client.constants.statusEmotes.error,
         name: member.user.tag,
       }));

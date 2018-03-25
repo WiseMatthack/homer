@@ -27,8 +27,8 @@ class DataProfile extends DataBase {
     return ({
       id: this.key,
       fields: [],
-      timezone: 'UTC',
-      locale: 'en-gb',
+      timezone: null,
+      locale: null,
       reminds: [],
     });
   }
