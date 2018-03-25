@@ -13,6 +13,8 @@ class Tempban extends Command {
   }
 
   async run(ctx) {
+    await ctx.guild.fetchMembers();
+
     const duration = ctx.args[0];
     const search = ctx.args[1];
     const reason = ctx.args.slice(2).join(' ') || ctx.__('moderation.common.noReason');

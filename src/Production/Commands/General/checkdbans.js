@@ -13,6 +13,8 @@ class Checkdbans extends Command {
   }
 
   async run(ctx) {
+    await ctx.guild.fetchMembers();
+
     let user = ctx.author;
     const search = ctx.args.join(' ');
 

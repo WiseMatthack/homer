@@ -226,6 +226,8 @@ class Tag extends Command {
   }
 
   async subList(ctx) {
+    await ctx.guild.fetchMembers();
+
     let { member } = ctx;
     const search = ctx.args.slice(1).join(' ');
     if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();

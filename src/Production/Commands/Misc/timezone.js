@@ -34,6 +34,8 @@ class Timezone extends Command {
         timezone: newTimezone,
       }));
     } else {
+      await ctx.guild.fetchMembers();
+
       let { member } = ctx;
       const search = ctx.args.join(' ');
       if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();

@@ -11,6 +11,8 @@ class Kick extends Command {
   }
 
   async run(ctx) {
+    await ctx.guild.fetchMembers();
+
     const search = ctx.args[0];
     const reason = ctx.args.slice(1).join(' ') || ctx.__('moderation.common.noReason');
 

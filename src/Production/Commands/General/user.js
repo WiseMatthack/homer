@@ -13,6 +13,8 @@ class User extends Command {
   }
 
   async run(ctx) {
+    await ctx.guild.fetchMembers();
+
     let { member } = ctx;
     const search = ctx.args.join(' ');
     if (ctx.mentions.members.size > 0) member = ctx.mentions.members.first();
