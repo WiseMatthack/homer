@@ -35,7 +35,7 @@
 	"case.error.notFound": "{{{ errorIcon }}} Aucun cas de modération trouvé avec l'ID `{{{ caseID }}}`.",
 	"case.error.invalidCase": "{{{ errorIcon }}} L'ID du cas de modération doit être un nombre.",
 	"category.list": "😷 Catégories de commandes désactivées :\n\n{{{ list }}}",
-	"category.noCat": "{{{ errorIcon }}} Vous devez fournir un **nom de catégorie**.",
+	"category.noCategory": "{{{ errorIcon }}} Vous devez fournir un **nom de catégorie**.",
 	"category.criticCat": "{{{ errorIcon }}} Vous ne pouvez pas désactiver une catégorie système.",
 	"category.disabled": "{{{ successIcon }}} Les commandes de la catégorie `{{{ category }}}` sont maintenant désactivées.",
 	"category.enabled": "{{{ successIcon }}} Les commandes de la catégorie `{{{ category }}}` sont maintenant activées.",

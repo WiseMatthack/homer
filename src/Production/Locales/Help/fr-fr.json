@@ -115,6 +115,11 @@
     "examples": ["vote", "vote top"]
   },
 
+  "category": {
+    "description": "Désactive une catégorie de commandes pour le serveur",
+    "usage": "category <list|catégorie>",
+    "examples": ["category list", "category Moderation"]
+  },
   "feed": {
     "description": "Gère les flux de logs sur le serveur",
     "usage": "feed (list|remove <salon>|<type> <salon>)",

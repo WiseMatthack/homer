@@ -35,7 +35,7 @@
 	"case.error.notFound": "{{{ errorIcon }}} No case found matching ID `{{{ caseID }}}`.",
 	"case.error.invalidCase": "{{{ errorIcon }}} The moderation case ID must be a number.",
 	"category.list": "😷 Disabled commands categories:\n\n{{{ list }}}",
-	"category.noCat": "{{{ errorIcon }}} You must provide a **category name**.",
+	"category.noCategory": "{{{ errorIcon }}} You must provide a **category name**.",
 	"category.criticCat": "{{{ errorIcon }}} You can't disable a critical commands category.",
 	"category.disabled": "{{{ successIcon }}} Commands of category `{{{ category }}}` are now disabled.",
 	"category.enabled": "{{{ successIcon }}} Commands of category `{{{ category }}}` are now enabled.",

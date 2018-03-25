@@ -115,6 +115,11 @@
     "examples": ["vote", "vote top"]
   },
 
+  "category": {
+    "description": "Disable a command category for the server",
+    "usage": "category <list|category name>",
+    "examples": ["category list", "category Moderation"]
+  },
   "feed": {
     "description": "Manage feeds on the server",
     "usage": "feed (list|remove <channel>|<type> <channel>)",
