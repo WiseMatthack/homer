@@ -17,7 +17,7 @@ const router = Router()
         presenceStatus: req.__(`presence.${user.presence.status}`),
         presenceIcon: client.emojis.get(client.constants.presenceIcons[user.presence.status]).url,
         presenceGame: user.presence.game ? user.presence.game.name : null,
-        premium: user.avatar.startsWith('a_') ? `${client.emojis.get(client.constants.nitroIcon).url} Discord Nitro` : req.__('global.none'),
+        premium: (user.avatar && user.avatar.startsWith('a_')) ? `${client.emojis.get(client.constants.nitroIcon).url} Discord Nitro` : req.__('global.none'),
       },
     });
   });
