@@ -12,7 +12,9 @@ class Vote extends Command {
 
   async run(ctx) {
     if (ctx.args[0] === 'top') {
-      const list = await this.client.database.getDocuments('votes').then(l => l.slice(0, 5));
+      const list = await this.client.database.getDocuments('votes').then(l => l
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 5));
 
       const message = [];
       for (const l of list) {
