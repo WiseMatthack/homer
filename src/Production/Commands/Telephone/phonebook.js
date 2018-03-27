@@ -11,12 +11,12 @@ class Phonebook extends Command {
 
   async run(ctx) {
     if (ctx.args[0] === 'switch') {
-      if (ctx.settings.data.misc.phone.phonebook) {
-        ctx.settings.data.misc.phone.phonebook = false;
+      if (ctx.settings.data.phone.phonebook) {
+        ctx.settings.data.phone.phonebook = false;
         await ctx.settings.saveData();
         ctx.channel.send(ctx.__('phonebook.switch.disabled'));
       } else {
-        ctx.settings.data.misc.phone.phonebook = true;
+        ctx.settings.data.phone.phonebook = true;
         await ctx.settings.saveData();
         ctx.channel.send(ctx.__('phonebook.switch.enabled'));
       }
