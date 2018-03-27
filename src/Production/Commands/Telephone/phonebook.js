@@ -44,6 +44,7 @@ class Phonebook extends Command {
         numbersArray.push(`- **${guild.name}**: ${number.number} [${ctx.__('lang.flagEmote')}]`);
       }
 
+      ctx.setLocale(ctx.settings.data.misc.locale);
       ctx.channel.send(ctx.__('phonebook.list', {
         search,
         list: numbersArray.join('\n'),
