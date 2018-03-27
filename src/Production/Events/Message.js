@@ -129,6 +129,8 @@ class Message extends Event {
         .find(c => c.sender === ctx.guild.id || c.receiver === ctx.guild.id);
 
       if (phone && phone.state === 1) {
+        if (ctx.channel.id !== ctx.settings.data.phone.channel) return;
+
         const distantSettings = phone.sender === ctx.guild.id ? await this.client.database.getDocument('guild', phone.receiver) : await this.client.database.getDocument('guild', phone.sender);
         const channel = this.client.channels.get(distantSettings.phone.channel);
         if (!channel) return this.client.phone.interruptCall(ctx.guild.id);
