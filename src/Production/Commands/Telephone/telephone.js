@@ -4,6 +4,7 @@ class Telephone extends Command {
   constructor(client) {
     super(client, {
       name: 'telephone',
+      userPermissions: ['MANAGE_GUILD'],
       category: 5,
     });
   }
