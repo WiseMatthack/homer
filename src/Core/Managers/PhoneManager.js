@@ -79,6 +79,8 @@ class PhoneManager extends Manager {
    */
   async pickupCall(id) {
     const call = this.calls.find(c => c.receiver === id);
+    if (!call) return;
+
     call.state = 1;
     this.calls.splice(this.calls.indexOf(call), 1);
     this.calls.push(call);

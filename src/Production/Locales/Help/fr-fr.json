@@ -180,6 +180,11 @@
     "usage": "pickup",
     "examples": []
   },
+  "phonebook": {
+    "description": "Recherche des numéros de téléphone sur le carnet d'adresses",
+    "usage": "phonebook <switch|numéro de téléphone>",
+    "examples": ["phonebook switch", "phonebook 1-464-393"]
+  },
   "telephone": {
     "description": "Configure le salon téléphone",
     "usage": "telephone",
