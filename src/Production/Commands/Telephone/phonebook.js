@@ -23,7 +23,7 @@ class Phonebook extends Command {
     } else {
       const search = ctx.args.join(' ');
       if (!search) return ctx.channel.send(ctx.__('phonebook.error.noSearch', {
-        errorIcon: this.client.constants.statusIcon.error,
+        errorIcon: this.client.constants.statusEmotes.error,
       }));
 
       const numbers = await this.client.database.getDocuments('guild')
@@ -32,7 +32,7 @@ class Phonebook extends Command {
           .map(s => ({ id: s.id, number: s.phone.number })));
 
       if (numbers.length === 0) return ctx.channel.send(ctx.__('phonebook.error.noFound', {
-        errorIcon: this.client.constants.statusIcon.error,
+        errorIcon: this.client.constants.statusEmotes.error,
         search,
       }));
 
