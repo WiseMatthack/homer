@@ -84,6 +84,11 @@
     "usage": "choose <choice A> <choice B> [choice C] etc.",
     "examples": ["choose iDroid Artuto iBot Endless"]
   },
+  "poll": {
+    "description": "Create polls and start voting!",
+    "usage": "poll <title> [options]",
+    "examples": ["poll What do you prefer ? -d A: McDonald's - B: Quick -e :regional_indicator_a: :regional_indicator_b: -t 1h -c GREEN"]
+  },
   "profile": {
     "description": "Displays information about someone",
     "usage": "profile ([User]|set <fieldName> <fieldContent>|clear <fieldName>)",

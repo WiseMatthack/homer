@@ -84,6 +84,11 @@
     "usage": "choose <choix A> <choix B> [choix C] etc.",
     "examples": ["choose iDroid Artuto iBot Endless"]
   },
+  "poll": {
+    "description": "Créez des sondages et commencez à voter !",
+    "usage": "poll <titre> [options]",
+    "examples": ["poll Que préférez-vous ? -d A: McDonald's - B: Quick -e :regional_indicator_a: :regional_indicator_b: -t 1h -c GREEN"]
+  },
   "profile": {
     "description": "Affichez le profile de quelqu'un",
     "usage": "profile ([Utilisateur]|set <nomChamp> <contenuChamp>|clear <nomChamp>)",
