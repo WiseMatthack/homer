@@ -11,6 +11,11 @@ class Phonebook extends Command {
 
   async run(ctx) {
     if (ctx.args[0] === 'switch') {
+      if (!ctx.member.permissions.has('MANAGE_GUILD')) return ctx.channel.send(ctx.__('command.missingPerm.user', {
+        errorIcon: this.client.constants.statusEmotes.error,
+        missingPermissions: ['MANAGE_GUILD'].map(perm => `\`${perm}\``).join(', '),
+      }));
+
       if (ctx.settings.data.phone.phonebook) {
         ctx.settings.data.phone.phonebook = false;
         await ctx.settings.saveData();
@@ -28,7 +33,9 @@ class Phonebook extends Command {
 
       const numbers = await this.client.database.getDocuments('guild')
         .then(settings => settings
-          .filter(s => s.phone.number && s.phone.phonebook && s.phone.number.includes(search))
+          .filter(s => s.phone.number && s.phone.phonebook &&
+            (s.phone.number.includes(search) ||
+            this.client.guilds.get(s.id).name.toLowerCase().includes(search.toLowerCase())))
           .map(s => ({ id: s.id, number: s.phone.number })));
 
       if (numbers.length === 0) return ctx.channel.send(ctx.__('phonebook.error.noFound', {
