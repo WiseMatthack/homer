@@ -18,7 +18,7 @@ class Call extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (this.client.phone.isCallActive(ctx.guild.id) === 'active' || this.client.phone.isCallActive(ctx.guild.id) === 'pending') return ctx.channel.send(ctx.__('call.error.alreadyCalling', {
+    if (this.client.phone.isCallActive(ctx.guild.id) !== 'none') return ctx.channel.send(ctx.__('call.error.alreadyCalling', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
@@ -37,7 +37,7 @@ class Call extends Command {
 
       if (!this.client.channels.has(settingsToCall.phone.channel)) return ctx.channel.send(ctx.__('call.receiver.noChannel'));
 
-      const areTheyInCall = this.client.phone.isCallActive(guildToCall.id);
+      const areTheyInCall = this.client.phone.isCallActive(guildToCall.id) !== 'none';
       if (areTheyInCall) return ctx.channel.send(ctx.__('call.receiver.inCall'));
 
       this.client.phone.initiateCall(ctx.guild.id, guildToCall.id);
