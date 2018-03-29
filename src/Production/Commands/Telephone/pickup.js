@@ -13,7 +13,7 @@ class Pickup extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (!this.client.phone.isCallActive(ctx.guild.id)) return ctx.channel.send(ctx.__('pickup.error.nobodyCalls', {
+    if (this.client.phone.isCallActive(ctx.guild.id) !== 'pending') return ctx.channel.send(ctx.__('pickup.error.nobodyCalls', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 

@@ -26,7 +26,9 @@ class PhoneManager extends Manager {
    * @returns {Boolean}
    */
   isCallActive(id) {
-    return this.calls.find(c => c.sender === id || c.receiver === id);
+    if (this.calls.find(c => (c.sender === id || c.receiver === id) && c.state === 1)) return 'active';
+    else if (this.calls.find(c => (c.sender === id || c.receiver === id) && c.state === 0)) return 'pending';
+    return 'none';
   }
 
   /**
