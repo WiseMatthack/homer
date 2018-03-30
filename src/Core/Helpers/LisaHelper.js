@@ -47,7 +47,7 @@ class LisaHelper extends Helper {
         .replace(/{atuser}/g, context.user.toString())
         .replace(/{user}/g, context.user.username)
         .replace(/{userid}/g, context.user.id)
-        .replace(/{nick}/g, context.member.nickname || context.user.username)
+        .replace(/{nick}/g, context.nickname || context.user.username)
         .replace(/{discrim}/g, context.user.discriminator)
         .replace(/{server}/g, context.guild.name)
         .replace(/{serverid}/g, context.guild.id)
