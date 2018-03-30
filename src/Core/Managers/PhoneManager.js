@@ -66,6 +66,7 @@ class PhoneManager extends Manager {
     setTimeout(async () => {
       const callObject = this.calls.find(c => c.sender === sender && c.receiver === receiver);
       if (!callObject || callObject.state !== 0) return;
+      this.calls.splice(this.calls.indexOf(callObject), 1);
 
       i18n.setLocale(senderSettings.data.misc.locale);
       await callingMsg.edit(i18n.__('phone.noAnswer', { number: receiverSettings.data.phone.number }));
