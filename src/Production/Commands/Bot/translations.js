@@ -24,29 +24,25 @@ class Translations extends Command {
     let currentField = [];
     for (const locale of locales) {
       if (currentLocale && locale.split('-')[0] !== currentLocale) {
-        embed.addField('‎', currentField);
-        currentField = [];
+        embed.fields.push({
+          name: '‎',
+          value: '',
+          inline: true,
+        });
       }
 
       currentLocale = locale.split('-')[0];
       const message = [];
       const catalog = i18n.getCatalog(locale);
 
-      const authorTags = [];
-      for (const author of catalog['lang.authors']) {
-        authorTags.push(await this.client.fetchUser(author).then(u => u.tag));
-      }
-
-      currentField.push(ctx.__('translations.locale', {
+      embed.fields[embed.fields.length - 1].value += `\n${ctx.__('translations.locale', {
         fullName: catalog['lang.fullName'],
         emote: catalog['lang.flagEmote'],
         code: catalog['lang.code'],
-      }));
+      })}`;
     }
 
-    ctx.channel.send(ctx.__('translations.locales', {
-      locales: translations.join('\n'),
-    }), { embed });
+    ctx.channel.send(ctx.__('translations.locales'), { embed });
   }
 }
 
