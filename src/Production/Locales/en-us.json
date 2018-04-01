@@ -1,8 +1,8 @@
 {
-	"lang.fullName": "English (United Kingdom)",
-	"lang.code": "en-gb",
-	"lang.flagEmote": ":flag_gb:",
-	"lang.flagImage": "https://discordapp.com/assets/6c2b2176dab23f4abaceb3bf23338483.svg",
+	"lang.fullName": "English (United States)",
+	"lang.code": "en-us",
+	"lang.flagEmote": ":flag_us:",
+	"lang.flagImage": "https://discordapp.com/assets/7bfa2e5b9008c10c09723e470491fd98.svg",
 	"lang.authors": ["205427654042583040"],
 
 	"global.none": "None",

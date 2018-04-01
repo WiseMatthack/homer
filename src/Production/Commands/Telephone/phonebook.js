@@ -25,6 +25,31 @@ class Phonebook extends Command {
         await ctx.settings.saveData();
         ctx.channel.send(ctx.__('phonebook.switch.enabled'));
       }
+    } else if (ctx.args[0] === 'blacklist') {
+      const number = ctx.args[1];
+      if (!number) return ctx.channel.send(ctx.__('phonebook.blacklist.error.noNumber', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
+      const foundGuild = await this.client.database.provider.table('guild').find({ phone: { number } })
+        .then(res => res[0]);
+      if (!foundGuild) return ctx.channel.send(ctx.__('phonebook.blacklist.error.noGuild', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
+      if (ctx.settings.data.phone.blacklist.includes(foundGuild.id)) {
+        ctx.settings.data.phone.blacklist.splice(ctx.settings.data.phone.blacklist.indexOf(foundGuild.id), 1);
+        await ctx.settings.saveData();
+        ctx.channel.send(ctx.__('phonebook.blacklist.removed', {
+          successIcon: this.client.constants.statusEmotes.success,
+        }));
+      } else {
+        ctx.settings.data.phone.blacklist.push(foundGuild.id);
+        await ctx.settings.saveData();
+        ctx.channel.send(ctx.__('phonebook.blacklist.added', {
+          successIcon: this.client.constants.statusEmotes.success,
+        }));
+      }
     } else {
       const search = ctx.args.join(' ');
       if (!search) return ctx.channel.send(ctx.__('phonebook.error.noSearch', {

@@ -187,8 +187,8 @@
   },
   "phonebook": {
     "description": "Recherche des numéros de téléphone sur le carnet d'adresses",
-    "usage": "phonebook <switch|numéro de téléphone>",
-    "examples": ["phonebook switch", "phonebook 1-464-393"]
+    "usage": "phonebook <switch|numéro de téléphone|blacklist <numéro de téléphone>>",
+    "examples": ["phonebook switch", "phonebook 1-464-393", "phonebook blacklist 999-999"]
   },
   "telephone": {
     "description": "Configure le salon téléphone",

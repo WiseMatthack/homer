@@ -31,7 +31,7 @@ class Call extends Command {
 
     if (settingsToCall) {
       const guildToCall = this.client.guilds.get(settingsToCall.id);
-      if (settingsToCall.phone.blacklist.includes(number)) return ctx.channel.send(ctx.__('call.numberBlacklisted', {
+      if (settingsToCall.phone.blacklist.includes(ctx.guild.id)) return ctx.channel.send(ctx.__('call.numberBlacklisted', {
         number,
       }));
 
