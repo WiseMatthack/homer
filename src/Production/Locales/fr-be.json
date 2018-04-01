@@ -300,7 +300,7 @@
 	"translate.textTooLong": "{{{ errorIcon }}} La longueur du texte ne doit excéder 1024 caractères.",
 	"translate.error": "{{{ errorIcon }}} Une erreur est survenue lors de la traduction.",
 	"translations.locales": "🗨 Langues disponibles sur Homer :\n\n{{{ embed }}}",
-	"translations.locale": "`{{{ code }}}`: {{{ emote }}} **{{{ fullName }}}**: par {{{ authors }}}.",
+	"translations.locale": "`{{{ code }}}`: {{{ emote }}} **{{{ fullName }}}**",
 	"translations.footer": "Pour configurer une langue, tapez {{{ prefix }}}locale <code>.",
 	"unban.error.noSearch": "{{{ errorIcon }}} Vous devez fournir un (partie du) tag ou l'ID de l'utilisateur à débannir.",
 	"unban.error.noUser": "{{{ errorIcon }}} Personne trouvé dans la liste des bans correspondant à `{{{ search }}}`.",

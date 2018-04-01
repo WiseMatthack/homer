@@ -301,7 +301,7 @@
 	"translate.textTooLong": "{{{ errorIcon }}} The text length must not exceed 1024 characters.",
 	"translate.error": "{{{ errorIcon }}} An error has occured during the translation.",
 	"translations.locales": "🗨 Languages for Homer:\n\n{{{ embed }}}",
-	"translations.locale": "`{{{ code }}}`: {{{ emote }}} **{{{ fullName }}}**: by {{{ authors }}}.",
+	"translations.locale": "`{{{ code }}}`: {{{ emote }}} **{{{ fullName }}}**",
 	"translations.footer": "To set a locale, run {{{ prefix }}}locale <code>.",
 	"unban.error.noSearch": "{{{ errorIcon }}} You must provide the (part of) tag or the ID of the user you want to unban.",
 	"unban.error.noUser": "{{{ errorIcon }}} Nobody found in the ban list matching `{{{ search }}}`.",
