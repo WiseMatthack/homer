@@ -14,8 +14,22 @@ class Translations extends Command {
   async run(ctx) {
     const locales = i18n.getLocales();
 
-    const translations = [];
+    const embed = new RichEmbed()
+      .setFooter(ctx.__('translations.footer', {
+        prefix: this.client.config.discord.defaultPrefixes[0],
+      }))
+      .setColor(ctx.guild.me.displayHexColor);
+
+    let currentLocale = null;
+    let currentField = [];
     for (const locale of locales) {
+      if (locale.split('-')[0] !== currentLocale) {
+        embed.addField('‎', currentField);
+        currentField = [];
+      }
+
+      currentLocale = locale.split('-')[0];
+      const message = [];
       const catalog = i18n.getCatalog(locale);
 
       const authorTags = [];
@@ -23,20 +37,12 @@ class Translations extends Command {
         authorTags.push(await this.client.fetchUser(author).then(u => u.tag));
       }
 
-      translations.push(ctx.__('translations.locale', {
+      currentField.push(ctx.__('translations.locale', {
         fullName: catalog['lang.fullName'],
         emote: catalog['lang.flagEmote'],
         code: catalog['lang.code'],
-        authors: authorTags.join(', '),
       }));
     }
-
-    const embed = new RichEmbed()
-      .setDescription(translations.join('\n'))
-      .setFooter(ctx.__('translations.footer', {
-        prefix: this.client.config.discord.defaultPrefixes[0],
-      }))
-      .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('translations.locales', {
       locales: translations.join('\n'),
