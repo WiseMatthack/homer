@@ -31,8 +31,8 @@ class Phonebook extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      const foundGuild = await this.client.database.provider.table('guild').find({ phone: { number } })
-        .then(res => res[0]);
+      const foundGuild = await this.client.database.getDocuments('guild')
+        .then(res => res.find(s => s.phone.number === number));
       if (!foundGuild) return ctx.channel.send(ctx.__('phonebook.blacklist.error.noGuild', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
