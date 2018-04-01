@@ -83,6 +83,7 @@ class User extends Command {
       .addField(ctx.__('user.embed.lastactive'), this.capitalizeFirstLetter(lastactiveStatus), true)
       .addField(ctx.__('user.embed.afk'), afkStatus, true)
       .addField(ctx.__('user.embed.creation'), mtz(member.user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`))
+      .addField(ctx.__('user.embed.join'), mtz(member.joinedTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`))
       .setColor(ctx.guild.me.displayHexColor)
       .setThumbnail(member.user.displayAvatarURL);
 

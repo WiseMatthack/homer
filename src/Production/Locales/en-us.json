@@ -317,6 +317,7 @@
 	"user.embed.lastactive": "⏱ Last active",
 	"user.embed.afk": "💤 AFK",
 	"user.embed.creation": "📆 Account creation date",
+	"user.embed.join": "⏲ Guild join date",
 	"user.afk.status": "{{{ reason }}} *(since {{{ since }}})*",
 	"vote.memberVote": "- **{{{ tag }}}** has voted {{{ count }}} time(s).",
 	"vote.embed.footer": "Run {{{ prefix }}}vote to get instructions for voting.",

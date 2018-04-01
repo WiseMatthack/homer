@@ -316,6 +316,7 @@
 	"user.embed.lastactive": "⏱ Dernière activité",
 	"user.embed.afk": "💤 AFK",
 	"user.embed.creation": "📆 Date de création du compte",
+	"user.embed.join": "⏲ Date d'arrivée sur le serveur",
 	"user.afk.status": "{{{ reason }}} *(depuis {{{ since }}})*",
 	"vote.memberVote": "- **{{{ tag }}}** a voté {{{ count }}} fois.",
 	"vote.embed.footer": "Tapez {{{ prefix }}}vote pour obtenir les instructions pour voter.",
