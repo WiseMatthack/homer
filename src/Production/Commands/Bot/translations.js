@@ -23,8 +23,8 @@ class Translations extends Command {
     let currentLocale = null;
     let currentField = [];
     for (const locale of locales) {
-      if (locale.split('-')[0] !== currentLocale) {
-        embed.addField('‎‎‎‎‎‎‎‎‎‎‎‎‎‎', currentField);
+      if (currentLocale && locale.split('-')[0] !== currentLocale) {
+        embed.addField('‎', currentField);
         currentField = [];
       }
 
