@@ -24,7 +24,7 @@ class Translations extends Command {
     let currentField = [];
     for (const locale of locales) {
       if (locale.split('-')[0] !== currentLocale) {
-        embed.addField('‎', currentField);
+        embed.addField('‎‎‎‎‎‎‎‎‎‎‎‎‎‎', currentField);
         currentField = [];
       }
 
