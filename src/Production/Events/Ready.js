@@ -8,11 +8,11 @@ class Ready extends Event {
   async handle() {
     console.log(`[Discord] Connected as ${this.client.user.tag}. On ${this.client.guilds.size} servers with ${this.client.users.size} users.`);
 
-    this.client.updateGame();
-    setInterval((count) => {
-      this.client.updateGame();
-      this.client.misc.updateCount(count);
-    }, 10000, this.client.guilds.size);
+    this.client.misc.updateGame();
+    setInterval(() => {
+      this.client.misc.updateGame();
+      this.client.misc.updateCount();
+    }, 10000);
 
     this.client.database.getDocuments('poll')
       .then((polls) => {

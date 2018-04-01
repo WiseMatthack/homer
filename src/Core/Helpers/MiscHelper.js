@@ -11,7 +11,7 @@ class MiscHelper extends Helper {
    * @param {Number} guild Guild count
    * @param {String} botID ID of the bot
    */
-  async updateCount(guild, botID = this.client.user.id) {
+  async updateCount(guild = this.client.guilds.size, botID = this.client.user.id) {
     snekfetch
       .post(`https://ls.terminal.ink/api/v1/bots/${botID}`)
       .set({
