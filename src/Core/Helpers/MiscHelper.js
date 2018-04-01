@@ -18,7 +18,7 @@ class MiscHelper extends Helper {
         Authorization: this.client.config.api.lsTerminal,
         'Content-Type': 'application/x-www-form-urlencoded',
       })
-      .send({ server_count: guild })
+      .send({ server_count: guildID })
       .catch(res => console.log('[Error] Unable to update guild count on ls.terminal.ink.\n', res.body));
 
     snekfetch
@@ -27,13 +27,13 @@ class MiscHelper extends Helper {
         Authorization: this.client.config.api.discordBots,
         'Content-Type': 'application/x-www-form-urlencoded',
       })
-      .send({ server_count: guild })
+      .send({ server_count: guildID })
       .catch(res => console.log('[Error] Unable to update guild count on discordbots.org.\n', res.body));
 
     snekfetch
       .post(`https://bots.discord.pw/api/bots/${botID}/stats`)
       .set({ Authorization: this.client.config.api.discordPw })
-      .send({ server_count: guild })
+      .send({ server_count: guildID })
       .catch(res => console.log('[Error] Unable to update guild count on bots.discord.pw.\n', res.body));
   }
 }
