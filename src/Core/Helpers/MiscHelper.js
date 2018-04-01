@@ -8,10 +8,10 @@ const snekfetch = require('snekfetch');
 class MiscHelper extends Helper {
   /**
    * Update the guild count on every bot list.
-   * @param {Number} guild Guild count
    * @param {String} botID ID of the bot
+   * @param {Number} guildID Guild count
    */
-  async updateCount(guild = this.client.guilds.size, botID = this.client.user.id) {
+  async updateCount(botID, guildID) {
     snekfetch
       .post(`https://ls.terminal.ink/api/v1/bots/${botID}`)
       .set({

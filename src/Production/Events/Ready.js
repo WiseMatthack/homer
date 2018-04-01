@@ -9,10 +9,10 @@ class Ready extends Event {
     console.log(`[Discord] Connected as ${this.client.user.tag}. On ${this.client.guilds.size} servers with ${this.client.users.size} users.`);
 
     this.client.updateGame();
-    setInterval(() => {
+    setInterval((client) => {
       this.client.updateGame();
-      this.client.misc.updateCount();
-    }, 10000);
+      this.client.misc.updateCount(client.user.id, client.guilds.size);
+    }, 10000, this.client);
 
     this.client.database.getDocuments('poll')
       .then((polls) => {
