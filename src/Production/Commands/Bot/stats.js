@@ -11,6 +11,9 @@ class Stats extends Command {
   }
 
   async run(ctx) {
+    const guildDatabase = await this.client.database.getDocuments('guild');
+    const numbers = guildDatabase.filter(g => g.phone.number).length;
+
     const embed = new RichEmbed()
       .setDescription(ctx.__('stats.embed.description', {
         guilds: this.client.guilds.size,
@@ -19,6 +22,7 @@ class Stats extends Command {
           .locale(ctx.settings.data.misc.locale)
           .fromNow(true),
         ram: Math.floor(process.memoryUsage().rss / 1000000),
+        activeNumbers: numbers,
       }))
       .setFooter(ctx.__('stats.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }))
       .setThumbnail(this.client.user.displayAvatarURL)

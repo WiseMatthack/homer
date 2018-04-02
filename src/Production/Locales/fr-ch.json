@@ -261,7 +261,7 @@
 	"settimezone.error.invalidTimezone": "{{{ errorIcon }}} Le fuseau horaire `{{{ timezone }}}` n'est pas reconnu par `moment-timezone`.",
 	"settimezone.set": "{{{ successIcon }}} Fuseau horaire configuré ! Voici un exemple: `{{{ demo }}}`.",
 	"stats.title": "📈 Statistiques à propos d'Homer:",
-	"stats.embed.description": "🏙 {{{ guilds }}} serveurs\n👥 {{{ users }}} utilisateurs\n⏱ En ligne depuis {{{ uptime }}}\n💻 Utilise {{{ ram }}}Mo de mémoire",
+	"stats.embed.description": "🏙 {{{ guilds }}} serveurs\n👥 {{{ users }}} utilisateurs\n⏱ En ligne depuis {{{ uptime }}}\n💻 Utilise {{{ ram }}}Mo de mémoire\n☎ {{{ activeNumbers }}} lignes téléphoniques actives",
 	"stats.embed.footer": "Vous pouvez avoir des informations sur moi avec {{{ prefix }}}about!",
 	"support.support": "🛂 Si vous souhaitez obtenir de l'aide, vous pouvez rejoindre mon serveur d'assistant grâce à ce lien : <{{{ link }}}>.",
 	"tag.common.noTag": "{{{ errorIcon }}} Vous devez fournir un **nom** de tag.",

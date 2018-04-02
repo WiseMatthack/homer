@@ -262,7 +262,7 @@
 	"settimezone.error.invalidTimezone": "{{{ errorIcon }}} The timezone `{{{ timezone }}}` is not recognized by `moment-timezone`.",
 	"settimezone.set": "{{{ successIcon }}} Timezone set! Here is an example: `{{{ demo }}}`.",
 	"stats.title": "📈 Statistics about Homer:",
-	"stats.embed.description": "🏙 {{{ guilds }}} servers\n👥 {{{ users }}} users\n⏱ Online for {{{ uptime }}}\n💻 Uses {{{ ram }}}MB of memory",
+	"stats.embed.description": "🏙 {{{ guilds }}} servers\n👥 {{{ users }}} users\n⏱ Online for {{{ uptime }}}\n💻 Uses {{{ ram }}}MB of memory\n☎ {{{ activeNumbers }}} active telephone lines",
 	"stats.embed.footer": "You can get information about me using {{{ prefix }}}about!",
 	"support.support": "🛂 If you wanna get helped on using the bot, you can join our support server using this invitation: <{{{ link }}}>.",
 	"tag.common.noTag": "{{{ errorIcon }}} You must provide a **tag name**.",
