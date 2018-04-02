@@ -64,7 +64,7 @@ class Remind extends Command {
       const end = profile.data.reminds
         .sort((a, b) => b.index - a.index)[profile.data.reminds.length - 1];
       const remind = {
-        index: end ? end.index : 1,
+        index: end ? (end.index + 1) : 1,
         content,
         guild: ctx.guild.id,
         channel: ctx.channel.id,
