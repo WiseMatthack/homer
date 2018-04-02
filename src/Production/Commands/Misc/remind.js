@@ -62,7 +62,7 @@ class Remind extends Command {
       const timeout = durationParser(duration) || 60000;
 
       const end = profile.data.reminds
-        .sort((a, b) => b.index - a.index)[profile.data.reminds.length - 1];
+        .sort((a, b) => a.index - b.index)[profile.data.reminds.length - 1];
       const remind = {
         index: end ? (end.index + 1) : 1,
         content,
