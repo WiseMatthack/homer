@@ -22,7 +22,7 @@ class Call extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (ctx.settings.data.phone.number === ctx.guild.id) return ctx.channel.send(ctx.__('call.error.cannotCallThis', {
+    if (ctx.settings.data.phone.number === number) return ctx.channel.send(ctx.__('call.error.cannotCallThis', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
