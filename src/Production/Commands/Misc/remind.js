@@ -37,7 +37,7 @@ class Remind extends Command {
       }));
 
       if (ctx.args[1]) {
-        const remind = profile.data.reminds.find(r => r.index === ctx.args[1]);
+        const remind = profile.data.reminds.find(r => r.index === parseInt(ctx.args[1]));
         if (!remind) return ctx.channel.send(ctx.__('remind.error.noRemindFound', {
           errorIcon: this.client.constants.statusEmotes.error,
           index: ctx.args[1],
