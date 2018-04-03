@@ -127,7 +127,7 @@ class Message extends Event {
           if (!channel) return;
 
           const formattedTime = mtz().format('HH:mm:ss');
-          channel.send(`\`[${formattedTime}]\` ⌨ **${message.guild.name}** (ID:${message.guild.id}) ran the command \`${cmd.name}\` (\`${message.cleanContent}\`) on **${message.guild.name}**`);
+          channel.send(`\`[${formattedTime}]\` ⌨ **${message.author.tag}** (ID:${message.author.id}) ran the command \`${cmd.name}\` (\`${message.cleanContent}\`) on **${message.guild.name}**`);
         }
 
         cmd.run(ctx);
