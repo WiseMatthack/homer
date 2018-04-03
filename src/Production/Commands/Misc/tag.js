@@ -1,5 +1,6 @@
 const Command = require('../../../Core/Structures/Command');
 const DataTag = require('../../../Core/Structures/Data/DataTag');
+const moment = require('moment-timezone');
 
 class Tag extends Command {
   constructor(client) {
@@ -82,6 +83,8 @@ class Tag extends Command {
       successIcon: this.client.constants.statusEmotes.success,
       tag: tagName,
     }));
+
+    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) created the tag \`${tagName}\` on **${ctx.guild.name}**`);
   }
 
   async subEdit(ctx) {
@@ -117,6 +120,8 @@ class Tag extends Command {
       successIcon: this.client.constants.statusEmotes.success,
       tag: tagName,
     }));
+
+    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) edited the tag \`${tagName}\` on **${ctx.guild.name}**`);
   }
 
   async subDelete(ctx) {
@@ -144,6 +149,8 @@ class Tag extends Command {
       successIcon: this.client.constants.statusEmotes.success,
       tag: tagName,
     }));
+
+    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) deleted the tag \`${tagName}\` on **${ctx.guild.name}**`);
   }
 
   async subOwner(ctx) {
@@ -254,6 +261,18 @@ class Tag extends Command {
       tag: member.user.tag,
       list: mappedTags.join(', '),
     }));
+  }
+
+  /**
+   * Sends a log in the tag-log channel.
+   * @param {String} message Message to send
+   */
+  async tagLog(message) {
+    const channel = this.client.channels.get(this.client.config.logChannels.tag);
+    if (!channel) return;
+
+    const formattedTime = moment().format('DD/MM/YYYY @ HH:mm:ss');
+    channel.send(`\`[${formattedTime}]\` 🏷 ${message}`);
   }
 
   /**

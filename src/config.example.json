@@ -20,6 +20,10 @@
     "channel": "",
     "guild": ""
   },
+  "logChannels": {
+    "tag": "",
+    "guild": ""
+  },
   "database": {
     "db": "",
     "host": "",
