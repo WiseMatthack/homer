@@ -1,5 +1,6 @@
 const Event = require('../../Core/Structures/Event');
 const { appendFile } = require('fs');
+const moment = require('moment-timezone');
 
 class GuildDelete extends Event {
   constructor(client) {
