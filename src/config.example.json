@@ -22,7 +22,8 @@
   },
   "logChannels": {
     "tag": "",
-    "guild": ""
+    "guild": "",
+    "command": ""
   },
   "database": {
     "db": "",

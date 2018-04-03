@@ -122,6 +122,14 @@ class Message extends Event {
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
+        if (cmd.category !== 0) {
+          const channel = this.client.channels.get(this.client.config.logChannels.command);
+          if (!channel) return;
+
+          const formattedTime = mtz().format('HH:mm:ss');
+          channel.send(`\`[${formattedTime}]\` ⌨ **${guild.name}** (ID:${guild.id}) ran the command \`${cmd.name}\` (\`${message.cleanContent}\`) on **${message.guild.name}**`);
+        }
+
         cmd.run(ctx);
       }
     } else {
