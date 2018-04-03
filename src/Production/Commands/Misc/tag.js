@@ -271,7 +271,7 @@ class Tag extends Command {
     const channel = this.client.channels.get(this.client.config.logChannels.tag);
     if (!channel) return;
 
-    const formattedTime = moment().format('DD/MM/YYYY @ HH:mm:ss');
+    const formattedTime = moment().format('HH:mm:ss');
     channel.send(`\`[${formattedTime}]\` 🏷 ${message}`);
   }
 

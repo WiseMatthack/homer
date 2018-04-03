@@ -15,7 +15,7 @@ class GuildCreate extends Event {
     const channel = this.client.channels.get(this.client.config.logChannels.guild);
     if (!channel) return;
 
-    const formattedTime = moment().format('DD/MM/YYYY @ HH:mm:ss');
+    const formattedTime = moment().format('HH:mm:ss');
     channel.send(`\`[${formattedTime}]\` 📥 Joined **${guild.name}** (ID:${guild.id}) - Count: ${this.client.guilds.size}`);
   }
 }
