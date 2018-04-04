@@ -114,11 +114,6 @@
     "usage": "timezone (set <fuseau horaire>)|([Membre])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
   },
-  "vote": {
-    "description": "Soutenez Homer sur DiscordBots.org",
-    "usage": "vote [top]",
-    "examples": ["vote", "vote top"]
-  },
 
   "category": {
     "description": "Désactive une catégorie de commandes pour le serveur",
