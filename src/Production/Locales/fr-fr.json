@@ -53,6 +53,7 @@
 	"clear.success": "{{{ successIcon }}} {{{ count }}} messages deleted matching criteria: `{{{ criteria }}}`.",
 	"command.missingPerm.bot": "{{{ errorIcon }}} Le bot a besoin des permissions suivantes pour exécuter la commande : {{{ missingPermissions }}}.",
 	"command.missingPerm.user": "{{{ errorIcon }}} Vous avez besoin des permissions suivantes pour exécuter la commande : {{{ missingPermissions }}}.",
+	"command.disabledCommandOverride": "{{{ errorIcon }}} La commande `{{{ name }}}` a été désactivée sur ce salon.",
 	"dashboard.article.footer": "Article écrit par <a href=\"/user/{{{ authorID }}}\">{{{ authorTag }}}</a> le {{{ published }}}.",
 	"dashboard.cookies.dismiss": "Ok",
 	"dashboard.cookies.link": "En apprendre plus sur les cookies.",

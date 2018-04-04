@@ -53,6 +53,7 @@
 	"clear.success": "{{{ successIcon }}} {{{ count }}} messages deleted matching criteria: `{{{ criteria }}}`.",
 	"command.missingPerm.bot": "{{{ errorIcon }}} The bot needs the following permission(s) to run this command: {{{ missingPermissions }}}.",
 	"command.missingPerm.user": "{{{ errorIcon }}} You need the following permission(s) to run this command: {{{ missingPermissions }}}.",
+	"command.disabledCommandOverride": "{{{ errorIcon }}} The command `{{{ name }}}` was disabled in this channel.",
 	"dashboard.article.footer": "Article made by <a href=\"/user/{{{ authorID }}}\">{{{ authorTag }}}</a> on {{{ published }}}.",
 	"dashboard.cookies.dismiss": "Ok",
 	"dashboard.cookies.link": "Learn more about cookies.",

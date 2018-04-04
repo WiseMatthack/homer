@@ -122,6 +122,11 @@ class Message extends Event {
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
+        if (ctx.channel.topic.includes(`{-${cmd.name}}`)) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          name: cmd.name,
+        }));
+
         if (cmd.category !== 0) {
           const channel = this.client.channels.get(this.client.config.logChannels.command);
           if (!channel) return;
