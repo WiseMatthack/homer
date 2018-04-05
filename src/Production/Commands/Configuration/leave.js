@@ -26,7 +26,7 @@ class Leave extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      ctx.settings.data.welcome = {
+      ctx.settings.data.leave = {
         channel: ctx.channel.id,
         message,
       };
