@@ -122,17 +122,19 @@ class Message extends Event {
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
-        if (ctx.channel.topic.includes(`{-${cmd.name}}`)) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
+        if ((cmd.category > 1) &&
+          ctx.channel.topic &&
+          ctx.channel.topic.includes(`{-${cmd.name}}`)) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
           errorIcon: this.client.constants.statusEmotes.error,
           name: cmd.name,
         }));
 
-        if (cmd.category !== 0) {
+        if (cmd.category !== 0 && !this.client.config.owners.includes(ctx.author.id)) {
           const channel = this.client.channels.get(this.client.config.logChannels.command);
           if (!channel) return;
 
           const formattedTime = mtz().format('HH:mm:ss');
-          channel.send(`\`[${formattedTime}]\` ⌨ **${message.author.tag}** (ID:${message.author.id}) ran the command \`${cmd.name}\` (\`${message.cleanContent}\`) on **${message.guild.name}**`);
+          channel.send(`\`[${formattedTime}]\` ⌨ **${ctx.author.tag}** (ID:${ctx.author.id}) ran the command \`${cmd.name}\` (\`${message.cleanContent}\`) on **${ctx.guild.name}**`);
         }
 
         cmd.run(ctx);
