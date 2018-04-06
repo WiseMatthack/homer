@@ -5,6 +5,7 @@ class Profile extends Command {
   constructor(client) {
     super(client, {
       name: 'profile',
+      aliases: ['p'],
       category: 3,
     });
   }
