@@ -90,9 +90,9 @@
     "examples": ["poll Que préférez-vous ? -d A: McDonald's - B: Quick -e :regional_indicator_a: :regional_indicator_b: -t 1h -c GREEN"]
   },
   "profile": {
-    "description": "Affichez le profile de quelqu'un",
-    "usage": "profile ([Utilisateur]|set <nomChamp> <contenuChamp>|clear <nomChamp>)",
-    "examples": ["profile iDroid#4441", "profile", "profile set twitter iDroid27210", "profile clear twitter"]
+    "description": "Affichez le profile de quelqu'un, créez le votre ou vérifiez les champs disponibles",
+    "usage": "profile ([Utilisateur]|set <nomChamp> <contenuChamp>|clear <nomChamp>|list)",
+    "examples": ["profile iDroid#4441", "profile", "profile list", "profile set twitter iDroid27210", "profile clear twitter"]
   },
   "remind": {
     "description": "Vous rappelle d'une tâche à faire",
