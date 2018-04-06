@@ -17,7 +17,7 @@ const router = Router()
     voteObject.count += 1;
     await client.database.insertDocument('votes', voteObject, { conflict: 'update' });
 
-    const userLocale = (await client.database.getDocument('profile', user.id).then(p => p.locale) || 'en-gb');
+    const userLocale = (await client.database.getDocument('profile', user.id).then(p => p ? (p.locale || 'en-gb') : 'en-gb'));
     i18n.setLocale(userLocale);
 
     user.send(i18n.__('vote.webhookDM'))
