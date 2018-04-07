@@ -34,6 +34,11 @@
     "usage": "avatar [Utilisateur]",
     "examples": ["avatar", "avatar b1nzy#1337"]
   },
+  "channel": {
+    "description": "Obtenez des informations sur un salon",
+    "usage": "channel [#salon]",
+    "examples": ["channel", "channel #fornite"]
+  },
   "checkdbans": {
     "description": "Vérifie si un ID utilisateur est listé sur la liste Discord Bans (non-officiel)",
     "usage": "checkdbans ([Utilisateur]|[UserID)",
