@@ -71,7 +71,7 @@ class Message extends Event {
 
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed.error,
+              message: parsed ? parsed.error : ctx.__('global.unknown'),
             }));
             ctx.channel.stopTyping(true);
           });
