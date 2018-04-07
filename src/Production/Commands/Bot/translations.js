@@ -20,26 +20,15 @@ class Translations extends Command {
       }))
       .setColor(ctx.guild.me.displayHexColor);
 
-    let currentLocale = null;
-    let currentField = [];
-    for (const locale of locales) {
-      if (locale.split('-')[0] !== currentLocale) {
-        embed.fields.push({
-          name: '‎',
-          value: '',
-          inline: true,
-        });
-      }
+    const message = [];
 
-      currentLocale = locale.split('-')[0];
-      const message = [];
+    for (const locale of i18n.getLocales()) {
       const catalog = i18n.getCatalog(locale);
-
-      embed.fields[embed.fields.length - 1].value += `\n${ctx.__('translations.locale', {
+      message.push(ctx.__('translations.locale', {
         fullName: catalog['lang.fullName'],
         emote: catalog['lang.flagEmote'],
         code: catalog['lang.code'],
-      })}`;
+      }));
     }
 
     ctx.channel.send(ctx.__('translations.locales'), { embed });
