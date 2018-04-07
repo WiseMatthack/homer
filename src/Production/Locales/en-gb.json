@@ -102,6 +102,7 @@
 	"feed.added": "{{{ successIcon }}} Feed added in <#{{{ channel }}}> successfully.",
 	"feedback.invalidText": "{{{ errorIcon }}} The message length must not exceed 512 characters.",
 	"feedback.sent": "{{{ successIcon }}} Your feedback has been sent!",
+	"finder.channels.noResult": "{{{ errorIcon }}} No text channel found matching `{{{ search }}}`.",
 	"finder.members.first": "{{{ warningIcon }}} **{{{ total }}}** members found:\n{{{ list }}}",
 	"finder.members.second": "... and {{{ left }}} members left.",
 	"finder.members.noResult": "{{{ errorIcon }}} No-one found matching `{{{ search }}}`.",

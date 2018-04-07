@@ -101,6 +101,7 @@
 	"feed.added": "{{{ successIcon }}} Flux ajouté dans <#{{{ channel }}}> avec succès.",
 	"feedback.invalidText": "{{{ errorIcon }}} La longueur du message ne doit excéder 512 caractères.",
 	"feedback.sent": "{{{ successIcon }}} Votre retour a été envoyé !",
+	"finder.channels.noResult": "{{{ errorIcon }}} Aucun salon textuel trouvé correspondant à `{{{ search }}}`.",
 	"finder.members.first": "{{{ warningIcon }}} **{{{ total }}}** membres trouvés:\n{{{ list }}}",
 	"finder.members.second": "... et {{{ left }}} membres restants.",
 	"finder.members.noResult": "{{{ errorIcon }}} Aucun membre trouvé correspondant à `{{{ search }}}`.",
