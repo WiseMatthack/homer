@@ -14,14 +14,7 @@ class Translations extends Command {
   async run(ctx) {
     const locales = i18n.getLocales();
 
-    const embed = new RichEmbed()
-      .setFooter(ctx.__('translations.footer', {
-        prefix: this.client.config.discord.defaultPrefixes[0],
-      }))
-      .setColor(ctx.guild.me.displayHexColor);
-
     const message = [];
-
     for (const locale of i18n.getLocales()) {
       const catalog = i18n.getCatalog(locale);
       message.push(ctx.__('translations.locale', {
@@ -30,6 +23,13 @@ class Translations extends Command {
         code: catalog['lang.code'],
       }));
     }
+
+    const embed = new RichEmbed()
+      .setDescription(message.join('\n'))
+      .setFooter(ctx.__('translations.footer', {
+        prefix: this.client.config.discord.defaultPrefixes[0],
+      }))
+      .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('translations.locales'), { embed });
   }
