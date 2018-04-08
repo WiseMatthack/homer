@@ -59,7 +59,6 @@ class Lookup extends Command {
 
         embed
           .addField(ctx.__('lookup.guild.id'), guildReq.id, true)
-          .addField(ctx.__('lookup.guild.owner.title'), ctx.__('lookup.guild.owner.value', { tag: guild.owner.user.tag }), true)
           .addField(ctx.__('lookup.guild.members.title'), ctx.__('lookup.guild.members.value', {
             online: `${this.client.emojis.get(this.client.constants.presenceIcons.online).toString()} ${guildReq.members.filter(m => m.status === 'online').length}`,
             idle: `${this.client.emojis.get(this.client.constants.presenceIcons.idle).toString()} ${guildReq.members.filter(m => m.status === 'idle').length}`,
