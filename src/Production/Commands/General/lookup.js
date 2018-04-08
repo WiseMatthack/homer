@@ -1,6 +1,8 @@
 const Command = require('../../../Core/Structures/Command');
 const { RichEmbed } = require('discord.js');
 const mtz = require('moment-timezone');
+const snekfetch = require('snekfetch');
+const { deconstruct } = require('../../../../node_modules/discord.js/src/util/Snowflake');
 
 class Lookup extends Command {
   constructor(client) {
@@ -19,63 +21,9 @@ class Lookup extends Command {
     const embed = new RichEmbed()
       .setColor(ctx.guild.me.displayHexColor);
 
-    if (this.client.guilds.has(lookup)) {
-      const guild = this.client.guilds.get(lookup);
-
-      embed
-        .addField(ctx.__('lookup.guild.id'), guild.id, true)
-        .addField(ctx.__('lookup.guild.owner.title'), ctx.__('lookup.guild.owner.value', { tag: guild.owner.user.tag }), true)
-        .addField(ctx.__('lookup.guild.members.title'), ctx.__('lookup.guild.members.value', {
-          total: guild.memberCount,
-          bots: guild.members.filter(m => m.user.bot).size,
-        }), true)
-        .addField(ctx.__('lookup.guild.channels.title'), ctx.__('lookup.guild.channels.value', {
-          text: guild.channels.filter(c => c.type === 'text').size,
-          voice: guild.channels.filter(c => c.type === 'voice').size,
-        }), true)
-        .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
-          creation: mtz(guild.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
-        }))
-        .setThumbnail(guild.iconURL);
-
-      ctx.channel.send(ctx.__('lookup.guild.title', {
-        name: guild.name,
-      }), { embed });
-    } else {
-      let user = null;
-      await this.client.fetchUser(lookup, false)
-        .then((fetched) => {
-          user = fetched;
-        })
-        .catch(() => {});
-
-      if (user) {
-        const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
-        const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
-
-        embed
-          .addField(ctx.__('lookup.user.id'), user.id, true)
-          .addField(ctx.__('lookup.user.premium', {
-            nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString(),
-          }), premium, true)
-          .addField(ctx.__('lookup.user.creation.title'), ctx.__('lookup.user.creation.value', {
-            creation: mtz(user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
-          }))
-          .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`);
-
-        ctx.channel.send(ctx.__('lookup.user.title', {
-          emote,
-          name: user.tag,
-        }), { embed });
-      } else {
-        let invite = null;
-        await this.client.fetchInvite(lookup)
-          .then((fetched) => {
-            invite = fetched;
-          })
-          .catch(() => {});
-
-        if (invite) {
+    if (isNaN(lookup)) {
+      this.client.fetchInvite(lookup)
+        .then((invite) => {
           embed
             .addField(ctx.__('lookup.invite.inviter.title'), ctx.__('lookup.invite.inviter.value', {
               tag: invite.inviter.tag,
@@ -89,12 +37,65 @@ class Lookup extends Command {
           ctx.channel.send(ctx.__('lookup.invite.title', {
             name: invite.guild.name,
           }), { embed });
-        } else {
-          ctx.channel.send(ctx.__('lookup.nothingFound', {
-            errorIcon: this.client.constants.statusEmotes.error,
-            lookup,
-          }));
-        }
+        })
+        .catch(() => ctx.channel.send(ctx.__('lookup.error.noInviteFound', { errorIcon: this.client.constants.statusEmotes.error, lookup })));
+    } else {
+      const guildReq = await snekfetch
+        .get(`https://discordapp.com/api/guilds/${lookup}/widget.json`)
+        .set({
+          'User-Agent': `DiscordBot (https://github.com/iDroid27210/homer) Node.js/${process.version}`,
+          'Accept-Encoding': 'gzip',
+        })
+        .then(res => res.body)
+        .catch(res => res.body);
+
+      if (guildReq.code !== 10004) {
+        if (guildReq.code === 50004) return ctx.channel.send(ctx.__('lookup.error.noMoreGuildInfo', {
+          errorIcon: this.client.constants.statusEmotes.error,
+        }));
+
+        const { timestamp } = deconstruct(guildReq.id);
+        const meta = await this.client.fetchInvite(guildReq.instant_invite).then(i => ({ icon: i.guild.iconURL }));
+
+        embed
+          .addField(ctx.__('lookup.guild.id'), guildReq.id, true)
+          .addField(ctx.__('lookup.guild.owner.title'), ctx.__('lookup.guild.owner.value', { tag: guild.owner.user.tag }), true)
+          .addField(ctx.__('lookup.guild.members.title'), ctx.__('lookup.guild.members.value', {
+            online: `${this.client.emojis.get(this.client.constants.presenceIcons.online).toString()} ${guildReq.members.filter(m => m.status === 'online').length}`,
+            idle: `${this.client.emojis.get(this.client.constants.presenceIcons.idle).toString()} ${guildReq.members.filter(m => m.status === 'idle').length}`,
+            dnd: `${this.client.emojis.get(this.client.constants.presenceIcons.dnd).toString()} ${guildReq.members.filter(m => m.status === 'dnd').length}`,
+          }), true)
+          .addField(ctx.__('lookup.guild.invite.title'), ctx.__('lookup.guild.invite.value', { invite: guildReq.instant_invite }), true)
+          .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
+            creation: mtz(timestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
+          }))
+          .setThumbnail(meta.icon);
+
+        ctx.channel.send(ctx.__('lookup.guild.title', {
+          name: guildReq.name,
+        }), { embed });
+      } else {
+        await this.client.fetchUser(lookup, false)
+          .then((user) => {
+            const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
+            const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
+  
+            embed
+              .addField(ctx.__('lookup.user.id'), user.id, true)
+              .addField(ctx.__('lookup.user.premium', {
+                nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString(),
+              }), premium, true)
+              .addField(ctx.__('lookup.user.creation.title'), ctx.__('lookup.user.creation.value', {
+                creation: mtz(user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
+              }))
+              .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`);
+  
+            ctx.channel.send(ctx.__('lookup.user.title', {
+              emote,
+              name: user.tag,
+            }), { embed });
+          })
+          .catch(() => ctx.__('lookup.error.noUserOrGuild', { errorIcon: this.client.constants.statusEmotes.error, lookup }));
       }
     }
   }
