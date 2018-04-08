@@ -59,7 +59,7 @@ class Checkdbans extends Command {
         if (reason) {
           embed
             .addField(ctx.__('checkdbans.embed.reason'), reason)
-            .addField(ctx.__('checkdbans.embed.reason'), tpm(proof));
+            .addField(ctx.__('checkdbans.embed.proof'), tpm(proof));
         }
 
         ctx.channel.send(ctx.__('checkdbans.title', { dbansIcon: this.client.constants.serviceIcons.discordBans, name: user.tag }), { embed });

@@ -50,6 +50,7 @@
 	"checkdbans.embed.status.is": "Listed",
 	"checkdbans.embed.status.isNot": "Not listed",
 	"checkdbans.embed.reason": "🖋 Reason",
+	"checkdbans.embed.proof": "🖼 Proof",
 	"checkdbans.error": "{{{ errorIcon }}} An error has occured while querying Discord Bans.",
 	"choose.not_enough_choices": "{{{ errorIcon }}} You must provide at least **2** choices.",
 	"choose.chosen": "🤔 I've chosen **{{{ choice }}}**!",
