@@ -77,7 +77,7 @@ class Lookup extends Command {
           name: guildReq.name,
         }), { embed });
       } else {
-        await this.client.fetchUser(lookup, false)
+        this.client.fetchUser(lookup, false)
           .then((user) => {
             const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
@@ -97,7 +97,7 @@ class Lookup extends Command {
               name: user.tag,
             }), { embed });
           })
-          .catch(() => ctx.__('lookup.error.noUserOrGuild', { errorIcon: this.client.constants.statusEmotes.error, lookup }));
+          .catch(() => ctx.channel.send(ctx.__('lookup.error.noUserOrGuild', { errorIcon: this.client.constants.statusEmotes.error, lookup })));
       }
     }
   }
