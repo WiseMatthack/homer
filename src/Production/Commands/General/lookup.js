@@ -56,7 +56,9 @@ class Lookup extends Command {
         }));
 
         const { timestamp } = deconstruct(guildReq.id);
-        const meta = await this.client.fetchInvite(guildReq.instant_invite).then(i => ({ icon: i.guild.iconURL }));
+        const meta = await this.client.fetchInvite(guildReq.instant_invite)
+          .then(i => ({ icon: i.guild.iconURL }))
+          .catch(() => ({}));
 
         embed
           .addField(ctx.__('lookup.guild.id'), guildReq.id, true)
