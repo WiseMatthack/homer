@@ -68,7 +68,9 @@ class Lookup extends Command {
             dnd: `${this.client.emojis.get(this.client.constants.presenceIcons.dnd).toString()} ${guildReq.members.filter(m => m.status === 'dnd').length}`,
           }), true)
           .addField(ctx.__('lookup.guild.invite.title'), ctx.__('lookup.guild.invite.value', {
-            invite: `[${guildReq.instant_invite.replace('https://discordapp.com/invite/', '')}](${guildReq.instant_invite})`
+            invite: guildReq.instant_invite ?
+              `[${guildReq.instant_invite.replace('https://discordapp.com/invite/', '')}](${guildReq.instant_invite})` :
+              ctx.__('global.none'),
           }), true)
           .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
             creation: mtz(timestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
