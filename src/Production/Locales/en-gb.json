@@ -145,6 +145,8 @@
 	"locale.unknownLocale": "{{{ errorIcon }}} The locale `{{{ locale }}}` is not recognized. Run {{{ prefix }}}translations to get the list of available locales.",
 	"lookup.error.noUserOrGuild": "{{{ errorIcon }}} No guild or user found matching ID `{{{ lookup }}}`.",
 	"lookup.error.noInviteFound": "{{{ errorIcon }}} No invitation found matching `{{{ lookup }}}`.",
+	"lookup.error.noMoreGuildInfo": "{{{ warningIcon }}} Guild found with ID `{{{ lookup }}}` but their widget is disabled.",
+	"lookup.error.noLookup": "{{{ errorIcon }}} You must provide an invite or a guild/user ID to search for.",
 	"lookup.guild.title": "🌐 Information about **{{{ name }}}**:",
 	"lookup.guild.id": "🔢 Guild ID",
 	"lookup.guild.owner.title": "👤 Owner",

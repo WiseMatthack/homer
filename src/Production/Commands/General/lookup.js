@@ -51,7 +51,8 @@ class Lookup extends Command {
 
       if (guildReq.code !== 10004) {
         if (guildReq.code === 50004) return ctx.channel.send(ctx.__('lookup.error.noMoreGuildInfo', {
-          errorIcon: this.client.constants.statusEmotes.error,
+          warningIcon: this.client.constants.statusEmotes.warning,
+          lookup,
         }));
 
         const { timestamp } = deconstruct(guildReq.id);

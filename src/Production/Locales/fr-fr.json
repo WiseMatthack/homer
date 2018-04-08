@@ -144,6 +144,8 @@
 	"locale.unknownLocale": "{{{ errorIcon }}} La langue `{{{ locale }}}` n'est pas reconnu. Tapez `{{{ prefix }}}translations` pour obtenir la liste des langues disponibles.",
 	"lookup.error.noUserOrGuild": "{{{ errorIcon }}} Aucun serveur ou utilisateur trouvé ayant l'ID `{{{ lookup }}}`.",
 	"lookup.error.noInviteFound": "{{{ errorIcon }}} Aucune invitation trouvée correspondante à `{{{ lookup }}}`.",
+	"lookup.error.noMoreGuildInfo": "{{{ warningIcon }}} Serveur trouvé avec l'ID `{{{ lookup }}}` mais leur widget est désactivé.",
+	"lookup.error.noLookup": "{{{ errorIcon }}} Vous devez fournir une invitation ou un ID d'utilisateur ou de serveur à rechercher.",
 	"lookup.guild.title": "🌐 Informations sur **{{{ name }}}**:",
 	"lookup.guild.id": "🔢 ID",
 	"lookup.guild.owner.title": "👤 Propriétaire",
