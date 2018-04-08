@@ -64,7 +64,9 @@ class Lookup extends Command {
             idle: `${this.client.emojis.get(this.client.constants.presenceIcons.idle).toString()} ${guildReq.members.filter(m => m.status === 'idle').length}`,
             dnd: `${this.client.emojis.get(this.client.constants.presenceIcons.dnd).toString()} ${guildReq.members.filter(m => m.status === 'dnd').length}`,
           }), true)
-          .addField(ctx.__('lookup.guild.invite.title'), ctx.__('lookup.guild.invite.value', { invite: guildReq.instant_invite }), true)
+          .addField(ctx.__('lookup.guild.invite.title'), ctx.__('lookup.guild.invite.value', {
+            invite: `[${guildReq.instant_invite.replace('https://discordapp.com/invite/', '')}](${guildReq.instant_invite})`
+          }), true)
           .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
             creation: mtz(timestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
           }))
