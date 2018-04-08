@@ -70,7 +70,7 @@ class Lookup extends Command {
           }), true)
           .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
             creation: mtz(timestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
-          }))
+          }), true)
           .setThumbnail(meta.icon);
 
         ctx.channel.send(ctx.__('lookup.guild.title', {
