@@ -191,9 +191,9 @@
     "examples": ["phonebook switch", "phonebook 1-464-393", "phonebook blacklist 999-999"]
   },
   "telephone": {
-    "description": "Configure le salon téléphone",
-    "usage": "telephone",
-    "examples": []
+    "description": "Configure un salon pour le téléphone ou le réinitialise",
+    "usage": "telephone [#salon] ou clear",
+    "examples": ["telephone", "telephone #mon-telephone", "telephone clear"]
   },
 
   "ban": {

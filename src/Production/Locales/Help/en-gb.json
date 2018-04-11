@@ -191,9 +191,9 @@
     "examples": ["phonebook switch", "phonebook 1-464-393", "phonebook blacklist 999-999"]
   },
   "telephone": {
-    "description": "Sets the telephone channel",
-    "usage": "telephone",
-    "examples": []
+    "description": "Set-up the telephone channel or reset it",
+    "usage": "telephone [#channel] or clear",
+    "examples": ["telephone", "telephone #my-telephone", "telephone clear"]
   },
 
   "ban": {
