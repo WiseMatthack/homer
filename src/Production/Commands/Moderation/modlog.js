@@ -31,7 +31,7 @@ class Modlog extends Command {
         channel = channels.first();
       }
 
-      if (channel.permissionsFor(ctx.guild.me).has('VIEW_CHANNEL')) return ctx.channel.send(ctx.__('modlog.error.noViewPermission', {
+      if (!channel.permissionsFor(ctx.guild.me).has('VIEW_CHANNEL')) return ctx.channel.send(ctx.__('modlog.error.noViewPermission', {
         errorIcon: this.client.constants.statusEmotes.error,
         channel: channel.id,
       }));
