@@ -93,7 +93,7 @@
 	"dashboard.user.premium": "🏅 Rangs spéciaux",
 	"donators.hasDonated": "**{{{ user }}}** a donné {{{ amount }}}",
 	"donators.text": "Les donations sont très utiles, elles peuvent être utilisées dans le financement de l'hébergeur, des API telles que Google ou DarkSky ou pour payer des travailleurs indépendants.\nSi vous souhaitez faire une donation et contribuer au développement d'Homer,\nvous pouvez utiliser ma page **PayPal.me** en [cliquant ici](https://paypal.me/ibotandidroid).",
-	"donators.donationTitle": "💵 Donations for **Homer**:",
+	"donators.donationTitle": "💵 Donations pour **Homer**:",
 	"feed.list.noFeed": "{{{ errorIcon }}} Aucun flux configuré sur ce serveur.",
 	"feed.list.entry": "- <#{{{ id }}}> (type: {{{ type }}})",
 	"feed.list.msg": "✍ Flux configurés sur **{{{ name }}}**:\n{{{ list }}}",
