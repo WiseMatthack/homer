@@ -17,6 +17,7 @@ class About extends Command {
         node: process.version,
         discord: version,
         defaultPrefix: this.client.config.discord.defaultPrefixes[0],
+        voteURL: `https://discordbots.org/bot/${this.client.user.id}/vote`,
       }))
       .setFooter(ctx.__('about.embed.footer', { prefix: this.client.config.discord.defaultPrefixes[0] }))
       .setTimestamp(this.client.initiated)
