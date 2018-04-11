@@ -130,11 +130,6 @@
     "usage": "category <list|category name>",
     "examples": ["category list", "category Moderation"]
   },
-  "feed": {
-    "description": "Manage feeds on the server",
-    "usage": "feed (list|remove <channel>|<type> <channel>)",
-    "examples": ["feed list", "feed remove #announcements", "feed 1 #mod-log"]
-  },
   "format": {
     "description": "Set a date or a time format for the guild",
     "usage": "format <type> <format>",
@@ -225,6 +220,11 @@
     "description": "Kicks a member from the server",
     "usage": "kick <@user|ID> [reason]",
     "examples": ["kick @iDroid", "kick @b1nzy Not a nice guy (jk)"]
+  },
+  "modlog": {
+    "description": "Set-up a modlog channel or reset it",
+    "usage": "modlog [#channel] or <clear>",
+    "examples": ["modlog", "modlog #moderation", "modlog clear"]
   },
   "reason": {
     "description": "Edits the reason of a moderation case",

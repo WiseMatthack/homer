@@ -130,11 +130,6 @@
     "usage": "category <list|catégorie>",
     "examples": ["category list", "category Moderation"]
   },
-  "feed": {
-    "description": "Gère les flux de logs sur le serveur",
-    "usage": "feed (list|remove <salon>|<type> <salon>)",
-    "examples": ["feed list", "feed remove #announcements", "feed 1 #mod-log"]
-  },
   "format": {
     "description": "Configure le format de la date et de l'heure pour le serveur",
     "usage": "format <type> <format>",
@@ -225,6 +220,11 @@
     "description": "Expulse un membre du serveur",
     "usage": "kick <@user|ID> [raison]",
     "examples": ["kick @iDroid", "kick @b1nzy Dehors !"]
+  },
+  "modlog": {
+    "description": "Configure un salon de modlog ou le réinitialise",
+    "usage": "modlog [#salon] ou <clear>",
+    "examples": ["modlog", "modlog #moderation", "modlog clear"]
   },
   "reason": {
     "description": "Edite la raison d'un cas de modération",
