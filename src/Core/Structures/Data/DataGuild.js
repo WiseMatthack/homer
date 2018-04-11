@@ -43,7 +43,7 @@ class DataGuild extends DataBase {
       phone: {
         number: null,
         channel: null,
-        phonebook: false,
+        phonebook: true,
         blacklist: [],
       },
       misc: {
