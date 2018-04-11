@@ -34,7 +34,7 @@ class DataGuild extends DataBase {
       },
       moderation: {
         cases: [],
-        channels: [],
+        channel: null,
       },
       disabledCategories: [],
       ignoredChannels: [],
