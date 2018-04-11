@@ -1,4 +1,5 @@
 const Command = require('../../../Core/Structures/Command');
+const { RichEmbed } = require('discord.js');
 
 class Donators extends Command {
   constructor(client) {
@@ -19,7 +20,12 @@ class Donators extends Command {
       }));
     }
 
-    ctx.channel.send(ctx.__('donators.text', { donators: donators.join('\n') }));
+    const embed = new RichEmbed()
+      .setDescription(ctx.__('donators.text'))
+      .addField('‎', donators.join('\n'))
+      .setColor(ctx.guild.me.displayHexColor);
+
+    ctx.channel.send(ctx.__('donators.donationTitle'), { embed });
   }
 }
 
