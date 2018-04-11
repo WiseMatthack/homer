@@ -13,8 +13,16 @@ class Number extends Command {
       const newNumber = ctx.settings.generateNumber();
       ctx.channel.send(ctx.__('number.reset.done', { number: newNumber }));
     } else {
-      const number = ctx.settings.data.phone.number || ctx.settings.generateNumber();
-      ctx.channel.send(ctx.__('number.is', { number }));
+      const number = ctx.settings.data.phone.number;
+
+      if (number) ctx.channel.send(ctx.__('number.is', { number }));
+      else {
+        await ctx.settings.generateNumber();
+        ctx.channel.send(ctx.__('number.generated', {
+          number: ctx.settings.data.phone.number,
+          defaultPrefix: this.client.config.discord.defaultPrefixes[0],
+        }));
+      }
     }
   }
 }

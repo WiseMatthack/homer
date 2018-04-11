@@ -193,6 +193,7 @@
 	"modlog.error.noViewPermission": "{{{ errorIcon }}} Je ne peux pas lire les messages dans <#{{{ channel }}}>.",
 	"modlog.error.noChannel": "{{{ errorIcon }}} Il n'y a pas de salon de modlog paramétré.",
 	"number.is": "☎ Votre numéro de téléphone est `{{{ number }}}`.",
+	"number.generated": "☎ Merci d'utiliser le téléphone d'Homer ! Votre numéro de téléphone est `{{{ number }}}`.\n🔖 Vous apparaissez par défaut sur l'annuaire. Si vous ne voulez pas y paraître, veuillez exécuter la commande `{{{ defaultPrefix }}}phonebook switch` (permission `MANAGE_GUILD` nécessaire).",
 	"number.reset.done": "☎ Votre nouveau numéro de téléphone est `{{{ number }}}`.",
 	"phone.calling": "☎ Appel de `{{{ number }}}` en cours...",
 	"phone.incomingCall": "☎ Vous recevez un appel de `{{{ number }}}` ! Tapez `{{{ prefix }}}pickup` pour répondre.",
