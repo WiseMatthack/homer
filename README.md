@@ -30,6 +30,13 @@ Language                                  | Code    | State      | Translator(s)
 English (United Kingdom)                  | en-gb   | Finished   | [@iDroid27210](https://github.com/iDroid27210)
 Français (France)                         | fr-fr   | Finished   | [@iDroid27210](https://github.com/iDroid27210)
 
+## Issues
+Of course, like any modern systems, Homer can have a bug in its code!  
+If you ever find a bug, usually the bot do not respond to a command, please join the support server and report it  
+or you can open an issue here.  
+But please provide **many** informations as you can: author ID, guild ID, time if possible, __exact__ command ran, etc.  
+Thank you for the future bugs you may report ;)  
+
 ## Contributing
 If you wanna contribute to the project, you can fork the repository and make your edits.  
 However, there are some requirements you have to know :  
