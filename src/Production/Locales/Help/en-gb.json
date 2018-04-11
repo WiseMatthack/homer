@@ -99,6 +99,11 @@
     "usage": "profile (set <field name> <field content>|clear <field name>|<user>|list)",
     "examples": ["profile iDroid#4441", "profile list", "profile", "profile set twitter iDroid27210", "profile clear twitter"]
   },
+  "quote": {
+    "description": "Fetch a message using its ID and display it",
+    "usage": "quote <message ID> [#channel]",
+    "examples": ["quote 123456789", "quote 123456789 #super-secret-place"]
+  },
   "remind": {
     "description": "Reminds you of tasks you set",
     "usage": "remind (<duration> <description>|list|remove <index>)",
