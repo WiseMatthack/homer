@@ -31,9 +31,10 @@ class Quote extends Command {
           .setDescription(fetchedMessage.content)
           .setColor(fetchedMessage.member.displayHexColor)
           .setAuthor(fetchedMessage.author.tag, fetchedMessage.author.avatarURL)
+          .setFooter(`#${fetchedMessage.channel.name}`)
           .setTimestamp(fetchedMessage.createdAt);
 
-        ctx.channel.send(`🗨 ${fetchedMessage.id} (<#${fetchedMessage.channel.id}>)`, { embed });
+        ctx.channel.send({ embed });
       })
       .catch((error) => {
         if (error.code === 10008) return ctx.channel.send(ctx.__('quote.error.notFound', {
