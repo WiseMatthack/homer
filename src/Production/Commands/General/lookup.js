@@ -58,6 +58,10 @@ class Lookup extends Command {
           lookup,
         }));
 
+        const inviteCode = guildReq.instant_invite ?
+          guildReq.instant_invite.replace('https://discordapp.com/invite/', '') : null;
+
+
         const { timestamp } = deconstruct(guildReq.id);
         const meta = await this.client.fetchInvite(guildReq.instant_invite)
           .then(i => ({ icon: `https://cdn.discordapp.com/icons/${i.guild.id}/${i.guild.icon}.png` }))
@@ -72,7 +76,7 @@ class Lookup extends Command {
           }), true)
           .addField(ctx.__('lookup.guild.invite.title'), ctx.__('lookup.guild.invite.value', {
             invite: guildReq.instant_invite ?
-              `[${guildReq.instant_invite.replace('https://discordapp.com/invite/', '')}](${guildReq.instant_invite})` :
+              `[${inviteCode}](https://discord.gg/${inviteCode})` :
               ctx.__('global.none'),
           }), true)
           .addField(ctx.__('lookup.guild.creation.title'), ctx.__('lookup.guild.creation.value', {
