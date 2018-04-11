@@ -25,14 +25,17 @@ class Lookup extends Command {
       this.client.fetchInvite(lookup)
         .then((invite) => {
           embed
+            .addField(ctx.__('lookup.invite.id'), invite.guild.id)
             .addField(ctx.__('lookup.invite.inviter.title'), ctx.__('lookup.invite.inviter.value', {
               tag: invite.inviter.tag,
+              id: invite.inviter.id,
             }))
             .addField(ctx.__('lookup.invite.channel.title'), ctx.__('lookup.invite.channel.value', {
               name: invite.channel.name,
+              id: invite.channel.id,
             }))
             .setFooter(ctx.__('lookup.invite.footer', { code: invite.code }))
-            .setThumbnail(invite.guild.iconURL);
+            .setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
 
           ctx.channel.send(ctx.__('lookup.invite.title', {
             name: invite.guild.name,
@@ -57,7 +60,7 @@ class Lookup extends Command {
 
         const { timestamp } = deconstruct(guildReq.id);
         const meta = await this.client.fetchInvite(guildReq.instant_invite)
-          .then(i => ({ icon: i.guild.iconURL }))
+          .then(i => ({ icon: `https://cdn.discordapp.com/icons/${i.guild.id}/${i.guild.icon}.png` }))
           .catch(() => ({}));
 
         embed
