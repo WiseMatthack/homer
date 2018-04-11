@@ -5,6 +5,7 @@ class About extends Command {
   constructor(client) {
     super(client, {
       name: 'about',
+      aliases: ['info'],
       category: 1,
     });
   }
