@@ -27,16 +27,14 @@ class Reason extends Command {
       caseID,
     }));
 
-    for (const log of foundCase.messages) {
-      const channel = this.client.channels.get(log.channel);
-      if (!channel) return;
+    const channel = this.client.channels.get(foundCase.message.channel);
+    if (!channel) return;
 
-      const msg = await channel.fetchMessage(log.message);
-      if (!msg) return;
+    const msg = await channel.fetchMessage(foundCase.message.message);
+    if (!msg) return;
 
-      const newContent = msg.content.replace(foundCase.reason, reason);
-      await msg.edit(newContent);
-    }
+    const newContent = msg.content.replace(foundCase.reason, reason);
+    await msg.edit(newContent);
 
     foundCase.reason = reason;
     ctx.settings.data.moderation.cases[caseIndex] = foundCase;

@@ -32,24 +32,21 @@ class ModHelper extends Helper {
       extra,
     }), i18n.__('moderation.log.reason', { reason })];
 
-    const messages = [];
-    for (const channel of settings.moderation.channels.filter(c => Number(c.type) === 1)) {
-      const textChannel = this.client.channels.get(channel.id);
-      if (!textChannel) return;
+    const textChannel = this.client.channels.get(settings.moderation.channel);
+    if (!textChannel) return;
 
-      const sentMessage = await textChannel.send(msg.join('\n'));
-      messages.push({
-        channel: channel.id,
-        message: sentMessage.id,
-      });
-    }
+    const sentMessage = await textChannel.send(msg.join('\n'));
+    message = {
+      channel: channel.id,
+      message: sentMessage.id,
+    };
 
     const moderationCase = {
       action,
       author,
       target,
       reason,
-      messages,
+      message,
       time,
       extra,
     };
