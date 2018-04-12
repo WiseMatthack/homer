@@ -153,7 +153,7 @@
 	"lookup.guild.owner.title": "👤 Propriétaire",
 	"lookup.guild.owner.value": "**{{{ tag }}}**",
 	"lookup.guild.members.title": "👥 Membres",
-	"lookup.guild.members.value": "{{{ total }}} membres dont {{{ bots }}} bots.",
+	"lookup.guild.members.value": "{{{ online }}} • {{{ idle }}} • {{{ dnd }}}",
 	"lookup.guild.invite.title": "📧 Invitation",
 	"lookup.guild.invite.value": "{{{ invite }}}",
 	"lookup.guild.creation.title": "📆 Date de création du serveur",
