@@ -193,6 +193,8 @@
 	"modlog.channelCleared": "{{{ successIcon }}} Le salon de modlog a été réinitialisé.",
 	"modlog.error.noViewPermission": "{{{ errorIcon }}} Je ne peux pas lire les messages dans <#{{{ channel }}}>.",
 	"modlog.error.noChannel": "{{{ errorIcon }}} Il n'y a pas de salon de modlog paramétré.",
+	"names.namesFor": "🏷 Noms précédents pour **{{{ tag }}}**:\n{{{ names }}}",
+	"names.error.noRecordedName": "{{{ warnIcon }}} Aucun nom d'utilisant précédent pour **{{{ tag }}}**.",
 	"number.is": "☎ Votre numéro de téléphone est `{{{ number }}}`.",
 	"number.generated": "☎ Merci d'utiliser le téléphone d'Homer ! Votre numéro de téléphone est `{{{ number }}}`.\n🔖 Vous apparaissez par défaut sur l'annuaire. Si vous ne voulez pas y paraître, veuillez exécuter la commande `{{{ defaultPrefix }}}phonebook switch` (permission `MANAGE_GUILD` nécessaire).",
 	"number.reset.done": "☎ Votre nouveau numéro de téléphone est `{{{ number }}}`.",

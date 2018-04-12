@@ -89,6 +89,11 @@
     "usage": "choose <choice A> <choice B> [choice C] etc.",
     "examples": ["choose iDroid Artuto iBot Endless"]
   },
+  "names": {
+    "description": "Search for previous names of user",
+    "usage": "names [@user]",
+    "examples": ["names", "names @b1nzy"]
+  },
   "poll": {
     "description": "Create polls and start voting!",
     "usage": "poll <title> [options]",

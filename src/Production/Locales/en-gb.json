@@ -194,6 +194,8 @@
 	"modlog.channelCleared": "{{{ successIcon }}} The modlog channel has been cleared.",
 	"modlog.error.noViewPermission": "{{{ errorIcon }}} I can't read messages in <#{{{ channel }}}>.",
 	"modlog.error.noChannel": "{{{ errorIcon }}} There is no modlog channel set.",
+	"names.namesFor": "🏷 Previous names for **{{{ tag }}}**:\n{{{ names }}}",
+	"names.error.noRecordedName": "{{{ warnIcon }}} No previous names recorded for **{{{ tag }}}**.",
 	"number.is": "☎ Your telephone number is `{{{ number }}}`.",
 	"number.generated": "☎ Thanks for using Homer telephone! Your telephone number is `{{{ number }}}`.\n🔖 You appear by default on the phonebook. If you do not want to appear on, please run the `{{{ defaultPrefix }}}phonebook switch` command (`MANAGE_GUILD` permission required).",
 	"number.reset.done": "☎ Your telephone number has been reset. Your new number is `{{{ number }}}`.",
