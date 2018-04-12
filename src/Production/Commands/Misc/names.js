@@ -25,7 +25,7 @@ class Names extends Command {
 
     const oldNames = await this.client.database.getDocument('names', member.id);
     if (!oldNames) return ctx.channel.send(ctx.__('names.error.noRecordedName', {
-      warnIcon: this.client.constants.statusEmotes.warn,
+      warnIcon: this.client.constants.statusEmotes.warning,
       tag: member.user.tag,
     }));
 
