@@ -9,7 +9,7 @@ class AsciiFunction extends TagFunction {
       return content.replace(/[\s\S]/g, (str) => {
         const num = str.charCodeAt().toString(2);
         str = '00000000'.slice(String(num).length) + num;
-        return !1 == spaceSeparatedOctets ? str : str + ' ';
+        return str;
       });
     } else if (args[1] === 'to') {
       return content.replace(/\s*[01]{8}\s*/g, (str) => {
