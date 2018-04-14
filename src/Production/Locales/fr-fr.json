@@ -277,7 +277,7 @@
 	"server.embed.owner": "👤 Propriétaire",
 	"server.embed.region": "🏠 Région",
 	"server.embed.members.title": "👥 Membres",
-	"server.embed.members.value": " {{{ total }}} • {{{ bots }}}\n{{{ online }}} • {{{ idle }}} • {{{ dnd }}}",
+	"server.embed.members.value": "**Total:** {{{ total }}} • {{{ bots }}}\n{{{ online }}} • {{{ idle }}} • {{{ dnd }}}",
 	"server.embed.verification": "🔒 Niveau de vérification",
 	"server.embed.explicit": "🚔 Filtrage de contenu explicite",
 	"server.embed.creation": "📆 Date de création du serveur",

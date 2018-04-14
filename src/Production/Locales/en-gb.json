@@ -278,7 +278,7 @@
 	"server.embed.owner": "👤 Owner",
 	"server.embed.region": "🏠 Voice region",
 	"server.embed.members.title": "👥 Members",
-	"server.embed.members.value": " {{{ total }}} • {{{ bots }}}\n{{{ online }}} • {{{ idle }}} • {{{ dnd }}}",
+	"server.embed.members.value": "**Total:** {{{ total }}} • {{{ bots }}}\n{{{ online }}} • {{{ idle }}} • {{{ dnd }}}",
 	"server.embed.verification": "🔒 Verification level",
 	"server.embed.explicit": "🚔 Explicit content filter",
 	"server.embed.creation": "📆 Guild creation date",
