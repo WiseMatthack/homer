@@ -8,6 +8,8 @@ class GuildDelete extends Event {
   }
 
   async handle(guild) {
+    if (!guild.available) return;
+
     this.client.database.deleteDocument('guild', guild.id)
       .catch(() => {});
 
