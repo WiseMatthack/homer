@@ -23,9 +23,9 @@ class Server extends Command {
       .addField(ctx.__('server.embed.members.title'), ctx.__('server.embed.members.value', {
         total: ctx.guild.memberCount,
         bots: `<:bot:420699407344730122> ${ctx.guild.members.filter(m => m.user.bot).size}`,
-        online: `${this.client.emojis.get(this.client.constants.presenceIcons.online).toString()} ${guildReq.members.filter(m => m.status === 'online').length}`,
-        idle: `${this.client.emojis.get(this.client.constants.presenceIcons.idle).toString()} ${guildReq.members.filter(m => m.status === 'idle').length}`,
-        dnd: `${this.client.emojis.get(this.client.constants.presenceIcons.dnd).toString()} ${guildReq.members.filter(m => m.status === 'dnd').length}`,
+        online: `${this.client.emojis.get(this.client.constants.presenceIcons.online).toString()} ${ctx.guild.members.filter(m => m.user.presence.status === 'online').size}`,
+        idle: `${this.client.emojis.get(this.client.constants.presenceIcons.idle).toString()} ${ctx.guild.members.filter(m => m.user.presence.status === 'idle').size}`,
+        dnd: `${this.client.emojis.get(this.client.constants.presenceIcons.dnd).toString()} ${ctx.guild.members.filter(m => m.user.presence.status === 'dnd').size}`,
       }), true)
       .addField(ctx.__('server.embed.verification'), verification, true)
       .addField(ctx.__('server.embed.explicit'), explicit, true)
