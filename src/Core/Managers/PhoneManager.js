@@ -61,6 +61,7 @@ class PhoneManager extends Manager {
       .send(i18n.__('phone.incomingCall', {
         number: senderSettings.data.phone.number,
         prefix: this.client.config.discord.defaultPrefixes[0],
+        callMessage: receiverSettings.data.phone.callMessage ? `\n${receiverSettings.data.phone.callMessage}` : '',
       }));
 
     setTimeout(async () => {

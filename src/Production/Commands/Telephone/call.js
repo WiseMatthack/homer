@@ -12,7 +12,6 @@ class Call extends Command {
     const number = ctx.args[0];
     if (!number) return ctx.channel.send(ctx.__('call.error.noNumber', {
       errorIcon: this.client.constants.statusEmotes.error,
-      defaultPrefix: this.client.config.discord.defaultPrefixes[0],
     }));
 
     if (!ctx.settings.data.phone.number) return ctx.channel.send(ctx.__('call.error.noAttributedNumber', {

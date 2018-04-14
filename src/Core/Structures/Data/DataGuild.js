@@ -45,6 +45,7 @@ class DataGuild extends DataBase {
         channel: null,
         phonebook: true,
         blacklist: [],
+        callMessage: null,
       },
       misc: {
         timezone: 'UTC',

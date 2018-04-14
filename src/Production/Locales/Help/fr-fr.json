@@ -176,6 +176,11 @@
     "usage": "call <numéro>",
     "examples": ["call 111-222"]
   },
+  "callmsg": {
+    "description": "Paramètre un message personnalisé pour les appels entrants ou le réinitialise",
+    "usage": "callmsg <message> ou clear",
+    "examples": ["callmsg @b1nzy Voilà un appel pour toi !", "callmsg clear"]
+  },
   "hangup": {
     "description": "Met fin à une communication",
     "usage": "hangup"
