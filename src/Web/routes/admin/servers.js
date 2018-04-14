@@ -6,7 +6,7 @@ const router = Router()
     if (req.isAuthenticated() && client.config.owners.includes(req.user.id)) return next();
     return res.render('error.pug', { errorCode: '403' });
   })
-  .get('/', (req, res) => {
+  .get('/', async (req, res) => {
     const guilds = client.guilds
       .sort((a, b) => a.name - b.name)
       .map(guild => ({
@@ -14,7 +14,7 @@ const router = Router()
         id: guild.id,
         owner: {
           id: guild.ownerID,
-          tag: guild.owner.user.tag,
+          tag: guild.owner ? guild.owner.user.tag : 'Unknown',
         },
         members: guild.memberCount,
         bots: Math.floor((guild.members.filter(m => m.user.bot).size / guild.memberCount) * 100),
