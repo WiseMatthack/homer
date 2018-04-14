@@ -15,10 +15,11 @@ class Server extends Command {
     const region = await ctx.guild.fetchVoiceRegions().then(vc => vc.find('id', ctx.guild.region).name);
     const explicit = ctx.__(`server.explicitContent.${ctx.guild.explicitContentFilter}`);
     const verification = ctx.__(`server.verificationLevel.${ctx.guild.verificationLevel}`);
+    const owner = await ctx.guild.fetchMember(ctx.guild.ownerID);
 
     const embed = new RichEmbed()
       .addField(ctx.__('server.embed.id'), ctx.guild.id, true)
-      .addField(ctx.__('server.embed.owner'), ctx.guild.owner.user.tag, true)
+      .addField(ctx.__('server.embed.owner'), owner.user.tag, true)
       .addField(ctx.__('server.embed.region'), region, true)
       .addField(ctx.__('server.embed.members.title'), ctx.__('server.embed.members.value', {
         total: ctx.guild.memberCount,
