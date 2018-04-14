@@ -11,7 +11,7 @@ class AsciiFunction extends TagFunction {
         str = '00000000'.slice(String(num).length) + num;
         return str;
       });
-    } else if (args[1] === 'to') {
+    } else if (args[0] === 'to') {
       return content.replace(/\s*[01]{8}\s*/g, (str) => {
         return String.fromCharCode(parseInt(str, 2))
       });
