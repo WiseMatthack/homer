@@ -366,7 +366,7 @@
 	"user.embed.join": "⏲ Guild join date",
 	"user.afk.status": "{{{ reason }}} *(since {{{ since }}})*",
 	"vote.title": "🗳 Votes for **Homer**:",
-	"vote.embedDescription": "You can vote on **Discord Bots List** to contribute to Homer's development, [click here](https://discordbots.org/bot/{{{ botID }}}/vote) and login with Discord in order to vote.\nYou'll receive a message saying your vote is taken into account.\n\n**🏆 Top voters of this month**\n{{{ topVoters }}}",
+	"vote.embedDescription": "You can vote on **Discord Bot List** to contribute to Homer's development, [click here](https://discordbots.org/bot/{{{ botID }}}/vote) and login with Discord in order to vote.\nYou'll receive a message saying your vote is taken into account.\n\n**🏆 Top voters of this month**\n{{{ topVoters }}}",
 	"vote.noVoter": "Nobody voted this month, be the first!",
 	"vote.voteEntry": "{{{ emote }}} **{{{ tag }}}** ({{{ count }}} votes)",
 	"vote.webhookDM": "🗳 Your vote on `discordbots.org` has been taken into account! Thank you for the interest in Homer.",
