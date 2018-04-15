@@ -28,6 +28,11 @@
     "description": "Get the list of available languages for Homer",
     "usage": "translations"
   },
+  "vote": {
+    "description": "Vote instructions and see who voted the most this month",
+    "usage": "vote",
+    "examples": []
+  },
 
   "avatar": {
     "description": "Get the avatar of someone",
