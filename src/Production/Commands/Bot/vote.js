@@ -10,14 +10,14 @@ class Vote extends Command {
   }
 
   async run(ctx) {
-    const list = await this.client.database.getDocuments('votes').then(list => list.sort((a, b) => b.count - a.count));
+    const list = await this.client.database.getDocuments('votes').then(l => l.sort((a, b) => b.count - a.count));
     const message = (list.length === 0 ? [ctx.__('vote.noVoter')] : []);
 
     for (let i = 0; i < list.length; i += 1) {
       if (i > 5) return;
 
       const voteEntry = list[i];
-      const userTag = this.client.fetchUser(voteEntry.id).then(u => u.tag);
+      const userTag = await this.client.fetchUser(voteEntry.id).then(u => u.tag);
 
       let medalEmote = '🏅';
       if (i === 0) medalEmote = '🥇';
