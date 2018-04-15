@@ -194,7 +194,7 @@ class Tag extends Command {
 
     ctx.channel.send(ctx.__('tag.raw.rawTag', {
       tag: tagName,
-      rawTag: tag.data.content,
+      rawTag: tag.data.content.replace(/`/g, '\`'),
     }));
   }
 
