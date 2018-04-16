@@ -13,7 +13,7 @@ class About extends Command {
     const embed = new RichEmbed()
       .setDescription(ctx.__('about.embed.description', {
         name: this.client.user.username,
-        node: process.version,
+        node: process.versions.node,
         discord: version,
         defaultPrefix: this.client.config.discord.defaultPrefixes[0],
         voteURL: `https://discordbots.org/bot/${this.client.user.id}/vote`,
