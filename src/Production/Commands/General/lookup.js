@@ -28,10 +28,10 @@ class Lookup extends Command {
             .addField(ctx.__('lookup.invite.id'), invite.guild.id)
             .addField(
               ctx.__('lookup.invite.inviter.title'),
-              invite.inviter ? ctx.__('global.unknown') : ctx.__('lookup.invite.inviter.value', {
+              invite.inviter ? ctx.__('lookup.invite.inviter.value', {
                 tag: invite.inviter.tag,
                 id: invite.inviter.id,
-              }),
+              }) : ctx.__('global.unknown'),
             )
             .addField(ctx.__('lookup.invite.channel.title'), ctx.__('lookup.invite.channel.value', {
               name: invite.channel.name,
