@@ -26,10 +26,13 @@ class Lookup extends Command {
         .then((invite) => {
           embed
             .addField(ctx.__('lookup.invite.id'), invite.guild.id)
-            .addField(ctx.__('lookup.invite.inviter.title'), ctx.__('lookup.invite.inviter.value', {
-              tag: invite.inviter.tag,
-              id: invite.inviter.id,
-            }))
+            .addField(
+              ctx.__('lookup.invite.inviter.title'),
+              invite.inviter ? ctx.__('global.unknown') : ctx.__('lookup.invite.inviter.value', {
+                tag: invite.inviter.tag,
+                id: invite.inviter.id,
+              }),
+            )
             .addField(ctx.__('lookup.invite.channel.title'), ctx.__('lookup.invite.channel.value', {
               name: invite.channel.name,
               id: invite.channel.id,
@@ -92,7 +95,7 @@ class Lookup extends Command {
           .then((user) => {
             const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
-  
+
             embed
               .addField(ctx.__('lookup.user.id'), user.id, true)
               .addField(ctx.__('lookup.user.premium', {
@@ -102,7 +105,7 @@ class Lookup extends Command {
                 creation: mtz(user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
               }))
               .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`);
-  
+
             ctx.channel.send(ctx.__('lookup.user.title', {
               emote,
               name: user.tag,
