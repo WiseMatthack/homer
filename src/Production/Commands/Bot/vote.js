@@ -4,7 +4,7 @@ const { RichEmbed } = require('discord.js');
 class Vote extends Command {
   constructor(client) {
     super(client, {
-      name: 'about',
+      name: 'vote',
       category: 1,
     });
   }
