@@ -12,7 +12,7 @@ class Vote extends Command {
   async run(ctx) {
     const list = await this.client.database.getDocuments('votes').then(l => l
       .sort((a, b) => b.count - a.count)
-      .slice(0, 4));
+      .slice(0, 5));
     const message = (list.length === 0 ? [ctx.__('vote.noVoter')] : []);
 
     for (let i = 0; i < list.length; i += 1) {
