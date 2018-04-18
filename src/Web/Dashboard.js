@@ -45,7 +45,7 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
-      .set(express.static(`${__dirname}/static`))
+      .use(express.static(`${__dirname}/static`))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
