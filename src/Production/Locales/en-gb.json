@@ -83,7 +83,7 @@
 	"dashboard.features.telephone.p": "Homer has an (almost) unique telephone feature. You can communicate in live with other servers having set-up the feature.<br>To get it running, generate your phone number using the <span style=\"font-family: monospace;\">h:number</span> command,<br>then set-up a telephone channel using the <span style=\"font-family: monospace;\">h:telephone</span> command.",
 	"dashboard.error.h2": "Oops",
 	"dashboard.error.p": "Something wrong happened!<br>We are fixing that, please come back later!<br>You can join the <a href=\"/support\">support server</a> to get assistance.",
-	"dashboard.footer.discordProperty": "The Discord logo is the property of <a href=\"https://discordapp.com\">Discord, Inc.</a>",
+	"dashboard.footer.discordProperty": "The Discord logo is the property of ",
 	"dashboard.footer.followMe": "Follow me on",
 	"donators.hasDonated": "**{{{ user }}}** donated {{{ amount }}}",
 	"donators.text": "Donations are very useful, they can be used for hosting, API services such as Google or DarkSky, paying third-part workers, etc...\nIf you wanna donate and contribute to Homer's development,\nyou can use my **PayPal.me** page by [clicking here](https://paypal.me/ibotandidroid).",

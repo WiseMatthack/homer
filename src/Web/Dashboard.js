@@ -1,6 +1,7 @@
 const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
+const path = require('path');
 
 /**
  * Represents an instance of the dashboard.
@@ -45,7 +46,7 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
-      .use(express.static(`${__dirname}/static`))
+      .use(express.static(path.join(`${__dirname}/static`)))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
@@ -60,7 +61,7 @@ class Dashboard {
         next();
       })
       .set('view engine', 'pug')
-      .set('views', `${__dirname}/views`);
+      .set('views', path.join(`${__dirname}/views`));
   }
 
   /**
