@@ -46,7 +46,6 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
-      .use(express.static(path.join(`${__dirname}/static`)))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
@@ -79,6 +78,7 @@ class Dashboard {
     });
 
     this.app.get('/', (req, res) => res.render('index.pug'));
+    this.app.use(express.static(path.join(`${__dirname}/static`)));
   }
 
   /**
