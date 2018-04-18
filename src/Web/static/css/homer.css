@@ -1,0 +1,86 @@
+.homer-navbar {
+  background-color: #7289DA;
+}
+
+.homer-jumbotrons {
+  background-color: #36393E;
+}
+
+.homer-jumbo-h {
+  color: #FFFFFF;
+}
+
+.homer-jumbo-p {
+  color: hsla(0,0%,100%,.7);
+}
+
+.homer-center {
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.homer-hr {
+  background-color: #EFEFEF;
+  height: 1px;
+  border: 0;
+}
+
+.homer-navlink {
+  color: #FFFFFF !important;
+}
+
+.homer-navlink:hover {
+  color: #E5E5E5 !important;
+}
+
+.homer-navbrand {
+  color: #FFFFFF !important;
+}
+
+.homer-footer {
+  background-color: #23272A;
+  color: hsla(0,0%,100%,.7);
+}
+
+.homer-links {
+  color: #7289DA;
+  text-decoration: none;
+}
+
+.homer-links:hover {
+  color: #8EA0E1;
+  text-decoration: none;
+}
+
+/* https://stackoverflow.com/questions/14580346/vertical-divider-between-two-columns-in-bootstrap */
+.row.vdivide [class*='col-']:not(:last-child):after {
+  background: #e0e0e0;
+  width: 1px;
+  content: "";
+  display: block;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  right: 0;
+  min-height: 70px;
+}
+
+body {
+  background-color: #23272A;
+}
+
+.btn-transparent {
+  background: transparent;
+  color: #F2F2F2;
+  -webkit-transition: background .2s ease-in-out, border .2s ease-in-out;
+  -moz-transition: background .2s ease-in-out, border .2s ease-in-out;
+  -o-transition: background .2s ease-in-out, border .2s ease-in-out;
+  transition: background .2s ease-in-out, border .2s ease-in-out;
+  border: 2px solid #4992B7;
+}
+
+.btn-transparent:hover {
+  color: white;
+  background-color: rgba(255,255,255,0.2);
+}

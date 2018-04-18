@@ -3,7 +3,7 @@ const client = require('../../index');
 const i18n = require('i18n');
 
 const router = Router()
-  .post('/vote', async (req, res) => {
+  .post('/vote', async (req) => {
     if (req.header('Authorization') !== client.config.api.discordBotsWebhook) return;
 
     const user = client.users.get(req.body.user) || (await client.fetchUser(req.body.user));
@@ -17,7 +17,7 @@ const router = Router()
     voteObject.count += 1;
     await client.database.insertDocument('votes', voteObject, { conflict: 'update' });
 
-    const userLocale = (await client.database.getDocument('profile', user.id).then(p => p ? (p.locale || 'en-gb') : 'en-gb'));
+    const userLocale = (await client.database.getDocument('profile', user.id).then(p => (p ? (p.locale || 'en-gb') : 'en-gb')));
     i18n.setLocale(userLocale);
 
     user.send(i18n.__('vote.webhookDM'))

@@ -1,16 +1,11 @@
-const { owners } = require('../config.json');
 const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
 
-/* Express modules */
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const expressSession = require('express-session');
-const auth = require('./modules/auth');
-
 /**
  * Represents an instance of the dashboard.
+ * Note: all "static" content is deserved by the Apache server (performance),
+ * so it will not be available here.
  */
 class Dashboard {
   /**
@@ -50,31 +45,23 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
-      .use(express.static(`${__dirname}/public`))
-      .use(bodyParser.json({
-        limit: '20mb',
-      }))
-      .use(bodyParser.urlencoded({
-        extended: true,
-        limit: '20mb',
-      }))
-      .use(cookieParser(this.dashboardSettings.sessionSecret))
-      .use(expressSession({
-        secret: this.dashboardSettings.sessionSecret,
-        resave: true,
-        saveUninitialized: true,
-        proxy: true,
-        cookie: {
-          secure: true,
-          maxAge: ((60000 * 60) * 24),
-        },
-      }))
-      .use(auth.initialize())
-      .use(auth.session())
       .use(i18n.init)
-      .use(this.globalVars)
+      .use((req, res, next) => {
+        const locales = i18n.getLocales().map((locale) => {
+          i18n.setLocale(locale);
+          return {
+            code: i18n.__('lang.code'),
+            name: i18n.__('lang.fullName'),
+          };
+        });
+
+        req.locales = locales;
+        res.locales = locales;
+        next();
+      })
       .set('view engine', 'pug')
-      .set('views', `${__dirname}/views`);
+      .set('views', `${__dirname}/views`)
+      .set(express.static(`${__dirname}/static`));
   }
 
   /**
@@ -91,65 +78,8 @@ class Dashboard {
       }
     });
 
-    this.app.get('/', async (req, res) => {
-      const articles = await this.client.database.getDocuments('articles')
-        .then(ar => ar.sort((a, b) => b.published - a.published).slice(0, 4));
-
-      const latestArticles = [];
-
-      for (const article of articles) {
-        const user = await this.client.fetchUser(article.author)
-          .then(u => u.tag);
-
-        latestArticles.push({
-          id: article.id,
-          title: article.title,
-          published: article.published,
-          author: user,
-        });
-      }
-
-      res.render('index.pug', {
-        latestArticles,
-      });
-    });
-  }
-
-  /**
-   * Implements global variables.
-   * @param {*} request Express request
-   * @param {*} response Express response
-   * @param {*} next Next
-   */
-  globalVars(request, response, next) {
-    const data = {
-      authenticated: request.isAuthenticated(),
-      locale: request.language,
-      nameDisplay: request.isAuthenticated() ? request.__('dashboard.nameDisplay.connected', {
-        username: request.user.username,
-        discriminator: request.user.discriminator,
-      }) : request.__('dashboard.nameDisplay.visitor'),
-      admin: request.isAuthenticated() ? owners.includes(request.user.id) : false,
-      activeLocale: {
-        code: request.__('lang.code'),
-        img: request.__('lang.flagImage'),
-      },
-      locales: i18n.getLocales()
-        .filter(l => i18n.getCatalog(l)['lang.code'] !== request.__('lang.code'))
-        .map(l => ({
-          code: i18n.getCatalog(l)['lang.code'],
-          img: i18n.getCatalog(l)['lang.flagImage'],
-        })),
-    };
-
-    Object.keys(data).forEach((key) => {
-      request[key] = data[key];
-      request.res[key] = data[key];
-      response[key] = data[key];
-      response.locals[key] = data[key];
-    });
-
-    next();
+    this.app.get('/', (req, res) => res.render('index.pug'));
+    this.app.get('*', (req, res) => res.render('error.pug'));
   }
 
   /**

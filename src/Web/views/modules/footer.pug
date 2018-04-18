@@ -1,29 +1,21 @@
-//- Footer - Represents the foot of any page
-
-footer(class="footer")
+footer(class="footer homer-footer")
   div(class="container")
-    p(class="text-muted text-center")
-      a(href="https://github.com/iDroid27210/homer")
-        i(class="fa fa-github-square fa-3x social")
-      a(href="https://twitter.com/iDroid27210")
-        i(class="fa fa-twitter fa-3x social")
-      br
-      a(href="https://discordbots.org/bot/305277118105911296")
-        img(src="https://discordbots.org/api/widget/status/305277118105911296.svg" alt="Homer")
-    hr
-      
-    div(class="dropdown text-center")
-      button(class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false")
-        img(src=`${activeLocale.img}` height="30")
-      if locales.length > 0
-        div(class="dropdown-menu" aria-labelledby="dropdownMenuButton")
-          each locale in locales
-            a(class="dropdown-item" id="locale" href=`/locale/${locale.code}`)
-              img(src=`${locale.img}` height="30")
-      
-    br
-    p(class="text-center") #{__('dashboard.footer.copyright')}
-  
-script
-  | const link = document.getElementById('locale');
-  | link.href = `${link.href}?redirectURI=${window.location.pathname}`;
+    div(class="row")
+      div(class="col-sm")
+        | Copyright &copy; 2018 -
+        a(class="homer-links" href="https://github.com/iDroid27210") iDroid27210
+        br
+        | #{__('dashboard.footer.discordProperty')}
+        a(class="homer-links" href="https://discordapp.com" target="_blank") Discord, Inc.
+
+      div(class="col-sm text-center")
+        a(href="https://discordbots.org/bot/305277118105911296")
+          img(src="https://discordbots.org/api/widget/status/305277118105911296.svg")
+
+      div(class="col-sm text-right")
+        | #{__('dashboard.footer.followMe')}
+        br
+        img(src="images/icons/twitter.svg" height="20")
+          a(class="homer-links" href="https://twitter.com/iDroid27210") @iDroid27210
+        img(src="images/icons/discord.svg" height="20")
+          span(style="font-family: monospace;") iDroid#4441

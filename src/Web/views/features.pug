@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+html
+  head
+    include modules/head.pug
+  body
+    include modules/header.pug
+
+    div(class="jumbotron jumbotron-fluid homer-jumbotrons")
+      div(class="container")
+        //- Moderation
+        div(class="row")
+          div(class="col-sm text-center")
+            h4(class="homer-jumbo-h") #{__('dashboard.features.moderation.h2')}
+            p(class="homer-jumbo-p") !{__('dashboard.features.moderation.p')}
+          div(class="col-sm text-center homer-center")
+            img(src="https://discordapp.com/assets/7247ff3d7a609104aa79cf391ea269b6.svg" height="150")
+
+        br
+
+        //- Utility
+        div(class="row")
+          div(class="col-sm text-center homer-center")
+            img(src="https://discordapp.com/assets/3896096ba07324c04ed0fe7e1acc3643.svg" height="150")
+          div(class="col-sm text-center")
+            h4(class="homer-jumbo-h") #{__('dashboard.features.utility.h2')}
+            p(class="homer-jumbo-p") !{__('dashboard.features.utility.p')}
+
+        br
+
+        //- Multilingual
+        div(class="row")
+          div(class="col-sm text-center")
+            h4(class="homer-jumbo-h") #{__('dashboard.features.multilingual.h2')}
+            p(class="homer-jumbo-p") !{__('dashboard.features.multilingual.p')}
+          div(class="col-sm text-center homer-center")
+            img(src="https://discordapp.com/assets/0b6fc9f58ca3827977d546a6ee0ca3e7.svg" height="150")
+
+        br
+
+        //- Telephone
+        div(class="row")
+          div(class="col-sm text-center homer-center")
+            img(src="https://discordapp.com/assets/8ce180bda86f59e517eb6a1d0ed84eef.svg" height="150")
+          div(class="col-sm text-center")
+            h4(class="homer-jumbo-h") #{__('dashboard.features.telephone.h2')}
+            p(class="homer-jumbo-p") !{__('dashboard.features.telephone.p')}
+
+    include modules/footer.pug
+    include modules/javascript.pug
