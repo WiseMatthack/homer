@@ -78,7 +78,6 @@ class Dashboard {
     });
 
     this.app.get('/', (req, res) => res.render('index.pug'));
-    this.app.use((req, res) => res.render('error.pug'));
   }
 
   /**
