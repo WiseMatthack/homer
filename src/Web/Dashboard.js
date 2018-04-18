@@ -68,7 +68,6 @@ class Dashboard {
    * @private
    */
   _loadRoutes() {
-    this.app.get('*', (req, res) => res.render('error.pug'));
     readdir(`${__dirname}/routes`, (err, files) => {
       if (err) console.error(err);
 
@@ -79,6 +78,7 @@ class Dashboard {
     });
 
     this.app.get('/', (req, res) => res.render('index.pug'));
+    this.app.use((req, res) => res.render('error.pug'));
   }
 
   /**
