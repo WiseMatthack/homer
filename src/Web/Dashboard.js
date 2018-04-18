@@ -2,6 +2,7 @@ const express = require('express');
 const { readdir } = require('fs');
 const i18n = require('i18n');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 /**
  * Represents an instance of the dashboard.
@@ -46,6 +47,7 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
+      .use(cookieParser(this.client.config.dashboard.sessionSecret))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
