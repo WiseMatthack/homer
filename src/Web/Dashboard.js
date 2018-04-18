@@ -47,16 +47,15 @@ class Dashboard {
       .enable('trust proxy')
       .use(i18n.init)
       .use((req, res, next) => {
-        const locales = i18n.getLocales().map((locale) => {
-          i18n.setLocale(locale);
-          return {
-            code: i18n.__('lang.code'),
-            name: i18n.__('lang.fullName'),
-          };
-        });
+        const locales = i18n.getLocales().map(locale => ({
+          code: i18n.getCatalog(locale)['lang.code'],
+          name: i18n.getCatalog(locale)['lang.fullName'],
+        }));
 
         req.locales = locales;
+        req.res.locales = locales;
         res.locales = locales;
+        res.locals.locales = locales;
         next();
       })
       .set('view engine', 'pug')
