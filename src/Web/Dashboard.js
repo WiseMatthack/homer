@@ -3,6 +3,7 @@ const { readdir } = require('fs');
 const i18n = require('i18n');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
 /**
  * Represents an instance of the dashboard.
@@ -48,6 +49,9 @@ class Dashboard {
     this.app
       .enable('trust proxy')
       .use(cookieParser(this.client.config.dashboard.sessionSecret))
+      .use(bodyParser.json({
+        limit: '20mb',
+      }))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
