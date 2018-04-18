@@ -45,6 +45,7 @@ class Dashboard {
   _initApp() {
     this.app
       .enable('trust proxy')
+      .set(express.static(`${__dirname}/static`))
       .use(i18n.init)
       .use((req, res, next) => {
         const locales = i18n.getLocales().map(locale => ({
@@ -59,8 +60,7 @@ class Dashboard {
         next();
       })
       .set('view engine', 'pug')
-      .set('views', `${__dirname}/views`)
-      .set(express.static(`${__dirname}/static`));
+      .set('views', `${__dirname}/views`);
   }
 
   /**
@@ -68,6 +68,7 @@ class Dashboard {
    * @private
    */
   _loadRoutes() {
+    this.app.get('*', (req, res) => res.render('error.pug'));
     readdir(`${__dirname}/routes`, (err, files) => {
       if (err) console.error(err);
 
@@ -78,7 +79,6 @@ class Dashboard {
     });
 
     this.app.get('/', (req, res) => res.render('index.pug'));
-    this.app.get('*', (req, res) => res.render('error.pug'));
   }
 
   /**
