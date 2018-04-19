@@ -30,7 +30,7 @@ class User extends Command {
 
     let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)}`;
     if (member.user.presence.game) {
-      presence += `${ctx.__(`user.gameTypes.${member.user.presence.type}`)} ${member.user.presence.game.url ? `[${member.user.presence.game.name}](${member.user.presence.game.url})` : `**${member.user.presence.game.name}**`}`;
+      presence += `\n${ctx.__(`user.gameTypes.${member.user.presence.game.type}`)} ${member.user.presence.game.url ? `[${member.user.presence.game.name}](${member.user.presence.game.url})` : `**${member.user.presence.game.name}**`}`;
     }
 
     const emote = member.user.bot ? '<:bot:420699407344730122>' : '👤';
