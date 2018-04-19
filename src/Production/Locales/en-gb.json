@@ -165,7 +165,7 @@
 	"lookup.invite.channel.value": "**#{{{ name }}}** (ID:{{{ id }}})",
 	"lookup.invite.title": "📧 Information about **{{{ name }}}**:",
 	"lookup.invite.footer": "Invite code: {{{ code }}}",
-	"message.afk.warn": "💤 **{{{ name }}}** is absent since {{{ since }}}!",
+	"message.afk.warn": "💤 **{{{ name }}}** is absent for {{{ since }}}!",
 	"message.cleverbot.disabled": "{{{ errorIcon }}} The cleverbot feature has been disabled.",
 	"message.cleverbot.error": "{{{ errorIcon }}} An error has occured while querying Cleverbot: `{{{ message }}}`.",
 	"message.disabledCommand": "{{{ errorIcon }}} The command `{{{ cmdName }}}` was disabled. Given reason:\n```{{{ reason }}}```",
