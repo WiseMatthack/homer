@@ -84,7 +84,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) created the tag \`${tagName}\` on **${ctx.guild.name}**`);
+    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) created the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subEdit(ctx) {
@@ -121,7 +121,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) edited the tag \`${tagName}\` on **${ctx.guild.name}**`);
+    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) edited the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subDelete(ctx) {
@@ -150,7 +150,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${ctx.author.tag}** (ID:${ctx.author.id}) deleted the tag \`${tagName}\` on **${ctx.guild.name}**`);
+    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) deleted the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subOwner(ctx) {
@@ -194,7 +194,7 @@ class Tag extends Command {
 
     ctx.channel.send(ctx.__('tag.raw.rawTag', {
       tag: tagName,
-      rawTag: tag.data.content.replace(/`/g, '\`'),
+      rawTag: this.client.escapeMarkdown(tag.content),
     }));
   }
 

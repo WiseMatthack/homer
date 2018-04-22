@@ -16,7 +16,7 @@ class GuildCreate extends Event {
     if (!channel) return;
 
     const formattedTime = moment().format('HH:mm:ss');
-    channel.send(`\`[${formattedTime}]\` 📥 Joined **${guild.name}** (ID:${guild.id}) - Count: ${this.client.guilds.size}`);
+    channel.send(`\`[${formattedTime}]\` 📥 Joined **${this.client.escapeMarkdown(guild.name)}** (ID:${guild.id}) - Count: ${this.client.guilds.size}`);
   }
 }
 

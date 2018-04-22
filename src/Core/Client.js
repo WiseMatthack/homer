@@ -153,6 +153,15 @@ class ExtendedClient extends Client {
   updateGame() {
     this.user.setActivity(`Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
   }
+
+  /**
+   * Escapes markdown content.
+   * @param {string} string String to escape
+   * @returns {string}
+   */
+  escapeMarkdown(string) {
+    return string.replace(/[\*\(\)\[\]\+\-\\_`#<>]/g, m => this.constants.markdownCharacters[m]);
+  }
 }
 
 module.exports = ExtendedClient;
