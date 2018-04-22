@@ -194,7 +194,7 @@ class Tag extends Command {
 
     ctx.channel.send(ctx.__('tag.raw.rawTag', {
       tag: tagName,
-      rawTag: this.client.escapeMarkdown(tag.content),
+      rawTag: this.client.escapeMarkdown(tag.data.content),
     }));
   }
 
