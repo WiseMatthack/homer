@@ -70,6 +70,7 @@ class Message extends Event {
             user: this.client.config.api.cleverbotUser,
             key: this.client.config.api.cleverbotKey,
             text: question,
+            nick: this.client.cleverbotName,
           })
           .then(async (res) => {
             await ctx.channel.send(res.body.response);
