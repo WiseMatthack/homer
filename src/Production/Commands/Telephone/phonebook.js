@@ -38,7 +38,10 @@ class Phonebook extends Command {
       }));
 
       if (ctx.settings.data.phone.blacklist.includes(foundGuild.id)) {
-        ctx.settings.data.phone.blacklist.splice(ctx.settings.data.phone.blacklist.indexOf(foundGuild.id), 1);
+        ctx.settings.data.phone.blacklist.splice(
+          ctx.settings.data.phone.blacklist.indexOf(foundGuild.id),
+          1,
+        );
         await ctx.settings.saveData();
         ctx.channel.send(ctx.__('phonebook.blacklist.removed', {
           successIcon: this.client.constants.statusEmotes.success,
@@ -69,14 +72,20 @@ class Phonebook extends Command {
       }));
 
       const numbersArray = [];
-      for (const number of numbers) {
+      for (let i = 0; i < numbersArray.length; i += 1) {
+        if (i > 9) {
+          numbersArray.push(ctx.__('phonebook.moreEntries', {
+            count: (numbers.length - i) + 1,
+          }));
+          break;
+        }
+
+        const number = numbers[i];
         const guild = this.client.guilds.get(number.id);
         const guildLocale = await this.client.database.getDocument('guild', guild.id).then(g => g.misc.locale);
-        ctx.setLocale(guildLocale);
-        numbersArray.push(`- **${guild.name}**: ${number.number} [${ctx.__('lang.flagEmote')}]`);
+        numbersArray.push(`- **${guild.name}**: ${number.number} [${ctx.getCatalog(guildLocale)['lang.flagEmote']}]`);
       }
 
-      ctx.setLocale(ctx.settings.data.misc.locale);
       ctx.channel.send(ctx.__('phonebook.list', {
         search,
         list: numbersArray.join('\n'),
