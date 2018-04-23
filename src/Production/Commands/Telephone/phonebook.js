@@ -72,7 +72,7 @@ class Phonebook extends Command {
       }));
 
       const numbersArray = [];
-      for (let i = 0; i < numbersArray.length; i += 1) {
+      for (let i = 0; i < numbers.length; i += 1) {
         if (i > 9) {
           numbersArray.push(ctx.__('phonebook.moreEntries', {
             count: (numbers.length - i) + 1,
