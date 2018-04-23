@@ -1,4 +1,5 @@
 const { Client } = require('discord.js');
+const snekfetch = require('snekfetch');
 const Dashboard = require('../Web/Dashboard');
 const { readdir } = require('fs');
 const config = require('../config.json');
@@ -52,12 +53,6 @@ class ExtendedClient extends Client {
      * @type {Boolean}
      */
     this.cleverbot = true;
-
-    /**
-     * Conversation strings (base64 text).
-     * @type {Object}
-     */
-    this.cleverbotConversations = {};
 
     /**
      * Disabled commands.
@@ -130,6 +125,20 @@ class ExtendedClient extends Client {
      * @type {ModHelper}
      */
     this.moderation = new ModHelper(this);
+
+    // Creating Cleverbot instance
+    snekfetch
+      .post('https://cleverbot.io/1.0/create')
+      .set({ 'Content-Type': 'application/json' })
+      .send({
+        user: this.config.api.cleverbotUser,
+        key: this.config.api.cleverbotKey,
+      })
+      .then(() => console.log('[Cleverbot] Created instance successfully'))
+      .catch((res) => {
+        if (res.body && res.body.status) console.log(`[Cleverbot] Failed to create instance: ${res.body.status}`);
+        else console.log('[Cleverbot] Failed to create instance.');
+      });
   }
 
   /**
@@ -160,7 +169,7 @@ class ExtendedClient extends Client {
    * @returns {string}
    */
   escapeMarkdown(string) {
-    return string.replace(/[\*\(\)\[\]\+\-\\_`#<>]/g, m => this.constants.markdownCharacters[m]);
+    return string.replace(/[\*\(\)\[\]\+\-\\_`#<>]/g, m => this.constants.markdownCharacters[m]); // eslint-disable-line no-useless-escape
   }
 }
 

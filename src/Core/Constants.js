@@ -53,5 +53,5 @@ exports.markdownCharacters = {
   '`': '\\`',
   '<': '&lt;',
   '>': '&gt;',
-  '&': '&amp;'
+  '&': '&amp;',
 };

@@ -57,21 +57,28 @@ class Message extends Event {
           errorIcon: this.client.constants.statusEmotes.error,
         }));
 
-        ctx.channel.startTyping();
-        snekfetch.get(`http://www.cleverbot.com/getreply?key=${this.client.config.api.cleverbot}&input=${question}&cx=${this.client.cleverbotConversations[ctx.author.id] || '0'}`)
-          .then(async (response) => {
-            const parsed = response.body;
+        if (ctx.channel.topic && ctx.channel.topic.toLowerCase().includes('{-cleverbot}')) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          name: 'cleverbot',
+        }));
 
-            this.client.cleverbotConversations[ctx.author.id] = parsed.cs;
-            await ctx.channel.send(parsed.output);
+        ctx.channel.startTyping();
+        snekfetch
+          .post('https://cleverbot.io/1.0/ask')
+          .set({ 'Content-Type': 'application/json' })
+          .send({
+            user: this.client.config.api.cleverbotUser,
+            key: this.client.config.api.cleverbotKey,
+            text: question,
+          })
+          .then(async (res) => {
+            await ctx.channel.send(res.body.response);
             ctx.channel.stopTyping();
           })
-          .catch(async (response) => {
-            const parsed = response.body;
-
+          .catch(async (res) => {
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: parsed ? parsed.error : ctx.__('global.unknown'),
+              message: res.body ? res.body.status : ctx.__('global.unknown'),
             }));
             ctx.channel.stopTyping(true);
           });

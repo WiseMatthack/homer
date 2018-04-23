@@ -5,7 +5,8 @@
     "token": ""
   },
   "api": {
-    "cleverbot": "",
+    "cleverbotKey": "",
+    "cleverbotUser": "",
     "darkSky": "",
     "discordBans": "",
     "discordBots": "",
