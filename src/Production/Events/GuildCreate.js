@@ -8,6 +8,8 @@ class GuildCreate extends Event {
   }
 
   async handle(guild) {
+    if (!guild.available) return;
+
     appendFile(`${__dirname}/../../../logs/guilds.txt`, `[${Date.now()}] Join - ${guild.name} (ID:${guild.id}) - Owner: ${guild.ownerID}\r\n`, (err) => {
       if (err) console.error(err);
     });
