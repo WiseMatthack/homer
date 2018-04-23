@@ -36,8 +36,8 @@ class ModHelper extends Helper {
     if (!textChannel) return;
 
     const sentMessage = await textChannel.send(msg.join('\n'));
-    message = {
-      channel: channel.id,
+    const message = {
+      channel: textChannel.id,
       message: sentMessage.id,
     };
 
