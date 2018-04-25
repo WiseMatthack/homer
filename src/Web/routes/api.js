@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const client = require('../../index');
 const i18n = require('i18n');
+const mtz = require('moment-timezone');
 
 const router = Router()
   .post('/vote', async (req, res) => {
@@ -10,22 +11,34 @@ const router = Router()
         message: 'INVALID_TOKEN',
       });
 
-    const user = client.users.get(req.body.user) || (await client.fetchUser(req.body.user));
-    if (!user) return;
+    const channel = client.channels.get(client.config.logChannels.votes);
+    const voteMessage = await channel.send(`\`[${mtz().format('HH:mm:ss')}]\` 🗳 **PROCESSING**`);
+    let editedMessage = null;
 
-    const voteObject = (await client.database.getDocument('votes', user.id) || {
-      id: user.id,
-      count: 0,
-    });
+    if (req.body.type === 'test') {
+      editedMessage = 'Test vote received from **Discord Bot List**, works fine.';
+    } else {
+      const user = client.users.get(req.body.user) || (await client.fetchUser(req.body.user));
+      if (!user) return;
 
-    voteObject.count += 1;
-    await client.database.insertDocument('votes', voteObject, { conflict: 'update' });
+      const voteObject = (await client.database.getDocument('votes', user.id) || {
+        id: user.id,
+        count: 0,
+      });
 
-    const userLocale = (await client.database.getDocument('profile', user.id).then(p => (p ? (p.locale || 'en-gb') : 'en-gb')));
-    i18n.setLocale(userLocale);
+      voteObject.count += 1;
+      await client.database.insertDocument('votes', voteObject, { conflict: 'update' });
 
-    user.send(i18n.__('vote.webhookDM'))
-      .catch(() => {});
+      const userLocale = (await client.database.getDocument('profile', user.id).then(p => (p ? (p.locale || 'en-gb') : 'en-gb')));
+      i18n.setLocale(userLocale);
+
+      user.send(i18n.__('vote.webhookDM'))
+        .catch(() => {});
+
+      editedMessage = `**${user.tag}** voted on Discord Bot List - Vote count: ${voteObject.count}`;
+    }
+
+    voteMessage.edit(voteMessage.content.replace('**PROCESSING**', editedMessage));
   });
 
 module.exports = router;
