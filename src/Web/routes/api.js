@@ -15,6 +15,7 @@ const router = Router()
     const voteMessage = await channel.send(`\`[${mtz().format('HH:mm:ss')}]\` 🗳 **PROCESSING**`);
     let editedMessage = null;
 
+    console.log(req.body);
     if (req.body.type === 'test') {
       editedMessage = 'Test vote received from **Discord Bot List**, works fine.';
     } else {
