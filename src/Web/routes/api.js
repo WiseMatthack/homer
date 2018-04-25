@@ -3,8 +3,12 @@ const client = require('../../index');
 const i18n = require('i18n');
 
 const router = Router()
-  .post('/vote', async (req) => {
-    if (req.header('Authorization') !== client.config.api.discordBotsWebhook) return;
+  .post('/vote', async (req, res) => {
+    if (req.header('Authorization') !== client.config.api.discordBotsWebhook) return res
+      .status(403)
+      .json({
+        message: 'INVALID_TOKEN',
+      });
 
     const user = client.users.get(req.body.user) || (await client.fetchUser(req.body.user));
     if (!user) return;
