@@ -18,6 +18,11 @@ const router = Router()
     console.log(req.body);
     if (req.body.type === 'test') {
       editedMessage = 'Test vote received from **Discord Bot List**, works fine.';
+      res
+        .status(200)
+        .json({
+          message: 'TEST_SUCCESSFUL',
+        });
     } else {
       const user = client.users.get(req.body.user) || (await client.fetchUser(req.body.user));
       if (!user) return;
@@ -37,6 +42,12 @@ const router = Router()
         .catch(() => {});
 
       editedMessage = `**${user.tag}** voted on Discord Bot List - Vote count: ${voteObject.count}`;
+
+      res
+        .status(200)
+        .json({
+          message: 'VOTE_RECEIVED',
+        });
     }
 
     voteMessage.edit(voteMessage.content.replace('**PROCESSING**', editedMessage));
