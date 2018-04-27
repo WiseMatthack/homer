@@ -8,6 +8,10 @@
     "usage": "feedback <message>",
     "examples": ["feedback Your bot is amazing!", "feedback There is a bug when we run the support command :x"]
   },
+  "guide": {
+    "description": "Get help on using main Homer features",
+    "usage": "guide"
+  },
   "help": {
     "description": "Get help on using the bot",
     "usage": "help"

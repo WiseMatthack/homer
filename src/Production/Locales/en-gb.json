@@ -114,6 +114,8 @@
 	"google.error.noResult": "{{{ googleIcon }}} No result found!",
 	"google.error.invalidSearch": "{{{ errorIcon }}} The search length must not exceed 120 characters.",
 	"google.error.unknown": "{{{ errorIcon }}} An unknown error has occured during querying Google.",
+	"guide.welcome": "🔖 **Welcome to the Homer guide**\nYou can get help on using main Homer features.\nPlease react with the emoji that represents the feature you wanna get help for.",
+	"guide.☎": "☎ **How to set-up Homer telephone**\n1) Dedicate a text channel for the telephone, type `{{{ prefix }}}telephone` in to mark it as the telephone channel.\n2) Generate your telephone number using `{{{ prefix }}}number`.\n3) By default you will appear on the phonebook, if you don't want to, run `{{{ prefix }}}phonebook switch`.\n4) Find numbers to call using `{{{ prefix }}}phonebook` or ask your friends to give theirs.\n5) Start calling using `{{{ prefix }}}call`!\n\n**Tip 1:** If you want to reset your number, use `{{{ prefix }}}number reset`\n**Tip 2:** If you want to blacklist a number, run the command `{{{ prefix }}}phonebook blacklist <number>`.",
 	"hackban.success": "{{{ successIcon }}} Successfully hackbanned **{{{ tag }}}**.",
 	"hackban.error.noSearch": "{{{ errorIcon }}} Specify the ID of the user to hackban.",
 	"hackban.error.forbidden": "{{{ errorIcon }}} **{{{ tag }}}** is a member of this guild, use the ban command instead.",
