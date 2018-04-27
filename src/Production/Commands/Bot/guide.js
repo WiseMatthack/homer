@@ -1,4 +1,5 @@
 const Command = require('../../../Core/Structures/Command');
+
 const possibleReactions = ['☎'];
 
 class Guide extends Command {
