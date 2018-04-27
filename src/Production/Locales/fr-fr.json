@@ -254,7 +254,7 @@
 	"remind.error.noRemind": "{{{ errorIcon }}} Vous n'avez aucun rappel en cours.",
 	"remind.error.noRemindFound": "{{{ errorIcon }}} Aucun rappel trouvé avec l'index `{{{ index }}}`.",
 	"remind.error.invalidParameters": "{{{ errorIcon }}} Vous devez fournir une durée et un contenu pour votre rappel (moins de 256 caractères de longueur).",
-	"remind.reminded": "⏰ <@{{{ user }}}> - Vous avez créé un rappel {{{ set }}} pour `{{{ content }}}` et l'échéance a été atteinte.",
+	"remind.reminded": "⏰ <@{{{ user }}}> - `{{{ content }}}` - Ajouté {{{ set }}}.",
 	"reason.edited": "{{{ successIcon }}} Raison pour le cas de modération `{{{ caseID }}}` modifiée avec succès.",
 	"reason.error.notFound": "{{{ errorIcon }}} Aucun cas de modération trouvé avec l'ID `{{{ caseID }}}`.",
 	"reason.error.invalidReason": "{{{ errorIcon }}} Vous devez fournir une raison ayant une longueur inférieure à 1024 caractères.",

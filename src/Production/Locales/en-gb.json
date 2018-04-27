@@ -255,7 +255,7 @@
 	"remind.error.noRemind": "{{{ errorIcon }}} You do not have any active remind.",
 	"remind.error.noRemindFound": "{{{ errorIcon }}} No remind found having the index `{{{ index }}}`.",
 	"remind.error.invalidParameters": "{{{ errorIcon }}} You must set a duration and a short text for your remind (less than 256 characters long).",
-	"remind.reminded": "⏰ <@{{{ user }}}> - You set a remind {{{ set }}} for `{{{ content }}}` and the deadline has been reached.",
+	"remind.reminded": "⏰ <@{{{ user }}}> -  `{{{ content }}}` - Set {{{ set }}}.",
 	"reason.edited": "{{{ successIcon }}} Reason for moderation case `{{{ caseID }}}` edited successfully.",
 	"reason.error.notFound": "{{{ errorIcon }}} No moderation case found with ID `{{{ caseID }}}`.",
 	"reason.error.invalidReason": "{{{ errorIcon }}} You must provide a reason with a length inferior to 1024 characters.",
