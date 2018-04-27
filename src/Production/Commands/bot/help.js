@@ -40,6 +40,8 @@ class Help extends Command {
 
       for (const category of this.client.config.discord.commandCategories) {
         if (category !== 'owner' && category !== 'aliases') {
+          const commandsList = this.client.commands.gps.get(category);
+
           embed.addField(
             ctx.__(`help.global.category.${category}`),
             commandsList.map(cmd => `\`${cmd}\``).join(' - '),
