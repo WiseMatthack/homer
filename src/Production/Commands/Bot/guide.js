@@ -20,7 +20,7 @@ class Guide extends Command {
     sentMessage.awaitReactions(
       (reaction, user) => user.id === ctx.author.id &&
         possibleReactions.includes(reaction.emoji.name),
-      { limit: 1 },
+      { max: 1 },
     )
       .then(async (reactions) => {
         await sentMessage.clearReactions();
