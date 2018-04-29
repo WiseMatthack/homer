@@ -61,13 +61,14 @@ class Remind extends Command {
           const parsedDuration = durationParser(argument);
           if (parsedDuration !== 0) duration += parsedDuration;
           else durationFinished = true;
-        } else {
-          if (duration === 0) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
-            errorIcon: this.client.constants.statusEmotes.error,
-          }));
-
-          typeof content === 'string' ? content += ` ${argument}` : content = argument;
         }
+
+        if (!durationFinished) return;
+        if (duration === 0) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
+          errorIcon: this.client.constants.statusEmotes.error,
+        }));
+
+        typeof content === 'string' ? content += ` ${argument}` : content = argument;
       }
 
       if (!content || content.length > 256) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
