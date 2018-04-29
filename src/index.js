@@ -38,7 +38,9 @@ process.on('unhandledRejection', (error) => {
   console.error(error);
 
   for (const ownerID of client.config.owners) {
-    const user = client.users.get(ownerID) || (await client.fetchUser(ownerID));
+    const user = client.users.get(ownerID);
+    if (!user) return;
+
     user.send(`\`[${mtz().format('HH:mm:ss')}]\` ${this.client.constants.statusEmotes.warning} Unhandled rejection ${this.client.constants.statusEmotes.warning}\n\n\`\`\`js\n${error.stack}\`\`\``)
       .catch(() => {}); // No but shit I won't handle the error of an error
   }
