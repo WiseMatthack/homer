@@ -37,13 +37,6 @@ class PhoneManager extends Manager {
    * @param {String} receiver Receiver ID
    */
   async initiateCall(sender, receiver) {
-    const call = {
-      sender,
-      receiver,
-      state: 0,
-    };
-    this.calls.push(call);
-
     const senderSettings = new DataGuild(this.client, sender);
     await senderSettings.getData();
 
@@ -63,6 +56,15 @@ class PhoneManager extends Manager {
         prefix: this.client.config.discord.defaultPrefixes[0],
         callMessage: receiverSettings.data.phone.callMessage ? `\n${receiverSettings.data.phone.callMessage}` : '',
       }));
+
+   const call = {
+      sender,
+      receiver,
+      state: 0,
+      senderMessage: callingMsg.id,
+      receiverMessage: incomingCallMsg.id,
+    };
+    this.calls.push(call);
 
     setTimeout(async () => {
       const callObject = this.calls.find(c => c.sender === sender && c.receiver === receiver);

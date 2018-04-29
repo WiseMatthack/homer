@@ -30,15 +30,19 @@ class Hangup extends Command {
           number: s.phone.number,
         }));
 
-      ctx.channel.send(ctx.__('phone.hangup.pending.asked'));
+      ctx.channel.fetchMessage(call[`${thisState}Message`])
+        .then(m => m.edit(ctx.__('phone.hangup.pending.asked')))
+        .catch(() => {});
 
       ctx.setLocale(victimSettings.locale);
       this.client
         .guilds.get(call[thisState === 'sender' ? 'receiver' : 'sender'])
         .channels.get(victimSettings.telephone)
-        .send(ctx.__('phone.hangup.pending.victim', {
-          number: victimSettings.number,
-        }));
+        .fetchMessage(call[`${thisState === 'sender' ? 'receiver' : 'sender'}Message`])
+          .then(m => m.edit(ctx.__('phone.hangup.pending.victim', {
+            number: ctx.settings.data.phone.number,
+          })))
+          .catch(() => {});
 
       this.client.phone.calls.splice(this.client.phone.calls.indexOf(call), 1);
     }
