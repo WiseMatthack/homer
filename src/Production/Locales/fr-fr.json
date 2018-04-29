@@ -260,6 +260,7 @@
 	"remind.error.noRemind": "{{{ errorIcon }}} Vous n'avez aucun rappel en cours.",
 	"remind.error.noRemindFound": "{{{ errorIcon }}} Aucun rappel trouvé avec l'index `{{{ index }}}`.",
 	"remind.error.invalidParameters": "{{{ errorIcon }}} Vous devez fournir une durée et un contenu pour votre rappel (moins de 256 caractères de longueur).",
+	"remind.error.invalidDuration": "{{{ errorIcon }}} La durée ne peut excéder 24 jours (`2147483647ms`).",
 	"remind.reminded": "⏰ <@{{{ user }}}> - `{{{ content }}}` - Ajouté {{{ set }}}.",
 	"reason.edited": "{{{ successIcon }}} Raison pour le cas de modération `{{{ caseID }}}` modifiée avec succès.",
 	"reason.error.notFound": "{{{ errorIcon }}} Aucun cas de modération trouvé avec l'ID `{{{ caseID }}}`.",

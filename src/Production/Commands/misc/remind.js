@@ -76,6 +76,10 @@ class Remind extends Command {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
+      if (duration > 2147483647) return ctx.channel.send(ctx.__('remind.error.invalidDuration', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
       const end = profile.data.reminds
         .sort((a, b) => a.index - b.index)[profile.data.reminds.length - 1];
       const remind = {
