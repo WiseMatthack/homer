@@ -13,10 +13,10 @@ class Support extends Command {
       .guilds.get(this.client.config.support.guild)
       .channels.get(this.client.config.support.channel)
       .createInvite({
-        temporary: true,
-        maxAge: 30000,
+        maxAge: 120,
+        maxUses: 1,
         unique: true,
-      });
+      }, `${ctx.author.tag} - Support invite`);
 
     ctx.channel.send(ctx.__('support.support', {
       link: invite,
