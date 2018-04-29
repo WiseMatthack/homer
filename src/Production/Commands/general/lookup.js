@@ -14,7 +14,7 @@ class Lookup extends Command {
 
   async run(ctx) {
     const lookup = ctx.args.join(' ');
-    if (!lookup) return ctx.channel.send(ctx.__('lookup.noLookup', {
+    if (!lookup) return ctx.channel.send(ctx.__('lookup.error.noLookup', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
