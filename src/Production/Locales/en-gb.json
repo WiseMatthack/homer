@@ -208,6 +208,8 @@
 	"phone.pickup.sender": "☎ They picked up the telephone, say hello!",
 	"phone.pickup.receiver": "☎ You picked up the telephone, say hello!",
 	"phone.hangup": "☎ The communication has ended.",
+	"phone.hangup.pending.asked": "☎ You cancelled the call.",
+	"phone.hangup.pending.victim": "☎ You missed a call from `{{{ number }}}`.",
 	"phonebook.switch.disabled": "🔖 You will no longer appear on the phonebook anymore.",
 	"phonebook.switch.enabled": "🔖 You will now appear on the phonebook.",
 	"phonebook.error.noSearch": "{{{ errorIcon }}} You must provide a number or a (partial) server name to search.",

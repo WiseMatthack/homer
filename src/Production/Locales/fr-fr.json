@@ -207,6 +207,8 @@
 	"phone.pickup.sender": "☎ Ils ont décroché le téléphone, dites bonjour !",
 	"phone.pickup.receiver": "☎ Vous avez décroché le téléphone, dites bonjour !",
 	"phone.hangup": "☎ La communication a prit fin.",
+	"phone.hangup.pending.asked": "☎ Vous avez annulé l'appel.",
+	"phone.hangup.pending.victim": "☎ Vous avez manqué un appel de `{{{ number }}}`.",
 	"phonebook.switch.disabled": "🔖 Vous n'apparaîtrez plus sur le carnet d'adresses.",
 	"phonebook.switch.enabled": "🔖 Vous apparaîtrez maintenant sur le carnet d'adresses.",
 	"phonebook.error.noSearch": "{{{ errorIcon }}} Vous devez fournir un numéro de téléphone ou un nom de serveur (partiel) à rechercher.",

@@ -13,11 +13,35 @@ class Hangup extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    if (this.client.phone.isCallActive(ctx.guild.id) !== 'active') return ctx.channel.send(ctx.__('pickup.error.nobodyCalls', {
+    const state = this.client.phone.isCallActive(ctx.guild.id);
+    if (this.client.phone.isCallActive(ctx.guild.id) === 'none') return ctx.channel.send(ctx.__('pickup.error.nobodyCalls', {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    this.client.phone.interruptCall(ctx.guild.id);
+    if (state === 'active') this.client.phone.interruptCall(ctx.guild.id);
+    else {
+      const call = this.client.phone.calls.find(c => c.sender === ctx.guild.id || c.receiver === ctx.guild.id);
+      const thisState = call.sender === ctx.guild.id ? 'sender' : 'receiver';
+
+      const victimSettings = await this.client.database.getDocument('guild', call[thisState === 'sender' ? 'receiver' : 'sender'])
+        .then(s => ({
+          locale: s.misc.locale,
+          telephone: s.phone.channel,
+          number: s.phone.number,
+        }));
+
+      ctx.channel.send(ctx.__('phone.hangup.pending.asked'));
+
+      ctx.setLocale(victimSettings.locale);
+      this.client
+        .guilds.get(call[thisState === 'sender' ? 'receiver' : 'sender'])
+        .channels.get(victimSettings.telephone)
+        .send(ctx.__('phone.hangup.pending.victim', {
+          number: victimSettings.number,
+        }));
+
+      this.client.phone.calls.splice(this.client.phone.calls.indexOf(call), 1);
+    }
   }
 }
 
