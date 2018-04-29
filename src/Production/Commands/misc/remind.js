@@ -52,14 +52,27 @@ class Remind extends Command {
         }));
       }
     } else {
-      const duration = ctx.args[0];
-      const content = ctx.args.splice(1).join(' ');
+      let duration = 0;
+      let content = null;
+      let durationFinished = false;
+      for (let i = 0; i < ctx.args.length; i += 1) {
+        const argument = ctx.args[i];
+        if (!durationFinished) {
+          const parsedDuration = durationParser(argument);
+          if (parsedDuration !== 0) duration += parsedDuration;
+          else durationFinished = true;
+        } else {
+          if (duration === 0) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
+            errorIcon: this.client.constants.statusEmotes.error,
+          }));
 
-      if (!duration || !content || content.length > 256) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
+          typeof content === 'string' ? content += ` ${argument}` : content = argument;
+        }
+      }
+
+      if (!content || content.length > 256) return ctx.channel.send(ctx.__('remind.error.invalidParameters', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
-
-      const timeout = durationParser(duration) || 60000;
 
       const end = profile.data.reminds
         .sort((a, b) => a.index - b.index)[profile.data.reminds.length - 1];
