@@ -8,6 +8,7 @@
 const Client = require('./Core/Client');
 const i18n = require('i18n');
 const { DiscordAPIError } = require('discord.js');
+const mtz = require('moment-timezone');
 
 /* Client */
 const client = new Client();
@@ -37,8 +38,8 @@ process.on('unhandledRejection', (error) => {
   console.error(error);
 
   for (const ownerID of client.config.owners) {
-    const user = client.users.get(ownerID);
-    user.send(`https://www.youtube.com/watch?v=mOYZaiDZ7BM :musical_note:\nIf it hadn't been for cotton-eye Joe\nI'd been married long time ago\nWhere did you come from. Where did you go ?\nWhere did you come from cotton-eye Joe ?\n\n\`\`\`js\n${error.message}\n${error.stack}\`\`\``)
+    const user = client.users.get(ownerID) || (await client.fetchUser(ownerID));
+    user.send(`\`[${mtz().format('HH:mm:ss')}]\` ${this.client.constants.statusEmotes.warning} Unhandled rejection ${this.client.constants.statusEmotes.warning}\n\n\`\`\`js\n${error.stack}\`\`\``)
       .catch(() => {}); // No but shit I won't handle the error of an error
   }
 });
