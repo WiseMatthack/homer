@@ -81,8 +81,8 @@ class Remind extends Command {
         content,
         guild: ctx.guild.id,
         channel: ctx.channel.id,
-        expires: timeout,
-        end: (Date.now() + timeout),
+        expires: duration,
+        end: (Date.now() + duration),
         set: Date.now(),
       };
 
