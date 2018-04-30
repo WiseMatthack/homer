@@ -21,6 +21,7 @@ class Call extends Command {
 
     if (ctx.channel.id !== ctx.settings.data.phone.channel) return ctx.channel.send(ctx.__('call.error.noPhoneChannel', {
       errorIcon: this.client.constants.statusEmotes.error,
+      channel: ctx.settings.data.phone.channel ? `<#${ctx.settings.data.phone.channel}>` : ctx.__('global.none'),
     }));
 
     if (this.client.phone.isCallActive(ctx.guild.id) !== 'none') return ctx.channel.send(ctx.__('call.error.alreadyCalling', {

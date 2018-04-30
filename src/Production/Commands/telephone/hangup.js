@@ -11,6 +11,7 @@ class Hangup extends Command {
   async run(ctx) {
     if (ctx.channel.id !== ctx.settings.data.phone.channel) return ctx.channel.send(ctx.__('pickup.error.noPhoneChannel', {
       errorIcon: this.client.constants.statusEmotes.error,
+      channel: ctx.settings.data.phone.channel ? `<#${ctx.settings.data.phone.channel}>` : ctx.__('global.none'),
     }));
 
     const state = this.client.phone.isCallActive(ctx.guild.id);
