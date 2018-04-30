@@ -3,7 +3,7 @@ const Command = require('../../../Core/Structures/Command');
 class Telephone extends Command {
   constructor(client) {
     super(client, {
-      name: 'phchannel',
+      name: 'setphone',
       aliases: ['phonechannel'],
       userPermissions: ['MANAGE_GUILD'],
       category: 'telephone',
@@ -12,14 +12,14 @@ class Telephone extends Command {
 
   async run(ctx) {
     if (ctx.args[0] === 'clear') {
-      if (!ctx.settings.data.phone.channel) return ctx.channel.send(ctx.__('phchannel.error.noChannel', {
+      if (!ctx.settings.data.phone.channel) return ctx.channel.send(ctx.__('setphone.error.noChannel', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
       ctx.settings.data.phone.channel = null;
       await ctx.settings.saveData();
 
-      ctx.channel.send(ctx.__('phchannel.channelCleared', {
+      ctx.channel.send(ctx.__('setphone.channelCleared', {
         successIcon: this.client.constants.statusEmotes.success,
       }));
     } else {
@@ -32,7 +32,7 @@ class Telephone extends Command {
         channel = channels.first();
       }
 
-      if (!channel.permissionsFor(ctx.guild.me).has('VIEW_CHANNEL')) return ctx.channel.send(ctx.__('phchannel.error.noViewPermission', {
+      if (!channel.permissionsFor(ctx.guild.me).has('VIEW_CHANNEL')) return ctx.channel.send(ctx.__('setphone.error.noViewPermission', {
         errorIcon: this.client.constants.statusEmotes.error,
         channel: channel.id,
       }));
@@ -40,7 +40,7 @@ class Telephone extends Command {
       ctx.settings.data.phone.channel = channel.id;
       await ctx.settings.saveData();
 
-      ctx.channel.send(ctx.__('phchannel.channelSet', {
+      ctx.channel.send(ctx.__('setphone.channelSet', {
         successIcon: this.client.constants.statusEmotes.success,
         channel: channel.id,
       }));

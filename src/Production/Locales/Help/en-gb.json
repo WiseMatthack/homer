@@ -209,10 +209,10 @@
     "usage": "phonebook <switch|phone number|blacklist <phone number>>",
     "examples": ["phonebook switch", "phonebook 1-464-393", "phonebook blacklist 999-999"]
   },
-  "phchannel": {
+  "setphone": {
     "description": "Set-up the telephone channel or reset it",
-    "usage": "phchannel [#channel] or clear",
-    "examples": ["phchannel", "phchannel #my-telephone", "phchannel clear"]
+    "usage": "setphone [#channel] or clear",
+    "examples": ["setphone", "setphone #my-telephone", "setphone clear"]
   },
 
   "ban": {
