@@ -131,7 +131,7 @@ class Message extends Event {
         }
 
         const missingBotPermissions = cmd.botPermissions
-          .filter(perm => !ctx.guild.me.permissions.has(perm));
+          .filter(perm => !ctx.channel.permissionsFor(ctx.guild.me).has(perm));
 
         if (missingBotPermissions.length > 0) return ctx.channel.send(ctx.__('command.missingPerm.bot', {
           errorIcon: this.client.constants.statusEmotes.error,
@@ -139,7 +139,7 @@ class Message extends Event {
         }));
 
         const missingUserPermissions = cmd.userPermissions
-          .filter(perm => !ctx.member.permissions.has(perm));
+          .filter(perm => !ctx.channel.permissionsFor(ctx.member).has(perm));
 
         if (missingUserPermissions.length > 0) return ctx.channel.send(ctx.__('command.missingPerm.user', {
           errorIcon: this.client.constants.statusEmotes.error,
