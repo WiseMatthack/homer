@@ -7,6 +7,7 @@ class Guide extends Command {
     super(client, {
       name: 'guide',
       category: 'bot',
+      botPermissions: ['ADD_REACTIONS'],
     });
   }
 
