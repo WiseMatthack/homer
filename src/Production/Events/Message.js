@@ -48,11 +48,16 @@ class Message extends Event {
       }), { embed });
     });
 
+    // Pre-load blacklist status
+    const blacklistStatus = await this.checkBlacklist(ctx.author.id);
+
     /* Handle Cleverbot */
     if (ctx.content.startsWith(`<@${this.client.user.id}>`) || ctx.content.startsWith(`<@!${this.client.user.id}>`)) {
       const question = ctx.content.split(/ +/g).slice(1).join(' ');
 
       if (question) {
+        if (blacklistStatus) return;
+
         if (!this.client.cleverbot) return ctx.channel.send(ctx.__('message.cleverbot.disabled', {
           errorIcon: this.client.constants.statusEmotes.error,
         }));
@@ -100,6 +105,17 @@ class Message extends Event {
         appendFile(`${__dirname}/../../../logs/commands.txt`, `[${Date.now()}] Author: ${ctx.author.id} - Channel: ${ctx.channel.id} - Guild: ${ctx.guild.id} - Content: ${ctx.content}\r\n`, (err) => {
           if (err) console.error(err);
         });
+
+        /* Blacklist */
+        if (blacklistStatus) return ctx.channel.send(ctx.__('message.blacklist', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          prefix: this.client.config.discord.defaultPrefixes[0],
+          reason: blacklistStatus.reason,
+          time: mtz(blacklistStatus.time)
+            .locale(ctx.settings.data.misc.locale)
+            .tz(ctx.settings.data.misc.timezone)
+            .format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
+        }));
 
         /* Can the user and bot run the command */
         if (cmd.private) {
@@ -160,6 +176,16 @@ class Message extends Event {
         channel.send(`☎ **${ctx.author.tag}**: ${message.cleanContent}`);
       }
     }
+  }
+
+  /**
+   * Checks if an user is blacklisted
+   * @param {String} id User ID
+   * @returns {Promise<String>}
+   */
+  async checkBlacklist(id) {
+    const entry = await this.client.database.getDocument('blacklist', id);
+    return entry || false;
   }
 }
 

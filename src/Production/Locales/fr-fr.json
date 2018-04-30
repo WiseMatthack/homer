@@ -176,6 +176,7 @@
 	"message.cleverbot.disabled": "{{{ errorIcon }}} La fonctionnalité cleverbot a été désactivée.",
 	"message.cleverbot.error": "{{{ errorIcon }}} Une erreur est survenue lors de la requête vers Cleverbot : `{{{ message }}}`.",
 	"message.disabledCommand": "{{{ errorIcon }}} La commande `{{{ cmdName }}}` a été désactivée. Raison donnée :\n```{{{ reason }}}```",
+	"message.blacklist": "{{{ errorIcon }}} Vous avez été blacklisté pour `{{{ reason }}}` à la date du `{{{ time }}}`\n        Si vous n'acceptez pas ce jugement, veuillez rejoindre notre serveur de support avec `{{{ prefix }}}support`.",
 	"moderation.action.1": "Ban",
 	"moderation.action.2": "Kick",
 	"moderation.action.3": "Hackban",
