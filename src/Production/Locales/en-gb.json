@@ -202,6 +202,7 @@
 	"number.is": "☎ Your telephone number is `{{{ number }}}`.",
 	"number.generated": "☎ Thanks for using Homer telephone! Your telephone number is `{{{ number }}}`.\n🔖 You appear by default on the phonebook. If you do not want to appear on, please run the `{{{ defaultPrefix }}}phonebook switch` command (`MANAGE_GUILD` permission required).",
 	"number.reset.done": "☎ Your telephone number has been reset. Your new number is `{{{ number }}}`.",
+	"phone.attachments": "📎 **Attachments**",
 	"phone.calling": "☎ Calling `{{{ number }}}`...",
 	"phone.incomingCall": "☎ You receive a call from `{{{ number }}}`! Run `{{{ prefix }}}pickup` to answer.{{{ callMessage }}}",
 	"phone.noAnswer": "☎ No answer from `{{{ number }}}`! Cancelled phone call.",

@@ -173,7 +173,25 @@ class Message extends Event {
         const distantSettings = phone.sender === ctx.guild.id ? await this.client.database.getDocument('guild', phone.receiver) : await this.client.database.getDocument('guild', phone.sender);
         const channel = this.client.channels.get(distantSettings.phone.channel);
         if (!channel) return this.client.phone.interruptCall(ctx.guild.id);
-        channel.send(`☎ **${ctx.author.tag}**: ${message.cleanContent}`);
+
+        /* Processing message */
+        // Disable links embedding
+        let content = ctx.cleanContent;
+        const urlExpression = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        for (const part of content.split('')) {
+          if (urlExpression.test(part)) {
+            content.replace(part, `<${part}>`);
+          }
+        }
+        let msg = `☎ **${ctx.author.tag}** : ${content}`;
+
+        // Attachments
+        if (ctx.attachments.size > 0) msg += `\n${ctx.__('phone.attachments')}`;
+        for (const attachment of ctx.attachments) {
+          message += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
+        }
+
+        channel.send(message);
       }
     }
   }
