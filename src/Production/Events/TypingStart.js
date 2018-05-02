@@ -1,6 +1,6 @@
 const Event = require('../../Core/Structures/Event');
 
-class Resume extends Event {
+class TypingStart extends Event {
   constructor(client) {
     super(client, 'typingStart');
   }
@@ -17,4 +17,4 @@ class Resume extends Event {
   }
 }
 
-module.exports = Resume;
+module.exports = TypingStart;
