@@ -183,13 +183,13 @@ class Message extends Event {
             content.replace(part, `<${part}>`);
           }
         }
-        let msg = `☎ **${ctx.author.tag}** : ${content}`;
+        let msg = `☎ **${ctx.author.tag}**: ${content}`;
 
         // Attachments
         if (ctx.attachments.size > 0) msg += `\n${ctx.__('phone.attachments')}`;
-        for (const attachment of ctx.attachments) {
+        ctx.attachments.forEach((attachment) => {
           msg += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
-        }
+        });
 
         channel.send(msg);
       }
