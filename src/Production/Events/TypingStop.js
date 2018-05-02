@@ -10,11 +10,10 @@ class TypingStop extends Event {
 
     const phoneCall = this.client.phone.calls.find(call =>
       call.state === 1 &&
-      (call.sender === channel.id || call.receiver === channel.id));
+      (call.sender === channel.guild.id || call.receiver === channel.guild.id));
     if (phoneCall) {
       const type = phoneCall.sender === channel.guild.id ? 'receiver' : 'sender';
       const targetGuild = this.client.guilds.get(phoneCall[type]);
-      if (!targetGuild) return;
 
       const targetChannel = targetGuild.channels.get(
         await this.client.database.getDocument('guild', targetGuild.id).then(s => s.phone.channel),
