@@ -2,7 +2,7 @@ const Event = require('../../Core/Structures/Event');
 
 class Resume extends Event {
   constructor(client) {
-    super(client, 'typingStart');
+    super(client, 'typingStop');
   }
 
   async handle(channel) {
