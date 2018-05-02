@@ -6,7 +6,7 @@ class TypingStop extends Event {
   }
 
   async handle(channel) {
-    if (channel.typing) return;
+    if (channel.typing || user.id === this.client.user.id) return;
 
     const phoneCall = this.client.phone.calls.find(call =>
       call.state === 1 &&
