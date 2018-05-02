@@ -188,10 +188,10 @@ class Message extends Event {
         // Attachments
         if (ctx.attachments.size > 0) msg += `\n${ctx.__('phone.attachments')}`;
         for (const attachment of ctx.attachments) {
-          message += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
+          content += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
         }
 
-        channel.send(message);
+        channel.send(content);
       }
     }
   }
