@@ -178,7 +178,7 @@ class Message extends Event {
         // Disable links embedding
         let content = message.cleanContent;
         const urlExpression = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-        for (const part of content.split('')) {
+        for (const part of content.split(/ +/g)) {
           if (urlExpression.test(part)) {
             content.replace(part, `<${part}>`);
           }
@@ -188,10 +188,10 @@ class Message extends Event {
         // Attachments
         if (ctx.attachments.size > 0) msg += `\n${ctx.__('phone.attachments')}`;
         for (const attachment of ctx.attachments) {
-          content += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
+          msg += `\n- **${attachment.filename}** (${(attachment.filesize / 1000).toFixed(2)}KB): <${attachment.url}>`;
         }
 
-        channel.send(content);
+        channel.send(msg);
       }
     }
   }
