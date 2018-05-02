@@ -8,9 +8,11 @@ class TypingStop extends Event {
   async handle(channel) {
     if (channel.typing) return;
 
-    const phoneCall = this.client.phone.calls.find(call => call.sender === channel.id || call.receiver === channel.id);
+    const phoneCall = this.client.phone.calls.find(call =>
+      call.state === 1 &&
+      (call.sender === channel.id || call.receiver === channel.id));
     if (phoneCall) {
-      const type = phoneCall.sender === channel.id ? 'receiver' : 'sender';
+      const type = phoneCall.sender === channel.guild.id ? 'receiver' : 'sender';
       const targetGuild = this.client.guilds.get(phoneCall[type]);
       if (!targetGuild) return;
 
