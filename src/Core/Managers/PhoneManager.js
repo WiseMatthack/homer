@@ -120,12 +120,14 @@ class PhoneManager extends Manager {
     i18n.setLocale(senderSettings.misc.locale);
     this.client.channels
       .get(senderSettings.phone.channel)
-      .send(i18n.__('phone.hangup'));
+      .send(i18n.__('phone.hangup'))
+      .then(m => m.channel.stopTyping(true));
 
     i18n.setLocale(receiverSettings.misc.locale);
     this.client.channels
       .get(receiverSettings.phone.channel)
-      .send(i18n.__('phone.hangup'));
+      .send(i18n.__('phone.hangup'))
+      .then(m => m.channel.stopTyping(true));
   }
 }
 
