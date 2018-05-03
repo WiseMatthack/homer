@@ -46,6 +46,7 @@ class Hangup extends Command {
           .catch(() => {});
 
       this.client.phone.calls.splice(this.client.phone.calls.indexOf(call), 1);
+      ctx.channel.fetchMessage(ctx.id).then(m => m.react(this.client.emojis.get('420529118417780747')));
     }
   }
 }
