@@ -14,7 +14,7 @@ class GuildMemberRemove extends Event {
       const channel = this.client.channels.get(settings.data.leave.channel);
       if (!channel) return;
 
-      channel.send(this.client.lisa.replaceStatic(settings.data.leave.message, member, 1));
+      channel.send(await this.client.lisa.process(settings.data.leave.message, member, 1));
     }
   }
 }

@@ -14,7 +14,7 @@ class GuildMemberAdd extends Event {
       const channel = this.client.channels.get(settings.data.welcome.channel);
       if (!channel) return;
 
-      channel.send(this.client.lisa.replaceStatic(settings.data.welcome.message, member, 1));
+      channel.send(await this.client.lisa.process(settings.data.welcome.message, member, 1));
     }
   }
 }

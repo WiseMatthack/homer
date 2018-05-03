@@ -10,12 +10,12 @@ class LisaHelper extends Helper {
    * @param {String} string String to process
    * @param {*} context Context of the process
    * @param {Number} contextType Type of the context (0: Tag - 1: Welcome/Leave)
-   * @returns {String} Proceeded string
+   * @returns {Promise<String>} Proceeded string
    */
-  process(string, context, contextType) {
-    const newString = this.replaceStatic(string, context, contextType);
+  async process(string, context, contextType) {
+    const newString = await this.replaceStatic(string, context, contextType);
 
-    return this.replaceDynamic(newString, context, contextType);
+    return (await this.replaceDynamic(newString, context, contextType));
   }
 
   /**
@@ -23,9 +23,10 @@ class LisaHelper extends Helper {
    * @param {String} string String to process
    * @param {*} context Context of the process
    * @param {Number} contextType Type of the context (0: Tag - 1: Welcome/Leave)
-   * @returns {String} Proceeded string
+   * @returns {Promise<String>} Proceeded string
    */
-  replaceStatic(string, context, contextType) {
+  async replaceStatic(string, context, contextType) {
+    const settings = contextType === 0 ? context.ctx.settings.data : await this.client.database.getDocument('guild', context.guild.id);
     let newString = string;
 
     if (contextType === 0) {
@@ -54,7 +55,11 @@ class LisaHelper extends Helper {
         .replace(/{servercount}/g, context.guild.memberCount);
     }
 
-    return newString;
+    return newString
+      .replace(/{locale}/g, settings.misc.locale)
+      .replace(/{timezone}/g, settings.misc.timezone)
+      .replace(/{timeFormat}/g, settings.misc.timeFormat)
+      .replace(/{dateFormat}/g, settings.misc.dateFormat);
   }
 
   /**
@@ -62,12 +67,13 @@ class LisaHelper extends Helper {
    * @param {String} string String to process
    * @param {*} context Context of the process
    * @param {Number} contextType Type of the context (0: Tag - 1: Welcome/Leave)
-   * @returns {String} Proceeded string
+   * @returns {Promise<String>} Proceeded string
    */
-  replaceDynamic(string, context, contextType) {
+  async replaceDynamic(string, context, contextType) {
     const foundFunctions = string.match(this.client.constants.functionPattern);
     if (!foundFunctions) return string;
-
+    const settings = contextType === 0 ? context.ctx.settings.data : await this.client.database.getDocument('guild', context.guild.id);
+    
     const pattern = this.client.constants.functionPattern;
     let newString = string;
 
@@ -79,7 +85,7 @@ class LisaHelper extends Helper {
         const customFunction = new (require(`../../Production/Tags/${parsedInput[1]}`))(this.client, context, contextType);
         if (!customFunction) return;
 
-        const result = customFunction.run(parsedInput[2].split('|'));
+        const result = customFunction.run(parsedInput[2].split('|'), context, contextType, settings);
         newString = newString.replace(fn, result);
         pattern.lastIndex = 0;
       } catch (e) {

@@ -45,7 +45,7 @@ class Tag extends Command {
       }));
 
       tag.incrementUses();
-      const proceeded = this.client.lisa.process(tag.data.content, { ctx, tag, args }, 0);
+      const proceeded = await this.client.lisa.process(tag.data.content, { ctx, tag, args }, 0);
 
       ctx.channel.send(proceeded);
     }
@@ -227,7 +227,7 @@ class Tag extends Command {
 
     const args = ctx.args.slice(1);
     tag.incrementUses();
-    const proceeded = this.client.lisa.process(tag.data.content, { ctx, tag, args }, 0);
+    const proceeded = await this.client.lisa.process(tag.data.content, { ctx, tag, args }, 0);
 
     ctx.channel.send(proceeded);
   }
