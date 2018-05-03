@@ -175,11 +175,11 @@ class ExtendedClient extends Client {
    * Update the bot game.
    */
   updateGame() {
-    this.user.setActivity(this.client.customGame ?
-      this.client.customGame
-        .replace(/{servers}/g, this.client.guilds.size)
-        .replace(/{users}/g, this.client.users.size)
-        .replace(/{prefix}/g, this.client.config.discord.defaultPrefixes[0])
+    this.user.setActivity(this.customGame ?
+      this.customGame
+        .replace(/{servers}/g, this.guilds.size)
+        .replace(/{users}/g, this.users.size)
+        .replace(/{prefix}/g, this.config.discord.defaultPrefixes[0])
       : `Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
   }
 
