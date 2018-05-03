@@ -61,6 +61,12 @@ class ExtendedClient extends Client {
     this.cleverbotName = null;
 
     /**
+     * Custom game set (when client updates it).
+     * @type {?String}
+     */
+    this.customGame = null;
+
+    /**
      * Disabled commands.
      * @type {Object}
      */
@@ -169,7 +175,12 @@ class ExtendedClient extends Client {
    * Update the bot game.
    */
   updateGame() {
-    this.user.setActivity(`Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
+    this.user.setActivity(this.client.customGame ?
+      this.client.customGame
+        .replace(/{servers}/g, this.client.guilds.size)
+        .replace(/{users}/g, this.client.users.size)
+        .replace(/{prefix}/g, this.client.config.discord.defaultPrefixes[0])
+      : `Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
   }
 
   /**
