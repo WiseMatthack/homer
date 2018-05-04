@@ -77,12 +77,6 @@ class Phonebook extends Command {
           successIcon: this.client.constants.statusEmotes.success,
         }));
       } else {
-        const flagPattern = /:flag_(.*):/g;
-        if (!flagPattern.test(flag)) return ctx.channel.send(ctx.__('phonebook.flag.invalidFlag', {
-          errorIcon: this.client.constants.statusEmotes.error,
-          flag,
-        }));
-
         ctx.settings.data.phone.customFlag = flag;
         await ctx.settings.saveData();
 
