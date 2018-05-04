@@ -19,7 +19,8 @@ class TypingStop extends Event {
         await this.client.database.getDocument('guild', targetGuild.id).then(s => s.phone.channel),
       );
 
-      targetChannel.stopTyping();
+      targetChannel.send('DEBUG TYPINGSTOP EVENT WORKING')
+      targetChannel.stopTyping(true);
     }
   }
 }
