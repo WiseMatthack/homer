@@ -53,7 +53,7 @@ class Phonebook extends Command {
           successIcon: this.client.constants.statusEmotes.success,
         }));
       }
-    } else if (args[0] === 'random') {
+    } else if (ctx.args[0] === 'random') {
       const numbers = await this.client.database.getDocuments('guild')
         .then(settings => settings.filter(s => s.phone.number && s.phone.phonebook && s.phone.channel));
 
