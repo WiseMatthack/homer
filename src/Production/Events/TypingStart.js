@@ -19,7 +19,7 @@ class TypingStart extends Event {
         await this.client.database.getDocument('guild', targetGuild.id).then(s => s.phone.channel),
       );
 
-      targetChannel.startTyping();
+      targetChannel.startTyping(100);
     }
   }
 }
