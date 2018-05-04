@@ -206,8 +206,8 @@
   },
   "phonebook": {
     "description": "Search for telephone numbers in the phonebook",
-    "usage": "phonebook <switch|phone number|blacklist <phone number>>",
-    "examples": ["phonebook switch", "phonebook 1-464-393", "phonebook blacklist 999-999"]
+    "usage": "phonebook <switch|random|phone number|blacklist <phone number>>",
+    "examples": ["phonebook switch", "phonebook random", "phonebook 1-464-393", "phonebook blacklist 999-999"]
   },
   "setphone": {
     "description": "Set-up the telephone channel or reset it",

@@ -53,6 +53,18 @@ class Phonebook extends Command {
           successIcon: this.client.constants.statusEmotes.success,
         }));
       }
+    } else if (args[0] === 'random') {
+      const numbers = await this.client.database.getDocuments('guild')
+        .then(settings => settings.filter(s => s.phone.number && s.phone.phonebook && s.phone.channel));
+
+      const randomChosen = numbers[Math.floor(Math.random() * numbers.length)];
+      if (!randomChosen) return ctx.channel.send(ctx.__('phonebook.error.noFound', {
+        errorIcon: this.client.constants.statusEmotes.error,
+        search: 'random',
+      }));
+
+      const guild = this.client.guilds.get(randomChosen.id);
+      ctx.channel.send(`- **${guild.name}**: ${randomChosen.phone.number} [${ctx.getCatalog(randomChosen.misc.locale)['lang.flagEmote']}]`);
     } else {
       const search = ctx.args.join(' ');
       if (!search) return ctx.channel.send(ctx.__('phonebook.error.noSearch', {
