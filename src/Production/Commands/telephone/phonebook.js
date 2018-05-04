@@ -26,6 +26,11 @@ class Phonebook extends Command {
         ctx.channel.send(ctx.__('phonebook.switch.enabled'));
       }
     } else if (ctx.args[0] === 'blacklist') {
+      if (!ctx.member.permissions.has('MANAGE_GUILD')) return ctx.channel.send(ctx.__('command.missingPerm.user', {
+        errorIcon: this.client.constants.statusEmotes.error,
+        missingPermissions: ['MANAGE_GUILD'].map(perm => `\`${perm}\``).join(', '),
+      }));
+
       const number = ctx.args[1];
       if (!number) return ctx.channel.send(ctx.__('phonebook.blacklist.error.noNumber', {
         errorIcon: this.client.constants.statusEmotes.error,
@@ -53,6 +58,39 @@ class Phonebook extends Command {
           successIcon: this.client.constants.statusEmotes.success,
         }));
       }
+    } else if (ctx.args[0] === 'flag') {
+      if (!ctx.member.permissions.has('MANAGE_GUILD')) return ctx.channel.send(ctx.__('command.missingPerm.user', {
+        errorIcon: this.client.constants.statusEmotes.error,
+        missingPermissions: ['MANAGE_GUILD'].map(perm => `\`${perm}\``).join(', '),
+      }));
+
+      const flag = ctx.args[1];
+      if (!flag) return ctx.channel.send(ctx.__('phonebook.flag.noFlag', {
+        errorIcon: this.client.constants.statusEmotes.error,
+      }));
+
+      if (flag === 'clear') {
+        ctx.settings.data.phone.customFlag = null;
+        await ctx.settings.saveData();
+
+        ctx.channel.send(ctx.__('phonebook.flag.clearedFlag', {
+          successIcon: this.client.constants.statusEmotes.success,
+        }));
+      } else {
+        const flagPattern = /:flag_(.*):/g;
+        if (!flagPattern.test(flag)) return ctx.channel.send(ctx.__('phonebook.flag.invalidFlag', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          flag,
+        }));
+
+        ctx.settings.data.phone.customFlag = flag;
+        await ctx.settings.saveData();
+
+        ctx.channel.send(ctx.__('phonebook.flag.setFlag', {
+          successIcon: this.client.constants.statusEmotes.success,
+          flag,
+        }));
+      }
     } else if (ctx.args[0] === 'random') {
       const numbers = await this.client.database.getDocuments('guild')
         .then(settings => settings.filter(s => s.phone.number && s.phone.phonebook && s.phone.channel));
@@ -76,7 +114,12 @@ class Phonebook extends Command {
           .filter(s => s.phone.number && s.phone.phonebook &&
             (s.phone.number.includes(search) ||
             this.client.guilds.get(s.id).name.toLowerCase().includes(search.toLowerCase())))
-          .map(s => ({ id: s.id, number: s.phone.number })));
+          .map(s => ({
+            id: s.id,
+            number: s.phone.number,
+            customFlag: s.phone.customFlag || null,
+            locale: s.misc.locale,
+          })));
 
       if (numbers.length === 0) return ctx.channel.send(ctx.__('phonebook.error.noFound', {
         errorIcon: this.client.constants.statusEmotes.error,
@@ -94,8 +137,7 @@ class Phonebook extends Command {
 
         const number = numbers[i];
         const guild = this.client.guilds.get(number.id);
-        const guildLocale = await this.client.database.getDocument('guild', guild.id).then(g => g.misc.locale);
-        numbersArray.push(`- **${guild.name}**: ${number.number} [${ctx.getCatalog(guildLocale)['lang.flagEmote']}]`);
+        numbersArray.push(`- **${guild.name}**: ${number.number} [${number.customFlag || ctx.getCatalog(number.locale)['lang.flagEmote']}]`);
       }
 
       ctx.channel.send(ctx.__('phonebook.list', {
