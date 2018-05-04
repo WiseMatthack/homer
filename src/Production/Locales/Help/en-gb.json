@@ -67,6 +67,10 @@
     "description": "Get information about the server",
     "usage": "server"
   },
+  "servers": {
+    "description": "Discover new servers with the Server Browser",
+    "usage": "servers"
+  },
   "translate": {
     "description": "Translate the provided text into the given language",
     "usage": "translate <target language (ISO 639-1)> <text>",

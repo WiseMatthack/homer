@@ -47,6 +47,11 @@ class DataGuild extends DataBase {
         blacklist: [],
         callMessage: null,
       },
+      serverBrowser: {
+        switch: false,
+        channel: null,
+        category: null,
+      },
       misc: {
         timezone: 'UTC',
         locale: 'en-gb',
