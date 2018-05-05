@@ -63,9 +63,8 @@ class User extends Command {
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
     const lastactiveStatus = (lastactiveObject && lastactiveObject.time) ? moment(lastactiveObject.time).locale(ctx.settings.data.misc.locale.split('-')[0]).fromNow() : ctx.__('global.unknown');
-    const presenceactiveStatus = (lastactiveObject && lastactiveObject.presenceUpdate) ? moment(lastactiveObject.presenceUpdate).locale(ctx.settings.data.misc.locale.split('-')[0]).fromNow() : ctx.__('global.unknown');
     
-    let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)} (${presenceactiveStatus})`;
+    let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)}`;
     if (member.user.presence.game) {
       presence += `\n${ctx.__(`user.gameTypes.${member.user.presence.game.type}`)} ${member.user.presence.game.url ? `[${member.user.presence.game.name}](${member.user.presence.game.url})` : `**${member.user.presence.game.name}**`}`;
     }

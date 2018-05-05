@@ -13,7 +13,6 @@ const PhoneManager = require('./Managers/PhoneManager');
 
 /* Helpers */
 const FinderHelper = require('./Helpers/FinderHelper');
-const LastactiveHelper = require('./Helpers/LastactiveHelper');
 const LisaHelper = require('./Helpers/LisaHelper');
 const HandlerHelper = require('./Helpers/HandlerHelper');
 const MiscHelper = require('./Helpers/MiscHelper');
@@ -107,12 +106,6 @@ class ExtendedClient extends Client {
      * @type {FinderHelper}
      */
     this.finder = new FinderHelper(this);
-
-    /**
-     * Lastactive helper associated to the client.
-     * @type {LastactiveHelper}
-     */
-    this.lastactive = new LastactiveHelper(this);
 
     /**
      * Lisa scripting language helper associated to the client.

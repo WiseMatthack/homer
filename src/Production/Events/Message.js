@@ -12,7 +12,12 @@ class Message extends Event {
 
   async handle(message) {
     /* Last active register */
-    this.client.lastactive.updateLastactive(message.author.id);
+    this.client.database.insertDocument('lastactive', {
+      id: message.author.id,
+      time: Date.now(),
+    }, {
+      conflict: 'update',
+    });
 
     /* Prevent shit */
     if (message.author.bot || !message.guild) return;
