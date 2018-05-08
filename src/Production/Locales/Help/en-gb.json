@@ -189,11 +189,6 @@
     "usage": "call <number>",
     "examples": ["call 111-222"]
   },
-  "callmsg": {
-    "description": "Set a custom message shown during incoming calls or reset it",
-    "usage": "callmsg <message> or clear",
-    "examples": ["callmsg @b1nzy Here is a call for you!", "callmsg clear"]
-  },
   "hangup": {
     "description": "Hangup a call",
     "usage": "hangup"
@@ -207,6 +202,11 @@
     "description": "Pickup a pending call",
     "usage": "pickup",
     "examples": []
+  },
+  "phmessage": {
+    "description": "Set or reset messages that are used by the telephone.",
+    "usage": "phmessage <type> <text>",
+    "examples": ["phmessage incoming Hey, @b1nZy you receive a call", "phmessage missed We will re-call you soon"]
   },
   "phonebook": {
     "description": "Search for telephone numbers in the phonebook",
