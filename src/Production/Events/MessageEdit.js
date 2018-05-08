@@ -18,8 +18,9 @@ class MessageEdit extends Event {
 
     const fetchedMessage = await distantChannel.fetchMessages({ limit: 50 })
       .then(messages => messages.find(m => m.content.startsWith(`☎ **${newMessage.author.tag}**: ${oldMessage.cleanContent}`)));
-    if (!fetchedMessage) return;
-
+    console.log('debug 1')
+      if (!fetchedMessage) return;
+    console.log('debug 2')
     fetchedMessage.edit(fetchedMessage.content
       .replace(oldMessage.cleanContent, newMessage.cleanContent));
   }
