@@ -1,8 +1,8 @@
 const Event = require('../../Core/Structures/Event');
 
-class MessageEdit extends Event {
+class MessageUpdate extends Event {
   constructor(client) {
-    super(client, 'messageEdit');
+    super(client, 'messageUpdate');
   }
 
   async handle(oldMessage, newMessage) {
@@ -18,12 +18,11 @@ class MessageEdit extends Event {
 
     const fetchedMessage = await distantChannel.fetchMessages({ limit: 50 })
       .then(messages => messages.find(m => m.content.startsWith(`☎ **${newMessage.author.tag}**: ${oldMessage.cleanContent}`)));
-    console.log('debug 1')
-      if (!fetchedMessage) return;
-    console.log('debug 2')
+    if (!fetchedMessage) return;
+
     fetchedMessage.edit(fetchedMessage.content
       .replace(oldMessage.cleanContent, newMessage.cleanContent));
   }
 }
 
-module.exports = MessageEdit;
+module.exports = MessageUpdate;
