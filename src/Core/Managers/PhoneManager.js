@@ -73,8 +73,8 @@ class PhoneManager extends Manager {
 
       i18n.setLocale(senderSettings.data.misc.locale);
       let message = i18n.__('phone.noAnswer', { number: receiverSettings.data.phone.number });
-      if (senderSettings.data.phone.missedMessage) {
-        message += `\n📧 ${senderSettings.data.phone.missedMessage}`;
+      if (receiverSettings.data.phone.missedMessage) {
+        message += `\n📧 ${receiverSettings.data.phone.missedMessage}`;
       }
       await callingMsg.edit(message);
 
