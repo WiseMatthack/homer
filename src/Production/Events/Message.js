@@ -181,14 +181,7 @@ class Message extends Event {
 
         /* Processing message */
         // Disable links embedding
-        const content = message.cleanContent;
-        const urlExpression = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-        for (const part of content.split(/ +/g)) {
-          if (urlExpression.test(part)) {
-            content.replace(part, `<${part}>`);
-          }
-        }
-        let msg = `☎ **${ctx.author.tag}**: ${content}`;
+        let msg = `☎ **${ctx.author.tag}**: ${message.cleanContent}`;
 
         // Attachments
         if (ctx.attachments.size > 0) msg += `\n${ctx.__('phone.attachments')}`;

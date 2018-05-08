@@ -17,7 +17,7 @@ class MessageDelete extends Event {
     const distantChannel = distantGuild.channels.get(distantSettings.phone.channel);
 
     const fetchedMessage = await distantChannel.fetchMessages({ limit: 50 })
-      .then(messages => messages.find(m => m.content === `☎ **${message.author.tag}**: ${message.cleanContent}`));
+      .then(messages => messages.find(m => m.content.startsWith(`☎ **${message.author.tag}**: ${message.cleanContent}`)));
     if (!fetchedMessage) return;
 
     fetchedMessage.delete();
