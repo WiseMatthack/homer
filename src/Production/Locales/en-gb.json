@@ -225,6 +225,7 @@
 	"phonebook.flag.setFlag": "{{{ successIcon }}} Your phonebook entry will now have flag {{{ flag }}}.",
 	"phonebook.flag.clearedFlag": "{{{ successIcon }}} Your phonebook entry will now have your locale's flag.",
 	"phonebook.flag.noFlag": "{{{ errorIcon }}} You must provide a custom flag to set. Put `clear` to use locale's flag.",
+	"phonebook.flag.invalidFlag": "{{{ errorIcon }}} `{{{ emote }}}` is not a recognized flag. They must start with `:flag_` on Discord.",
 	"pickup.error.noPhoneChannel": "{{{ errorIcon }}} You must run this command in the telephone channel ({{{ channel }}}).",
 	"pickup.error.nobodyCalls": "{{{ errorIcon }}} Nobody is calling you.",
 	"ping.ping": "🏓 Ping...",

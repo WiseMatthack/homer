@@ -224,6 +224,7 @@
 	"phonebook.flag.setFlag": "{{{ successIcon }}} Votre entrée sur l'annuaire a désormais le drapeau {{{ flag }}}.",
 	"phonebook.flag.clearedFlag": "{{{ successIcon }}} Votre entrée sur l'annuaire a désormais le drapeau de la langue configurée.",
 	"phonebook.flag.noFlag": "{{{ errorIcon }}} Vous devez fournir un drapeau à définir. Mettez `clear` pour utiliser le drapeau de la langue configurée.",
+	"phonebook.flag.invalidFlag": "{{{ errorIcon }}} `{{{ emote }}}` n'est pas un drapeau reconnu. Ils doivent commencer avec `:flag_` sur Discord.",
 	"pickup.error.noPhoneChannel": "{{{ errorIcon }}} Vous devez exécuter cette commande dans le salon téléphone ({{{ channel }}}).",
 	"pickup.error.nobodyCalls": "{{{ errorIcon }}} Personne ne vous appelle.",
 	"ping.ping": "🏓 Ping...",

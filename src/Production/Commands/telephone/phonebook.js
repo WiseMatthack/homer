@@ -77,6 +77,11 @@ class Phonebook extends Command {
           successIcon: this.client.constants.statusEmotes.success,
         }));
       } else {
+        if (!this.client.constants.flagEmotes.includes(flag)) return ctx.channel.send(ctx.__('phonebook.flag.invalidFlag', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          emote: flag,
+        }));
+
         ctx.settings.data.phone.customFlag = flag;
         await ctx.settings.saveData();
 
@@ -87,7 +92,8 @@ class Phonebook extends Command {
       }
     } else if (ctx.args[0] === 'random') {
       const numbers = await this.client.database.getDocuments('guild')
-        .then(settings => settings.filter(s => s.phone.number && s.phone.phonebook && s.phone.channel));
+        .then(settings =>
+          settings.filter(s => s.phone.number && s.phone.phonebook && s.phone.channel));
 
       const randomChosen = numbers[Math.floor(Math.random() * numbers.length)];
       if (!randomChosen) return ctx.channel.send(ctx.__('phonebook.error.noFound', {
