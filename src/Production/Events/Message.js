@@ -181,7 +181,7 @@ class Message extends Event {
 
         /* Processing message */
         // Disable links embedding
-        let content = message.cleanContent;
+        const content = message.cleanContent;
         const urlExpression = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         for (const part of content.split(/ +/g)) {
           if (urlExpression.test(part)) {
