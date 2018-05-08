@@ -46,6 +46,7 @@ class DataGuild extends DataBase {
         phonebook: true,
         blacklist: [],
         callMessage: null,
+        missedMessage: null,
       },
       serverBrowser: {
         switch: false,
