@@ -35,7 +35,7 @@ class Vote extends Command {
         botID: this.client.user.id,
         topVoters: message.join('\n'),
         votersCount: list.length,
-        votesCount: list.reduce((a, b) => a.count + b.count),
+        votesCount: list.map(a => a.count).reduce((a, b) => a + b),
         userCount: list.find(v => v.id === ctx.author.id) ? list.find(v => v.id === ctx.author.id).count : 0,
       }))
       .setColor(ctx.guild.me.displayHexColor);
