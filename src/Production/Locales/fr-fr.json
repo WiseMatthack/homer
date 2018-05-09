@@ -398,7 +398,7 @@
 	"user.embed.join": "⏲ Date d'arrivée sur le serveur",
 	"user.afk.status": "{{{ reason }}} *(depuis {{{ since }}})*",
 	"vote.title": "🗳 Votes pour **Homer**:",
-	"vote.embedDescription": "Vous pouvez voter sur **Discord Bot List** pour contribuer à la croissance d'Homer, [cliquez ici](https://discordbots.org/bot/{{{ botID }}}/vote) et connectez-vous avec Discord pour voter.\nVous recevrez un message vous disant que votre vote a été pris en compte.\n\n**🏆 Meilleurs voteurs du mois**\n{{{ topVoters }}}",
+	"vote.embedDescription": "Vous pouvez voter sur **Discord Bot List** pour contribuer à la croissance d'Homer, [cliquez ici](https://discordbots.org/bot/{{{ botID }}}/vote) et connectez-vous avec Discord pour voter.\nVous recevrez un message vous disant que votre vote a été pris en compte.\n\n**📊 Statistiques**\n- **{{{ votersCount }}}** personnes ont voté pour Homer.\n- **{{{ votesCount }}}** votes ont été reçus ce mois-ci.\n- Vous avez voté **{{{ userCount }}}** fois ce mois-ci.\n\n**🏆 Meilleurs voteurs du mois**\n{{{ topVoters }}}",
 	"vote.noVoter": "Personne n'a voté ce mois-ci, soyez le premier !",
 	"vote.voteEntry": "{{{ emote }}} **{{{ tag }}}** ({{{ count }}} votes)",
 	"vote.webhookDM": "🗳 Votre vote sur `discordbots.org` a été pris en compte ! Merci de l'intérêt que vous portez pour Homer.",
