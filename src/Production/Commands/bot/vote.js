@@ -11,11 +11,10 @@ class Vote extends Command {
 
   async run(ctx) {
     const list = await this.client.database.getDocuments('votes').then(l => l
-      .sort((a, b) => b.count - a.count)
-      .slice(0, 5));
+      .sort((a, b) => b.count - a.count));
     const message = (list.length === 0 ? [ctx.__('vote.noVoter')] : []);
 
-    for (let i = 0; i < list.length; i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       const voteEntry = list[i];
       const userTag = await this.client.fetchUser(voteEntry.id).then(u => u.tag);
 
@@ -35,6 +34,9 @@ class Vote extends Command {
       .setDescription(ctx.__('vote.embedDescription', {
         botID: this.client.user.id,
         topVoters: message.join('\n'),
+        votersCount: list.length,
+        votesCount: list.map(a => a.count).reduce((a, b) => a + b),
+        userCount: list.find(v => v.id === ctx.author.id) ? list.find(v => v.id === ctx.author.id).count : 0,
       }))
       .setColor(ctx.guild.me.displayHexColor);
 
