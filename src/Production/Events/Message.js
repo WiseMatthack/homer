@@ -1,6 +1,6 @@
 const Event = require('../../Core/Structures/Event');
 const Context = require('../../Core/Structures/Context');
-const { RichEmbed } = require('discord.js');
+const { RichEmbed, Util } = require('discord.js');
 const snekfetch = require('snekfetch');
 const mtz = require('moment-timezone');
 const { appendFile } = require('fs');
@@ -151,19 +151,19 @@ class Message extends Event {
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
-        if ((cmd.category > 1) &&
+        if ((['owner', 'bot'].includes(cmd.category)) &&
           ctx.channel.topic &&
           ctx.channel.topic.includes(`{-${cmd.name}}`)) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
           errorIcon: this.client.constants.statusEmotes.error,
           name: cmd.name,
         }));
 
-        if (cmd.category !== 0 && !this.client.config.owners.includes(ctx.author.id)) {
+        if (cmd.category !== 'owner' && !this.client.config.owners.includes(ctx.author.id)) {
           const channel = this.client.channels.get(this.client.config.logChannels.command);
           if (!channel) return;
 
           const formattedTime = mtz().format('HH:mm:ss');
-          channel.send(`\`[${formattedTime}]\` ⌨ **${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) ran the command \`${cmd.name}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
+          channel.send(`\`[${formattedTime}]\` ⌨ **${Util.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) ran the command \`${cmd.name}\` on **${Util.escapeMarkdown(ctx.guild.name)}**`);
         }
 
         cmd.run(ctx);

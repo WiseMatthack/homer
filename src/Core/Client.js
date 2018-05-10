@@ -175,15 +175,6 @@ class ExtendedClient extends Client {
         .replace(/{prefix}/g, this.config.discord.defaultPrefixes[0])
       : `Type ${this.config.discord.defaultPrefixes[0]}help! On ${this.guilds.size} servers with ${this.users.size} users.`);
   }
-
-  /**
-   * Escapes markdown content.
-   * @param {string} string String to escape
-   * @returns {string}
-   */
-  escapeMarkdown(string) {
-    return string.replace(/[\*\(\)\[\]\+\-\\_`#<>]/g, m => this.constants.markdownCharacters[m]); // eslint-disable-line no-useless-escape
-  }
 }
 
 module.exports = ExtendedClient;

@@ -1,6 +1,7 @@
 const Command = require('../../../Core/Structures/Command');
 const DataTag = require('../../../Core/Structures/Data/DataTag');
 const moment = require('moment-timezone');
+const { Util } = require('discord.js');
 
 class Tag extends Command {
   constructor(client) {
@@ -84,7 +85,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) created the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
+    this.tagLog(`**${Util.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) created the tag \`${Util.escapeMarkdown(tagName)}\` on **${Util.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subEdit(ctx) {
@@ -121,7 +122,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) edited the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
+    this.tagLog(`**${Util.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) edited the tag \`${Util.escapeMarkdown(tagName)}\` on **${Util.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subDelete(ctx) {
@@ -150,7 +151,7 @@ class Tag extends Command {
       tag: tagName,
     }));
 
-    this.tagLog(`**${this.client.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) deleted the tag \`${this.client.escapeMarkdown(tagName)}\` on **${this.client.escapeMarkdown(ctx.guild.name)}**`);
+    this.tagLog(`**${Util.escapeMarkdown(ctx.author.tag)}** (ID:${ctx.author.id}) deleted the tag \`${Util.escapeMarkdown(tagName)}\` on **${Util.escapeMarkdown(ctx.guild.name)}**`);
   }
 
   async subOwner(ctx) {
@@ -194,7 +195,7 @@ class Tag extends Command {
 
     ctx.channel.send(ctx.__('tag.raw.rawTag', {
       tag: tagName,
-      rawTag: this.client.escapeMarkdown(tag.data.content),
+      rawTag: Util.escapeMarkdown(tag.data.content, true),
     }));
   }
 

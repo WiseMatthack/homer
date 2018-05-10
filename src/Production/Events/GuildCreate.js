@@ -1,5 +1,6 @@
 const Event = require('../../Core/Structures/Event');
 const { appendFile } = require('fs');
+const { Util } = require('discord.js');
 const moment = require('moment-timezone');
 
 class GuildCreate extends Event {
@@ -18,7 +19,7 @@ class GuildCreate extends Event {
     if (!channel) return;
 
     const formattedTime = moment().format('HH:mm:ss');
-    channel.send(`\`[${formattedTime}]\` 📥 Joined **${this.client.escapeMarkdown(guild.name)}** (ID:${guild.id}) - Count: ${this.client.guilds.size}`);
+    channel.send(`\`[${formattedTime}]\` 📥 Joined **${Util.escapeMarkdown(guild.name)}** (ID:${guild.id}) - Count: ${this.client.guilds.size}`);
   }
 }
 
