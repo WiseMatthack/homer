@@ -151,7 +151,7 @@ class Message extends Event {
           missingPermissions: missingUserPermissions.map(perm => `\`${perm}\``).join(', '),
         }));
 
-        if ((['owner', 'bot'].includes(cmd.category)) &&
+        if (!(['owner', 'bot'].includes(cmd.category)) &&
           ctx.channel.topic &&
           ctx.channel.topic.includes(`{-${cmd.name}}`)) return ctx.channel.send(ctx.__('command.disabledCommandOverride', {
           errorIcon: this.client.constants.statusEmotes.error,
