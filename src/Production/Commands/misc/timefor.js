@@ -2,11 +2,11 @@ const Command = require('../../../Core/Structures/Command');
 const DataProfile = require('../../../Core/Structures/Data/DataProfile');
 const mtz = require('moment-timezone');
 
-class Timezone extends Command {
+class TimeFor extends Command {
   constructor(client) {
     super(client, {
-      name: 'timezone',
-      aliases: ['tf', 'timefor'],
+      name: 'timefor',
+      aliases: ['tf'],
       category: 'misc',
     });
   }
@@ -17,11 +17,11 @@ class Timezone extends Command {
       await profile.getData();
 
       const newTimezone = ctx.args[1];
-      if (!newTimezone) return ctx.channel.send(ctx.__('timezone.set.noTimezone', {
+      if (!newTimezone) return ctx.channel.send(ctx.__('timefor.set.noTimezone', {
         errorIcon: this.client.constants.statusEmotes.error,
       }));
 
-      if (!mtz.tz.names().includes(ctx.args[1])) return ctx.channel.send(ctx.__('timezone.set.invalidTimezone', {
+      if (!mtz.tz.names().includes(ctx.args[1])) return ctx.channel.send(ctx.__('timefor.set.invalidTimezone', {
         errorIcon: this.client.constants.statusEmotes.error,
         timezone: newTimezone,
       }));
@@ -29,7 +29,7 @@ class Timezone extends Command {
       profile.data.timezone = newTimezone;
       await profile.saveData();
 
-      ctx.channel.send(ctx.__('timezone.set.done', {
+      ctx.channel.send(ctx.__('timefor.set.done', {
         successIcon: this.client.constants.statusEmotes.success,
         timezone: newTimezone,
       }));
@@ -52,13 +52,13 @@ class Timezone extends Command {
       const profile = new DataProfile(this.client, member.id);
       await profile.getData();
 
-      if (!profile.data.timezone) return ctx.channel.send(ctx.__('timezone.noProfile', {
+      if (!profile.data.timezone) return ctx.channel.send(ctx.__('timefor.noProfile', {
         errorIcon: this.client.constants.statusEmotes.error,
         name: member.user.tag,
       }));
 
       const timeFor = mtz().tz(profile.data.timezone);
-      ctx.channel.send(ctx.__('timezone.for', {
+      ctx.channel.send(ctx.__('timefor.for', {
         name: member.user.tag,
         hour24: timeFor.format('HH:mm'),
         hour12: timeFor.format('hh:mm A'),
@@ -67,4 +67,4 @@ class Timezone extends Command {
   }
 }
 
-module.exports = Timezone;
+module.exports = TimeFor;
