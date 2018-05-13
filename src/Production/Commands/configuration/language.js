@@ -15,7 +15,7 @@ class Language extends Command {
     const locale = ctx.args[0];
 
     if (locale) {
-      if (!i18n.getLocales().includes(locale)) return ctx.channel.send(ctx.__('locale.unknownLocale', {
+      if (!i18n.getLocales().includes(locale)) return ctx.channel.send(ctx.__('language.unknownLocale', {
         errorIcon: this.client.constants.statusEmotes.error,
         prefix: this.client.config.discord.defaultPrefixes[0],
         locale,
@@ -25,7 +25,7 @@ class Language extends Command {
       ctx.setLocale(locale);
       await ctx.settings.saveData();
 
-      ctx.channel.send(ctx.__('locale.set', {
+      ctx.channel.send(ctx.__('language.set', {
         successIcon: this.client.constants.statusEmotes.success,
         code: ctx.__('lang.code'),
         fullName: ctx.__('lang.fullName'),
@@ -36,7 +36,7 @@ class Language extends Command {
       const message = [];
       for (const locale of i18n.getLocales()) {
         const catalog = i18n.getCatalog(locale);
-        message.push(ctx.__('locale.entry', {
+        message.push(ctx.__('language.entry', {
           fullName: catalog['lang.fullName'],
           emote: catalog['lang.flagEmote'],
           code: catalog['lang.code'],
@@ -45,12 +45,12 @@ class Language extends Command {
 
       const embed = new RichEmbed()
         .setDescription(message.join('\n'))
-        .setFooter(ctx.__('locale.footer', {
+        .setFooter(ctx.__('language.footer', {
           prefix: this.client.config.discord.defaultPrefixes[0],
         }))
         .setColor(ctx.guild.me.displayHexColor);
 
-      ctx.channel.send(ctx.__('locale.localeSet', {
+      ctx.channel.send(ctx.__('language.localeSet', {
         code: ctx.__('lang.code'),
         fullName: ctx.__('lang.fullName'),
         emote: ctx.__('lang.flagEmote'),
