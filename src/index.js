@@ -41,7 +41,7 @@ process.on('unhandledRejection', (error) => {
     const user = client.users.get(ownerID);
     if (!user) return;
 
-    user.send(`\`[${mtz().format('HH:mm:ss')}]\` ${this.client.constants.statusEmotes.warning} Unhandled rejection ${this.client.constants.statusEmotes.warning}\n\n\`\`\`js\n${error.stack}\`\`\``)
+    user.send(`\`[${mtz().format('HH:mm:ss')}]\` ${client.constants.statusEmotes.warning} Unhandled rejection ${client.constants.statusEmotes.warning}\n\n\`\`\`js\n${error.stack}\`\`\``)
       .catch(() => {}); // No but shit I won't handle the error of an error
   }
 });
