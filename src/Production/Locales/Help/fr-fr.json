@@ -137,7 +137,7 @@
     "usage": "tag (sous-commande <args>)|<nomTag>",
     "examples": ["tag create <nomTag> <contenuTag>", "tag delete <nomTag>", "tag edit <nomTag> <nouveauContenu>", "tag owner <nomTag>", "tag search <rechercheTag>", "tag random", "tag raw <nomTag>", "tag <nomTag>"]
   },
-  "timezone": {
+  "timefor": {
     "description": "Quelle heure est-il là ?",
     "usage": "timezone (set <fuseau horaire>)|([Membre])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
@@ -173,7 +173,7 @@
     "usage": "prefix [préfixe]",
     "examples": ["prefix bot!", "prefix homer::"]
   },
-  "settimezone": {
+  "timezone": {
     "description": "Configure le fuseau horaire du sevreur",
     "usage": "timezone <fuseau horaire>",
     "examples": ["timezone Europe/Paris", "timezone America/Mexico_City"]

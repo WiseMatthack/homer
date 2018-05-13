@@ -137,7 +137,7 @@
     "usage": "tag (subcommand <args>)|<tag name>",
     "examples": ["tag create <tagName> <tagContent>", "tag delete <tagName>", "tag edit <tagName> <newContent>", "tag owner <tagName>", "tag search <tagSearch>", "tag random", "tag raw <tagName>", "tag <tagName>"]
   },
-  "timezone": {
+  "timefor": {
     "description": "What time is it there ?",
     "usage": "timezone (set <timezone>)|([member])",
     "examples": ["timezone set Europe/Paris", "timezone iDroid#4441"]
@@ -173,7 +173,7 @@
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
   },
-  "settimezone": {
+  "timezone": {
     "description": "Set a timezone for the guild",
     "usage": "timezone <timezone>",
     "examples": ["timezone Europe/Paris", "timezone America/Mexico_City"]
