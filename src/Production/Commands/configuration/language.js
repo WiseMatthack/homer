@@ -1,4 +1,5 @@
 const Command = require('../../../Core/Structures/Command');
+const { RichEmbed } = require('discord.js');
 const i18n = require('i18n');
 
 class Language extends Command {
