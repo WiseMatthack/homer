@@ -28,10 +28,6 @@
     "description": "Rejoignez le serveur d'assistance pour obtenir de l'aide avancée",
     "usage": "support"
   },
-  "translations": {
-    "description": "Obtenez la liste des langues disponibles sur Homer",
-    "usage": "translations"
-  },
   "vote": {
     "description": "Instructions de vote et la liste des meilleurs voteurs du mois",
     "usage": "vote",
@@ -158,15 +154,15 @@
     "usage": "ignore [Salon]",
     "examples": ["ignore #trash", "ignore partOfChannelName"]
   },
+  "language": {
+    "description": "Configure la langue du serveur",
+    "usage": "language <code>",
+    "examples": ["language en-gb", "language de-de", "language fr-fr"]
+  },
   "leave": {
     "description": "Configure le flux de départs",
     "usage": "leave <message>",
     "examples": ["leave Oh non, {user.tag} est parti !"]
-  },
-  "locale": {
-    "description": "Configure la langue du serveur",
-    "usage": "locale <code>",
-    "examples": ["locale en-gb", "locale de-de", "locale fr-fr"]
   },
   "prefix": {
     "description": "Gérez vos préfixes personnalisés",

@@ -28,10 +28,6 @@
     "description": "Join the support server to get help on using the bot",
     "usage": "support"
   },
-  "translations": {
-    "description": "Get the list of available languages for Homer",
-    "usage": "translations"
-  },
   "vote": {
     "description": "Vote instructions and see who voted the most this month",
     "usage": "vote",
@@ -158,15 +154,15 @@
     "usage": "ignore [Channel]",
     "examples": ["ignore #trash", "ignore partOfChannelName"]
   },
+  "language": {
+    "description": "Set a locale for the guild",
+    "usage": "language <code>",
+    "examples": ["language en-gb", "language de-de", "language fr-fr"]
+  },
   "leave": {
     "description": "Set-up the leave feed",
     "usage": "leave <message>",
     "examples": ["leave Oh no, {user.tag} has left!"]
-  },
-  "locale": {
-    "description": "Set a locale for the guild",
-    "usage": "locale <code>",
-    "examples": ["locale en-gb", "locale de-de", "locale fr-fr"]
   },
   "prefix": {
     "description": "Manage your custom prefixes",
