@@ -19,19 +19,19 @@ class Weather extends Command {
     }));
 
     const query = encodeURIComponent(location);
-    const locationData = await snekfetch.get(`https://maps.googleapis.com/maps/api/geocode/json?key=${this.client.config.api.googleGeocode}&address=${query}&language=${ctx.settings.data.misc.locale.split('-')[0]}`)
+    const locationData = await snekfetch.get(`https://dev.virtualearth.net/REST/v1/Locations?query=${location}&maxResults=1&culture=${ctx.settings.data.misc.locale}&key=${this.client.config.api.bingGeocode}`)
       .then((res) => {
         const parsed = res.body;
-        if (parsed.results.length === 0) return null;
+        if (parsed.resourceSets[0].estimatedTotal === 0) return null;
 
-        const foundLoc = parsed.results[0];
+        const foundLoc = parsed.resourceSets[0].resources[0];
         return ({
-          city: foundLoc.address_components.find(c => c.types.includes('locality')) || null,
-          department: foundLoc.address_components.find(c => c.types.includes('administrative_area_level_2')) || null,
-          region: foundLoc.address_components.find(c => c.types.includes('administrative_area_level_1')) || null,
-          country: foundLoc.address_components.find(c => c.types.includes('country')) || null,
-          postalcode: foundLoc.address_components.find(c => c.types.includes('postal_code')) || null,
-          geometry: `${foundLoc.geometry.location.lat},${foundLoc.geometry.location.lng}`,
+          city: foundLoc.address.locality || null,
+          department: foundLoc.address.adminDistrict2 || null,
+          region: foundLoc.address.adminDistrict || null,
+          country: foundLoc.address.countryRegion || null,
+          postalcode: this.franceDepartments[foundLoc.address.adminDistrict2] || null,
+          geometry: foundLoc.point.coordinates.join(','),
         });
       })
       .catch(() => null);
@@ -70,18 +70,18 @@ class Weather extends Command {
       .setColor(ctx.guild.me.displayHexColor);
 
     ctx.channel.send(ctx.__('weather.title', {
-      city: locationData.city ? locationData.city.long_name : ctx.__('global.unknown'),
-      region: locationData.region ? locationData.region.long_name : ctx.__('global.unknown'),
-      country: locationData.country ? locationData.country.long_name : ctx.__('global.unknown'),
+      city: locationData.city || ctx.__('global.unknown'),
+      region: locationData.region || ctx.__('global.unknown'),
+      country: locationData.country || ctx.__('global.unknown'),
     }), { embed });
 
-    if (locationData.country && locationData.country.short_name === 'FR' && locationData.postalcode) {
+    if (locationData.country === 'France' && locationData.postalcode) {
       const alertData = await snekfetch.get('http://api.meteofrance.com/files/vigilance/vigilance.json')
         .then(res => res.body);
 
       const meta = alertData.meta.find(m => m.zone === 'FR');
       const dept = alertData.data
-        .find(d => locationData.postalcode.short_name.startsWith(d.department));
+        .find(d => locationData.postalcode === d.department);
       if (!dept || dept.level < 2) return;
 
       const embedColors = {
@@ -114,6 +114,117 @@ class Weather extends Command {
     const arrayIndex = Number((angle / 22.5) + 0.5);
     const windArray = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
     return windArray[Math.round(arrayIndex % 16)];
+  }
+
+  /**
+   * France postal codes mapped by their names
+   * @type {Object}
+   */
+  get franceDepartments() {
+    return ({
+      "Aube": "10",
+      "Aude": "11",
+      "Aveyron": "12",
+      "Bouches-du-Rhône": "13",
+      "Calvados": "14",
+      "Cantal": "15",
+      "Charente": "16",
+      "Charente-Maritime": "17",
+      "Cher": "18",
+      "Corrèze": "19",
+      "Côte-d'Or": "21",
+      "Côtes-d'Armor": "22",
+      "Creuse": "23",
+      "Dordogne": "24",
+      "Doubs": "25",
+      "Drôme": "26",
+      "Eure": "27",
+      "Eure-et-Loir": "28",
+      "Finistère": "29",
+      "Gard": "30",
+      "Haute-Garonne": "31",
+      "Gers": "32",
+      "Gironde": "33",
+      "Hérault": "34",
+      "Ille-et-Vilaine": "35",
+      "Indre": "36",
+      "Indre-et-Loire": "37",
+      "Isère": "38",
+      "Jura": "39",
+      "Landes": "40",
+      "Loir-et-Cher": "41",
+      "Loire": "42",
+      "Haute-Loire": "43",
+      "Loire-Atlantique": "44",
+      "Loiret": "45",
+      "Lot": "46",
+      "Lot-et-Garonne": "47",
+      "Lozère": "48",
+      "Maine-et-Loire": "49",
+      "Manche": "50",
+      "Marne": "51",
+      "Haute-Marne": "52",
+      "Mayenne": "53",
+      "Meurthe-et-Moselle": "54",
+      "Meuse": "55",
+      "Morbihan": "56",
+      "Moselle": "57",
+      "Nièvre": "58",
+      "Nord": "59",
+      "Oise": "60",
+      "Orne": "61",
+      "Pas-de-Calais": "62",
+      "Puy-de-Dôme": "63",
+      "Pyrénées Atlantiques": "64",
+      "Hautes-Pyrénées": "65",
+      "Pyrénées-Orientales": "66",
+      "Bas Rhin": "67",
+      "Haut Rhin": "68",
+      "Rhône": "69",
+      "Haute-Saône": "70",
+      "Saône-et-Loire": "71",
+      "Sarthe": "72",
+      "Savoie": "73",
+      "Haute-Savoie": "74",
+      "Paris": "75",
+      "Seine-Maritime": "76",
+      "Seine-et-Marne": "77",
+      "Yvelines": "78",
+      "Deux-Sèvres": "79",
+      "Somme": "80",
+      "Tarn": "81",
+      "Tarn-et-Garonne": "82",
+      "Var": "83",
+      "Vaucluse": "84",
+      "Vendée": "85",
+      "Vienne": "86",
+      "Haute-Vienne": "87",
+      "Vosges": "88",
+      "Yonne": "89",
+      "Territoire de Belfort": "90",
+      "Essonne": "91",
+      "Hauts-de-Seine": "92",
+      "Seine-Saint-Denis": "93",
+      "Val-de Marne": "94",
+      "Val-d'Oise": "95",
+      "Guadeloupe": "971",
+      "Martinique": "972",
+      "Guyane": "973",
+      "Réunion": "974",
+      "Saint Pierre et Miquelon": "975",
+      "Mayotte": "976",
+      "Ain": "01",
+      "Aisne": "02",
+      "Allier": "03",
+      "Alpes de Haute Provence": "04",
+      "Hautes Alpes": "05",
+      "Alpes Maritimes": "06",
+      "Ardèche": "07",
+      "Ardennes": "08",
+      "Ariège": "09",
+      "Corse du Sud": "2A",
+      "Haute-Corse": "2B"
+    });
   }
 }
 
