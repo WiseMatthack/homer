@@ -96,7 +96,7 @@ class Weather extends Command {
         .join(' - ');
 
       const alertEmbed = new RichEmbed()
-        .setDescription(`**ALERTE ${meta.colLevels[dept.level - 1]}**\nPhénomènes dangereux en cours dans le département **${locationData.department ? locationData.department.long_name : ctx.__('global.unknown')}**.\n${alerts}\n\nPour plus d'informations consultez la carte de vigilance.`)
+        .setDescription(`**ALERTE ${meta.colLevels[dept.level - 1]}**\nPhénomènes dangereux en cours dans le département **${locationData.department || ctx.__('global.unknown')}**.\n${alerts}\n\nPour plus d'informations consultez la carte de vigilance.`)
         .setThumbnail(`http://api.meteofrance.com/files/vigilance/${meta.vignette}?anticache=${Date.now()}`)
         .setFooter(`Émission: ${mtz(meta.dates.dateInsertion).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Début: ${mtz(meta.dates.dateRun).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)} - Fin: ${mtz(meta.dates.datePrevue).tz(ctx.settings.data.misc.timezone).locale(ctx.settings.data.misc.locale).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)}`, `https://${this.client.config.dashboard.baseDomain}/images/services/meteofrance.png`)
         .setColor(embedColors[dept.level]);
