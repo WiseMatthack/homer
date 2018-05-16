@@ -6,6 +6,8 @@ class MessageDelete extends Event {
   }
 
   async handle(message) {
+    if (!message.guild) return;
+
     const phone = this.client.phone.calls
       .filter(c => c.state === 1)
       .find(c => c.sender === message.guild.id || c.receiver === message.guild.id);

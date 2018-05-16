@@ -6,6 +6,8 @@ class MessageUpdate extends Event {
   }
 
   async handle(oldMessage, newMessage) {
+    if (!newMessage.guild) return;
+
     const phone = this.client.phone.calls
       .filter(c => c.state === 1)
       .find(c => c.sender === newMessage.guild.id || c.receiver === newMessage.guild.id);
