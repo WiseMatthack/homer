@@ -1,22 +1,18 @@
-# Translating Homer
+## Introducing
 
-## Introduction
-Hey,  
-Thank you for wanting to translate Homer into your language.  
-I really appreciate it and it can bring people who do not speak English well.  
-All languages are accepted, even Chineese (Traditional)!  
-If you have found something wrong in an **existing** translation, feel free to create a pull request in order  
-to fix this issue.  
+Welcome to the **translating** note for Homer. First, thank you for wanting to translate Homer into your language.  
+We do accept **any** language from Chinese to Portuguese.  
+Please follow the instructions below to translate Homer into your language.  
   
-Thank you :heart:
+## Instructions
+- **Fork** the repository on your personal GitHub  
+- Create a file called `xx.json` where `xx` is the ISO 639-1 code of your language and insert the content of `en-gb.json` inside  
+- Edit the right part of lines with the translated text (*Note: you can reorganize the sentences to make them sound right*)  
+- Check the whole translation and, if it is okay, make a pull request  
+  
+## History  
 
-## How do I translate
-First, start forking the repository using the "Fork" button at the top-right.  
-Then, you must copy the content of `en-gb.json` that you can find in `src/Production/Locales`.  
-After that, create a file using the following syntax: `locale-country.json` and paste what you just copied inside it.  
-Finally, start translating Homer by editing English with your language!
-
-## Important notice
-- Please only touch to the **right side** of lines (`something.else.here` must be kept as they are).  
-- Revamp sentences if you need to, they must sound human and not robot-processed.  
-- Respect Mustache syntax, do not touch to `{{{` `}}}` and what's inside, you can move them in the sentence yet.
+Language                                   |   Code   | Author(s)
+-------------------------------------------|----------|-----------------------
+English (United Kingdom)                   | `en-gb`  | [@iDroid27210](https://github.com/iDroid27210)
+Français (France)                          | `fr-fr`  | [@iDroid27210](https://github.com/iDroid27210)
