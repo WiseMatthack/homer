@@ -48,11 +48,6 @@ class DataGuild extends DataBase {
         callMessage: null,
         missedMessage: null,
       },
-      serverBrowser: {
-        switch: false,
-        channel: null,
-        category: null,
-      },
       misc: {
         timezone: 'UTC',
         locale: 'en-gb',
