@@ -24,10 +24,11 @@ class Guide extends Command {
       { max: 1 },
     )
       .then(async (reactions) => {
-        await sentMessage.clearReactions();
         sentMessage.edit(ctx.__(`guide.${reactions.first().emoji.name}`, {
           prefix: this.client.config.discord.defaultPrefixes[0],
         }));
+
+        sentMessage.clearReactions();
       });
   }
 }
