@@ -40,25 +40,14 @@ class User extends Command {
     const arrayMembers = ctx.guild.members
       .sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)
       .array();
-    const thisIndex = arrayMembers.findIndex(m => m.id === member.id);
+    const shownIndex = arrayMembers.findIndex(m => m.id === member.id);
+    let workIndex = shownIndex - 3;
+    if (workIndex < 0) workIndex = 0;
 
-    let joinOrder;
-    switch (thisIndex) {
-      case 0:
-        joinOrder = `**${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username} > ${arrayMembers[thisIndex + 4].user.username}`;
-        break;
-      case 1:
-        joinOrder = `${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username} > ${arrayMembers[thisIndex + 3].user.username}`;
-        break;
-      case (ctx.guild.memberCount - 1):
-        joinOrder = `${arrayMembers[thisIndex - 4].user.username} > ${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}**`;
-        break;
-      case (ctx.guild.memberCount - 2):
-        joinOrder = `${arrayMembers[thisIndex - 3].user.username} > ${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username}`;
-        break;
-      default:
-        joinOrder = `${arrayMembers[thisIndex - 2].user.username} > ${arrayMembers[thisIndex - 1].user.username} > **${arrayMembers[thisIndex].user.username}** > ${arrayMembers[thisIndex + 1].user.username} > ${arrayMembers[thisIndex + 2].user.username}`;
-        break;
+    let joinOrder = (arrayMembers[index].id === ctx.author.id) ? `[**${arrayMembers[index].user.username}**]()` : arrayMembers[index].user.username;
+    for (let i = workIndex + 3; i < (workIndex + 7); i += 1) {
+      if (i > arrayMembers.length) break;
+      joinOrder += ` > ${(arrayMembers[index].id === ctx.author.id) ? `[**${arrayMembers[index].user.username}**]()` : arrayMembers[index].user.username}`;
     }
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
