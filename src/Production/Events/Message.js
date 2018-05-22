@@ -89,7 +89,7 @@ class Message extends Event {
           .catch(async (res) => {
             await ctx.channel.send(ctx.__('message.cleverbot.error', {
               errorIcon: this.client.constants.statusEmotes.error,
-              message: res.body ? res.body.status : ctx.__('global.unknown'),
+              message: (res.body && res.body.status) ? res.body.status : `HTTP ${res.statusCode}`,
             }));
             ctx.channel.stopTyping(true);
           });
