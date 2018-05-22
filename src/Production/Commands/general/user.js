@@ -44,10 +44,10 @@ class User extends Command {
     let workIndex = shownIndex - 3;
     if (workIndex < 0) workIndex = 0;
 
-    let joinOrder = (arrayMembers[index].id === ctx.author.id) ? `[**${arrayMembers[index].user.username}**]()` : arrayMembers[index].user.username;
+    let joinOrder = (arrayMembers[workIndex].id === ctx.author.id) ? `[**${arrayMembers[workIndex].user.username}**]()` : arrayMembers[workIndex].user.username;
     for (let i = workIndex + 3; i < (workIndex + 7); i += 1) {
       if (i > arrayMembers.length) break;
-      joinOrder += ` > ${(arrayMembers[index].id === ctx.author.id) ? `[**${arrayMembers[index].user.username}**]()` : arrayMembers[index].user.username}`;
+      joinOrder += ` > ${(arrayMembers[workIndex].id === ctx.author.id) ? `[**${arrayMembers[workIndex].user.username}**]()` : arrayMembers[workIndex].user.username}`;
     }
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
