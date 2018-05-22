@@ -170,6 +170,11 @@
     "usage": "prefix [préfixe]",
     "examples": ["prefix bot!", "prefix homer::"]
   },
+  "settings": {
+    "description": "Consultez les paramètres de votre serveur ou réinitialisez-les",
+    "usage": "settings [reset]",
+    "examples": ["settings", "settings reset"]
+  },
   "timezone": {
     "description": "Configure le fuseau horaire du sevreur",
     "usage": "timezone <fuseau horaire>",

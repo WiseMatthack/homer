@@ -170,6 +170,11 @@
     "usage": "prefix [prefix]",
     "examples": ["prefix bot!", "prefix homer::"]
   },
+  "settings": {
+    "description": "Take a look at the server settings or reset them",
+    "usage": "settings [reset]",
+    "examples": ["settings", "settings reset"]
+  },
   "timezone": {
     "description": "Set a timezone for the guild",
     "usage": "timezone <timezone>",
