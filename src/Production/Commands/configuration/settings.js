@@ -29,7 +29,10 @@ class Settings extends Command {
         .then(async (reactions) => {
           if (reactions.first().emoji.id === emotes[0]) {
             await this.client.database.deleteDocument('guild', ctx.guild.id);
-            message.edit(ctx.__('settings.reset.success'));
+            message.edit(ctx.__('settings.reset.success', {
+              successIcon: this.client.constants.statusEmotes.success,
+            }));
+            message.clearReactions();
           } else {
             message.delete();
           }
