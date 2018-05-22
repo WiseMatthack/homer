@@ -48,6 +48,18 @@ class FinderHelper extends Helper {
   }
 
   /**
+   * Finds roles.
+   * @param {String} search Search terms
+   * @param {String} id Guild ID
+   * @returns {Role[]}
+   */
+  findRoles(search, id) {
+    const search2 = search.toLowerCase();
+    return this.client.guilds.get(id).roles
+      .filter(r => r.name.toLowerCase().includes(search2) || r.id === search2);
+  }
+
+  /**
    * Format for member list.
    * @param {GuildMember[]} members Collection of GuildMember
    * @param {String} locale Guild's locale

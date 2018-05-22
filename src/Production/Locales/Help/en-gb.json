@@ -59,6 +59,11 @@
     "usage": "lookup <(guildID|userID|invite)>",
     "examples": ["lookup 205427654042583040", "lookup 382951433378594817", "lookup https://discord.gg/Z9mKZV6"]
   },
+  "role": {
+    "description": "Get information about server roles",
+    "usage": "role <role name>",
+    "examples": ["role Admins"]
+  },
   "server": {
     "description": "Get information about the server",
     "usage": "server"
