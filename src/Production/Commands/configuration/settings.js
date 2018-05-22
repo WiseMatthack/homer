@@ -26,7 +26,7 @@ class Settings extends Command {
       message.awaitReactions((reaction, user) => user.id === ctx.author.id && emotes.includes(reaction.emoji.id), {
         max: 1,
       })
-        .then((reactions) => {
+        .then(async (reactions) => {
           if (reactions.first().emoji.id === emotes[0]) {
             await this.client.database.deleteDocument('guild', ctx.guild.id);
             message.edit(ctx.__('settings.reset.success'));
