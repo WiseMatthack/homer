@@ -45,7 +45,7 @@ class User extends Command {
     if (workIndex < 0) workIndex = 0;
 
     let joinOrder = (arrayMembers[workIndex].id === member.id) ? `[**${arrayMembers[workIndex].user.username}**](https://homer.idroid.me)` : arrayMembers[workIndex].user.username;
-    for (let i = (workIndex + 1); i < (workIndex + 7); i += 1) {
+    for (let i = (workIndex + 2); i < (workIndex + 6); i += 1) {
       if (i > arrayMembers.length) break;
       joinOrder += ` > ${(arrayMembers[i].id === member.id) ? `[**${arrayMembers[i].user.username}**](https://homer.idroid.me)` : arrayMembers[i].user.username}`;
     }
