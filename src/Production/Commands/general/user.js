@@ -75,7 +75,7 @@ class User extends Command {
       .addField(ctx.__('user.embed.afk'), afkStatus, true)
       .addField(ctx.__('user.embed.creation'), mtz(member.user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`), true)
       .addField(ctx.__('user.embed.join'), mtz(member.joinedTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`), true)
-      .setColor(ctx.guild.me.displayHexColor)
+      .setColor(ctx.guild.me.displayHexColor === '#000000' ? undefined : ctx.guild.me.displayHexColor)
       .setThumbnail(member.user.displayAvatarURL);
 
     ctx.channel.send(ctx.__('user.title', { emote, name: member.user.tag }), { embed });

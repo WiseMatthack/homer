@@ -38,7 +38,7 @@ class Role extends Command {
       .addField(ctx.__('role.embed.mentionable'), role.mentionable ? ctx.__('global.yes') : ctx.__('global.no'), true)
       .addField(ctx.__('role.embed.permissions'), permissionString, false)
       .addField(ctx.__('role.embed.creation'), mtz(role.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`), false)
-      .setColor(role.hexColor);
+      .setColor(role.hexColor === '#000000' ? undefined : role.hexColor);
 
     ctx.channel.send(ctx.__('role.title', {
       name: role.name,
