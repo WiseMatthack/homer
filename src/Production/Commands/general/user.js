@@ -44,10 +44,10 @@ class User extends Command {
     let workIndex = shownIndex - 3;
     if (workIndex < 0) workIndex = 0;
 
-    let joinOrder = (arrayMembers[workIndex].id === ctx.author.id) ? `[**${arrayMembers[workIndex].user.username}**]()` : arrayMembers[workIndex].user.username;
-    for (let i = workIndex + 3; i < (workIndex + 7); i += 1) {
+    let joinOrder = (arrayMembers[workIndex].id === member.id) ? `[**${arrayMembers[workIndex].user.username}**](https://homer.idroid.me)` : arrayMembers[workIndex].user.username;
+    for (let i = (workIndex + 1); i < (workIndex + 7); i += 1) {
       if (i > arrayMembers.length) break;
-      joinOrder += ` > ${(arrayMembers[i].id === ctx.author.id) ? `[**${arrayMembers[i].user.username}**]()` : arrayMembers[i].user.username}`;
+      joinOrder += ` > ${(arrayMembers[i].id === member.id) ? `[**${arrayMembers[i].user.username}**](https://homer.idroid.me)` : arrayMembers[i].user.username}`;
     }
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
