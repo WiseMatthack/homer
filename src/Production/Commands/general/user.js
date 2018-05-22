@@ -70,7 +70,7 @@ class User extends Command {
       .addField(ctx.__('user.embed.presence'), presence, true)
       .addField(ctx.__('user.embed.nitro', { nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString() }), premium, true)
       .addField(ctx.__('user.embed.roles'), sortedRoles)
-      .addField(ctx.__('user.embed.joinorder', { index: (thisIndex + 1) }), joinOrder)
+      .addField(ctx.__('user.embed.joinorder', { index: (shownIndex + 1) }), joinOrder)
       .addField(ctx.__('user.embed.lastactive'), this.capitalizeFirstLetter(lastactiveStatus), true)
       .addField(ctx.__('user.embed.afk'), afkStatus, true)
       .addField(ctx.__('user.embed.creation'), mtz(member.user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`), true)
