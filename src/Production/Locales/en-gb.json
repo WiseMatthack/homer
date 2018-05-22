@@ -331,7 +331,7 @@
 	"settings.embed.moderation": "🔨 Moderation",
 	"settings.embed.moderation-value": "**Channel**: {{{ channel }}}\n**Total cases**: {{{ cases }}}",
 	"settings.embed.phone": "☎ Telephone",
-	"settings.embed.phone-value": "**Channel**: {{{ channel }}\n**Number**: `{{{ number }}}`\n**Incoming-call message**: {{{ incomingMessage }}} • **Missing-call message**: {{{ missedMessage }}}\n**Phonebook flag**: {{{ customFlag }}}",
+	"settings.embed.phone-value": "**Channel**: {{{ channel }}}\n**Number**: `{{{ number }}}`\n**Incoming-call message**: `{{{ incomingMessage }}}`\n**Missing-call message**: `{{{ missedMessage }}}`\n**Phonebook flag**: {{{ customFlag }}}",
 	"settings.embed.misc": "🎮 Miscellaneous",
 	"settings.embed.misc-value": "**Language**: {{{ locale }}}\n**Timezone**: {{{ timezone }}}\n**Custom prefixes**: {{{ prefixes }}}",
 	"settings.embed.formats": "📆 Formats",

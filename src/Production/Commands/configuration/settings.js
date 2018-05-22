@@ -71,8 +71,7 @@ class Settings extends Command {
         .setColor(ctx.guild.me.displayHexColor)
         .setFooter(ctx.__('settings.embed.footer', {
           prefix: this.client.config.discord.defaultPrefixes[0],
-        }))
-        .setThumbnail(ctx.guild.iconURL);
+        }));
 
       ctx.channel.send(ctx.__('settings.title', {
         name: ctx.guild.name,

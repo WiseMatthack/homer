@@ -333,7 +333,7 @@
 	"settings.embed.moderation": "🔨 Modération",
 	"settings.embed.moderation-value": "**Salon**: {{{ channel }}}\n**Total des cas**: {{{ cases }}}",
 	"settings.embed.phone": "☎ Téléphone",
-	"settings.embed.phone-value": "**Salon**: {{{ channel }}\n**Numéro**: `{{{ number }}}`\n**Message d'appel entrant**: {{{ incomingMessage }}} • **Message d'appel sortant**: {{{ missedMessage }}}\n**Drapeau de l'annuaire**: {{{ customFlag }}}",
+	"settings.embed.phone-value": "**Salon**: {{{ channel }}}\n**Numéro**: `{{{ number }}}`\n**Message d'appel entrant**: `{{{ incomingMessage }}}`\n**Message d'appel sortant**: `{{{ missedMessage }}}`\n**Drapeau de l'annuaire**: {{{ customFlag }}}",
 	"settings.embed.misc": "🎮 Divers",
 	"settings.embed.misc-value": "**Langue**: {{{ locale }}}\n**Fuseau horaire**: {{{ timezone }}}\n**Préfixes personnalisés**: {{{ prefixes }}}",
 	"settings.embed.formats": "📆 Formats",
