@@ -27,7 +27,7 @@ class Role extends Command {
     const permissionString = Object.keys(permissions)
       .filter(perm => permissions[perm])
       .map(perm => `\`${perm}\``)
-      .join(', ');
+      .join(', ') || ctx.__('global.none');
 
     const embed = new RichEmbed()
       .addField(ctx.__('role.embed.id'), role.id, true)
