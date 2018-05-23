@@ -48,7 +48,7 @@ class MiscHelper extends Helper {
   timeSince(time, compact = false, locale = 'en-gb') {
     i18n.setLocale(locale);
 
-    let timeSeconds = (Date.now() - time) / 100;
+    let timeSeconds = (Date.now() - time) / 1000;
     let text = '';
 
     const years = timeSeconds / (60 * 60 * 24 * 365);
