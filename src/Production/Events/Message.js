@@ -49,7 +49,7 @@ class Message extends Event {
 
       ctx.channel.send(ctx.__('message.afk.warn', {
         name: mention.tag,
-        since: mtz(afkObject.time).locale(ctx.settings.data.misc.locale).fromNow(true),
+        since: this.client.misc.timeSince(afkObject.time, false, ctx.settings.data.misc.locale),
       }), { embed });
     });
 

@@ -51,7 +51,9 @@ class User extends Command {
     }
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
-    const lastactiveStatus = (lastactiveObject && lastactiveObject.time) ? moment(lastactiveObject.time).locale(ctx.settings.data.misc.locale.split('-')[0]).fromNow() : ctx.__('global.unknown');
+    const lastactiveStatus = (lastactiveObject && lastactiveObject.time) ? ctx.__('global.ago', {
+      time: this.client.misc.timeSince(lastactiveObject.time, false, ctx.settings.data.misc.locale),
+    }) : ctx.__('global.unknown');
     
     let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)}`;
     if (member.user.presence.game) {
@@ -61,7 +63,7 @@ class User extends Command {
     const afkObject = await this.client.absence.getAbsence(member.id);
     const afkStatus = afkObject ? ctx.__('user.afk.status', {
       reason: afkObject.reason,
-      since: mtz(afkObject.time).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
+      since: this.client.misc.timeSince(afkObject.time, false, ctx.settings.data.misc.locale),
     }) : ctx.__('global.no');
 
     const embed = new RichEmbed()

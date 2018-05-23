@@ -1,5 +1,6 @@
 const Helper = require('./Helper');
 const snekfetch = require('snekfetch');
+const i18n = require('i18n');
 
 /**
  * Represents a misc helper.
@@ -35,6 +36,56 @@ class MiscHelper extends Helper {
       .set({ Authorization: this.client.config.api.discordPw })
       .send({ server_count: guildID })
       .catch(() => {});
+  }
+
+  /**
+   * Time since now
+   * @param {Number} time Timestamp to compare
+   * @param {Boolean} compact Compact mode (optional)
+   * @param {String} locale Language to use (optional)
+   * @returns {String} Formatted string
+   */
+  timeSince(time, compact = false, locale = 'en-gb') {
+    i18n.setLocale(locale);
+
+    let timeSeconds = (Date.now() - time) / 100;
+    let text = '';
+
+    const years = timeSeconds / (60 * 60 * 24 * 365);
+    if (years > 0) {
+      text += `**${years}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.years`)} `;
+      timeSeconds %= (60 * 60 * 24 * 365);
+    }
+
+    const weeks = timeSeconds / (60 * 60 * 24 * 7);
+    if (weeks > 0) {
+      text += `**${weeks}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.weeks`)} `;
+      timeSeconds %= (60 * 60 * 24 * 7);
+    }
+
+    const days = timeSeconds / (60 * 60 * 24);
+    if (days > 0) {
+      text += `**${days}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.days`)} `;
+      timeSeconds %= (60 * 60 * 24);
+    }
+
+    const hours = timeSeconds / (60 * 60);
+    if (hours > 0) {
+      text += `**${hours}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.hours`)} `;
+      timeSeconds %= (60 * 60);
+    }
+
+    const minutes = timeSeconds / 60;
+    if (minutes > 0) {
+      text += `**${minutes}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.minutes`)} `;
+      timeSeconds %= 60;
+    }
+
+    if (timeSeconds > 0) {
+      text += `**${timeSeconds}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.seconds`)}`;
+    }
+
+    return text || i18n.__('global.none');
   }
 }
 
