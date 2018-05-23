@@ -287,7 +287,7 @@
 	"role.embed.color": "🖌 Couleur (hex)",
 	"role.embed.position": "▶ Position",
 	"role.embed.managed": "🛡 Gestion auto.",
-	"role.embed.hoisted": "🌟 Affiché séparément",
+	"role.embed.hoisted": "🌟 Affichage séparé",
 	"role.embed.mentionable": "📲 Mentionnable",
 	"role.embed.permissions": "🔩 Permissions",
 	"role.embed.creation": "📆 Date de création du rôle",
