@@ -51,41 +51,41 @@ class MiscHelper extends Helper {
     let timeSeconds = (Date.now() - time) / 1000;
     let text = '';
 
-    const years = timeSeconds / (60 * 60 * 24 * 365);
+    const years = Math.floor(timeSeconds / (60 * 60 * 24 * 365));
     if (years > 0) {
       text += `**${years}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.years`)} `;
       timeSeconds %= (60 * 60 * 24 * 365);
     }
 
-    const weeks = timeSeconds / (60 * 60 * 24 * 7);
+    const weeks = Math.floor(timeSeconds / (60 * 60 * 24 * 7));
     if (weeks > 0) {
       text += `**${weeks}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.weeks`)} `;
       timeSeconds %= (60 * 60 * 24 * 7);
     }
 
-    const days = timeSeconds / (60 * 60 * 24);
+    const days = Math.floor(timeSeconds / (60 * 60 * 24));
     if (days > 0) {
       text += `**${days}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.days`)} `;
       timeSeconds %= (60 * 60 * 24);
     }
 
-    const hours = timeSeconds / (60 * 60);
+    const hours = Math.floor(timeSeconds / (60 * 60));
     if (hours > 0) {
       text += `**${hours}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.hours`)} `;
       timeSeconds %= (60 * 60);
     }
 
-    const minutes = timeSeconds / 60;
+    const minutes = Math.floor(timeSeconds / 60);
     if (minutes > 0) {
       text += `**${minutes}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.minutes`)} `;
       timeSeconds %= 60;
     }
 
-    if (timeSeconds > 0) {
+    if (Math.floor(timeSeconds) > 0) {
       text += `**${timeSeconds}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.seconds`)}`;
     }
 
-    return text || i18n.__('global.none');
+    return text || i18n.__('global.noTimeAgo');
   }
 }
 
