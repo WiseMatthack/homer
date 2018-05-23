@@ -15,6 +15,16 @@ class UserUpdate extends Event {
       nameObject.names.push(oldUser.username);
       this.client.database.insertDocument('names', nameObject, { conflict: 'update' });
     }
+
+    if ((oldUser.presence.status !== newUser.presence.status) && newUser.presence.status === 'offline') {
+      const lastactiveObject = (await this.client.database.getDocument('lastactive', oldUser.id)) || ({
+        id: oldUser.id,
+      });
+
+      lastactiveObject.presenceTime = Date.now();
+
+      this.client.database.insertDocument('lastactive', lastactiveObject, { conflict: 'update' });
+    }
   }
 }
 
