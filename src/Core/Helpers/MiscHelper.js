@@ -82,7 +82,7 @@ class MiscHelper extends Helper {
     }
 
     if (Math.floor(timeSeconds) > 0) {
-      text += `**${timeSeconds}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.seconds`)}`;
+      text += `**${Math.floor(timeSeconds)}**${i18n.__(`dateUtil.${compact ? 'compact' : 'full'}.seconds`)}`;
     }
 
     return text || i18n.__('global.noTimeAgo'); // 'no time ago' assuming it's less than a second ago
