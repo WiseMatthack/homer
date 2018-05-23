@@ -20,7 +20,7 @@
 	"ban.error.noSearch": "{{{ errorIcon }}} Mentionnez ou spécifiez l'ID du membre à bannir.",
 	"ban.error.noMember": "{{{ errorIcon }}} Aucune membre trouvé avec l'ID fourni.",
 	"ban.error": "{{{ errorIcon }}} Une erreur est survenue lors du bannissement du membre. `{{{ error }}}`",
-	"call.error.noNumber": "{{{ errorIcon }}} Vous devez fournir un numéro de téléphone à appeler.",
+	"call.error.noNumber": "{{{ errorIcon }}} Vous devez fournir un numéro de téléphone à appeler ou `random` pour appeler une ligne au hasard.",
 	"call.error.noAttributedNumber": "{{{ errorIcon }}} Vous n'avez pas de numéro de téléphone attribué. Tapez `{{{ defaultPrefix }}}number` pour générer votre numéro.",
 	"call.error.noPhoneChannel": "{{{ errorIcon }}} Vous devez exécuter cette commande dans le salon téléphone ({{{ channel }}}).",
 	"call.error.alreadyCalling": "{{{ errorIcon }}} Vous êtes déjà en cours d'appel avec quelqu'un.",

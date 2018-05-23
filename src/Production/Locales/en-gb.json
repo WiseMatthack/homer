@@ -20,7 +20,7 @@
 	"ban.error.noSearch": "{{{ errorIcon }}} Mention or specify the ID of the member to ban.",
 	"ban.error.noMember": "{{{ errorIcon }}} No member found matching the given user ID.",
 	"ban.error": "{{{ errorIcon }}} An error has occured while banning the member. `{{{ error }}}`",
-	"call.error.noNumber": "{{{ errorIcon }}} You must provide a telephone number to call.",
+	"call.error.noNumber": "{{{ errorIcon }}} You must provide a telephone number to call or `random` to call a random line.",
 	"call.error.noAttributedNumber": "{{{ errorIcon }}} You do not have a telephone number. Please run `{{{ defaultPrefix }}}number` to generate one.",
 	"call.error.noPhoneChannel": "{{{ errorIcon }}} You must run this command in the telephone channel ({{{ channel }}}).",
 	"call.error.alreadyCalling": "{{{ errorIcon }}} You are already in-call with someone.",

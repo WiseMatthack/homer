@@ -187,9 +187,9 @@
   },
 
   "call": {
-    "description": "Appelle un numéro de téléphone",
-    "usage": "call <numéro>",
-    "examples": ["call 111-222"]
+    "description": "Appelle un numéro de téléphone (aléatoire)",
+    "usage": "call <numéro ou random>",
+    "examples": ["call 111-222", "call random"]
   },
   "hangup": {
     "description": "Met fin à une communication",

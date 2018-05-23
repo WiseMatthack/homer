@@ -32,8 +32,11 @@ class Call extends Command {
       errorIcon: this.client.constants.statusEmotes.error,
     }));
 
-    const settings = await this.client.database.getDocuments('guild');
-    const settingsToCall = settings.find(s => s.phone.number === number);
+    const settingsToCall = ctx.args[0] === 'random' ?
+      (await this.client.database.getDocuments('guild').then((servers) => {
+        const filteredServers = servers.filter(s => s.phone.number && s.phone.phonebook && this.client.channels.has(s.phone.channel));
+        return filteredServers[Math.round(Math.random() * filteredServers.length)];
+      })) : (await this.client.database.provider.table('guild').filter({ phone: { number } }).then(s => s[0] || null));
 
     if (settingsToCall) {
       const guildToCall = this.client.guilds.get(settingsToCall.id);
