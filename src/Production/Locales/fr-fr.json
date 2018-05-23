@@ -10,6 +10,7 @@
 	"global.no": "Non",
 	"global.by": "par",
 	"global.ago": "Il y a {{{ time }}}",
+	"global.noTimeAgo": "Moins d'une seconde",
 	"global.unknown": "Inconnu(e)",
 	"about.embed.description": "Salut! Je suis **{{{ name }}}**, un bot facile à utiliser et riche en fonctionnalités pour Discord.\nJe fournis tout ce qu'une communauté a besoin, apporte les outils nécessaires et garde votre serveur amusant !\n\nJ'ai été réalisé par **iDroid#4441** avec [node.js](https://nodejs.org) ({{{ node }}}) en utilisant l'outil API [discord.js](https://discord.js.org) ({{{ discord }}}).\nVous pouvez voir mes commandes en utilisant la commande `{{{ defaultPrefix }}}help`.\nMettez une étoile et contribuez à mon dévelopmment sur [GitHub](https://github.com/iDroid27210/homer) !\nVous pouvez également voter pour moi sur [DiscordBots.org]({{{ voteURL }}}).\n\nVous pouvez rejoindre le serveur de support si vous voulez de l'aide, tapez juste `{{{ defaultPrefix }}}support` et suivez le lien.\nMerci, iDroid.",
 	"about.embed.footer": "Observez les statistiques avec {{{ prefix }}}stats! - Dernier redémarrage",
