@@ -95,6 +95,7 @@ class Lookup extends Command {
           .then((user) => {
             const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
+            const extension = (user.avatar && user.avatar.startsWith('a_')) ? 'gif' : 'png';
 
             embed
               .addField(ctx.__('lookup.user.id'), user.id, true)
@@ -104,7 +105,7 @@ class Lookup extends Command {
               .addField(ctx.__('lookup.user.creation.title'), ctx.__('lookup.user.creation.value', {
                 creation: mtz(user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
               }))
-              .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`);
+              .setThumbnail(`https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${extension}`);
 
             ctx.channel.send(ctx.__('lookup.user.title', {
               emote,
