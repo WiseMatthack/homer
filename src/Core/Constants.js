@@ -1,7 +1,7 @@
 exports.statusEmotes = {
-  success: '<:success:420529118417780747>',
+  success: '<:greenTick:449091594025566208>',
   warning: '<:warn:420529189658034187>',
-  error: '<:error:420529091280633856>',
+  error: '<:redTick:449091616783859712>',
 };
 
 exports.presenceIcons = {
