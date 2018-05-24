@@ -1,6 +1,5 @@
 const Command = require('../../../Core/Structures/Command');
 const { RichEmbed } = require('discord.js');
-const mtz = require('moment-timezone');
 
 class Stats extends Command {
   constructor(client) {
@@ -18,9 +17,7 @@ class Stats extends Command {
       .setDescription(ctx.__('stats.embed.description', {
         guilds: this.client.guilds.size,
         users: this.client.users.size,
-        uptime: mtz(this.client.initiated.getTime())
-          .locale(ctx.settings.data.misc.locale)
-          .fromNow(true),
+        uptime: this.client.misc.timeSince(this.client.initiated.getTime(), true, ctx.settings.data.misc.locale),
         ram: Math.floor(process.memoryUsage().rss / 1000000),
         activeNumbers: numbers,
       }))
