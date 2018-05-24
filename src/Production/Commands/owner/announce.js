@@ -24,7 +24,7 @@ class Announce extends Command {
     await updateRole.setMentionable(true, 'Announcement');
 
     // We send the message
-    await updateChannel.send(`${updateRole.toString()}\n${updateMessage}`);
+    await updateChannel.send(`${updateMessage}\n[${updateRole.toString()}]`);
 
     // We set the role as non-mentionable
     await updateRole.setMentionable(false, 'Announcement');
