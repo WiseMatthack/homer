@@ -34,7 +34,12 @@ class Call extends Command {
 
     const settingsToCall = ctx.args[0] === 'random' ?
       (await this.client.database.getDocuments('guild').then((servers) => {
-        const filteredServers = servers.filter(s => (s.phone.number && s.phone.phonebook && this.client.channels.has(s.phone.channel)) && s.phone.number !== '1-SUPPORT');
+        const filteredServers = servers.filter(s =>
+          (s.phone.number && s.phone.phonebook && this.client.channels.has(s.phone.channel)) &&
+          s.phone.number !== '1-SUPPORT' &&
+          this.client.phone.isCallActive(s.id) === 'none' &&
+          s.phone.number !== ctx.settings.data.phone.number);
+
         return filteredServers[Math.round(Math.random() * filteredServers.length)];
       })) : (await this.client.database.provider.table('guild').filter({ phone: { number } }).then(s => s[0] || null));
 
