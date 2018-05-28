@@ -56,7 +56,7 @@ class User extends Command {
     }) : ctx.__('global.unknown');
     
     let presence = `${this.client.emojis.get(this.client.constants.presenceIcons[member.user.presence.status]).toString()} ${ctx.__(`presence.${member.user.presence.status}`)}`;
-    if (member.user.presence.status === 'offline' && lastactiveObject.presenceTime) presence += ` (${this.client.misc.timeSince(lastactiveObject.presenceTime, true, ctx.settings.data.misc.locale)})`;
+    if (member.user.presence.status === 'offline' && (lastactiveObject && lastactiveObject.presenceTime)) presence += ` (${this.client.misc.timeSince(lastactiveObject.presenceTime, true, ctx.settings.data.misc.locale)})`;
     if (member.user.presence.game) {
       presence += `\n${ctx.__(`user.gameTypes.${member.user.presence.game.type}`)} ${member.user.presence.game.url ? `[${member.user.presence.game.name}](${member.user.presence.game.url})` : `**${member.user.presence.game.name}**`}`;
     }
