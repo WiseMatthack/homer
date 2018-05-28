@@ -436,7 +436,7 @@
 	"weather.embed.misc.title": "☁ Divers",
 	"weather.embed.misc.value": "💦 Humidité: {{{ humidity }}}%\n☁ Nébulosité: {{{ nebulosity }}}%",
 	"weather.embed.footer": "Informations fournies par DarkSky.",
-	"weather.notFound": "{{{ errorIcon }}} Aucune localité trouvée correspondant à `{{{ location }}}`.",
+	"weather.notFound": "{{{ errorIcon }}} Aucun lieu trouvée correspondant à `{{{ location }}}`.",
 	"welcome.set": "{{{ successIcon }}} Flux d'arrivées configuré sur <#{{{ channel }}}>!",
 	"welcome.cleared": "{{{ successIcon }}} Paramètres du flux d'arrivées réinitialisés !",
 	"welcome.invalidMessage": "{{{ errorIcon }}} Le message d'accueil ne doit excéder 256 caractères.",
