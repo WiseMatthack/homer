@@ -18,7 +18,8 @@ class PhBlacklist extends Command {
     const foundGuild = await this.client.database.provider
       .table('guild')
       .filter({ phone: { number } })
-      .run();
+      .run()
+      .then(res => res[0]);
 
     if (!foundGuild) return ctx.channel.send(ctx.__('phblacklist.error.noGuild', {
       errorIcon: this.client.constants.statusEmotes.error,
