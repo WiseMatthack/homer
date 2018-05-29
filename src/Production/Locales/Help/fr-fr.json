@@ -205,6 +205,11 @@
     "usage": "pickup",
     "examples": []
   },
+  "phblacklist": {
+    "description": "Ajoute ou retire des serveurs de la liste noire",
+    "usage": "phblacklist <numéro>",
+    "examples": ["phblacklist 000-000"]
+  },
   "phmessage": {
     "description": "Défini ou réinitialise les messages utilisés par le téléphone.",
     "usage": "phmessage <type> <texte>",
@@ -212,8 +217,8 @@
   },
   "phonebook": {
     "description": "Recherche des numéros de téléphone sur le carnet d'adresses",
-    "usage": "phonebook <switch|random|numéro de téléphone|blacklist <numéro de téléphone>>",
-    "examples": ["phonebook switch", "phonebook random", "phonebook 1-464-393", "phonebook blacklist 999-999"]
+    "usage": "phonebook <switch|random|numéro de téléphone>",
+    "examples": ["phonebook switch", "phonebook random", "phonebook 1-464-393"]
   },
   "setphone": {
     "description": "Configure un salon pour le téléphone ou le réinitialise",

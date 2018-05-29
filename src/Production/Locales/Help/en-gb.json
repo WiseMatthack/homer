@@ -205,6 +205,11 @@
     "usage": "pickup",
     "examples": []
   },
+  "phblacklist": {
+    "description": "Add or remove guilds to the server blacklist",
+    "usage": "phblacklist <number>",
+    "examples": ["phblacklist 000-000"]
+  },
   "phmessage": {
     "description": "Set or reset messages that are used by the telephone.",
     "usage": "phmessage <type> <text>",
@@ -212,8 +217,8 @@
   },
   "phonebook": {
     "description": "Search for telephone numbers in the phonebook",
-    "usage": "phonebook <switch|random|phone number|blacklist <phone number>>",
-    "examples": ["phonebook switch", "phonebook random", "phonebook 1-464-393", "phonebook blacklist 999-999"]
+    "usage": "phonebook <switch|random|phone number>",
+    "examples": ["phonebook switch", "phonebook random", "phonebook 1-464-393"]
   },
   "setphone": {
     "description": "Set-up the telephone channel or reset it",
