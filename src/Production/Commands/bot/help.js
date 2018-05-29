@@ -16,7 +16,7 @@ class Help extends Command {
 
     if (IsFound && !found.private) {
       const help = require(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)[found.name];
-      delete require.cache[require.resolve(`../../Locales/Help${ctx.settings.data.misc.locale}.json`)];
+      delete require.cache[require.resolve(`../../Locales/Help/${ctx.settings.data.misc.locale}.json`)];
 
       const prefix = this.client.config.discord.defaultPrefixes[0];
       const embed = new RichEmbed()
