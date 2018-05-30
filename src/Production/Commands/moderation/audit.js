@@ -69,7 +69,11 @@ class Audit extends Command {
 
       auditLogs = auditLogs.filter(entry => entry.user.id === member.id);
     }
+
     auditLogs = auditLogs.first(5);
+    if (auditLogs.size === 0) return ctx.channel.send(ctx.__('audit.error.noEntry', {
+      errorIcon: this.client.constants.statusEmotes.error,
+    }));
 
     const embed = new RichEmbed()
       .setColor(ctx.guild.me.displayHexColor === '#000000' ? undefined : ctx.guild.me.displayHexColor);
@@ -88,7 +92,7 @@ class Audit extends Command {
     });
 
     ctx.channel.send(ctx.__('audit.title'), {
-      emoji: this.client.emojis.get(this.client.constants.auditEmoji).toString(),
+      emoji: this.client.constants.auditEmoji,
       embed,
     });
   }
