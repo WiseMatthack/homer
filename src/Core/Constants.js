@@ -23,6 +23,8 @@ exports.nitroIcon = '420522857785720832';
 
 exports.botEmote = '<:ibot:420656561493377024>';
 
+exports.auditEmoji = '451404017847894017';
+
 exports.serversCategories = ['social', 'gaming', 'other'];
 
 exports.profileFields = {

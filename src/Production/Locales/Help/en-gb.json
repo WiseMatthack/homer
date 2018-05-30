@@ -226,6 +226,11 @@
     "examples": ["setphone", "setphone #my-telephone", "setphone clear"]
   },
 
+  "audit": {
+    "description": "Fetches the last 5 audit log entries matching the given criterias",
+    "usage": "audit [action] [args]",
+    "examples": ["audit", "audit action GUILD_UPDATE", "audit action b1nZy#1337"]
+  },
   "ban": {
     "description": "Bans a member from the server",
     "usage": "ban <@user|ID> [reason]",
