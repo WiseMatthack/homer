@@ -46,7 +46,7 @@ class User extends Command {
 
     let joinOrder = (arrayMembers[workIndex].id === member.id) ? `**${arrayMembers[workIndex].user.username}**` : arrayMembers[workIndex].user.username;
     for (let i = (workIndex + 2); i < (workIndex + 6); i += 1) {
-      if (i > arrayMembers.length) break;
+      if (i > arrayMembers.length || !arrayMembers[i]) break;
       joinOrder += ` > ${(arrayMembers[i].id === member.id) ? `**${arrayMembers[i].user.username}**` : arrayMembers[i].user.username}`;
     }
 
