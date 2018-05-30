@@ -37,6 +37,7 @@ class Audit extends Command {
       name: 'audit',
       aliases: ['auditlogs'],
       userPermissions: ['VIEW_AUDIT_LOG'],
+      botPermissions: ['VIEW_AUDIT_LOG'],
       category: 'moderation',
     });
   }
