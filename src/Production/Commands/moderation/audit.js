@@ -36,7 +36,7 @@ class Audit extends Command {
     super(client, {
       name: 'audit',
       aliases: ['auditlogs'],
-      userPermissions: ['VIEW_AUDIT_LOGS'],
+      userPermissions: ['VIEW_AUDIT_LOG'],
       category: 'moderation',
     });
   }
