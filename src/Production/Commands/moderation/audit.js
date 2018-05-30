@@ -85,16 +85,15 @@ class Audit extends Command {
         ctx.__('audit.entry', {
           executor: `${entry.executor.tag} (ID:${entry.executor.id})`,
           target: entry.extra ? `${entry.extra.toString()} (ID:${entry.extra.id})` : ctx.__('global.none'),
-          reason: entry.reason,
+          reason: entry.reason || ctx.__('global.none'),
           date: mtz(entry.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)
         }),
       );
     });
 
-    ctx.channel.send(ctx.__('audit.title'), {
+    ctx.channel.send(ctx.__('audit.title', {
       emoji: this.client.constants.auditEmoji,
-      embed,
-    });
+    }), { embed });
   }
 }
 
