@@ -46,7 +46,7 @@ class Audit extends Command {
     const args = ctx.args.slice(1).join(' ');
 
     let auditLogs = await ctx.guild.fetchAuditLogs().then(audit => audit.entries);
-    if (action === 'action') {
+    if (action === 'action' && args) {
       if (!validActions.includes(args)) return ctx.channel.send(ctx.__('audit.error.invalidAuditAction', {
         errorIcon: this.client.constants.statusEmotes.error,
         validActions: validActions.map(action => `\`${action}\``).join(', '),
@@ -67,7 +67,7 @@ class Audit extends Command {
         member = members.first();
       }
 
-      auditLogs = auditLogs.filter(entry => entry.user.id === member.id);
+      auditLogs = auditLogs.filter(entry => entry.executor.id === member.id);
     }
 
     auditLogs = auditLogs.first(5);
