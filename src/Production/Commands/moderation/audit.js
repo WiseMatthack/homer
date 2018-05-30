@@ -99,7 +99,7 @@ class Audit extends Command {
           target = `${entry.target.code}`;
           break;
         case 'MESSAGE':
-          target = `${entry.target.id} (${entry.target.author.tag} - <#${entry.target.channel.id}>)`;
+          target = `ID:${entry.target.id}`;
           break;
         default:
           target = ctx.__('global.none');
