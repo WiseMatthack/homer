@@ -80,11 +80,36 @@ class Audit extends Command {
 
     auditLogs.forEach((entry) => {
       const emoji = this.client.emojis.find('name', `AUDIT_${entry.action}`);
+
+      let target = null;
+      switch (entry.targetType) {
+        case 'CHANNEL':
+          target = `<#${entry.target.id}> (ID:${entry.target.id})`;
+          break;
+        case 'USER':
+          target = `<@${entry.target.id}> (ID:${entry.target.id})`;
+          break;
+        case 'ROLE':
+          target = `<@&${entry.target.id}> (ID:${entry.target.id})`;
+          break;
+        case 'EMOJI':
+          target = `${entry.target.toString()} (ID:${entry.target.id})`;
+          break;
+        case 'INVITE':
+          target = `${entry.target.code}`;
+          break;
+        case 'MESSAGE':
+          target = `${entry.target.id} (${entry.target.author.tag} - <#${entry.target.channel.id}>)`;
+          break;
+        default:
+          target = ctx.__('global.none');
+      }
+
       embed.addField(
         `${emoji ? emoji.toString() : undefined} ${ctx.__(`audit.action.${entry.action}`)}`,
         ctx.__('audit.entry', {
           executor: `${entry.executor.tag} (ID:${entry.executor.id})`,
-          target: entry.extra ? `${entry.extra.toString()} (ID:${entry.extra.id})` : ctx.__('global.none'),
+          target,
           reason: entry.reason || ctx.__('global.none'),
           date: mtz(entry.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)
         }),
