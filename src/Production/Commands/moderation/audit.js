@@ -80,7 +80,7 @@ class Audit extends Command {
         `${emoji ? emoji.toString() : undefined} ${ctx.__(`audit.action.${entry.action}`)}`,
         ctx.__('audit.entry', {
           executor: `${entry.executor.tag} (ID:${entry.executor.id})`,
-          target: `${entry.extra.toString()} (ID:${entry.extra.id})`,
+          target: entry.extra ? `${entry.extra.toString()} (ID:${entry.extra.id})` : ctx.__('global.none'),
           reason: entry.reason,
           date: mtz(entry.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`)
         }),
