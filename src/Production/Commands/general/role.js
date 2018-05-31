@@ -23,6 +23,11 @@ class Role extends Command {
       search,
     }));
 
+    const seriousPosition = (ctx.guild.roles
+      .sort((a, b) => b.position - a.position)
+      .array()
+      .findIndex(r => r.id === role.id) + 1);
+
     const permissions = new Permissions(role.permissions).serialize();
     const permissionString = Object.keys(permissions)
       .filter(perm => permissions[perm])
@@ -32,7 +37,7 @@ class Role extends Command {
     const embed = new RichEmbed()
       .addField(ctx.__('role.embed.id'), role.id, true)
       .addField(ctx.__('role.embed.color'), role.hexColor ? role.hexColor.toUpperCase() : ctx.__('global.none'), true)
-      .addField(ctx.__('role.embed.position'), `#${(ctx.guild.roles.size - role.position)}`, true)
+      .addField(ctx.__('role.embed.position'), `#${seriousPosition}`, true)
       .addField(ctx.__('role.embed.managed'), role.managed ? ctx.__('global.yes') : ctx.__('global.no'), true)
       .addField(ctx.__('role.embed.hoisted'), role.hoist ? ctx.__('global.yes') : ctx.__('global.no'), true)
       .addField(ctx.__('role.embed.mentionable'), role.mentionable ? ctx.__('global.yes') : ctx.__('global.no'), true)
