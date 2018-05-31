@@ -14,8 +14,10 @@ class Vote extends Command {
       .sort((a, b) => b.count - a.count));
     const message = (list.length === 0 ? [ctx.__('vote.noVoter')] : []);
 
-    for (let i = 0; (i < list.length && i < 5); i += 1) {
+    for (let i = 0; i < 5; i += 1) {
       const voteEntry = list[i];
+      if (!voteEntry) break;
+
       const userTag = await this.client.fetchUser(voteEntry.id).then(u => u.tag);
 
       let medalEmote = '🏅';
