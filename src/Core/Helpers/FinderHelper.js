@@ -15,6 +15,8 @@ class FinderHelper extends Helper {
   findMembers(search, id) {
     const search2 = search.toLowerCase();
     return this.client.guilds.get(id).members.filter(m =>
+      m.user.tag.toLowerCase().startsWith(search2) ||
+      m.displayName.toLowerCase().startsWith(search2) ||
       m.user.tag.toLowerCase().includes(search2) ||
       m.displayName.toLowerCase().includes(search2) ||
       m.id === search2);
@@ -28,6 +30,7 @@ class FinderHelper extends Helper {
   findUsers(search) {
     const search2 = search.toLowerCase();
     return this.client.users.filter(u =>
+      u.tag.toLowerCase().startsWith(search2) ||
       u.tag.toLowerCase().includes(search2) ||
       u.id === search2);
   }
@@ -43,6 +46,7 @@ class FinderHelper extends Helper {
     return this.client.guilds.get(id).channels
       .filter(c => c.type === 'text')
       .filter(c =>
+        c.name.toLowerCase().startsWith(search2) ||
         c.name.toLowerCase().includes(search2) ||
         c.id === search2);
   }
@@ -56,7 +60,10 @@ class FinderHelper extends Helper {
   findRoles(search, id) {
     const search2 = search.toLowerCase();
     return this.client.guilds.get(id).roles
-      .filter(r => r.name.toLowerCase().includes(search2) || r.id === search2);
+      .filter(r =>
+        r.name.toLowerCase().startsWith(search2) ||
+        r.name.toLowerCase().includes(search2) ||
+        r.id === search2);
   }
 
   /**
