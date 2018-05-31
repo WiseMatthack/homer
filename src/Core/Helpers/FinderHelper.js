@@ -61,6 +61,7 @@ class FinderHelper extends Helper {
     const search2 = search.toLowerCase();
     return this.client.guilds.get(id).roles
       .filter(r =>
+        r.name.toLowerCase() === search2 ||
         r.name.toLowerCase().startsWith(search2) ||
         r.name.toLowerCase().includes(search2) ||
         r.id === search2);
