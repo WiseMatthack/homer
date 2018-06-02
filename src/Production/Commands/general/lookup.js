@@ -93,7 +93,7 @@ class Lookup extends Command {
         this.client.fetchUser(lookup, false)
           .then((user) => {
             const badges = [];
-            if (member.user.avatar && member.user.avatar.startsWith('a_')) badges.push(this.client.emojis.get(this.client.constants.nitroIcon).toString());
+            if (user.avatar && user.avatar.startsWith('a_')) badges.push(this.client.emojis.get(this.client.constants.nitroIcon).toString());
             if (this.client.constants.discordStaff.includes(member.id)) badges.push(this.client.emojis.get(this.client.constants.staffIcon).toString());
 
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
