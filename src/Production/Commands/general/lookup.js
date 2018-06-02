@@ -92,7 +92,10 @@ class Lookup extends Command {
       } else {
         this.client.fetchUser(lookup, false)
           .then((user) => {
-            const premium = (user.avatar && user.avatar.startsWith('a_')) ? true : false;
+            const badges = [];
+            if (member.user.avatar && member.user.avatar.startsWith('a_')) badges.push(this.client.emojis.get(this.client.constants.nitroIcon).toString());
+            if (this.client.constants.discordStaff.includes(member.id)) badges.push(this.client.emojis.get(this.client.constants.staffIcon).toString());
+
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
             const extension = (user.avatar && user.avatar.startsWith('a_')) ? 'gif' : 'png';
 
@@ -106,7 +109,7 @@ class Lookup extends Command {
             ctx.channel.send(ctx.__('lookup.user.title', {
               emote,
               name: user.tag,
-              nitro: premium ? ` ${this.client.emojis.get(this.client.constants.nitroIcon).toString()}` : '',
+              badges: (badges.length > 0) ? ` ${badges.join(' ')}` : '',
             }), { embed });
           })
           .catch(() => ctx.channel.send(ctx.__('lookup.error.noUserOrGuild', { errorIcon: this.client.constants.statusEmotes.error, lookup })));

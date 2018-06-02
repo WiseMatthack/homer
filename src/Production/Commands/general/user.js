@@ -29,7 +29,6 @@ class User extends Command {
     }
 
     const emote = member.user.bot ? '<:bot:420699407344730122>' : '👤';
-    const premium = (member.user.avatar && member.user.avatar.startsWith('a_')) ? true : false;
 
     const sortedRoles = (member.roles
       .filter(r => r.id !== ctx.guild.id)
@@ -49,6 +48,10 @@ class User extends Command {
       if (i > arrayMembers.length || !arrayMembers[i]) break;
       joinOrder += ` > ${(arrayMembers[i].id === member.id) ? `**${arrayMembers[i].user.username}**` : arrayMembers[i].user.username}`;
     }
+
+    const badges = [];
+    if (member.user.avatar && member.user.avatar.startsWith('a_')) badges.push(this.client.emojis.get(this.client.constants.nitroIcon).toString());
+    if (this.client.constants.discordStaff.includes(member.id)) badges.push(this.client.emojis.get(this.client.constants.staffIcon).toString());
 
     const lastactiveObject = await this.client.database.getDocument('lastactive', member.id);
     const lastactiveStatus = (lastactiveObject && lastactiveObject.time) ? ctx.__('global.ago', {
@@ -83,7 +86,7 @@ class User extends Command {
     ctx.channel.send(ctx.__('user.title', {
       emote,
       name: member.user.tag,
-      nitro: premium ? ` ${this.client.emojis.get(this.client.constants.nitroIcon).toString()}` : '',
+      badges: (badges.length > 0) ? ` ${badges.join(' ')}` : '',
     }), { embed });
   }
 
