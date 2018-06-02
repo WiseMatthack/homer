@@ -27,7 +27,7 @@ class Message extends Event {
     await ctx.getGuildSettings();
 
     /* AFK remover */
-    client.absence.getAbsence(ctx.author.id).then((afkRemoving) => {
+    this.client.absence.getAbsence(ctx.author.id).then((afkRemoving) => {
       if (!afkRemoving) return;
       this.client.absence.removeAbsence(ctx.author.id);
     });
