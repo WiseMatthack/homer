@@ -27,16 +27,18 @@ class Message extends Event {
     await ctx.getGuildSettings();
 
     /* AFK remover */
-    const afkRemoving = await this.client.absence.getAbsence(ctx.author.id);
-    if (afkRemoving) {
-      await this.client.absence.removeAbsence(ctx.author.id);
-    }
+    client.absence.getAbsence(ctx.author.id).then((afkRemoving) => {
+      if (!afkRemoving) return;
+      this.client.absence.removeAbsence(ctx.author.id);
+    });
 
     /* We stop here if the channel has to be ignored */
     if (ctx.settings.data.ignoredChannels.includes(ctx.channel.id)) return;
 
     /* AFK warner */
     ctx.mentions.users.forEach(async (mention) => {
+      if (mention.id === ctx.author.id) return;
+
       const afkObject = await this.client.absence.getAbsence(mention.id);
       if (!afkObject) return;
 
@@ -54,14 +56,22 @@ class Message extends Event {
     });
 
     // Pre-load blacklist status
-    const blacklistStatus = await this.checkBlacklist(ctx.author.id);
+    const blacklistStatus = await this.client.database.getDocument('blacklist', ctx.author.id);
 
     /* Handle Cleverbot */
     if (ctx.content.startsWith(`<@${this.client.user.id}>`) || ctx.content.startsWith(`<@!${this.client.user.id}>`)) {
       const question = ctx.content.split(/ +/g).slice(1).join(' ');
 
       if (question) {
-        if (blacklistStatus) return;
+        if (blacklistStatus) return ctx.channel.send(ctx.__('message.blacklist', {
+          errorIcon: this.client.constants.statusEmotes.error,
+          prefix: this.client.config.discord.defaultPrefixes[0],
+          reason: blacklistStatus.reason,
+          time: mtz(blacklistStatus.time)
+            .locale(ctx.settings.data.misc.locale)
+            .tz(ctx.settings.data.misc.timezone)
+            .format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
+        }));
 
         if (!this.client.cleverbot) return ctx.channel.send(ctx.__('message.cleverbot.disabled', {
           errorIcon: this.client.constants.statusEmotes.error,
@@ -192,16 +202,6 @@ class Message extends Event {
         channel.send(msg);
       }
     }
-  }
-
-  /**
-   * Checks if an user is blacklisted
-   * @param {String} id User ID
-   * @returns {Promise<String>}
-   */
-  async checkBlacklist(id) {
-    const entry = await this.client.database.getDocument('blacklist', id);
-    return entry || false;
   }
 }
 
