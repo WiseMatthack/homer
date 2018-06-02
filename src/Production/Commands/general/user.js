@@ -29,7 +29,7 @@ class User extends Command {
     }
 
     const emote = member.user.bot ? '<:bot:420699407344730122>' : '👤';
-    const premium = (member.user.avatar && member.user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
+    const premium = (member.user.avatar && member.user.avatar.startsWith('a_')) ? true : false;
 
     const sortedRoles = (member.roles
       .filter(r => r.id !== ctx.guild.id)
@@ -70,8 +70,7 @@ class User extends Command {
     const embed = new RichEmbed()
       .addField(ctx.__('user.embed.id'), member.id, true)
       .addField(ctx.__('user.embed.nickname'), member.nickname ? member.nickname : ctx.__('global.none'), true)
-      .addField(ctx.__('user.embed.presence'), presence, true)
-      .addField(ctx.__('user.embed.nitro', { nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString() }), premium, true)
+      .addField(ctx.__('user.embed.presence'), presence)
       .addField(ctx.__('user.embed.roles'), sortedRoles)
       .addField(ctx.__('user.embed.joinorder', { index: (shownIndex + 1) }), joinOrder)
       .addField(ctx.__('user.embed.lastactive'), this.capitalizeFirstLetter(lastactiveStatus), true)
@@ -81,7 +80,11 @@ class User extends Command {
       .setColor(ctx.guild.me.displayHexColor === '#000000' ? undefined : ctx.guild.me.displayHexColor)
       .setThumbnail(member.user.displayAvatarURL);
 
-    ctx.channel.send(ctx.__('user.title', { emote, name: member.user.tag }), { embed });
+    ctx.channel.send(ctx.__('user.title', {
+      emote,
+      name: member.user.tag,
+      nitro: premium ? ` ${this.client.emojis.get(this.client.constants.nitroIcon).toString()}` : '',
+    }), { embed });
   }
 
   /**

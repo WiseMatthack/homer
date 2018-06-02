@@ -64,11 +64,10 @@ class Lookup extends Command {
         const inviteCode = guildReq.instant_invite ?
           guildReq.instant_invite.replace('https://discordapp.com/invite/', '') : null;
 
-
         const { timestamp } = deconstruct(guildReq.id);
         const meta = await this.client.fetchInvite(guildReq.instant_invite)
           .then(i => ({ icon: `https://cdn.discordapp.com/icons/${i.guild.id}/${i.guild.icon}.png` }))
-          .catch(() => ({}));
+          .catch(() => ({ icon: `https://${this.client.config.dashboard.baseDomain}/images/icons/no-image.png` }));
 
         embed
           .addField(ctx.__('lookup.guild.id'), guildReq.id, true)
@@ -93,15 +92,12 @@ class Lookup extends Command {
       } else {
         this.client.fetchUser(lookup, false)
           .then((user) => {
-            const premium = (user.avatar && user.avatar.startsWith('a_')) ? ctx.__('global.yes') : ctx.__('global.no');
+            const premium = (user.avatar && user.avatar.startsWith('a_')) ? true : false;
             const emote = user.bot ? '<:bot:420699407344730122>' : '👤';
             const extension = (user.avatar && user.avatar.startsWith('a_')) ? 'gif' : 'png';
 
             embed
-              .addField(ctx.__('lookup.user.id'), user.id, true)
-              .addField(ctx.__('lookup.user.premium', {
-                nitroIcon: this.client.emojis.get(this.client.constants.nitroIcon).toString(),
-              }), premium, true)
+              .addField(ctx.__('lookup.user.id'), user.id)
               .addField(ctx.__('lookup.user.creation.title'), ctx.__('lookup.user.creation.value', {
                 creation: mtz(user.createdTimestamp).tz(ctx.settings.data.misc.timezone).format(`${ctx.settings.data.misc.dateFormat} ${ctx.settings.data.misc.timeFormat}`),
               }))
@@ -110,6 +106,7 @@ class Lookup extends Command {
             ctx.channel.send(ctx.__('lookup.user.title', {
               emote,
               name: user.tag,
+              nitro: premium ? ` ${this.client.emojis.get(this.client.constants.nitroIcon).toString()}` : '',
             }), { embed });
           })
           .catch(() => ctx.channel.send(ctx.__('lookup.error.noUserOrGuild', { errorIcon: this.client.constants.statusEmotes.error, lookup })));
