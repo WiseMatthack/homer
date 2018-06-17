@@ -22,6 +22,9 @@ class Message extends Event {
     /* Prevent shit */
     if (message.author.bot || !message.guild) return;
 
+    /* Prevent ultra shit */
+    if (message.author.id === '432616432149200897') return;
+
     /* We initiate the context for commands, etc. */
     const ctx = new Context(this.client, message);
     await ctx.getGuildSettings();
