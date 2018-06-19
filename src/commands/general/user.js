@@ -67,7 +67,7 @@ class UserCommand extends Command {
 
       const joinOrder = [];
       joinOrder.push(orderedMembers[index].id === member.id ? `**${orderedMembers[index].user.username}**` : orderedMembers[index].user.username);
-      for (let i = (index + 1); i < (index + 7); i += 1) {
+      for (let i = (index + 2); i < (index + 6); i += 1) {
         if (i >= orderedMembers.length) break;
         joinOrder.push(orderedMembers[i].id === member.id ? `**${orderedMembers[i].user.username}**` : orderedMembers[i].user.username);
       }
