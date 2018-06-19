@@ -11,7 +11,6 @@ class LocaleManager extends Manager {
     this.options = this.client.config.localization;
     this.locales = {};
     this.directory = isAbsolute(this.options.directory) ? this.options.directory : resolve(__dirname, this.options.directory);
-    this.autoReload = this.options.autoReload || true;
     this.defaultLocale = this.options.defaultLocale || 'en-gb';
 
     // Load locales

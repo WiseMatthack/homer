@@ -28,8 +28,7 @@
     "token": ""
   },
   "localization": {
-    "directory": "",
-    "autoReload": false
+    "directory": ""
   },
   "logChannel": "",
   "misc": {
