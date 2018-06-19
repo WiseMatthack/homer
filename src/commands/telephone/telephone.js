@@ -245,7 +245,7 @@ class ImportSubcommand extends Command {
   }
 
   async execute(context) {
-    const oldSubscription = await this.client.database.provider.db('homer').table('guild').get(context.message.guild.id).run()
+    const oldSubscription = await this.client.database.provider.db('homer_bot').table('guild').get(context.message.guild.id).run()
     if (!oldSubscription || !oldSubscription.phone.number) return context.replyWarning(context.__('telephone.import.noNumber'));
 
 

@@ -91,7 +91,7 @@ class ImportSubcommand extends Command {
   }
 
   async execute(context) {
-    const oldSettings = await this.client.database.provider.db('homer').table('guild').get(context.message.guild.id).run();
+    const oldSettings = await this.client.database.provider.db('homer_bot').table('guild').get(context.message.guild.id).run();
     if (!oldSettings) return context.replyWarning(context.__('settings.import.noOldSettings'));
 
     context.settings.misc.locale = oldSettings.misc.locale;
