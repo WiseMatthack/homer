@@ -480,6 +480,7 @@
   "telephone.phonebook.alreadyDisabled": "You are already out of the phonebook.",
   "telephone.phonebook.disabled": "You will no longer appear on the phonebook.",
   "telephone.phonebook.enabled": "The message for your phonebook entry has been successfully updated!",
+  "telephone.import.noNumber": "You have no telephone subscription to import!",
   
   "timefor.title": "🕐 Current time for {{{ name }}}: {{{ time }}}",
   "timefor.noSettings": "No settings found for {{{ name }}}. To set your timezone, run `{{{ command }}}` in **Direct Messages**.",

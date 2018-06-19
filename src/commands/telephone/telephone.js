@@ -11,6 +11,7 @@ class TelephoneCommand extends Command {
         new TerminateSubcommand(client),
         new PhonebookSubcommand(client),
         new SwitchSubcommand(client),
+        new ImportSubcommand(client),
       ],
       category: 'telephone',
       dm: true,
@@ -239,6 +240,7 @@ class ImportSubcommand extends Command {
     super(client, {
       name: 'import',
       category: 'telephone',
+      userPermissions: ['MANAGE_GUILD'],
     });
   }
 
@@ -262,19 +264,20 @@ class ImportSubcommand extends Command {
       time: Date.now(),
     };
 
-    const terminateInformation = [
+    const setupInformation = [
       `${this.dot} ${context.__('telephone.embed.number')}: **${subscription.number}**`,
-      `${this.dot} ${context.__('telephone.embed.subscriber')}: ${subscriber || `*${context.__('global.unknown')}*`}`,
+      `${this.dot} ${context.__('telephone.embed.subscriber')}: **${context.message.author.username}**#${context.message.author.discriminator}`,
+      `${this.dot} ${context.__('telephone.embed.phonebook')}: ${subscription.phonebook ? `**${context.__('global.yes')}** (${subscription.phonebook})` : `**${context.__('global.no')}**`}`,
       `${this.dot} ${context.__('telephone.embed.date')}: **${context.formatDate(subscription.time)}**`,
       '',
-      `${this.dot} ${context.__('telephone.terminate.confirmation', { success: this.client.constants.emotes.success, error: this.client.constants.emotes.error })}`,
+      `${this.dot} ${context.__('telephone.setup.confirmation', { success: this.client.constants.emotes.success, error: this.client.constants.emotes.error })}`,
     ].join('\n');
 
     const embed = new RichEmbed()
-      .setDescription(terminateInformation);
+      .setDescription(setupInformation);
 
     const message = await context.reply(
-      context.__('telephone.terminate.title', { name: context.message.guild ? `**#${context.message.channel.name}**` : `**${context.__('global.dm')}**` }),
+      context.__('telephone.setup.title', { name: context.message.guild ? `**#${context.message.channel.name}**` : `**${context.__('global.dm')}**` }),
       { embed },
     );
 
@@ -289,12 +292,18 @@ class ImportSubcommand extends Command {
         const emoji = reactions.first().emoji.identifier;
 
         if (emoji === this.client.constants.emotes.successID) {
-          await this.client.database.deleteDocument('telephone', context.message.channel.id);
+          await this.client.database.insertDocument(
+            'telephone',
+            subscription,
+            {
+              conflict: 'update',
+            },
+          );
 
-          message.edit(`${this.client.constants.emotes.success} ${context.__('telephone.terminate.done')}`);
+          message.edit(`${this.client.constants.emotes.success} ${context.__('telephone.setup.done')}`);
           message.clearReactions();
         } else {
-          message.edit(`${this.client.constants.emotes.success} ${context.__('telephone.terminate.cancelled')}`);
+          message.edit(`${this.client.constants.emotes.success} ${context.__('telephone.setup.cancelled')}`);
           message.clearReactions();
         }
       });

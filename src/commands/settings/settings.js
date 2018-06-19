@@ -138,7 +138,6 @@ class ImportSubcommand extends Command {
         if (reactions.first().emoji.identifier === this.emotes[0]) {
           await context.saveSettings();
           message.edit(`${this.client.constants.emotes.success} ${context.__('settings.import.imported')}`);
-          this.client.database.provider.db('homer').table('guild').get(context.message.guild.id).delete().run();
           message.clearReactions();
         } else {
           message.edit(`${this.client.constants.emotes.success} ${context.__('settings.import.cancelled')}`);
