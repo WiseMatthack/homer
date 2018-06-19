@@ -1,0 +1,13 @@
+{
+  "lang.code": "fr",
+  "lang.name": "Français",
+  "lang.flag": ":flag_fr:",
+  "lang.authors": ["205427654042583040"],
+
+  "global.yes": "Oui",
+  "global.no": "Non",
+  "global.noReason": "Aucune raison",
+  "global.none": "Aucun(e)",
+  "global.noInformation": "Aucune information disponible",
+  "global.unknown": "Inconnu(e)"
+}

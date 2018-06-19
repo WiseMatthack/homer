@@ -1,0 +1,49 @@
+{
+  "api": {
+    "bingGeocode": "",
+    "cleverbotKey": "",
+    "cleverbotUser": "",
+    "darkSky": "",
+    "discordBans": "",
+    "googleCx": "",
+    "googleKey": "",
+    "youtube": ""
+  },
+  "botWhitelist": [],
+  "client": {
+    "messageCacheLifetime": 1,
+    "disableEveryone": false
+  },
+  "commands": {
+    "categories": []
+  },
+  "database": {
+    "host": "",
+    "port": 1,
+    "db": ""
+  },
+  "discord": {
+    "id": "",
+    "prefixes": [],
+    "token": ""
+  },
+  "localization": {
+    "directory": "",
+    "autoReload": false
+  },
+  "logChannel": "",
+  "misc": {
+    "ownerDm": "",
+    "supportInvite": ""
+  },
+  "owners": [],
+  "server": {
+    "domain": "",
+    "port": 1
+  },
+  "sharder": {
+    "totalShards": 0,
+    "delay": 1,
+    "respawn": false
+  }
+}
