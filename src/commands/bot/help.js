@@ -24,7 +24,7 @@ class HelpCommand extends Command {
         .filter(c => c.category === category)
         .sort((a, b) => a.name.localeCompare(b.name));
       commands.forEach((command) => {
-        categoryMessage.push(`\`${context.prefix || this.client.prefix}${command.name}${command.usage ? ` ${command.usage}` : ''}\` - ${this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${command.name}`) ? context.__(`helpUtil.${command.name}`) : context.__('helpUtil.noDescription')}`);
+        categoryMessage.push(`\`${this.client.prefix}${command.name}${command.usage ? ` ${command.usage}` : ''}\` - ${this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${command.name}`) ? context.__(`helpUtil.${command.name}`) : context.__('helpUtil.noDescription')}`);
       });
 
       helpMessage.push(

@@ -48,7 +48,7 @@ class Command {
         const helpMessage = [
           context.__('commandHandler.help.title', { command: parent.join(' ') }),
           '\n',
-          context.__('commandHandler.help.usage', { usage: `${context.prefix || this.client.prefix}${parent.join(' ')}${this.usage ? ` ${this.usage}` : ''}` }),
+          context.__('commandHandler.help.usage', { usage: `${this.client.prefix}${parent.join(' ')}${this.usage ? ` ${this.usage}` : ''}` }),
           '\n',
           context.__('commandHandler.help.aliases', { aliases: this.aliases.map(a => `\`${a}\``).join(' ') || none }),
           '\n',
@@ -67,7 +67,7 @@ class Command {
 
             helpMessage.push(
               '\n',
-              `\`${context.prefix || this.client.prefix}${parentClone.join(' ')}${subcommand.usage ? ` ${subcommand.usage}` : ''}\` - ${this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${parent.join('.')}`) ? context.__(`helpUtil.${parentClone.join('.')}`) : context.__('helpUtil.noDescription')}`,
+              `\`${this.client.prefix}${parentClone.join(' ')}${subcommand.usage ? ` ${subcommand.usage}` : ''}\` - ${this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${parent.join('.')}`) ? context.__(`helpUtil.${parentClone.join('.')}`) : context.__('helpUtil.noDescription')}`,
             );
           }
         }
