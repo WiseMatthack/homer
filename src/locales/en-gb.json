@@ -264,6 +264,19 @@
   "names.title": "Previous names for {{{ name }}}:",
   "names.noPreviousNames": "No previous names recorded for {{{ name }}}",
 
+  "phblacklist.title": "🏴 Blacklist for {{{ name }}}:",
+  "phblacklist.noEntry": "You have no blacklisted number yet.",
+  "phblacklist.number": "Number",
+  "phblacklist.date": "Date",
+  "phblacklist.add.noNumber": "You must provide a number to blacklist.",
+  "phblacklist.add.cannotAddThis": "You can't blacklist your own telephone number!",
+  "phblacklist.add.notFound": "No subscription found with number `{{{ number }}}`.",
+  "phblacklist.add.alreadyExist": "This channel has already been blacklisted with number **{{{ number }}}**.",
+  "phblacklist.add.added": "The channel linked to this subscription has been blacklisted!",
+  "phblacklist.remove.noNumber": "You must provide a number to remove from the blacklist.",
+  "phblacklist.remove.notFound": "No blacklist entry found with number `{{{ number }}}`.",
+  "phblacklist.remove.removed": "The channel linked to this subscription has been removed from the blacklist!",
+
   "phmessage.title": "📑 Telephone messages for {{{ name }}}:",
   "phmessage.embed.incoming": "Incoming-call message",
   "phmessage.embed.missed": "Missed-call message",
@@ -422,6 +435,7 @@
   "tag.owner.owner": "The tag \"{{{ name }}}\" belongs to {{{ author }}}.",
 
   "telephone.notAssigned": "The provided number is not assigned.",
+  "telephone.refusedConnection": "The connection with your correspondent has been refused. You may have been **blacklisted** or the telephone service is currently **under maintenance**.",
   "telephone.attachments": "🔗 **Attachments:**",
   "telephone.noCall": "Nobody is calling you.",
   "telephone.title": "📞 Subscription for {{{ name }}}:",

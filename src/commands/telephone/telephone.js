@@ -6,7 +6,12 @@ class TelephoneCommand extends Command {
     super(client, {
       name: 'telephone',
       aliases: ['phone'],
-      children: [new SubscribeSubcommand(client), new TerminateSubcommand(client), new PhonebookSubcommand(client)],
+      children: [
+        new SubscribeSubcommand(client),
+        new TerminateSubcommand(client),
+        new PhonebookSubcommand(client),
+        new SwitchSubcommand(client),
+      ],
       category: 'telephone',
       dm: true,
     });
@@ -203,6 +208,28 @@ class PhonebookSubcommand extends Command {
     } else {
       await this.client.database.updateDocument('telephone', context.message.channel.id, { phonebook: message });
       context.replySuccess(context.__('telephone.phonebook.enabled'));
+    }
+  }
+}
+
+class SwitchSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'switch',
+      category: 'telephone',
+      private: true,
+      dm: true,
+    });
+  }
+
+  async execute(context) {
+    const current = await this.client.database.getDocument('bot', 'settings').then(s => s.telephone);
+    if (current) {
+      await this.client.database.updateDocument('bot', 'settings', { telephone: false });
+      context.replySuccess('The telephone service has been successfully **disabled**!');
+    } else {
+      await this.client.database.updateDocument('bot', 'settings', { telephone: true });
+      context.replySuccess('The telephone service has been successfully **enabled**!');
     }
   }
 }

@@ -12,6 +12,7 @@ class CallCommand extends Command {
   }
 
   async execute(context) {
+    const status = await this.client.database.getDocument('bot', 'settings').then(s => s.telephone);
     const calls = await this.client.database.getDocuments('calls');
 
     const thisSubscription = await this.client.database.getDocument('telephone', context.message.channel.id);
@@ -28,6 +29,9 @@ class CallCommand extends Command {
 
     const toSubscription = await this.client.database.findDocuments('telephone', { number }).then(r => r[0]);
     if (!toSubscription) return context.replyWarning(context.__('telephone.notAssigned', { number }));
+    if (toSubscription.blacklist.find(b => b.channel === context.message.channel.id) || !status) {
+      return context.replyWarning(context.__('telephone.refusedConnection'));
+    }
 
     if (calls.find(c => c.sender.number === number || c.receiver.number === number)) {
       return context.replyWarning(context.__('call.receiverBusy'));
