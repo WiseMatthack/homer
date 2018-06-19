@@ -102,7 +102,7 @@ class WeatherCommand extends Command {
 
   getDirection(angle) {
     const arrayIndex = Number((angle / 22.5) + 0.5);
-    return Math.round(arrayIndex % 16) - 1;
+    return Math.round(arrayIndex % 15);
   }
 
   get franceDepartments() {
