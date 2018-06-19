@@ -37,8 +37,7 @@
   },
   "owners": [],
   "server": {
-    "domain": "",
-    "port": 1
+    "domain": ""
   },
   "sharder": {
     "totalShards": 0,

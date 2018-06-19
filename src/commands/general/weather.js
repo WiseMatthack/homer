@@ -56,7 +56,7 @@ class WeatherCommand extends Command {
     const embed = new RichEmbed()
       .setDescription(weatherInformation)
       .setFooter(`${context.__('weather.embed.footer.location')} Bing™ Maps • ${context.__('weather.embed.footer.weather')} DarkSky™`, 'https://darksky.net/images/darkskylogo.png')
-      .setThumbnail(`https://${this.client.config.server.domain}/images/services/weather_icons/${weatherData.currently.icon}.png`);
+      .setThumbnail(`https://${this.client.config.server.domain}/assets/weather/${weatherData.currently.icon}.png`);
 
     const region = [locationData.region, locationData.country]
       .filter(a => a)
