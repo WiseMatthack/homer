@@ -49,7 +49,7 @@ module.exports = [
   new Method(
     'creation',
     null,
-    (env, params) => deconstruct(params[0]).timestamp,
+    (env, params) => deconstruct(params[0]).timestamp.toString(),
   ),
 
   // userid
