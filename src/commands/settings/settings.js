@@ -16,6 +16,8 @@ class SettingsCommand extends Command {
     const embed = new RichEmbed()
       .setDescription([
         `${this.dot} ${context.__('settings.embed.locale')}: ${context.__('lang.flag')} **${context.__('lang.name')}** (\`${context.__('lang.code')}\`)`,
+        `${this.dot} ${context.__('settings.embed.welcome')}: ${(context.settings.welcome.message && context.settings.welcome.channel) ? `<#${context.settings.welcome.channel}>: ${context.settings.welcome.message}` : context.__('global.none')}`,
+        `${this.dot} ${context.__('settings.embed.leave')}: ${(context.settings.leave.message && context.settings.leave.channel) ? `<#${context.settings.leave.channel}>: ${context.settings.leave.message}` : context.__('global.none')}`,
         `${this.dot} ${context.__('settings.embed.timezone')}: **${context.settings.misc.timezone}**`,
         `${this.dot} ${context.__('settings.embed.dateFormat')}: **${context.settings.misc.dateFormat}**`,
         `${this.dot} ${context.__('settings.embed.timeFormat')}: **${context.settings.misc.timeFormat}**`,
