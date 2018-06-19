@@ -18,6 +18,10 @@ class Context {
   }
 
   saveSettings() {
+    if (Object.is(this.settings, this.message.guild ?
+      this.client.constants.defaultGuildSettings(this.message.guild.id) :
+      this.client.constants.defaultUserSettings(this.message.author.id))) return;
+
     return this.client.database.insertDocument('settings', this.settings, { conflict: 'update' });
   }
 
