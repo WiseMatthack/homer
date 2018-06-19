@@ -9,7 +9,6 @@ class Menu {
     }, options);
     this.menuMessage = null;
     this.currentPage = 0;
-    this.pause = false;
 
     this._patch(data);
   }
@@ -18,7 +17,7 @@ class Menu {
     return [
       '⏪',
       '◀',
-      '⏯',
+      '⏹',
       '▶',
       '⏩',
     ];
@@ -40,7 +39,8 @@ class Menu {
   send(content, options = {}) {
     const embed = new RichEmbed()
       .setTitle(this.context.__('global.page', { num: (this.currentPage + 1) }))
-      .setDescription(this.pages[this.currentPage]);
+      .setDescription(this.pages[this.currentPage])
+      .setFooter(this.context.__('global.page', { num: `${this.currentPage + 1}/${this.pages.length}` }));
 
     options.embed = embed;
     return this.context.message.channel.send(content, options).then(async (m) => {
@@ -55,27 +55,28 @@ class Menu {
       );
 
       collector.on('collect', (reaction) => {
-        if (reaction.emoji.name === '⏯') {
-          this.pause = this.pause ? false : true;
+        if (reaction.emoji.name === '⏹') {
+          return collector.stop();
         }
 
-        if (!this.pause) {
-          let tmpNum = this.currentPage;
-
-          if (reaction.emoji.name === '⏪') {
-            this.currentPage = 0;
-          } else if (reaction.emoji.name === '◀') {
-            this.currentPage -= 1;
-          } else if (reaction.emoji.name === '▶') {
-            this.currentPage += 1;
-          } else if (reaction.emoji.name === '⏩') {
-            this.currentPage = (this.pages.length - 1);
-          }
-
-          if (this.currentPage < 0) this.currentPage = (this.pages.length - 1);
-          if (this.currentPage > (this.pages.length - 1)) this.currentPage = 0;
-          if (tmpNum !== this.currentPage) this.refreshMenu();
+        let tmpNum = this.currentPage;
+        if (reaction.emoji.name === '⏪') {
+          this.currentPage = 0;
+        } else if (reaction.emoji.name === '◀') {
+          this.currentPage -= 1;
+        } else if (reaction.emoji.name === '▶') {
+          this.currentPage += 1;
+        } else if (reaction.emoji.name === '⏩') {
+          this.currentPage = (this.pages.length - 1);
         }
+
+        if (this.currentPage < 0) this.currentPage = (this.pages.length - 1);
+        if (this.currentPage > (this.pages.length - 1)) this.currentPage = 0;
+        if (tmpNum !== this.currentPage) this.refreshMenu();
+      });
+
+      collector.on('end', () => {
+        this.menuMessage.delete();
       });
     });
   }
@@ -83,7 +84,8 @@ class Menu {
   refreshMenu() {
     const embed = new RichEmbed()
       .setTitle(this.context.__('global.page', { num: (this.currentPage + 1) }))
-      .setDescription(this.pages[this.currentPage]);
+      .setDescription(this.pages[this.currentPage])
+      .setFooter(this.context.__('global.page', { num: `${this.currentPage + 1}/${this.pages.length}` }));
 
     this.menuMessage.edit(this.menuMessage.content, { embed }).then((m) => {
       this.menuMessage = m;

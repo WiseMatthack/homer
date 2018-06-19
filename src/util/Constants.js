@@ -91,6 +91,53 @@ exports.categoryEmotes = {
   telephone: '📞',
 };
 
+exports.profileFields= [
+  {
+    id: 'about',
+    name: 'About me',
+  },
+  {
+    id: 'email',
+    name: 'E-mail',
+  },
+  {
+    id: 'instagram',
+    name: 'Instagram',
+  },
+  {
+    id: 'minecraft',
+    name: 'Minecraft',
+  },
+  {
+    id: 'nnid',
+    name: 'Nintendo Network ID',
+  },
+  {
+    id: 'skype',
+    name: 'Skype',
+  },
+  {
+    id: 'snapchat',
+    name: 'Snapchat',
+  },
+  {
+    id: 'steam',
+    name: 'Steam',
+  },
+  {
+    id: 'twitch',
+    name: 'Twitch',
+  },
+  {
+    id: 'twitter',
+    name: 'Twitter',
+  },
+  {
+    id: 'youtube',
+    name: 'YouTube',
+  },
+];
+
 exports.donationLink = 'https://paypal.me/ibotandidroid';
 exports.githubLink = 'https://github.com/iDroid27210/homer';
 exports.logChannel = '458334746338918403';
