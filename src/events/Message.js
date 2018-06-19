@@ -35,7 +35,7 @@ class MessageEvent extends Event {
     // AFK notification
     const expression = /<@!?(\d{17,20})>/g;
     const mentions = message.content.match(expression);
-    if (message.guild && mentions) {
+    if (message.guild && mentions && !message.author.bot) {
       const guildSettings = await this.client.database.getDocument('settings', message.guild.id) || this.client.constants.defaultGuildSettings(message.guild.id);
       const msg = [];
       for (const mention of mentions) {
