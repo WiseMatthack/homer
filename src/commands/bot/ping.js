@@ -11,7 +11,6 @@ class PingCommand extends Command {
   }
 
   async execute(context) {
-    const time = Date.now();
     const sentMessage = await context.reply(context.__('ping.ping'));
     sentMessage.edit(context.__('ping.pong', {
       api: Math.floor(this.client.ping),
