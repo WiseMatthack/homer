@@ -5,6 +5,7 @@ class CallsCommand extends Command {
   constructor(client) {
     super(client, {
       name: 'calls',
+      category: 'owner',
       private: true,
       dm: true,
     });
