@@ -69,7 +69,7 @@ class UserCommand extends Command {
       const m1 = this.client.users.get(orderedMembers[index]);
       console.log(`Début: ${m1}`)
       joinOrder.push(m1.id === member.id ? `**${m1.username}**` : m1.username);
-      for (let i = (index + 2); i < (index + 6); i += 1) {
+      for (let i = (index + 1); i < (index + 6); i += 1) {
         if (i >= orderedMembers.length) break;
         const m2 = this.client.users.get(orderedMembers[i]);
         console.log(`${i}: ${m2}`)
