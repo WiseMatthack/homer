@@ -61,20 +61,22 @@ class UserCommand extends Command {
     if (context.message.guild) {
       const orderedMembers = context.message.guild.members
         .sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)
-        .array();
-      let index = orderedMembers.findIndex(m => m.id === member.id) - 3;
+        .keyArray();
+      let index = orderedMembers.findIndex(m => m === member.id) - 3;
       if (index < 0) index = 0;
 
       const joinOrder = [];
-      joinOrder.push(orderedMembers[index].id === member.id ? `**${orderedMembers[index].user.username}**` : orderedMembers[index].user.username);
+      const m1 = this.client.users.get(orderedMembers[index]);
+      joinOrder.push(m1.id === member.id ? `**${m1.username}**` : m1.username);
       for (let i = (index + 2); i < (index + 6); i += 1) {
         if (i >= orderedMembers.length) break;
-        joinOrder.push(orderedMembers[i].id === member.id ? `**${orderedMembers[i].user.username}**` : orderedMembers[i].user.username);
+        const m2 = this.client.users.get(orderedMembers[i]);
+        joinOrder.push(m2.id === member.id ? `**${m2.username}**` : m2.username);
       }
 
       userInformation.push(
         `${this.dot} ${context.__('user.embed.join')}: **${context.formatDate(member.joinedTimestamp)}**`,
-        `${this.dot} ${context.__('user.embed.joinOrder')} (\`#${orderedMembers.findIndex(m => m.id === member.id) + 1}\`): ${joinOrder.join(' > ')}`,
+        `${this.dot} ${context.__('user.embed.joinOrder')} (\`#${orderedMembers.findIndex(m => m === member.id) + 1}\`): ${joinOrder.join(' > ')}`,
       );
     }
 
