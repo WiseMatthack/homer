@@ -159,7 +159,7 @@ class Command {
       this.client.database.insertDocument('commandStats', {
         author: context.message.author.id,
         guild: context.message.guild ? context.message.guild.id : 'dm',
-        command: this.name,
+        command: parent.join(' '),
         time: Date.now(),
       });
     }
