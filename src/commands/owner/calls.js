@@ -17,7 +17,7 @@ class CallsCommand extends Command {
 
     const menu = new Menu(
       context,
-      calls.map(call => `${this.dot} Sender: **${call.sender.number}** - Receiver: **${call.receiver.number}** - Created ${this.client.time.timeSince(call.time, 'en-gb', false, true)}`),
+      calls.map(call => `${this.dot} Sender: **${call.sender.number}** - Receiver: **${call.receiver.number}** - Created ${this.client.time.timeSince(call.time, 'en-gb', true, true)}`),
     );
 
     menu.send('📞 Ongoing telephone calls:');
