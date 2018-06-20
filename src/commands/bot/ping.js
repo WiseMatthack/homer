@@ -15,7 +15,7 @@ class PingCommand extends Command {
     const sentMessage = await context.reply(context.__('ping.ping'));
     sentMessage.edit(context.__('ping.pong', {
       api: Math.floor(this.client.ping),
-      heartbeat: Math.abs(sentMessage.createdTimestamp - time),
+      heartbeat: (sentMessage.createdTimestamp - context.message.createdTimestamp),
     }));
   }
 }
