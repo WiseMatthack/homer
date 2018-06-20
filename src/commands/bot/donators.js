@@ -14,6 +14,7 @@ class DonatorsCommand extends Command {
 
   async execute(context) {
     const donatorsTable = await this.client.database.getDocuments('donators');
+    const perks = await this.client.database.getDocument('bot', 'settings').then(s => s.perks || []);
     const donatorsList = [];
 
     for (const donator of donatorsTable) {
@@ -23,7 +24,7 @@ class DonatorsCommand extends Command {
           id: context.__('global.unknown'),
         }));
       
-      donatorsList.push(`**${user.username}**#${user.discriminator}: €${donator.amount}`);
+      donatorsList.push(`**${user.username}**#${user.discriminator}: ${donator.amount}`);
     }
 
     const embed = new RichEmbed()
@@ -38,7 +39,7 @@ class DonatorsCommand extends Command {
       )
       .addField(
         context.__('donators.perksTitle'),
-        context.__('donators.perksContent'),
+        perks.map(perk => `**€${perk.amount}**: ${perk.text}`).join('\n') || context.__('global.none'),
         true,
       );
 
@@ -61,7 +62,7 @@ class AddSubcommand extends Command {
 
   async execute(context) {
     const userID = context.args[0];
-    const amount = context.args[1];
+    const amount = context.args.slice(1).join(' ');
     if (!userID) return context.replyError('You must provide the ID of a user to add!');
     if (!amount) return context.replyError('You must provide the amount of the donation!');
 
