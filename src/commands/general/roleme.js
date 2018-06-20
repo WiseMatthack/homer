@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const { RichEmbed } = require('discord.js');
 
 class RolemeCommand extends Command {
   constructor(client) {
@@ -58,14 +59,17 @@ class ListSubcommand extends Command {
           context.saveSettings();
         }
 
-        return `- ${role ? `**${role.name}**` : `*${context.__('global.none')}*`} (ID:${roleID})`;
+        return `${this.dot} ${role ? `**${role.name}**` : `*${context.__('global.unknown')}*`} (ID:${roleID})`;
       })
       .join(', ');
 
-    context.replySuccess([
+    const embed = new RichEmbed()
+      .setDescription(roleList);
+
+    context.replySuccess(
       context.__('roleme.list.title', { name: context.message.guild.name }),
-      roleList,
-    ].join('\n'));
+      { embed },
+    );
   }
 }
 
