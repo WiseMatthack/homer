@@ -70,7 +70,7 @@ class CallCommand extends Command {
       this.client.updateMessage(
         callObject.sender.id,
         callObject.senderMessage,
-        `${context.__('call.senderMissed', { number })}${callObject.receiver.message.missed ? `\n${callObject.sender.message.missed}` : ''}`,
+        `${context.__('call.senderMissed', { number })}${callObject.receiver.message.missed ? `\n${callObject.receiver.message.missed}` : ''}`,
       );
 
       this.client.updateMessage(
