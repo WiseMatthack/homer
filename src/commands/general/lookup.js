@@ -111,7 +111,7 @@ class LookupCommand extends Command {
     if (done) return;
 
     // Invite
-    await this.client.fetchInvite(search)
+    await this.client.rest.makeRequest('get', `/invites/${search}?with_counts=true`, true)
       .then((invite) => {
         done = true;
 
@@ -120,11 +120,10 @@ class LookupCommand extends Command {
           context.__('global.none');
 
         const inviteInformation = [
-          `${this.dot} ${context.__('lookup.invite.embed.server')}: ${invite.guild ? `**${invite.guild.name}** (ID:${invite.guild.id})` : context.__('global.none')}`,
+          `${this.dot} ${context.__('lookup.invite.embed.server')}: ${invite.guild ? `**${invite.guild.name}** (ID:${invite.guild.id})` : context.__('global.none')}${invite.guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
           `${this.dot} ${context.__('lookup.invite.embed.inviter')}: ${inviter}`,
           `${this.dot} ${context.__('lookup.invite.embed.channel')}: **${invite.channel.name ? `#${invite.channel.name}` : context.__('global.groupDm')}** (ID:${invite.channel.id})`,
-          `${this.dot} ${context.__('lookup.invite.embed.members')}: **${invite.memberCount}**${invite.presenceCount ? ` (${this.client.constants.status.online} **${invite.presenceCount}**)` : ''}`,
-          `${this.dot} ${context.__('lookup.invite.embed.channels')}: **${invite.textChannelCount || 0}** ${context.__('channel.type.text')} - **${invite.voiceChannelCount || 0}** ${context.__('channel.type.voice')}`,
+          `${this.dot} ${context.__('lookup.invite.embed.members')}: **${invite.approximate_member_count}**${invite.approximate_presence_count ? ` (${this.client.constants.status.online} **${invite.approximate_presence_count}**)` : ''}`,
           `${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`,
         ].join('\n');
 
