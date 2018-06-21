@@ -207,7 +207,7 @@ class WeatherCommand extends Command {
       'Ardèche': '07',
       'Ardennes': '08',
       'Ariège': '09',
-      'Corse du Sud': '2A',
+      'Corse-du-Sud': '2A',
       'Haute-Corse': '2B',
     });
   }
