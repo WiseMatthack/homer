@@ -67,11 +67,16 @@ class CallCommand extends Command {
       if (!callObject || callObject.state !== 0) return;
 
       this.client.database.deleteDocument('calls', callObject.id);
-      this.client.updateMessage(callObject.sender.id, callObject.senderMessage, context.__('call.senderMissed', { number }));
+      this.client.updateMessage(
+        callObject.sender.id,
+        callObject.senderMessage,
+        `${context.__('call.senderMissed', { number })}${callObject.receiver.message.missed ? `\n${callObject.sender.message.missed}` : ''}`,
+      );
+
       this.client.updateMessage(
         callObject.receiver.id,
         callObject.receiverMessage,
-        `${this.client.__(toLanguage, 'call.receiverMissed', { number: callObject.sender.number })}${callObject.sender.message.missed ? `\n${callObject.sender.message.missed}` : ''}`,
+        `${this.client.__(toLanguage, 'call.receiverMissed', { number: callObject.sender.number })}`,
       );
     }, 30000);
   }
