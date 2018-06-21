@@ -21,7 +21,7 @@ class ServerCommand extends Command {
     ].join(', ');
 
     const serverInformation = [
-      `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**`,
+      `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**${guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
       `${this.dot} ${context.__('server.embed.owner')}: **${guildOwner.username}**#${guildOwner.discriminator} (ID:${guild.ownerID})`,
       `${this.dot} ${context.__('server.embed.region')}: ${this.client.constants.regionFlags[guild.region]} **${context.__(`server.region.${guild.region}`)}**`,
       `${this.dot} ${context.__('server.embed.members')}: **${guild.memberCount}** (${this.client.constants.emotes.botIcon} **${guild.members.filter(m => m.user.bot).size}** - ${this.client.constants.status.online} **${guild.members.filter(m => m.user.presence.status === 'online').size}**)`,
