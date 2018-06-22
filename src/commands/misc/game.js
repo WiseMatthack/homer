@@ -89,7 +89,7 @@ class GameCommand extends Command {
         '',
         `${this.dot} **[${context.__('game.embed.seeIgdb')}](${response.url})**`,
       ].join('\n'))
-      .setThumbnail(`https:${response.cover.url}`);
+      .setThumbnail(response.cover ? `https:${response.cover.url}` : undefined);
 
     message.edit(
       context.__('game.title', { name: `**${response.name}**` }),
