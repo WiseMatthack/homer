@@ -60,10 +60,22 @@ class GameCommand extends Command {
       developers.push(`**[${r.name}](${r.url})**`);
     }
 
+    const platforms = [];
+    for (const platform of response.platforms || []) {
+      const r = await snekfetch
+        .get(`${this.baseURL}/platforms/${platform}`)
+        .set('Accept', 'application/json')
+        .set('user-key', this.client.config.api.igdb)
+        .then(res => res.body[0]);
+
+      platforms.push(`**[${r.name}](${r.url})**`);
+    }
+
     const embed = new RichEmbed()
       .setDescription([
         `${this.dot} ${context.__('game.embed.publishers')}: ${publishers.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.developers')}: ${developers.join(', ') || context.__('global.none')}`,
+        `${this.dot} ${context.__('game.embed.platforms')}: ${platforms.join(', ') || context.__('global.none')}`,
         '',
         `**${response.summary}**`,
         '',
