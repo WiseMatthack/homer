@@ -21,6 +21,7 @@ class GameCommand extends Command {
     const search = context.args.join(' ');
     if (!search) return context.replyError(context.__('game.noSearch'));
     if (search.length > 64) return context.replyWarning(context.__('game.searchTooLong'));
+    const message = await context.reply(context.__('global.loading'));
 
     // Auto-complete search
     const searchQuery = await snekfetch.get(`https://www.igdb.com/search_autocomplete_all?q=${encodeURIComponent(search)}`)
@@ -28,7 +29,7 @@ class GameCommand extends Command {
       .catch(() => null);
 
     if (!searchQuery.game_suggest) {
-      return context.replyWarning(context.__('game.noResult', { search }));
+      return message.edit(`${this.client.constants.emotes.warning} ${context.__('game.noResult', { search })}`);
     }
 
     const query = `/games/${searchQuery.game_suggest[0].id}`;
@@ -90,7 +91,7 @@ class GameCommand extends Command {
       ].join('\n'))
       .setThumbnail(`https:${response.cover.url}`);
 
-    context.reply(
+    message.edit(
       context.__('game.title', { name: `**${response.name}**` }),
       { embed },
     );
