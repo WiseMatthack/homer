@@ -125,6 +125,7 @@
   "game.embed.publishers": "Publishers",
   "game.embed.developers": "Developers",
   "game.embed.platforms": "Platforms",
+  "game.embed.release": "Release date",
   "game.embed.seeIgdb": "More on IGDB",
   "game.noSearch": "You must provide a game to search.",
   "game.searchTooLong": "The search length must be fewer than 64 characters.",
