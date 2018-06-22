@@ -111,7 +111,7 @@ class LookupCommand extends Command {
     if (done) return;
 
     // Invite
-    await this.client.rest.makeRequest('get', `/invites/${search}?with_counts=true`, true)
+    await this.client.rest.makeRequest('get', `/invites/${this.client.resolver.resolveInviteCode(search)}?with_counts=true`, true)
       .then((invite) => {
         done = true;
 
@@ -128,8 +128,9 @@ class LookupCommand extends Command {
         ].join('\n');
 
         embed.setDescription(inviteInformation)
-        if (invite.guild && invite.guild.icon) {
-          embed.setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
+        if (invite.guild) {
+          if (invite.guild.icon) embed.setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
+          if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png`);
         }
 
         context.reply(
