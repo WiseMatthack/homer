@@ -35,7 +35,7 @@ class GameCommand extends Command {
       .get(`${this.baseURL}${query}`)
       .set('Accept', 'application/json')
       .set('user-key', this.client.config.api.igdb)
-      .then(res => res.body)
+      .then(res => res.body[0])
       .catch(() => null);
 
     const publishers = [];
