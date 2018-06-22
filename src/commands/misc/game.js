@@ -84,11 +84,9 @@ class GameCommand extends Command {
         `${this.dot} ${context.__('game.embed.developers')}: ${developers.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.platforms')}: ${platforms.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.release')}: **${release}**`,
-        '',
-        response.summary || context.__('game.embed.noDesc'),
-        '',
         `${this.dot} **[${context.__('game.embed.seeIgdb')}](${response.url})**`,
       ].join('\n'))
+      .addField(context.__('game.embed.description'), response.summary ? response.summary.substring(0, 1024) : context.__('game.embed.noDesc'))
       .setThumbnail(response.cover ? `https:${response.cover.url}` : undefined);
 
     message.edit(
