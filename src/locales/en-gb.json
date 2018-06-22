@@ -127,6 +127,7 @@
   "game.embed.platforms": "Platforms",
   "game.embed.release": "Release date",
   "game.embed.seeIgdb": "More on IGDB",
+  "game.embed.noDesc": "No description available",
   "game.noSearch": "You must provide a game to search.",
   "game.searchTooLong": "The search length must be fewer than 64 characters.",
   "game.noResult": "No game found matching `{{{ search }}}`.",

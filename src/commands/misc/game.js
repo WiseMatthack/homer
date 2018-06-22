@@ -84,7 +84,7 @@ class GameCommand extends Command {
         `${this.dot} ${context.__('game.embed.platforms')}: ${platforms.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.release')}: **${release}**`,
         '',
-        `**${response.summary}**`,
+        response.summary || context.__('game.embed.noDesc'),
         '',
         `${this.dot} **[${context.__('game.embed.seeIgdb')}](${response.url})**`,
       ].join('\n'))
