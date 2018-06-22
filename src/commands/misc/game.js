@@ -21,7 +21,7 @@ class GameCommand extends Command {
     const search = context.args.join(' ');
     if (!search) return context.replyError(context.__('game.noSearch'));
     if (search.length > 64) return context.replyWarning(context.__('game.searchTooLong'));
-    const message = await context.reply(context.__('global.loading'));
+    const message = await context.replyLoading(context.__('global.loading'));
 
     // Auto-complete search
     const searchQuery = await snekfetch.get(`https://www.igdb.com/search_autocomplete_all?q=${encodeURIComponent(search)}`)
