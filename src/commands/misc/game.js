@@ -1,6 +1,7 @@
 const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
+const mtz = require('moment-timezone');
 
 class GameCommand extends Command {
   constructor(client) {
@@ -71,11 +72,17 @@ class GameCommand extends Command {
       platforms.push(`**[${r.name}](${r.url})**`);
     }
 
+    const release = mtz(response.first_release_date)
+      .tz(context.settings.misc.timezone)
+      .locale(context.settings.misc.locale)
+      .format(context.settings.misc.dateFormat);
+
     const embed = new RichEmbed()
       .setDescription([
         `${this.dot} ${context.__('game.embed.publishers')}: ${publishers.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.developers')}: ${developers.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.platforms')}: ${platforms.join(', ') || context.__('global.none')}`,
+        `${this.dot} ${context.__('game.embed.release')}: **${release}**`,
         '',
         `**${response.summary}**`,
         '',
