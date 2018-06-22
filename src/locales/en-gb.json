@@ -121,6 +121,14 @@
   "finderUtil.findEmojis.zeroResult": "No emotes found matching `{{{ search }}}`",
   "finderUtil.formatEmojis.title": "**{{{ count }}}** emotes found:",
 
+  "game.title": "🎮 Information about {{{ name }}}:",
+  "game.embed.publishers": "Publishers",
+  "game.embed.developers": "Developers",
+  "game.embed.seeIgdb": "More on IGDB",
+  "game.noSearch": "You must provide a game to search.",
+  "game.searchTooLong": "The search length must be fewer than 64 characters.",
+  "game.noResult": "No game found matching `{{{ search }}}`.",
+
   "google.result": "{{{ mention }}}, here is your result: {{{ link }}}",
   "google.error.noResult": "No result found for the given query",
   "google.error.unknown": "An unknown error occured",
@@ -157,6 +165,7 @@
   "helpUtil.format": "Manage the date and time formats",
   "helpUtil.format.date": "Set the date format",
   "helpUtil.format.time": "Set the time format",
+  "helpUtil.game": "Get information about a game (IGDB)",
   "helpUtil.google": "Search for content on Google",
   "helpUtil.hangup": "Hangup an ongoing call",
   "helpUtil.help": "Displays the help for the bot",
