@@ -130,7 +130,7 @@ class LookupCommand extends Command {
         embed.setDescription(inviteInformation)
         if (invite.guild) {
           if (invite.guild.icon) embed.setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
-          if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png`);
+          if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512`);
         }
 
         context.reply(
