@@ -39,23 +39,23 @@ class GameCommand extends Command {
       .catch(() => null);
 
     const publishers = [];
-    for (const publisher of response.publishers) {
+    for (const publisher of response.publishers || []) {
       const r = await snekfetch
         .get(`${this.baseURL}/companies/${publisher}`)
         .set('Accept', 'application/json')
         .set('user-key', this.client.config.api.igdb)
-        .then(res => res.body);
+        .then(res => res.body[0]);
 
       publishers.push(`**[${r.name}](${r.url})**`);
     }
 
     const developers = [];
-    for (const developer of response.developers) {
+    for (const developer of response.developers || []) {
       const r = await snekfetch
         .get(`${this.baseURL}/companies/${developer}`)
         .set('Accept', 'application/json')
         .set('user-key', this.client.config.api.igdb)
-        .then(res => res.body);
+        .then(res => res.body[0]);
 
       developers.push(`**[${r.name}](${r.url})**`);
     }
