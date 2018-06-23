@@ -32,6 +32,7 @@ class UserCommand extends Command {
     }
 
     const badges = [];
+    if (context.message.guild && context.message.guild.ownerID === user.id) badges.push(this.client.constants.badges.owner);
     if (this.client.config.owners.includes(user.id)) badges.push(this.client.constants.badges.botDev);
     if (user.avatar && user.avatar.startsWith('a_')) badges.push(this.client.constants.badges.nitro);
     await this.client.database.getDocument('donators', user.id).then(a => a ? badges.push(this.client.constants.badges.donator) : undefined);

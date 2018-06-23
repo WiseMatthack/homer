@@ -53,6 +53,7 @@ exports.badges = {
   donator: '<:donator:458192052866383873>',
   nitro: '<:nitro:452417495341727763>',
   botDev: '<:botDev:458194202908426262>',
+  owner: '<:ownerCrown:460019597027049472>',
 };
 
 exports.status = {
