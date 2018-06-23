@@ -48,7 +48,7 @@ class GameCommand extends Command {
         .set('user-key', this.client.config.api.igdb)
         .then(res => res.body[0]);
 
-      publishers.push(`**[${r.name}](${r.url})**`);
+      publishers.push(`**${r.name}**`);
     }
 
     const developers = [];
@@ -59,7 +59,7 @@ class GameCommand extends Command {
         .set('user-key', this.client.config.api.igdb)
         .then(res => res.body[0]);
 
-      developers.push(`**[${r.name}](${r.url})**`);
+      developers.push(`**${r.name}**`);
     }
 
     const platforms = [];
@@ -70,7 +70,7 @@ class GameCommand extends Command {
         .set('user-key', this.client.config.api.igdb)
         .then(res => res.body[0]);
 
-      platforms.push(`**[${r.name}](${r.url})**`);
+      platforms.push(`**${r.name}**`);
     }
 
     const release = mtz(response.first_release_date)
@@ -84,7 +84,6 @@ class GameCommand extends Command {
         `${this.dot} ${context.__('game.embed.developers')}: ${developers.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.platforms')}: ${platforms.join(', ') || context.__('global.none')}`,
         `${this.dot} ${context.__('game.embed.release')}: **${release}**`,
-        `${this.dot} **[${context.__('game.embed.seeIgdb')}](${response.url})**`,
       ].join('\n'))
       .addField(context.__('game.embed.description'), response.summary ? response.summary.substring(0, 1024) : context.__('game.embed.noDesc'))
       .setThumbnail(response.cover ? `https:${response.cover.url}` : undefined);
