@@ -77,6 +77,7 @@ class Menu {
 
       collector.on('end', () => {
         this.menuMessage.delete();
+        this.context.message.delete();
       });
     });
   }
