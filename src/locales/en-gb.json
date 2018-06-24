@@ -302,8 +302,8 @@
   "phmessage.incoming.updated": "The incoming-call message has been updated successfully!",
   "phmessage.missed.updated": "The missed-call message has been updated successfully!",
 
-  "phonebook.title": "🔖 Welcome to the Homer phonebook:",
-  "phonebook.notFound": "No phonebook entry found matching the given criterias.",
+  "phonebook.title": "🔖 Homer telephone book:",
+  "phonebook.notFound": "The provided telephone number is either unassigned or we have committed to not provide information on it.",
 
   "pickup.sender": "📞 They picked up the phone. Say hello!",
   "pickup.receiver": "📞 You picked up the phone. Say hello!",
