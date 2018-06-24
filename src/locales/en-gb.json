@@ -437,11 +437,6 @@
   "settings.reset.awaitReaction": "All your settings will be lost! Are you sure?",
   "settings.reset.deleted": "The settings have been restored to the defaults",
   "settings.reset.cancelled": "The settings have not been restored to the defaults",
-  "settings.import.title": "🔧 To import these settings (from the stable version) on {{{ name }}}, react with the success emote:",
-  "settings.import.noOldSettings": "You have no settings to import.",
-  "settings.import.imported": "Settings imported successfully!",
-  "settings.import.cancelled": "Settings importation cancelled.",
-  "settings.import.prefixes": "Prefixes",
 
   "stats.title": "📊 Statistics about **{{{ name }}}**:",
   "stats.embed.shards": "Shards",
@@ -494,7 +489,6 @@
   "telephone.phonebook.alreadyDisabled": "You are already out of the phonebook.",
   "telephone.phonebook.disabled": "You will no longer appear on the phonebook.",
   "telephone.phonebook.enabled": "The message for your phonebook entry has been successfully updated!",
-  "telephone.import.noNumber": "You have no telephone subscription to import!",
   
   "timefor.title": "🕐 Current time for {{{ name }}}: {{{ time }}}",
   "timefor.noSettings": "No settings found for {{{ name }}}. To set your timezone, run `{{{ command }}}` in **Direct Messages**.",
