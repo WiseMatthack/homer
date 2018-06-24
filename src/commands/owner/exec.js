@@ -17,7 +17,7 @@ class ExecCommand extends Command {
     const code = context.args.join(' ');
     if (!code) return context.replyError('You must provide a code to execute.');
 
-    exec(code, (error, stdout, stderr) => {
+    exec(code, async (error, stdout, stderr) => {
       if (error) return context.replyError(`An error occured during execution!\n\`\`\`js\n${error}\`\`\``);
 
       let message = '';
