@@ -464,6 +464,7 @@
   "tag.delete.cantInteract": "You can't delete the tag \"{{{ name }}}\"",
   "tag.delete.deleted": "Tag \"{{{ name }}}\" deleted successfully!",
   "tag.owner.owner": "The tag \"{{{ name }}}\" belongs to {{{ author }}}.",
+  "tag.exec.noContent": "You must provide a content to execute (allows Lisa code).",
 
   "telephone.notAssigned": "The provided number is not assigned.",
   "telephone.refusedConnection": "The connection with your correspondent has been refused. You may have been **blacklisted** or the telephone service is currently **under maintenance**.",
