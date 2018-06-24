@@ -17,10 +17,11 @@ class ExecCommand extends Command {
     if (!code) return context.replyError('You must provide a code to execute.');
 
     exec(code, (error, stdout, stderr) => {
+      if (error) return context.replyError(`An error occured during execution!\n\`\`\`js\n${error}\`\`\``);
+
       let message = '';
-      if (error) message += error;
-      if (stdout) message += stdout;
       if (stderr) message += stderr;
+      if (stdout) message += stdout;
       context.reply(message, { code: true });
     });
   }
