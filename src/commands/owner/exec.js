@@ -24,7 +24,7 @@ class ExecCommand extends Command {
       if (stderr) message += stderr;
       if (stdout) message += stdout;
 
-      if (message.length > 1950) {
+      if (message.length <= 1950) {
         context.reply(message, { code: true });
       } else {
         const data = await snekfetch
