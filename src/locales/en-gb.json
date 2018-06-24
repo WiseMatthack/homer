@@ -221,6 +221,7 @@
   "helpUtil.telephone": "Manage your telephone subscription",
   "helpUtil.telephone.subscribe": "Subscribe to the telephone",
   "helpUtil.telephone.terminate": "Terminate your telephone subscription",
+  "helpUtil.telephone.phonebook": "Set your phonebook's description (or \"off\" to not appear on it)",
   "helpUtil.timefor": "Get current time for a user",
   "helpUtil.timezone": "Set the server timezone",
   "helpUtil.timezone.search": "Search for timezones",

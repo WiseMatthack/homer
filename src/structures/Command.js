@@ -61,7 +61,7 @@ class Command {
         if (this.children.length > 0 && this.children.filter(c => !c.hidden).length > 0) {
           helpMessage.push('\n', '\n', context.__('commandHandler.help.subcommands'));
 
-          for (const subcommand of this.children) {
+          for (const subcommand of this.children.filter(c => !c.hidden)) {
             const parentClone = Array.from(parent);
             parentClone.push(subcommand.name);
 
