@@ -10,7 +10,7 @@ class DisconnectEvent extends Event {
     this.client.ready = false;
 
     // Sending message in logChannel
-    this.client.sendMessage(this.client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${this.client.shard.id}** has become **OFFLINE**.`);
+    this.client.sendMessage(this.client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${this.client.shard.id}** is now **OFFLINE**.`);
   }
 }
 
