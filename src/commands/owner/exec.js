@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const snekfetch = require('snekfetch');
 const { exec } = require('child_process');
 
 class ExecCommand extends Command {
@@ -22,7 +23,19 @@ class ExecCommand extends Command {
       let message = '';
       if (stderr) message += stderr;
       if (stdout) message += stdout;
-      context.reply(message, { code: true });
+
+      if (message.length > 1950) {
+        context.reply(message, { code: true });
+      } else {
+        const data = await snekfetch
+          .post('https://hastebin.com/documents')
+          .set('Content-Type', 'application/json')
+          .send(message)
+          .then(res => res.body)
+          .catch(() => ({}));
+
+        context.replyWarning(`Output too long! Uploaded on Hastebin: <https://hastebin.com/${data.key}>`);
+      }
     });
   }
 }
