@@ -29,7 +29,8 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      });
+      })
+      .catch(r => console.error(r.body));
 
     snekfetch
       .post(`https://discordbots.org/api/bots/${this.client.user.id}/stats`)
@@ -39,7 +40,8 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      });
+      })
+      .catch(r => console.error(r.body));
   }
 }
 
