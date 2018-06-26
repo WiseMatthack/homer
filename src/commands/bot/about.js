@@ -21,8 +21,8 @@ class AboutCommand extends Command {
       context.__('about.embed.text'),
       '',
       `${this.dot} ${context.__('about.embed.owners')}: ${owners.join(', ')}`,
-      `${this.dot} ${context.__('about.embed.versions')}: **[${this.client.user.username}](https://homer.idroid.me) 1.0.0** / **[Node.js](https://nodejs.org) ${process.version}** / **[discord.js](https://discord.js.org) v${version}**`,
-      `${this.dot} ${context.__('about.embed.links')}: **[GitHub](${this.client.constants.githubLink})** / **[Discord Bot List](https://discordbots.org/bot/${this.client.user.id})**`,
+      `${this.dot} ${context.__('about.embed.versions')}: **[Node.js](https://nodejs.org) ${process.version}** / **[discord.js](https://discord.js.org) v${version}**`,
+      `${this.dot} ${context.__('about.embed.links')}: **[GitHub](${this.client.constants.githubLink})**`,
     ].join('\n');
 
     const embed = new RichEmbed()
