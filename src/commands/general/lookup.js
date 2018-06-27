@@ -16,6 +16,7 @@ class LookupCommand extends Command {
   async execute(context) {
     const search = context.args.join(' ');
     if (!search) return context.replyError(context.__('lookup.noSearch'));
+    const message = await context.replyLoading(context.__('global.loading'));
     const embed = new RichEmbed();
     let done = false;
 
@@ -47,7 +48,7 @@ class LookupCommand extends Command {
             `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.${user.avatar.startsWith('a_') ? 'gif' : 'png'}` :
             this.getDefaultAvatar(user.discriminator));
 
-        context.reply(
+        message.edit(
           context.__('user.title', {
             emote: (user.bot ? this.client.constants.emotes.botUser : this.client.constants.emotes.humanUser),
             name: `**${user.username}**#${user.discriminator}`,
@@ -94,7 +95,7 @@ class LookupCommand extends Command {
           .setDescription(guildInformation)
           .setThumbnail(metadata.icon);
 
-        context.reply(
+        message.edit(
           context.__('server.title', { name: guildObject.name }),
           { embed },
         );
@@ -102,7 +103,7 @@ class LookupCommand extends Command {
       .catch((res) => {
         if (res.body && res.body.code === 50004) {
           done = true;
-          context.replyWarning(context.__('lookup.disabledWidget', { search }));
+          message.edit(`${this.client.constants.status.warning} ${context.__('lookup.disabledWidget', { search })}`);
         } else {
           done = false;
         }
@@ -133,7 +134,7 @@ class LookupCommand extends Command {
           if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512`);
         }
 
-        context.reply(
+        message.edit(
           context.__('lookup.invite.title', { invite: invite.code }),
           { embed },
         );
@@ -143,7 +144,7 @@ class LookupCommand extends Command {
       });
 
     if (!done) {
-      context.replyError(context.__('lookup.nothingFound', { search }));
+      message.edit(`${this.client.constants.status.error} ${context.__('lookup.nothingFound', { search })}`);
     }
   }
 
