@@ -55,6 +55,7 @@ class Menu {
       );
 
       collector.on('collect', (reaction) => {
+        reaction.remove(this.context.message.author.id);
         if (reaction.emoji.name === '⏹') {
           return collector.stop();
         }
