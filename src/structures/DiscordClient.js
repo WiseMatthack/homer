@@ -10,7 +10,6 @@ const LisaManager = require('../managers/LisaManager');
 
 // Util
 const Constants = require('../util/Constants');
-const ModerationUtil = require('../util/ModerationUtil');
 const UpdateUtil = require('../util/UpdateUtil');
 const FinderUtil = require('../util/FinderUtil');
 const TimeUtil = require('../util/TimeUtil');
