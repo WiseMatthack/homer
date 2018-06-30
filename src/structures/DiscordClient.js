@@ -30,7 +30,6 @@ class DiscordClient extends Client {
     this.localization = new LocaleManager(this);
     this.lisa = new LisaManager(this);
 
-    this.moderation = new ModerationUtil(this);
     this.finder = new FinderUtil(this);
     this.time = new TimeUtil(this);
     this.update = new UpdateUtil(this);
