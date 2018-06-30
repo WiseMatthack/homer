@@ -17,7 +17,7 @@ class YoutubeCommand extends Command {
     if (search.length > 128) return context.replyWarning(context.__('youtube.searchTooLong'));
 
     snekfetch
-      .get(`https://www.googleapis.com/youtube/v3/search?key=${this.client.config.api.youtube}&part=snippet&regionCode=${context.settings.misc.locale}&maxResults=1&q=${search}`)
+      .get(`https://www.googleapis.com/youtube/v3/search?key=${this.client.config.api.youtube}&part=snippet&maxResults=1&q=${search}`)
       .then((response) => {
         const parsed = response.body;
 
