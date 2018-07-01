@@ -103,7 +103,7 @@ class LookupCommand extends Command {
       .catch((res) => {
         if (res.body && res.body.code === 50004) {
           done = true;
-          message.edit(`${this.client.constants.status.warning} ${context.__('lookup.disabledWidget', { search })}`);
+          message.edit(`${this.client.constants.emotes.warning} ${context.__('lookup.disabledWidget', { search })}`);
         } else {
           done = false;
         }

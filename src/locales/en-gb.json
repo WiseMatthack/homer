@@ -270,7 +270,7 @@
   "leave.clear.cleared": "The leave message has been cleared.",
   
   "lookup.noSearch": "You must provide a Discord ID or a invite code to search",
-  "lookup.disabledWidget": "Guild found with ID **{{{ search }}}** but their widget is disabled",
+  "lookup.disabledWidget": "Guild found with ID `{{{ search }}}` but no more information available.",
   "lookup.invite.title": "📧 Information about invite **{{{ invite }}}**:",
   "lookup.invite.embed.server": "Server",
   "lookup.invite.embed.inviter": "Inviter",
