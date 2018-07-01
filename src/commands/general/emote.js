@@ -9,6 +9,10 @@ class EmoteCommand extends Command {
     });
   }
 
+  getURL(id, animated) {
+    return `https://cdn.discordapp.com/emojis/${id}.${animated ? 'gif' : 'png'}`;
+  }
+
   async execute(context) {
     const search = context.args.join(' ');
     let emoji = null;
@@ -26,12 +30,12 @@ class EmoteCommand extends Command {
       `${this.dot} ${context.__('emote.embed.guild')}: ${emoji.guild ? `**${emoji.guild}**` : `*${context.__('global.unknown')}*`}`,
       `${this.dot} ${context.__('emote.embed.animated')}: **${emoji.animated ? context.__('global.yes') : context.__('global.no')}**`,
       `${this.dot} ${context.__('emote.embed.managed')}: **${emoji.managed ? context.__('global.yes') : context.__('global.no')}**`,
-      `${this.dot} ${context.__('emote.embed.url')}: **[${context.__('global.image')}](${emoji.url})**`,
+      `${this.dot} ${context.__('emote.embed.url')}: **[${context.__('global.image')}](${getURL(emoji.id, emoji.animated)})**`,
     ].join('\n');
 
     const embed = new RichEmbed()
       .setDescription(emoteInformation)
-      .setThumbnail(emoji.url);
+      .setThumbnail(getURL(emoji.id, emoji.animated));
     
     context.replySuccess(
       context.__('emote.title', { name: emoji.name }),
