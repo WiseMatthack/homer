@@ -145,9 +145,12 @@ class FinderUtil {
   }
 
   async findEmojis(query) {
+    console.log('DEBUG - SENDING BROADCAST EVAL')
     const list = await this.client.shard.broadcastEval('this.emojis.map(e => ({ id: e.id, name: e.name, animated: e.animated, managed: e.managed, guild: e.guild ? e.guild.name : null }))')
-      .then(emojis => emojis.reduce((prev, val) => prev.concat(val)));
+      .then(emojis => emojis.reduce((prev, val) => prev.concat(val)))
+      .catch(console.error);
 
+      console.log('DEBUG - OK')
     const emojiTest = emojiExpression.exec(query); emojiExpression.lastIndex = 0;
     if (emojiTest) {
       return [list.find(e => e.id === emojiTest[1])];

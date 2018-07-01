@@ -17,6 +17,7 @@ class EmoteCommand extends Command {
     const search = context.args.join(' ');
     let emoji = null;
     if (search) {
+      console.log('DEBUG - BEFORE CALLING SEARCH')
       const foundEmojis = await this.client.finder.findEmojis(search);
       if (!foundEmojis || foundEmojis.length === 0) return context.replyError(context.__('finderUtil.findEmojis.zeroResult', { search }));
       else if (foundEmojis.length === 1) emoji = foundEmojis[0];
