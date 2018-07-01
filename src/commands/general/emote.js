@@ -32,12 +32,12 @@ class EmoteCommand extends Command {
       `${this.dot} ${context.__('emote.embed.animated')}: **${emoji.animated ? context.__('global.yes') : context.__('global.no')}**`,
       `${this.dot} ${context.__('emote.embed.managed')}: **${emoji.managed ? context.__('global.yes') : context.__('global.no')}**`,
       `${this.dot} ${context.__('emote.embed.creation')}: **${context.formatDate(deconstruct(emoji.id).timestamp)}**`,
-      `${this.dot} ${context.__('emote.embed.url')}: **[${context.__('global.image')}](${getURL(emoji.id, emoji.animated)})**`,
+      `${this.dot} ${context.__('emote.embed.url')}: **[${context.__('global.image')}](${this.getURL(emoji.id, emoji.animated)})**`,
     ].join('\n');
 
     const embed = new RichEmbed()
       .setDescription(emoteInformation)
-      .setThumbnail(getURL(emoji.id, emoji.animated));
+      .setThumbnail(this.getURL(emoji.id, emoji.animated));
     
     context.replySuccess(
       context.__('emote.title', { name: emoji.name }),
