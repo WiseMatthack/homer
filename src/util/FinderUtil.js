@@ -146,11 +146,20 @@ class FinderUtil {
 
   async findEmojis(query) {
     console.log('DEBUG - SENDING BROADCAST EVAL')
-    const list = await this.client.shard.broadcastEval('this.emojis.map(e => ({ id: e.id, name: e.name, animated: e.animated, managed: e.managed, guild: e.guild ? e.guild.name : null }))')
-      .then(emojis => emojis.reduce((prev, val) => prev.concat(val)))
-      .catch(console.error);
+    const list = await this.client.shard.broadcastEval(`this.client.finder._emojiFind('${query}')`)
+      .then(list => list.concat((prev, val) => prev.concat(val)));
+    return list || [];    
+  }
 
-      console.log('DEBUG - OK')
+  _emojiFind(query) {
+    const list = this.client.emojis.map((e) => ({
+      id: e.id,
+      name: e.name,
+      animated: e.animated,
+      managed: e.managed,
+      guild: e.guild ? e.guild.name : null,
+    }));
+
     const emojiTest = emojiExpression.exec(query); emojiExpression.lastIndex = 0;
     if (emojiTest) {
       return [list.find(e => e.id === emojiTest[1])];
