@@ -144,7 +144,7 @@ class LookupCommand extends Command {
       });
 
     if (!done) {
-      message.edit(`${this.client.constants.status.error} ${context.__('lookup.nothingFound', { search })}`);
+      message.edit(`${this.client.constants.emotes.error} ${context.__('lookup.nothingFound', { search })}`);
     }
   }
 
