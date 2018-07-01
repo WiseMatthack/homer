@@ -96,6 +96,7 @@
   "emote.embed.guild": "Guild",
   "emote.embed.animated": "Animated",
   "emote.embed.managed": "Managed",
+  "emote.embed.creation": "Creation date",
   "emote.embed.url": "URL",
   "emote.noQuery": "You must provide an emote to search",
 

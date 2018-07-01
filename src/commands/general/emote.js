@@ -1,5 +1,6 @@
 const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
+const { deconstruct } = require('../../../node_modules/discord.js/src/util/Snowflake');
 
 class EmoteCommand extends Command {
   constructor(client) {
@@ -17,7 +18,6 @@ class EmoteCommand extends Command {
     const search = context.args.join(' ');
     let emoji = null;
     if (search) {
-      console.log('DEBUG - BEFORE CALLING SEARCH')
       const foundEmojis = await this.client.finder.findEmojis(search);
       if (!foundEmojis || foundEmojis.length === 0) return context.replyError(context.__('finderUtil.findEmojis.zeroResult', { search }));
       else if (foundEmojis.length === 1) emoji = foundEmojis[0];
@@ -31,6 +31,7 @@ class EmoteCommand extends Command {
       `${this.dot} ${context.__('emote.embed.guild')}: ${emoji.guild ? `**${emoji.guild}**` : `*${context.__('global.unknown')}*`}`,
       `${this.dot} ${context.__('emote.embed.animated')}: **${emoji.animated ? context.__('global.yes') : context.__('global.no')}**`,
       `${this.dot} ${context.__('emote.embed.managed')}: **${emoji.managed ? context.__('global.yes') : context.__('global.no')}**`,
+      `${this.dot} ${context.__('emote.embed.creation')}: **${context.formatDate(deconstruct(emoji.id).timestamp)}**`,
       `${this.dot} ${context.__('emote.embed.url')}: **[${context.__('global.image')}](${getURL(emoji.id, emoji.animated)})**`,
     ].join('\n');
 
