@@ -146,7 +146,7 @@ class FinderUtil {
 
   async findEmojis(query) {
     console.log('DEBUG - SENDING BROADCAST EVAL')
-    const list = await this.client.shard.broadcastEval(`this.client.finder._emojiFind('${query}')`)
+    const list = await this.client.shard.broadcastEval(`this.finder._emojiFind('${query}')`)
       .then(list => list.concat((prev, val) => prev.concat(val)));
     return list || [];    
   }
