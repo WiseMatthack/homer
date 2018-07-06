@@ -44,7 +44,7 @@ class WeatherCommand extends Command {
       .catch(() => null);
     if (!weatherData) return context.replyWarning(context.__('weather.unknownError'));
 
-    const uvIndex = Math.floor(weatherData.uvIndex);
+    const uvIndex = Math.floor(weatherData.currently.uvIndex);
     const weatherInformation = [
       `${this.dot} ${context.__('weather.embed.weather')}: **${weatherData.currently.summary}**`,
       `${this.dot} ${context.__('weather.embed.temperature')}: **${Math.floor(weatherData.currently.temperature)}**°C (**${Math.floor((weatherData.currently.temperature * 1.8) + 32)}**°F)`,
