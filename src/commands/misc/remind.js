@@ -29,7 +29,7 @@ class RemindCommand extends Command {
     if (text.length === 0) return context.replyError(context.__('remind.noText'));
     else if (text.length > 128) return context.replyWarning(context.__('remind.textTooLong'));
 
-    const start = Date.now();
+    const start = (Date.now() + 1000);
     const end = (Date.now() + time);
     const id = (Math.random().toFixed(4).toString().substring(2));
     await this.client.database.insertDocument(
