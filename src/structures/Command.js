@@ -152,6 +152,12 @@ class Command {
       ));
     }
 
+    // We fetch members in the guild IF they have not been
+    if (context.message.guild && !this.client.fetchDone.includes(context.message.guild.id)) {
+      await context.message.guild.fetchMembers();
+      this.client.fetchDone.push(context.message.guild.id);
+    }
+
     // Insert stats and cooldown
     if (!this.client.config.owners.includes(context.message.author.id)) {
       this.client.database.insertDocument('cooldown', { id: context.message.author.id, time: Date.now() });
