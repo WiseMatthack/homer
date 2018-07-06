@@ -44,11 +44,13 @@ class WeatherCommand extends Command {
       .catch(() => null);
     if (!weatherData) return context.replyWarning(context.__('weather.unknownError'));
 
+    const uvIndex = Math.floor(weatherData.uvIndex);
     const weatherInformation = [
       `${this.dot} ${context.__('weather.embed.weather')}: **${weatherData.currently.summary}**`,
       `${this.dot} ${context.__('weather.embed.temperature')}: **${Math.floor(weatherData.currently.temperature)}**°C (**${Math.floor((weatherData.currently.temperature * 1.8) + 32)}**°F)`,
       `${this.dot} ${context.__('weather.embed.feelsLike')}: **${Math.floor(weatherData.currently.apparentTemperature)}**°C (**${Math.floor((weatherData.currently.apparentTemperature * 1.8) + 32)}**°F)`,
       `${this.dot} ${context.__('weather.embed.wind')}: **${context.__(`weather.wind.${this.getDirection(weatherData.currently.windBearing)}`)}** - **${Math.floor(weatherData.currently.windSpeed)}**${context.__('weather.units.kph')} (**${Math.floor(weatherData.currently.windSpeed / 1.609)}**${context.__('weather.units.mph')})`,
+      `${this.dot} ${context.__('weather.embed.uv')}: **${uvIndex}** (**${context.__(`weather.uv.${this.getUvLevel(uvIndex)}`)}**)`,
       `${this.dot} ${context.__('weather.embed.humidity')}: **${Math.floor(weatherData.currently.humidity * 100)}**%`,
       `${this.dot} ${context.__('weather.embed.nebulosity')}: **${Math.floor(weatherData.currently.cloudCover * 100)}**%`,
     ].join('\n');
@@ -103,6 +105,15 @@ class WeatherCommand extends Command {
   getDirection(angle) {
     const arrayIndex = Number((angle / 22.5) + 0.5);
     return Math.round(arrayIndex % 15);
+  }
+
+  getUvLevel(index) {
+    if (index <= 2) return 'low';
+    else if (index >= 3 && index <= 5) return 'medium';
+    else if (index >= 6 && index <= 7) return 'high';
+    else if (index >= 8 && index <= 10) return 'veryHigh';
+    else if (index >= 11) return 'extreme';
+    return 'na';
   }
 
   get franceDepartments() {
