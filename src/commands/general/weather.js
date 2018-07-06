@@ -27,7 +27,7 @@ class WeatherCommand extends Command {
 
         const foundLoc = body.resourceSets[0].resources[0];
         return ({
-          city: foundLoc.address.locality || null,
+          city: foundLoc.address.locality || foundLoc.address.formattedAddress || null,
           department: foundLoc.address.adminDistrict2 || null,
           region: foundLoc.address.adminDistrict || null,
           country: foundLoc.address.countryRegion || null,
