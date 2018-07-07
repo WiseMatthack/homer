@@ -200,7 +200,7 @@ class InfoSubcommand extends Command {
       `${this.dot} ${context.__('radio.info.embed.language')}: **${meta.language}**`,
       `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
       `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
-      `${this.dot} ${context.__('radio.info.embed.since')}: **${this.client.time.timeSince(Date.now() - streamTime)}**`,
+      `${this.dot} ${context.__('radio.info.embed.since')}: ${this.client.time.timeSince(Date.now() - streamTime)}`,
     ].join('\n');
 
     const embed = new RichEmbed()
