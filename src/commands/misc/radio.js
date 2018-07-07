@@ -209,7 +209,7 @@ class InfoSubcommand extends Command {
 
     const embed = new RichEmbed()
       .setDescription(infoDescription)
-      .setThumbnail(`https://${this.client.config.server.domain}/assets/radios/${meta.logo}.png`);
+      .setThumbnail(`https://${this.client.config.server.domain}/assets/radios/${meta.logo}.png?nocache=${Date.now()}`);
 
     context.reply(context.__('radio.info.title'), { embed });
   }
