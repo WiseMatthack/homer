@@ -65,7 +65,7 @@ class TuneSubcommand extends Command {
     if (!radio) return context.replyWarning(context.__('radio.tune.noRadioFound', { frequency }));
 
     let connection = this.client.voiceConnections.get(context.message.guild.id);
-    if (!connection) await channel.join();
+    if (!connection) connection = await channel.join();
 
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
     const message = await context.message.channel.send(context.__('radio.tune.tunning', { name: radio.name }));
