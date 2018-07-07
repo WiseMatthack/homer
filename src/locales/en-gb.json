@@ -352,8 +352,15 @@
   "quote.missingUserPermissions": "You do not have required permissions to see this message (View Channel and Read Message History).",
   
   "radio.hub": "📻 Welcome to the radio hub! Run `{{{ prefix }}}radio help` to have the list of subcommands.",
+  "radio.noRadioChannel": "You must specify a radio channel using `{{{ prefix }}}radio channel`.",
+  "radio.cannotJoinOrSpeak": "The bot cannot join or speak in **{{{ name }}}**.",
+  "radio.notInChannel": "You must be in the radio channel to run this command!",
   "radio.list.noRadio": "There are no radios available for the moment.",
   "radio.list.title": "📻 Radios available on **{{{ name }}}**:",
+  "radio.tune.noFrequency": "You must provide a frequency to tune in.",
+  "radio.tune.noRadioFound": "No radio found on frequency `{{{ frequency }}}`.",
+  "radio.tune.tunning": "📻 Tunning into **{{{ name }}}**...",
+  "radio.tune.playing": "📻 You are listening to **{{{ name }}}**.",
   "radio.types.0": "Music",
   
   "remind.noDuration": "You must provide a duration for your remind.",
