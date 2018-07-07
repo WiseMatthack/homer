@@ -78,6 +78,10 @@ class TuneSubcommand extends Command {
       },
     );
 
+    if (this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id)) {
+      this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
+    }
+
     this.client.currentBroadcasts.push({
       guild: context.message.guild.id,
       radio: radio.id,
