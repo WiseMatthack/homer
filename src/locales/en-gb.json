@@ -379,6 +379,7 @@
   "radio.info.embed.name": "Radio",
   "radio.info.embed.language": "Language",
   "radio.info.embed.country": "Country",
+  "radio.info.embed.playing": "Playing info",
   "radio.info.embed.type": "Type",
   "radio.info.embed.since": "Streaming for",
   "radio.types.0": "Music",

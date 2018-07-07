@@ -1,6 +1,7 @@
 const Command = require('../../structures/Command');
 const Menu = require('../../structures/Menu');
 const { RichEmbed } = require('discord.js');
+const snekfetch = require('snekfetch');
 
 class RadioCommand extends Command {
   constructor(client) {
@@ -201,10 +202,22 @@ class InfoSubcommand extends Command {
     const streamTime = this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime;
     const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
 
+    let playing = `**${context.__('global.noInformation')}**`;
+    if (meta.stationId) {
+      const request = await snekfetch.get(`https://api.radio.net/info/v2/search/nowplaying?apikey=${this.client.config.api.radio}&numberoftitles=1&station=${meta.stationId}`)
+        .then(r => r.body)
+        .catch(() => null);
+
+      if (request && request[0]) {
+        playing = request[0].streamTitle.split(' - ').map(a => `**${a}**`).join(' - ');
+      }
+    }
+
     const infoDescription = [
       `${this.dot} ${context.__('radio.info.embed.name')}: **[${meta.name}](${meta.website})**`,
       `${this.dot} ${context.__('radio.info.embed.language')}: **${meta.language}**`,
       `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
+      `${this.dot} ${context.__('radio.info.embed.playing')}: ${playing}`,
       `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
       `${this.dot} ${context.__('radio.info.embed.since')}: ${this.client.time.timeSince(Date.now() - streamTime)}`,
     ].join('\n');
