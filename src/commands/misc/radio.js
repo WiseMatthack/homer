@@ -1,5 +1,6 @@
 const Command = require('../../structures/Command');
 const Menu = require('../../structures/Menu');
+const { RichEmbed } = require('discord.js');
 
 class RadioCommand extends Command {
   constructor(client) {
@@ -76,6 +77,10 @@ class TuneSubcommand extends Command {
       },
     );
 
+    this.client.currentBroadcasts.push({
+      guild: context.message.guild.id,
+      radio: radio.id,
+    });
     dispatcher.once('speaking', () => message.edit(context.__('radio.tune.playing', { name: radio.name })));
   }
 }
@@ -122,6 +127,7 @@ class StopSubcommand extends Command {
     let connection = this.client.voiceConnections.get(context.message.guild.id);
     if (!connection) return context.replyWarning(context.__('radio.stop.noActiveStream', { name: connection.channel.name }));
     await channel.leave();
+    this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
 
     context.replySuccess(context.__('radio.stop.done'));
   }
@@ -183,6 +189,24 @@ class InfoSubcommand extends Command {
   }
 
   async execute(context) {
+    const currentBroadcast = this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id);
+    if (!currentBroadcast) return context.replyWarning(context.__('radio.info.noActiveStream'));
+    const streamTime = this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime;
+    const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
+
+    const infoDescription = [
+      `${this.dot} ${context.__('radio.info.embed.name')}: **[${meta.name}](${meta.url})**`,
+      `${this.dot} ${context.__('radio.info.embed.language')}: **${meta.language}**`,
+      `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
+      `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
+      `${this.dot} ${context.__('radio.info.embed.since')}: **${this.client.time.timeSince(Date.now() - streamTime)}**`,
+    ].join('\n');
+
+    const embed = new RichEmbed()
+      .setDescription(infoDescription)
+      .setThumbnail(`https://${this.client.config.server.domain}/assets/radios/${meta.logo}.png`);
+
+    context.reply(context.__('radio.info.title'), { embed });
   }
 }
 

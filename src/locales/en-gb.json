@@ -373,6 +373,13 @@
   "radio.channel.noChannelFound": "No channel found matching the given search, you can also run this command while being on a voice channel.",
   "radio.channel.set": "Radio channel set to **{{{ name }}}**.",
   "radio.channel.clear.cleared": "The radio channel has been successfully cleared!",
+  "radio.info.noActiveStream": "There is no active stream right now.",
+  "radio.info.title": "📻 Information about current stream:",
+  "radio.info.embed.name": "Radio",
+  "radio.info.embed.language": "Language",
+  "radio.info.embed.country": "Country",
+  "radio.info.embed.type": "Type",
+  "radio.info.embed.since": "Streaming for",
   "radio.types.0": "Music",
   
   "remind.noDuration": "You must provide a duration for your remind.",
