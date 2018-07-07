@@ -37,7 +37,9 @@ class ListSubcommand extends Command {
 
     const menu = new Menu(
       context,
-      radios.map(r => `\`${r.id}\`: ${r.emote} **[${r.name}](${r.website})** - ${r.language} (${r.country}) - ${context.__(`radio.types.${r.type}`)}`),
+      radios
+        .sort((a, b) => parseFloat(a.id) > parseFloat(b.id))
+        .map(r => `\`${r.id}\`: ${r.emote} **[${r.name}](${r.website})** - ${r.language} (${r.country}) - ${context.__(`radio.types.${r.type}`)}`),
     );
 
     menu.send(context.__('radio.list.title', { name: this.client.user.username }));
