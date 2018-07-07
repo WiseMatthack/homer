@@ -72,7 +72,7 @@ class TuneSubcommand extends Command {
     if (!connection) connection = await channel.join();
 
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
-    const message = await context.message.channel.send(context.__('radio.tune.tunning', { name: radio.name }));
+    const message = await context.message.channel.send(context.__('radio.tune.tuning', { name: radio.name }));
     const dispatcher = await connection.playStream(
       radio.url,
       {
