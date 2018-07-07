@@ -48,7 +48,6 @@ class TuneSubcommand extends Command {
       name: 'tune',
       category: 'misc',
       usage: '<frequency>',
-      private: true,
     });
   }
 
@@ -87,7 +86,6 @@ class VolumeSubcommand extends Command {
       name: 'volume',
       category: 'misc',
       usage: '<volume (0-100)>',
-      private: true,
     });
   }
 
@@ -112,7 +110,6 @@ class StopSubcommand extends Command {
     super(client, {
       name: 'stop',
       category: 'misc',
-      private: true,
     });
   }
 
@@ -137,7 +134,6 @@ class ChannelSubcommand extends Command {
       category: 'misc',
       usage: '[channel]',
       userPermissions: ['MANAGE_GUILD'],
-      private: true,
     });
   }
 
@@ -156,6 +152,37 @@ class ChannelSubcommand extends Command {
     await context.saveSettings();
 
     context.replySuccess(context.__('radio.channel.set', { name: channel.name }));
+  }
+}
+
+class ChannelClearSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'clear',
+      category: 'misc',
+      userPermissions: ['MANAGE_GUILD'],
+    });
+  }
+
+  async execute(context) {
+    const channel = context.message.guild.channels.get(context.settings.radio.channel);
+    if (!channel) return context.replyWarning(context.__('radio.noRadioChannel', { prefix: this.client.prefix }));
+
+    context.settings.radio.channel = '0';
+    await context.saveSettings();
+    context.replySuccess(context.__('radio.channel.clear.cleared'));
+  }
+}
+
+class InfoSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'info',
+      category: 'misc',
+    });
+  }
+
+  async execute(context) {
   }
 }
 
