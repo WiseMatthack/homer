@@ -24,6 +24,7 @@ class DiscordClient extends Client {
     this.events = [];
     this.unavailable = [];
     this.fetchDone = [];
+    this.currentBroadcasts = [];
     this.ready = false;
 
     this.commands = new CommandManager(this);
