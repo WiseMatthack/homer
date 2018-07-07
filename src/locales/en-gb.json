@@ -197,6 +197,8 @@
   "helpUtil.profile.clear": "Clear a profile field",
   "helpUtil.profile.fields": "Get the list of available profile fields",
   "helpUtil.quote": "Fetches a message using its Discord ID",
+  "helpUtil.radio": "Listen to radios in voice channel",
+  "helpUtil.radio.list": "Get the list of available radios",
   "helpUtil.remind": "Set a remind",
   "helpUtil.remind.list": "Manage your active reminds",
   "helpUtil.remind.delete": "Delete an active remind",
@@ -348,6 +350,11 @@
   "quote.notFound": "No message found in **{{{ channel }}}** matching ID `{{{ message }}}`.",
   "quote.missingBotPermissions": "The bot does not have required permissions to fetch messages (View Channel and Read Message History).",
   "quote.missingUserPermissions": "You do not have required permissions to see this message (View Channel and Read Message History).",
+  
+  "radio.hub": "📻 Welcome to the radio hub! Run `{{{ prefix }}}radio help` to have the list of subcommands.",
+  "radio.list.noRadio": "There are no radios available for the moment.",
+  "radio.list.title": "📻 Radios available on **{{{ name }}}**:",
+  "radio.types.0": "Music",
   
   "remind.noDuration": "You must provide a duration for your remind.",
   "remind.noText": "You must provide a text for your remind.",
