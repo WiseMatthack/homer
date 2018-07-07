@@ -13,6 +13,7 @@ class RadioCommand extends Command {
         new VolumeSubcommand(client),
         new StopSubcommand(client),
         new ChannelSubcommand(client),
+        new InfoSubcommand(client),
       ],
     });
   }
