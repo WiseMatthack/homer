@@ -204,6 +204,7 @@
   "helpUtil.radio.stop": "Stop the current broadcast and leaves the channel",
   "helpUtil.radio.channel": "Set the radio channel",
   "helpUtil.radio.channel.clear": "Clear the radio channel",
+  "helpUtil.radio.info": "Show info on the radio currently played",
   "helpUtil.remind": "Set a remind",
   "helpUtil.remind.list": "Manage your active reminds",
   "helpUtil.remind.delete": "Delete an active remind",

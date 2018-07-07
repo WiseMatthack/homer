@@ -200,7 +200,7 @@ class InfoSubcommand extends Command {
     const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
 
     const infoDescription = [
-      `${this.dot} ${context.__('radio.info.embed.name')}: **[${meta.name}](${meta.url})**`,
+      `${this.dot} ${context.__('radio.info.embed.name')}: **[${meta.name}](${meta.website})**`,
       `${this.dot} ${context.__('radio.info.embed.language')}: **${meta.language}**`,
       `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
       `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
