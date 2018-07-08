@@ -91,7 +91,16 @@ class TuneSubcommand extends Command {
       guild: context.message.guild.id,
       radio: radio.id,
     });
-    dispatcher.once('speaking', () => message.edit(context.__('radio.tune.playing', { name: radio.name })));
+
+    dispatcher.once('speaking', () => {
+      message.edit(context.__('radio.tune.playing', { name: radio.name }));
+      if (!connection.dispatcher) {
+        connection.playFile('/var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3', {
+          volume: context.settings.radio.volume || 0.5,
+          bitrate: hq ? 64 : 48,
+        });
+      }
+    });
   }
 }
 
