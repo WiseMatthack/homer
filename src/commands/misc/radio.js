@@ -65,19 +65,21 @@ class TuneSubcommand extends Command {
     const frequency = context.args[0];
     if (!frequency) return context.replyError(context.__('radio.tune.noFrequency'));
 
-    const radio = await this.client.database.getDocument('radios', frequency);
-    if (!radio) return context.replyWarning(context.__('radio.tune.noRadioFound', { frequency }));
-
     let connection = this.client.voiceConnections.get(context.message.guild.id);
     if (!connection) connection = await channel.join();
+
+    const radio = await this.client.database.getDocument('radios', frequency) || ({
+      name: '?',
+      id: 0,
+    });
 
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
     const message = await context.message.channel.send(context.__('radio.tune.tuning', { name: radio.name }));
     const dispatcher = await connection.playStream(
-      radio.url,
+      radio.url || `https://${this.client.config.server.domain}/assets/radios/BAD.mp3`,
       {
         volume: context.settings.radio.volume || 0.5,
-        bitrate: hq ? 96 : 48,
+        bitrate: hq ? 64 : 48,
       },
     );
 
@@ -199,6 +201,7 @@ class InfoSubcommand extends Command {
   async execute(context) {
     const currentBroadcast = this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id);
     if (!currentBroadcast) return context.replyWarning(context.__('radio.info.noActiveStream'));
+    if (currentBroadcast.id === 0) return context.replyWarning(context.__('radio.info.unavailableProgramme'));
     const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
 
     let since = `**${context.__('global.none')}**`;

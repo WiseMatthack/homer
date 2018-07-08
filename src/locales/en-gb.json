@@ -375,6 +375,7 @@
   "radio.channel.set": "Radio channel set to **{{{ name }}}**.",
   "radio.channel.clear.cleared": "The radio channel has been successfully cleared!",
   "radio.info.noActiveStream": "There is no active stream right now.",
+  "radio.info.unavailableProgramme": "No information available for the current station.",
   "radio.info.title": "📻 Information about current stream:",
   "radio.info.embed.name": "Radio",
   "radio.info.embed.language": "Language",
