@@ -199,7 +199,9 @@ class InfoSubcommand extends Command {
   async execute(context) {
     const currentBroadcast = this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id);
     if (!currentBroadcast) return context.replyWarning(context.__('radio.info.noActiveStream'));
-    const streamTime = this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime;
+    const streamTime = this.client.voiceConnections.get(context.message.guild.id).dispatcher ? 
+      this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime :
+      Date.now();
     const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
 
     let playing = `**${context.__('global.noInformation')}**`;
