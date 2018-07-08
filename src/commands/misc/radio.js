@@ -2,6 +2,7 @@ const Command = require('../../structures/Command');
 const Menu = require('../../structures/Menu');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
+const parser = require('playlist-parser');
 
 class RadioCommand extends Command {
   constructor(client) {
@@ -76,7 +77,7 @@ class TuneSubcommand extends Command {
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
     const message = await context.message.channel.send(context.__('radio.tune.tuning', { name: radio.name }));
     const dispatcher = await connection.playStream(
-      radio.url || `file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3`,
+      (await parseURL(radio.url)) || `file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3`,
       {
         volume: context.settings.radio.volume || 0.5,
         bitrate: hq ? 64 : 48,
@@ -247,6 +248,17 @@ class InfoSubcommand extends Command {
 
     context.reply(context.__('radio.info.title'), { embed });
   }
+}
+
+async function parseURL(url) {
+  const extension = url.split('?')[0];
+
+  if (extension.endsWith('m3u')) {
+    const data = await snekfetch.get(url).then(r => r.text);
+    return parser.M3U.parse(data)[0].file;
+  }
+
+  return url;
 }
 
 module.exports = RadioCommand;
