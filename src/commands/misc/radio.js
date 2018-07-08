@@ -40,7 +40,7 @@ class ListSubcommand extends Command {
     const menu = new Menu(
       context,
       radios
-        .sort((a, b) => parseFloat(a.id) > parseFloat(b.id))
+        .sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
         .map(r => `\`${r.id}\`: ${r.emote} **[${r.name}](${r.website})** - ${r.language} (${r.country}) - ${context.__(`radio.types.${r.type}`)}`),
     );
 
