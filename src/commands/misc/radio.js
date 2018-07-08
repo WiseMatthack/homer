@@ -199,10 +199,12 @@ class InfoSubcommand extends Command {
   async execute(context) {
     const currentBroadcast = this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id);
     if (!currentBroadcast) return context.replyWarning(context.__('radio.info.noActiveStream'));
-    const streamTime = this.client.voiceConnections.get(context.message.guild.id).dispatcher ? 
-      this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime :
-      Date.now();
     const meta = await this.client.database.getDocument('radios', currentBroadcast.radio);
+
+    let since = `**${context.__('global.none')}**`;
+    if (this.client.voiceConnections.get(context.message.guild.id).dispatcher) {
+      since = this.client.time.timeSince(Date.now() - this.client.voiceConnections.get(context.message.guild.id).dispatcher.totalStreamTime);
+    }
 
     let playing = `**${context.__('global.noInformation')}**`;
     if (meta.stationId) {
@@ -221,7 +223,7 @@ class InfoSubcommand extends Command {
       `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
       `${this.dot} ${context.__('radio.info.embed.playing')}: ${playing}`,
       `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
-      `${this.dot} ${context.__('radio.info.embed.since')}: ${this.client.time.timeSince(Date.now() - streamTime)}`,
+      `${this.dot} ${context.__('radio.info.embed.since')}: ${since}`,
     ].join('\n');
 
     const embed = new RichEmbed()
