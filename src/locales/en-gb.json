@@ -385,6 +385,7 @@
   "radio.info.embed.since": "Streaming for",
   "radio.types.0": "Music",
   "radio.types.1": "Information",
+  "radio.types.2": "Generalist",
   
   "remind.noDuration": "You must provide a duration for your remind.",
   "remind.noText": "You must provide a text for your remind.",
