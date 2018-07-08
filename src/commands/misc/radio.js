@@ -77,7 +77,7 @@ class TuneSubcommand extends Command {
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
     const message = await context.message.channel.send(context.__('radio.tune.tuning', { name: radio.name }));
     const dispatcher = await connection.playStream(
-      (await parseURL(radio.url)) || `file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3`,
+      radio.url ? (await parseURL(radio.url)) : `file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3`,
       {
         volume: context.settings.radio.volume || 0.5,
         bitrate: hq ? 64 : 48,
