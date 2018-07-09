@@ -137,6 +137,7 @@ class StopSubcommand extends Command {
   constructor(client) {
     super(client, {
       name: 'stop',
+      aliases: ['stfu'],
       category: 'misc',
     });
   }

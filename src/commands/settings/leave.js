@@ -6,6 +6,7 @@ class LeaveCommand extends Command {
       name: 'leave',
       usage: '<message>',
       children: [new ChannelSubcommand(client), new ClearSubcommand(client)],
+      userPermissions: ['MANAGE_GUILD'],
       category: 'settings',
     });
   }
@@ -26,6 +27,7 @@ class ChannelSubcommand extends Command {
     super(client, {
       name: 'channel',
       usage: '[channel]',
+      userPermissions: ['MANAGE_GUILD'],
       category: 'settings',
     });
   }
@@ -50,6 +52,7 @@ class ClearSubcommand extends Command {
   constructor(client) {
     super(client, {
       name: 'clear',
+      userPermissions: ['MANAGE_GUILD'],
       category: 'settings',
     });
   }
