@@ -42,6 +42,8 @@
   "channel.embed.id": "Discord ID",
   "channel.embed.type": "Type",
   "channel.embed.position": "Position",
+  "channel.embed.bitrate": "Bitrate",
+  "channel.embed.users": "Users",
   "channel.embed.creation": "Channel creation date",
   "channel.embed.topic": "Topic",
   "channel.type.text": "Text",

@@ -24,8 +24,11 @@ class ChannelCommand extends Command {
       `${this.dot} ${context.__('channel.embed.id')}: **${channel.id}**`,
       `${this.dot} ${context.__('channel.embed.type')}: **${context.__(`channel.type.${channel.type}`)}**`,
       `${this.dot} ${context.__('channel.embed.position')}: #**${context.message.guild.channels.sort((a, b) => a.position - b.position).array().findIndex(c => c.id === channel.id) + 1}**`,
-      `${this.dot} ${context.__('channel.embed.creation')}: **${context.formatDate(channel.createdTimestamp)}**`,
     ];
+
+    if (channel.type === 'voice') channelInformation.push(`${this.dot} ${context.__('channel.embed.bitrate')}: **${channel.bitrate}**Kbps`);
+    channelInformation.push(`${this.dot} ${context.__('channel.embed.users')}: **${channel.members.size}**/**${channel.userLimit === 0 ? '∞' : channel.userLimit}**`);
+    channelInformation.push(`${this.dot} ${context.__('channel.embed.creation')}: **${context.formatDate(channel.createdTimestamp)}**`);
 
     const embed = new RichEmbed()
       .setDescription(channelInformation);
