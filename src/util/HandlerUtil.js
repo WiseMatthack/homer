@@ -9,8 +9,8 @@ class HandlerUtil {
     const user = await this.client.fetchUser(job.user)
       .catch(() => null);
     if (!user) return;
-    const settings = await this.client.database.getDocument('settings', user.id) ||
-      this.client.constants.defaultUserSettings(user.id);
+    const settings = await this.client.database.getDocument('settings', user.id)
+      || this.client.constants.defaultUserSettings(user.id);
 
     user.send(this.client.__(settings.misc.locale, 'handler.remind', {
       text: job.text,
@@ -19,8 +19,8 @@ class HandlerUtil {
   }
 
   async poll(job) {
-    const settings = await this.client.database.getDocument('settings', job.guild) ||
-      this.client.constants.defaultGuildSettings(job.guild);
+    const settings = await this.client.database.getDocument('settings', job.guild)
+      || this.client.constants.defaultGuildSettings(job.guild);
 
     const channel = this.client.channels.get(job.channelID);
     if (!channel) return;
@@ -55,9 +55,9 @@ class HandlerUtil {
     const embed = new RichEmbed().setTitle(job.title);
     if (job.color) embed.setColor(job.color);
 
-    const winMsg = winners.length > 1 ?
-      this.client.__(settings.misc.settings, 'handler.poll.tie', { count: max }) :
-      this.client.__(settings.misc.locale, 'handler.poll.one', { count: max });
+    const winMsg = winners.length > 1
+      ? this.client.__(settings.misc.settings, 'handler.poll.tie', { count: max })
+      : this.client.__(settings.misc.locale, 'handler.poll.one', { count: max });
     embed.setDescription(`${winMsg}\n\n${winners.map(r => r.emoji).join(' ')}`);
 
     channel.send({ embed });

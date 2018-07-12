@@ -6,9 +6,9 @@ class Context {
     this.message = message;
     this.args = this.message.content.split(/ +/g);
     this.prefix = null;
-    this.settings = message.guild ?
-      this.client.constants.defaultGuildSettings(message.guild.id) :
-      this.client.constants.defaultUserSettings(message.author.id);
+    this.settings = message.guild
+      ? this.client.constants.defaultGuildSettings(message.guild.id)
+      : this.client.constants.defaultUserSettings(message.author.id);
   }
 
   async getSettings() {
@@ -18,9 +18,9 @@ class Context {
   }
 
   saveSettings() {
-    if (Object.is(this.settings, this.message.guild ?
-      this.client.constants.defaultGuildSettings(this.message.guild.id) :
-      this.client.constants.defaultUserSettings(this.message.author.id))) return;
+    if (Object.is(this.settings, this.message.guild
+      ? this.client.constants.defaultGuildSettings(this.message.guild.id)
+      : this.client.constants.defaultUserSettings(this.message.author.id))) return;
 
     return this.client.database.insertDocument('settings', this.settings, { conflict: 'update' });
   }
@@ -48,7 +48,7 @@ class Context {
   react(emote) {
     return this.message.react(emote);
   }
-  
+
   reactSuccess() {
     return this.message.react(this.getEmoteID(this.client.constants.emotes.success));
   }
@@ -94,17 +94,15 @@ class Context {
           name: part.substring(1).toLowerCase(),
           value: '',
         });
+      } else if (options.length === 0 && !titleDone) {
+        if (title.length === 0) title += part;
+        else title += ` ${part}`;
       } else {
-        if (options.length === 0 && !titleDone) {
-          if (title.length === 0) title += part;
-          else title += ` ${part}`;
+        const index = (options.length - 1);
+        if (options[index].value.length === 0) {
+          options[index].value = part;
         } else {
-          const index = (options.length - 1);
-          if (options[index].value.length === 0) {
-            options[index].value = part;
-          } else {
-            options[index].value += ` ${part}`;
-          }
+          options[index].value += ` ${part}`;
         }
       }
     }

@@ -13,7 +13,7 @@ class ChannelDeleteEvent extends Event {
         if (settings.ignored.find(i => i.id === channel.id)) {
           settings.ignored.splice(settings.ignored.findIndex(i => i.id === channel.id), 1);
         }
-  
+
         this.client.database.insertDocument(
           'settings',
           settings,

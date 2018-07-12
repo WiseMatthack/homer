@@ -1,6 +1,6 @@
-const Command = require('../../structures/Command');
 const snekfetch = require('snekfetch');
 const { exec } = require('child_process');
+const Command = require('../../structures/Command');
 
 class ExecCommand extends Command {
   constructor(client) {

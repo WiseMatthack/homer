@@ -1,6 +1,6 @@
-const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
+const Command = require('../../structures/Command');
 
 class CheckdbansCommand extends Command {
   constructor(client) {
@@ -10,7 +10,7 @@ class CheckdbansCommand extends Command {
       usage: '[user]',
       category: 'general',
       dm: true,
-    })
+    });
   }
 
   async execute(context) {
@@ -19,7 +19,7 @@ class CheckdbansCommand extends Command {
     if (isNaN(search) && context.message.guild) {
       const foundMembers = this.client.finder.findMembers(context.message.guild.members, search);
       if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search }));
-      else if (foundMembers.length === 1) user = foundMembers[0].user;
+      if (foundMembers.length === 1) user = foundMembers[0].user;
       else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     } else if (search) {
       user = await this.client.fetchUser(search)
@@ -55,9 +55,9 @@ class CheckdbansCommand extends Command {
         const embed = new RichEmbed()
           .setDescription(banInformation.join('\n'))
           .setColor(body === 'False' ? 0x00FF00 : 0xFF0000)
-          .setThumbnail(user.avatar ?
-            `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}` :
-            this.getDefaultAvatar(user.discriminator));
+          .setThumbnail(user.avatar
+            ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}`
+            : this.getDefaultAvatar(user.discriminator));
 
         message.edit(
           context.__('checkdbans.title', { emote: this.client.constants.emotes.dbans, name: `**${user.username}**#${user.discriminator}` }),

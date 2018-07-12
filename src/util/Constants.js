@@ -1,4 +1,4 @@
-exports.defaultGuildSettings = (id) => ({
+exports.defaultGuildSettings = id => ({
   id,
   welcome: {
     channel: '0',
@@ -23,7 +23,7 @@ exports.defaultGuildSettings = (id) => ({
   },
 });
 
-exports.defaultUserSettings = (id) => ({
+exports.defaultUserSettings = id => ({
   id,
   prefixes: [],
   misc: {
@@ -97,7 +97,7 @@ exports.categoryEmotes = {
   telephone: '📞',
 };
 
-exports.profileFields= [
+exports.profileFields = [
   {
     id: 'about',
     name: 'About me',

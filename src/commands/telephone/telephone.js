@@ -36,7 +36,7 @@ class TelephoneCommand extends Command {
 
     const embed = new RichEmbed()
       .setDescription(subscriptionInformation);
-    
+
     context.reply(
       context.__('telephone.title', { name: context.message.guild ? `**#${context.message.channel.name}**` : `**${context.__('global.dm')}**` }),
       { embed },

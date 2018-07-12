@@ -60,7 +60,7 @@ class Menu {
           return collector.stop();
         }
 
-        let tmpNum = this.currentPage;
+        const tmpNum = this.currentPage;
         if (reaction.emoji.name === '⏪') {
           this.currentPage = 0;
         } else if (reaction.emoji.name === '◀') {

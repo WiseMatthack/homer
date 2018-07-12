@@ -1,6 +1,6 @@
-const Command = require('../../structures/Command');
 const translator = require('google-translate-api');
 const { RichEmbed } = require('discord.js');
+const Command = require('../../structures/Command');
 
 class TranslateCommand extends Command {
   constructor(client) {

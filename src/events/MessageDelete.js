@@ -15,10 +15,9 @@ class MessageDeleteEvent extends Event {
           const target = (message.channel.id === callObject.sender.id) ? callObject.receiver.id : callObject.sender.id;
           const targetMessage = await this.client.rest.methods.getChannelMessages(target, { limit: 100 })
             .then((data) => {
-              const filter = (m) => 
-                !m.webhook_id &&
-                m.author.id == this.client.user.id &&
-                m.content.startsWith(`📞 **${message.author.username}**#${message.author.discriminator}: ${message.content}`);
+              const filter = m => !m.webhook_id
+                && m.author.id == this.client.user.id
+                && m.content.startsWith(`📞 **${message.author.username}**#${message.author.discriminator}: ${message.content}`);
 
               return data.find(filter);
             });

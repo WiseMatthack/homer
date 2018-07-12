@@ -24,5 +24,5 @@ sharder.on('message', (shard, mail) => {
 
 // Spawn shards
 sharder.spawn(sharder.config.sharder.totalShards, sharder.config.sharder.delay)
-  .then((shards) => console.log(`[Sharder] Spawning ${shards.size} shards...`))
+  .then(shards => console.log(`[Sharder] Spawning ${shards.size} shards...`))
   .catch(console.error);

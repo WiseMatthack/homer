@@ -25,9 +25,9 @@ class RemindCommand extends Command {
     }
 
     if (time === 0) return context.replyError(context.__('remind.noDuration'));
-    else if (time < 60000) time = 60000;
+    if (time < 60000) time = 60000;
     if (text.length === 0) return context.replyError(context.__('remind.noText'));
-    else if (text.length > 128) return context.replyWarning(context.__('remind.textTooLong'));
+    if (text.length > 128) return context.replyWarning(context.__('remind.textTooLong'));
 
     const start = (Date.now() + 1000);
     const end = (start + time);

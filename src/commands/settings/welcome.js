@@ -38,7 +38,7 @@ class ChannelSubcommand extends Command {
     if (search) {
       const foundChannels = this.client.finder.findRolesOrChannels(context.message.guild.channels, search);
       if (!foundChannels || foundChannels.length === 0 || !foundChannels[0]) return context.replyError(context.__('finderUtil.findChannels.zeroResult', { search }));
-      else if (foundChannels.length === 1) channel = foundChannels[0];
+      if (foundChannels.length === 1) channel = foundChannels[0];
       else if (foundChannels.length > 1) return context.replyWarning(this.client.finder.formatChannels(foundChannels, context.settings.misc.locale));
     }
 

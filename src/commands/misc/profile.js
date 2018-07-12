@@ -23,15 +23,17 @@ class ProfileCommand extends Command {
     if (search && context.message.guild) {
       const foundMembers = this.client.finder.findMembers(context.message.guild.members, search);
       if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search }));
-      else if (foundMembers.length === 1) user = foundMembers[0].user;
+      if (foundMembers.length === 1) user = foundMembers[0].user;
       else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     }
 
     const profile = await this.client.database.getDocument('profiles', user.id);
-    if (!profile) return context.replyWarning(context.__('profile.noProfile', {
-      name: `**${user.username}**#${user.discriminator}`,
-      command: `${this.client.prefix}profile set`,
-    }));
+    if (!profile) {
+      return context.replyWarning(context.__('profile.noProfile', {
+        name: `**${user.username}**#${user.discriminator}`,
+        command: `${this.client.prefix}profile set`,
+      }));
+    }
 
     const profileInformation = profile.fields
       .sort((a, b) => a.id > b.id)
@@ -70,7 +72,7 @@ class SetSubcommand extends Command {
     }
 
     const profile = await this.client.database.getDocument('profiles', context.message.author.id) || getProfile(context.message.author.id);
-    if (profile.fields.length > 20) return context.replyWarning(context.__('profile.set.tooMuchFields'));    
+    if (profile.fields.length > 20) return context.replyWarning(context.__('profile.set.tooMuchFields'));
 
     const existingField = profile.fields.find(f => f.id === name.toLowerCase());
     if (existingField) profile.fields.splice(profile.fields.indexOf(existingField), 1);

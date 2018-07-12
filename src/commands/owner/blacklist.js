@@ -1,6 +1,6 @@
-const Command = require('../../structures/Command');
 const snekfetch = require('snekfetch');
 const { RichEmbed } = require('discord.js');
+const Command = require('../../structures/Command');
 
 class BlacklistCommand extends Command {
   constructor(client) {
@@ -40,7 +40,7 @@ class GuildSubcommand extends Command {
       .get(`https://discordapp.com/api/guilds/${guildID}/widget.json`)
       .set({ 'User-Agent': this.client.constants.userAgent() })
       .then(res => res.body)
-      .catch(res => res.body.code === 10004 ? null : {});
+      .catch(res => (res.body.code === 10004 ? null : {}));
 
     if (blacklistEntry) {
       await this.client.database.deleteDocument('blacklist', guildID);

@@ -1,5 +1,5 @@
-const Command = require('../../structures/Command');
 const snekfetch = require('snekfetch');
+const Command = require('../../structures/Command');
 
 class GoogleCommand extends Command {
   constructor(client) {

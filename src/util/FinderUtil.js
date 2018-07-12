@@ -2,7 +2,7 @@
 const tagExpression = /(.{0,30})#(\d{4})/g;
 const mentionExpression = /<(@!?|@&|#)(\d{17,20})>/g;
 const idExpression = /(\d{17,20})/g;
-const emojiExpression = /<a?:.{0,100}:(\d{17,20})>/g
+const emojiExpression = /<a?:.{0,100}:(\d{17,20})>/g;
 
 class FinderUtil {
   constructor(client) {
@@ -19,10 +19,9 @@ class FinderUtil {
       const discriminator = userTagTest[2];
 
       const foundMembers = members
-        .filter(m =>
-          m.user.username.toLowerCase() === username &&
-          m.user.discriminator === discriminator);
-      
+        .filter(m => m.user.username.toLowerCase() === username
+          && m.user.discriminator === discriminator);
+
       if (foundMembers.size > 0) return foundMembers;
     } else if (mentionTest) {
       return [members.get(mentionTest[2])];
@@ -45,7 +44,7 @@ class FinderUtil {
       } else if ((username.toLowerCase() === query || displayName.toLowerCase() === query) && exact.length === 0) {
         wrongCase.push(member);
       } else if ((username.toLowerCase().startsWith(lowerQuery) || displayName.toLowerCase().startsWith(lowerQuery)) && wrongCase.length === 0) {
-        startsWith.push(member)
+        startsWith.push(member);
       } else if ((username.toLowerCase().includes(lowerQuery) || displayName.toLowerCase().includes(lowerQuery)) && startsWith.length === 0) {
         includes.push(member);
       }
@@ -80,7 +79,7 @@ class FinderUtil {
 
     if (mentionTest) {
       return [list.get(mentionTest[2])];
-    } else if (idTest) {
+    } if (idTest) {
       return [list.get(idTest[1])];
     }
 
@@ -98,7 +97,7 @@ class FinderUtil {
       } else if (name.toLowerCase() === query && exact.length === 0) {
         wrongCase.push(item);
       } else if (name.toLowerCase().startsWith(lowerQuery) && wrongCase.length === 0) {
-        startsWith.push(item)
+        startsWith.push(item);
       } else if (name.toLowerCase().includes(lowerQuery) && startsWith.length === 0) {
         includes.push(item);
       }
@@ -147,11 +146,11 @@ class FinderUtil {
   async findEmojis(query) {
     const list = await this.client.shard.broadcastEval(`this.finder._emojiFind('${query}')`)
       .then(list => list.reduce((prev, val) => prev.concat(val)));
-    return list || [];    
+    return list || [];
   }
 
   _emojiFind(query) {
-    const list = this.client.emojis.map((e) => ({
+    const list = this.client.emojis.map(e => ({
       id: e.id,
       name: e.name,
       animated: e.animated,
@@ -163,13 +162,13 @@ class FinderUtil {
     if (emojiTest) {
       return [list.find(e => e.id === emojiTest[1])];
     }
-  
+
     const exact = [];
     const wrongCase = [];
     const startsWith = [];
     const includes = [];
     const lowerQuery = query.toLowerCase();
-  
+
     list.forEach((emoji) => {
       const name = emoji.name;
       const id = emoji.id;

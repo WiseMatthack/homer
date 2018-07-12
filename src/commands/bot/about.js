@@ -15,7 +15,7 @@ class AboutCommand extends Command {
     for (const owner of this.client.config.owners) {
       const user = await this.client.fetchUser(owner);
       owners.push(`**${user.username}**#${user.discriminator}`);
-    } 
+    }
 
     const aboutInformation = [
       context.__('about.embed.text'),
@@ -27,10 +27,10 @@ class AboutCommand extends Command {
 
     const embed = new RichEmbed()
       .setDescription(aboutInformation)
-      .setThumbnail(this.client.user.avatar ?
-        `https://cdn.discordapp.com/avatars/${this.client.user.id}/${this.client.user.avatar}` :
-        this.getDefaultAvatar(this.client.user.discriminator));
-    
+      .setThumbnail(this.client.user.avatar
+        ? `https://cdn.discordapp.com/avatars/${this.client.user.id}/${this.client.user.avatar}`
+        : this.getDefaultAvatar(this.client.user.discriminator));
+
     context.reply(
       context.__('about.title', { emote: this.client.constants.emotes.bot, name: `**${this.client.user.username}**` }),
       { embed },

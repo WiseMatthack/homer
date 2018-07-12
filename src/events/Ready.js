@@ -1,5 +1,5 @@
-const Event = require('../structures/Event');
 const mtz = require('moment-timezone');
+const Event = require('../structures/Event');
 
 class ReadyEvent extends Event {
   constructor(client) {

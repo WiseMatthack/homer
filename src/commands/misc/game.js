@@ -1,7 +1,7 @@
-const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
 const mtz = require('moment-timezone');
+const Command = require('../../structures/Command');
 
 class GameCommand extends Command {
   constructor(client) {

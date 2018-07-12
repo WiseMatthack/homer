@@ -1,6 +1,6 @@
-const Manager = require('../structures/Manager');
 const { isAbsolute, resolve } = require('path');
 const readdir = require('util').promisify(require('fs').readdir);
+const Manager = require('../structures/Manager');
 
 const MUSTACHE_SYNTAX = /\{\{\{\s*([\w\.]+)\s*\}\}\}/g;
 
@@ -36,7 +36,7 @@ class LocaleManager extends Manager {
   }
 
   hasKey(locale, key) {
-    return (this.locales[locale][key] || this.locales[this.defaultLocale][key]) ? true : false;
+    return !!((this.locales[locale][key] || this.locales[this.defaultLocale][key]));
   }
 
   translate(locale, key, args = {}) {

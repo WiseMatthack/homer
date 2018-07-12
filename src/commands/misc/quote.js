@@ -20,7 +20,7 @@ class QuoteCommand extends Command {
     if (search && context.message.guild) {
       const foundChannels = this.client.finder.findRolesOrChannels(context.message.guild.channels, search);
       if (!foundChannels || foundChannels.length === 0 || !foundChannels[0]) return context.replyError(context.__('finderUtil.findChannels.zeroResult', { search }));
-      else if (foundChannels.length === 1) channel = foundChannels[0];
+      if (foundChannels.length === 1) channel = foundChannels[0];
       else if (foundChannels.length > 1) return context.replyWarning(this.client.finder.formatChannels(foundChannels, context.settings.misc.locale));
     }
 
@@ -35,9 +35,9 @@ class QuoteCommand extends Command {
     channel.fetchMessage(messageID)
       .then((message) => {
         const embed = new RichEmbed()
-          .setAuthor(message.author.tag, message.author.avatar ?
-            `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.${message.author.avatar.startsWith('a_') ? 'gif' : 'png'}` :
-            this.getDefaultAvatar(message.author.discriminator))
+          .setAuthor(message.author.tag, message.author.avatar
+            ? `https://cdn.discordapp.com/avatars/${message.author.id}/${message.author.avatar}.${message.author.avatar.startsWith('a_') ? 'gif' : 'png'}`
+            : this.getDefaultAvatar(message.author.discriminator))
           .setDescription(message.content)
           .setFooter(`${channel.type === 'text' ? `#${channel.name}` : context.__('global.dm')} - ${message.editedTimestamp ? context.__('quote.edited') : context.__('quote.created')}`)
           .setTimestamp(message.editedAt || message.createdAt);

@@ -15,10 +15,9 @@ class MessageUpdateEvent extends Event {
           const target = (newMessage.channel.id === callObject.sender.id) ? callObject.receiver.id : callObject.sender.id;
           const targetMessage = await this.client.rest.methods.getChannelMessages(target, { limit: 100 })
             .then((data) => {
-              const filter = (m) => 
-                !m.webhook_id &&
-                m.author.id == this.client.user.id &&
-                m.content.startsWith(`📞 **${newMessage.author.username}**#${newMessage.author.discriminator}: ${oldMessage.content}`);
+              const filter = m => !m.webhook_id
+                && m.author.id == this.client.user.id
+                && m.content.startsWith(`📞 **${newMessage.author.username}**#${newMessage.author.discriminator}: ${oldMessage.content}`);
 
               return data.find(filter);
             });

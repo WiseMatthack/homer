@@ -16,7 +16,7 @@ class RoleCommand extends Command {
     if (search) {
       const foundRoles = this.client.finder.findRolesOrChannels(context.message.guild.roles, search);
       if (!foundRoles || foundRoles.length === 0) return context.replyError(context.__('finderUtil.findRoles.zeroResult', { search }));
-      else if (foundRoles.length === 1) role = foundRoles[0];
+      if (foundRoles.length === 1) role = foundRoles[0];
       else if (foundRoles.length > 1) return context.replyWarning(this.client.finder.formatRoles(foundRoles, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('role.noQuery'));
@@ -70,7 +70,7 @@ class GiveSubcommand extends Command {
     if (roleSearch) {
       const foundRoles = this.client.finder.findRolesOrChannels(context.message.guild.roles, roleSearch);
       if (!foundRoles || foundRoles.length === 0) return context.replyError(context.__('finderUtil.findRoles.zeroResult', { search: roleSearch }));
-      else if (foundRoles.length === 1) role = foundRoles[0];
+      if (foundRoles.length === 1) role = foundRoles[0];
       else if (foundRoles.length > 1) return context.replyWarning(this.client.finder.formatRoles(foundRoles, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('role.noQuery'));
@@ -80,7 +80,7 @@ class GiveSubcommand extends Command {
     if (userSearch) {
       const foundMembers = this.client.finder.findMembers(context.message.guild.members, userSearch);
       if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search: userSearch }));
-      else if (foundMembers.length === 1) member = foundMembers[0];
+      if (foundMembers.length === 1) member = foundMembers[0];
       else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('roleme.give.noUserQuery'));

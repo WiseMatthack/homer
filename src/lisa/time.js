@@ -1,11 +1,11 @@
-const Method = require('../structures/Method');
 const mtz = require('moment-timezone');
+const Method = require('../structures/Method');
 
 module.exports = [
   // now
   new Method(
     'now',
-    (env) => mtz()
+    env => mtz()
       .locale(env.settings.misc.locale)
       .tz(env.settings.misc.timezone)
       .format(`${env.settings.misc.dateFormat} ${env.settings.misc.timeFormat}`),

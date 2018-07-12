@@ -44,9 +44,9 @@ class TimeUtil {
       string.push(`**${Math.floor(seconds)}**${this.client.__(locale, `timeUtil.timeSince.seconds.${short ? 'short' : 'long'}`)}`);
     }
 
-    return (string.length > 0) ?
-      (ago ? this.client.__(locale, 'timeUtil.timeSince.ago', { time: string.join(', ') }) : string.join(', ')) :
-      this.client.__(locale, 'timeUtil.timeSince.noTime');
+    return (string.length > 0)
+      ? (ago ? this.client.__(locale, 'timeUtil.timeSince.ago', { time: string.join(', ') }) : string.join(', '))
+      : this.client.__(locale, 'timeUtil.timeSince.noTime');
   }
 
   parseDuration(string, locale = 'en-gb') {

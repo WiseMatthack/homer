@@ -1,5 +1,5 @@
-const Method = require('../structures/Method');
 const bigInteger = require('big-integer');
+const Method = require('../structures/Method');
 
 module.exports = [
   // note
@@ -224,8 +224,7 @@ function evaluateStatement(statement) {
       case '|<|':
         return (s1.compareTo(s2) < 0);
       case '|?|':
-        try { return s1.match(new RegExp(s2)); }
-        catch (e) { return null; }
+        try { return s1.match(new RegExp(s2)); } catch (e) { return null; }
     }
   }
 

@@ -4,13 +4,13 @@ module.exports = [
   // args
   new Method(
     'args',
-    (env) => env.args.join(' '),
+    env => env.args.join(' '),
   ),
 
   // argslen
   new Method(
     'argslen',
-    (env) => env.args.length.toString(),
+    env => env.args.length.toString(),
   ),
 
   // arg

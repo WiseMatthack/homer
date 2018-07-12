@@ -1,9 +1,9 @@
 // Modules
-const DiscordClient = require('./structures/DiscordClient');
 const { DiscordAPIError } = require('discord.js');
 const mtz = require('moment-timezone');
 const config = require('../config.json');
 const { scheduleJob } = require('node-schedule');
+const DiscordClient = require('./structures/DiscordClient');
 
 // Initializing client
 const client = new DiscordClient(config);
@@ -50,19 +50,19 @@ process.on('unhandledRejection', (err) => {
 });
 
 // Misc
-String.prototype.replaceAll = function(search, replacement) {
+String.prototype.replaceAll = function (search, replacement) {
   if (typeof search === 'string') {
     return this.split(search).join(replacement);
   }
 };
 
-String.prototype.hashCode = function() {
-	let hash = 0;
-	if (this.length === 0) return hash;
-	for (let i = 0; i < this.length; i++) {
-		char = this.charCodeAt(i);
-		hash = ((hash << 5) - hash) + char;
-		hash = hash & hash;
-	}
-	return hash;
-}
+String.prototype.hashCode = function () {
+  let hash = 0;
+  if (this.length === 0) return hash;
+  for (let i = 0; i < this.length; i++) {
+    char = this.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash &= hash;
+  }
+  return hash;
+};

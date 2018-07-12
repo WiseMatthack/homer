@@ -1,6 +1,6 @@
 const { Client } = require('discord.js');
-const DjsConstants = require('../../node_modules/discord.js/src/util/Constants');
 const readdir = require('util').promisify(require('fs').readdir);
+const DjsConstants = require('../../node_modules/discord.js/src/util/Constants');
 
 // Managers
 const CommandManager = require('../managers/CommandManager');

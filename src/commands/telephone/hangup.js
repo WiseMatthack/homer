@@ -24,14 +24,12 @@ class HangupCommand extends Command {
         this.client.sendMessage(callObject.sender.id, this.client.__(callObject.sender.locale, 'hangup.target'));
         this.client.sendMessage(callObject.receiver.id, this.client.__(callObject.receiver.locale, 'hangup.author'));
       }
+    } else if (state === 'sender') {
+      this.client.sendMessage(callObject.sender.id, this.client.__(callObject.sender.locale, 'hangup.author'));
+      this.client.updateMessage(callObject.receiver.id, callObject.receiverMessage, this.client.__(callObject.receiver.locale, 'call.receiverMissed', { number: callObject.sender.number }));
     } else {
-      if (state === 'sender') {
-        this.client.sendMessage(callObject.sender.id, this.client.__(callObject.sender.locale, 'hangup.author'));
-        this.client.updateMessage(callObject.receiver.id, callObject.receiverMessage, this.client.__(callObject.receiver.locale, 'call.receiverMissed', { number: callObject.sender.number }));
-      } else {
-        this.client.sendMessage(callObject.sender.id, this.client.__(callObject.sender.locale, 'hangup.target'));
-        this.client.sendMessage(callObject.receiver.id, this.client.__(callObject.receiver.locale, 'hangup.author'));
-      }
+      this.client.sendMessage(callObject.sender.id, this.client.__(callObject.sender.locale, 'hangup.target'));
+      this.client.sendMessage(callObject.receiver.id, this.client.__(callObject.receiver.locale, 'hangup.author'));
     }
   }
 }

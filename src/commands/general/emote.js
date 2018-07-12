@@ -20,7 +20,7 @@ class EmoteCommand extends Command {
     if (search) {
       const foundEmojis = await this.client.finder.findEmojis(search);
       if (!foundEmojis || foundEmojis.length === 0) return context.replyError(context.__('finderUtil.findEmojis.zeroResult', { search }));
-      else if (foundEmojis.length === 1) emoji = foundEmojis[0];
+      if (foundEmojis.length === 1) emoji = foundEmojis[0];
       else if (foundEmojis.length > 1) return context.replyWarning(this.client.finder.formatEmojis(foundEmojis, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('emote.noQuery'));
@@ -38,7 +38,7 @@ class EmoteCommand extends Command {
     const embed = new RichEmbed()
       .setDescription(emoteInformation)
       .setThumbnail(this.getURL(emoji.id, emoji.animated));
-    
+
     context.replySuccess(
       context.__('emote.title', { name: emoji.name }),
       { embed },

@@ -53,7 +53,7 @@ class CommandManager extends Manager {
     if (command) {
       context.args.shift();
       command.run(context);
-    } else if (context.prefix === `<@${context.guild && context.guild.me.nickname ? '!' : ''}${this.client.user.id}>`){
+    } else if (context.prefix === `<@${context.guild && context.guild.me.nickname ? '!' : ''}${this.client.user.id}>`) {
       this.client.other.handleCleverbot(context);
     }
   }

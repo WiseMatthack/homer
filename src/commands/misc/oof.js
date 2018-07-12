@@ -10,7 +10,7 @@ class OofCommand extends Command {
   }
 
   async execute(context) {
-    context.reply("oof");
+    context.reply('oof');
   }
 }
 

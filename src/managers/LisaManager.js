@@ -1,12 +1,12 @@
+const readdir = require('util').promisify(require('fs').readdir);
 const Environment = require('../structures/Environment');
-const readdir = require('util').promisify(require('fs').readdir)
 
-/******************************************************************
+/** ****************************************************************
  * Lisa scripting language                                        *
  * Javascript port of jagrosh's JagTag                            *
  * 100% compatiblity with Spectra tags                            *
  * Copyright (c) 2018 - iDroid27210 & John A. Grosh (jagrosh)     *
- ******************************************************************/
+ ***************************************************************** */
 
 class LisaUtil {
   constructor(client) {
@@ -63,7 +63,7 @@ class LisaUtil {
           const method = this.methods.find(m => m.name === name);
           if (method) {
             try {
-              result = method.parseComplex(env, params)
+              result = method.parseComplex(env, params);
             } catch (e) {
               result = e.message;
             }

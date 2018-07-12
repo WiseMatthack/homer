@@ -60,7 +60,7 @@ class ChannelSubcommand extends Command {
     if (search) {
       const foundChannels = this.client.finder.findRolesOrChannels(context.message.guild.channels, search);
       if (!foundChannels || foundChannels.length === 0 || !foundChannels[0]) return context.replyError(context.__('finderUtil.findChannels.zeroResult', { search }));
-      else if (foundChannels.length === 1) channel = foundChannels[0];
+      if (foundChannels.length === 1) channel = foundChannels[0];
       else if (foundChannels.length > 1) return context.replyWarning(this.client.finder.formatChannels(foundChannels, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('ignore.channel.noSearch'));
@@ -97,7 +97,7 @@ class UserSubcommand extends Command {
     if (search) {
       const foundMembers = this.client.finder.findMembers(context.message.guild.members, search);
       if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search }));
-      else if (foundMembers.length === 1) user = foundMembers[0].user;
+      if (foundMembers.length === 1) user = foundMembers[0].user;
       else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('ignore.user.noSearch'));

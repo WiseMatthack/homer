@@ -1,8 +1,8 @@
-const Command = require('../../structures/Command');
-const Menu = require('../../structures/Menu');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
 const parser = require('playlist-parser');
+const Menu = require('../../structures/Menu');
+const Command = require('../../structures/Command');
 
 class RadioCommand extends Command {
   constructor(client) {
@@ -77,7 +77,7 @@ class TuneSubcommand extends Command {
     const hq = (this.client.config.owners.includes(context.message.author.id) || await this.client.database.getDocument('donators', context.message.author.id));
     const message = await context.message.channel.send(context.__('radio.tune.tuning', { name: radio.name }));
     const dispatcher = await connection.playStream(
-      radio.url ? (await parseURL(radio.url)) : `file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3`,
+      radio.url ? (await parseURL(radio.url)) : 'file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3',
       {
         volume: context.settings.radio.volume || 0.5,
         bitrate: hq ? 64 : 48,
@@ -95,7 +95,7 @@ class TuneSubcommand extends Command {
 
     dispatcher.once('speaking', () => {
       message.edit(context.__('radio.tune.playing', { name: radio.name }));
-      
+
       setTimeout(() => {
         if (!connection.dispatcher) {
           connection.playFile('/var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3', {
@@ -148,7 +148,7 @@ class StopSubcommand extends Command {
     if (!channel.joinable || !channel.speakable) return context.replyError(context.__('radio.cannotJoinOrSpeak', { name: channel.name }));
     if (!channel.members.has(context.message.author.id)) return context.replyWarning(context.__('radio.notInChannel'));
 
-    let connection = this.client.voiceConnections.get(context.message.guild.id);
+    const connection = this.client.voiceConnections.get(context.message.guild.id);
     if (!connection) return context.replyWarning(context.__('radio.stop.noActiveStream', { name: connection.channel.name }));
     await channel.leave();
     this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
@@ -173,7 +173,7 @@ class ChannelSubcommand extends Command {
     if (search) {
       const foundChannels = this.client.finder.findRolesOrChannels(context.message.guild.channels.filter(c => c.type === 'voice'), search);
       if (!foundChannels || foundChannels.length === 0 || !foundChannels[0]) return context.replyError(context.__('finderUtil.findChannels.zeroResult', { search }));
-      else if (foundChannels.length === 1) channel = foundChannels[0];
+      if (foundChannels.length === 1) channel = foundChannels[0];
       else if (foundChannels.length > 1) return context.replyWarning(this.client.finder.formatChannels(foundChannels, context.settings.misc.locale));
     }
     if (!channel) return context.replyWarning(context.__('radio.channel.noChannelFound'));

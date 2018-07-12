@@ -23,7 +23,7 @@ class DonatorsCommand extends Command {
           tag: context.__('global.unknown'),
           id: context.__('global.unknown'),
         }));
-      
+
       donatorsList.push(`**${user.username}**#${user.discriminator}: ${donator.amount}`);
     }
 

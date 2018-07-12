@@ -41,7 +41,7 @@ class Command {
     // Help & subcommands
     if (context.args.length > 0) {
       const tempArgs = context.args[0];
-      
+
       if (tempArgs === 'help' && !this.hidden) {
         const none = context.__('global.none');
 
@@ -53,8 +53,8 @@ class Command {
           context.__('commandHandler.help.aliases', { aliases: this.aliases.map(a => `\`${a}\``).join(' ') || none }),
           '\n',
           context.__('commandHandler.help.description', {
-            description: this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${parent.join('.')}`) ?
-              context.__(`helpUtil.${parent.join('.')}`) : context.__('helpUtil.noDescription'),
+            description: this.client.localization.hasKey(context.settings.misc.locale, `helpUtil.${parent.join('.')}`)
+              ? context.__(`helpUtil.${parent.join('.')}`) : context.__('helpUtil.noDescription'),
           }),
         ];
 
@@ -74,8 +74,8 @@ class Command {
 
         return context.message.author.send(helpMessage.join(''))
           .then(() => context.reactSuccess())
-          .catch(() => context.replyWarning(context.__('commandHandler.help.cannotSend')))
-      } else if (tempArgs) {
+          .catch(() => context.replyWarning(context.__('commandHandler.help.cannotSend')));
+      } if (tempArgs) {
         const subcommand = this.children.find(c => c.name === tempArgs.toLowerCase() || c.aliases.includes(tempArgs.toLowerCase()));
         if (subcommand) {
           context.args.shift();
@@ -196,7 +196,7 @@ class Command {
     if (topic.includes(`{-${this.category}}`)) return false;
 
     // All
-    if (topic.includes(`{-all}`)) return false;
+    if (topic.includes('{-all}')) return false;
     return true;
   }
 }

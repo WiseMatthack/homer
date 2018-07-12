@@ -1,5 +1,5 @@
-const Manager = require('../structures/Manager');
 const rethinkdb = require('rethinkdbdash');
+const Manager = require('../structures/Manager');
 
 class DatabaseManager extends Manager {
   constructor(client) {

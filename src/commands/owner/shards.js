@@ -16,8 +16,7 @@ class ShardsCommand extends Command {
     const values = await this.client.shard.broadcastEval('this ? ({ ping: this.ping, status: this.status, guilds: this.guilds.size, users: this.users.size }) : null')
       .catch(() => []);
 
-    const shardInformation = values.map((value, index) =>
-      `${this.dot} Shard ${index}: ${value ? `**${this.statusString[value.status] || 'UNKNOWN'}** / **${Math.floor(value.ping)}**ms / **${value.guilds}** servers / **${value.users}** users${index === this.client.shard.id ? ' (current)' : ''}` : '**INITIALIZING**'}`).join('\n');
+    const shardInformation = values.map((value, index) => `${this.dot} Shard ${index}: ${value ? `**${this.statusString[value.status] || 'UNKNOWN'}** / **${Math.floor(value.ping)}**ms / **${value.guilds}** servers / **${value.users}** users${index === this.client.shard.id ? ' (current)' : ''}` : '**INITIALIZING**'}`).join('\n');
 
     const embed = new RichEmbed().setDescription(shardInformation);
     context.reply(`${this.client.constants.emotes.bot} Information about shards:`, { embed });

@@ -1,6 +1,6 @@
-const Command = require('../../structures/Command');
 const { Util } = require('discord.js');
 const mtz = require('moment-timezone');
+const Command = require('../../structures/Command');
 
 class TimezoneCommand extends Command {
   constructor(client) {
