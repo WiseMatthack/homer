@@ -20,7 +20,7 @@ module.exports = [
       const tag = await env.client.database.getDocument('tags', name);
       if (!tag) return 'UNKNOWN_TAG';
 
-      return (await env.client.lisa.parseString(env, tag.content, 'tag', args, true)) || '';
+      return (await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true)) || '';
     },
   )
 ];

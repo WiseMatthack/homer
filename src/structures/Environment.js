@@ -25,6 +25,12 @@ class Environment {
       this.user = object.user;
       this.channel = object.channel;
       this.children = true;
+    } else if (type === 'childrenTag') {
+      this.guild = object.guild;
+      this.member = object.member;
+      this.user = object.user;
+      this.channel = object.channel;
+      this.children = true;
     }
   }
 }
