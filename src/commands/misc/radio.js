@@ -41,7 +41,7 @@ class ListSubcommand extends Command {
       context,
       radios
         .sort((a, b) => parseFloat(a.id) - parseFloat(b.id))
-        .map(r => `\`${r.id}\`: ${r.emote} **[${r.name}](${r.website})** - ${r.language} (${r.country}) - ${context.__(`radio.types.${r.type}`)}`),
+        .map(r => `\`${r.id}\`: ${r.emote} **[${r.name}](${r.website})** - ${r.language} (${r.country}) - ${r.type.map(t => context.__(`radio.types.${t}`)).join(', ')}`),
     );
 
     menu.send(context.__('radio.list.title', { name: this.client.user.username }));
@@ -239,7 +239,7 @@ class InfoSubcommand extends Command {
       `${this.dot} ${context.__('radio.info.embed.language')}: **${meta.language}**`,
       `${this.dot} ${context.__('radio.info.embed.country')}: **${meta.country}**`,
       `${this.dot} ${context.__('radio.info.embed.playing')}: ${playing}`,
-      `${this.dot} ${context.__('radio.info.embed.type')}: **${context.__(`radio.types.${meta.type}`)}**`,
+      `${this.dot} ${context.__('radio.info.embed.topics')}: ${meta.type.map(t => `**${context.__(`radio.types.${t}`)}**`).join(', ')}`,
       `${this.dot} ${context.__('radio.info.embed.since')}: ${since}`,
     ].join('\n');
 
