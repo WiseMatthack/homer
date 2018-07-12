@@ -6,7 +6,7 @@ class GuildMemberAddEvent extends Event {
   }
 
   async handle(member) {
-    this.client.database.getDocument('settings', member.guild.id).then((settings) => {
+    this.client.database.getDocument('settings', member.guild.id).then(async (settings) => {
       if (!settings) return;
 
       const channel = member.guild.channels.get(settings.welcome.channel);
