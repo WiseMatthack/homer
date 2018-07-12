@@ -1,10 +1,28 @@
 const Method = require('../structures/Method');
 
 module.exports = [
+  // uid
   new Method(
     'uuid',
     () => uuid(),
   ),
+
+  // exec
+  new Method(
+    'exec',
+    null,
+    async (env, params) => {
+      if (env.children || !params[0]) return;
+
+      const name = params[0];
+      const args = params.slice(1);
+
+      const tag = await env.client.database.getDocument('tags', name);
+      if (!tag) return 'UNKNOWN_TAG';
+
+      return (await env.client.lisa.parseString(env, tag.content, 'tag', args, true)) || '';
+    },
+  )
 ];
 
 function uuid() {

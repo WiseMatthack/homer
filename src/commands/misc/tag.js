@@ -28,7 +28,7 @@ class TagCommand extends Command {
     const tag = await this.client.database.getDocument('tags', name.toLowerCase());
     if (!tag) return context.replyWarning(context.__('tag.unknownTag', { name }));
 
-    context.reply(this.client.lisa.parseString(context, tag.content, 'tag', args));
+    context.reply(await this.client.lisa.parseString(context, tag.content, 'tag', args));
   }
 }
 
@@ -198,7 +198,7 @@ class ExecSubcommand extends Command {
     const content = context.args.join(' ');
     if (!content) return context.replyError(context.__('tag.exec.noContent'));
 
-    context.reply(this.client.lisa.parseString(context, content, 'tag'));
+    context.reply(await this.client.lisa.parseString(context, content, 'tag'));
   }
 }
 

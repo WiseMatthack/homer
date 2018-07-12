@@ -13,7 +13,7 @@ class GuildMemberAddEvent extends Event {
       if (!channel) return;
 
       member.settings = settings;
-      channel.send(this.client.lisa.parseString(member, settings.welcome.message, 'memberlog'));
+      channel.send(await this.client.lisa.parseString(member, settings.welcome.message, 'memberlog'));
     });
   }
 }

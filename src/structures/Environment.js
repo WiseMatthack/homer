@@ -1,5 +1,5 @@
 class Environment {
-  constructor(client, object, type, args) {
+  constructor(client, object, type, args, children) {
     this.client = client;
     this.vars = [];
     this.guild = null;
@@ -7,6 +7,7 @@ class Environment {
     this.user = null;
     this.channel = null;
     this.args = args || [];
+    this.children = children;
     this.settings = object.settings;
 
     this._patch(object, type);
@@ -23,6 +24,7 @@ class Environment {
       this.member = object;
       this.user = object.user;
       this.channel = object.channel;
+      this.children = true;
     }
   }
 }

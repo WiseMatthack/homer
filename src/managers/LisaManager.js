@@ -32,8 +32,8 @@ class LisaUtil {
     await this.loadMethods(sandbox);
   }
 
-  parseString(context, string, type, tagArgs = []) {
-    const env = new Environment(this.client, context, type, tagArgs);
+  async parseString(context, string, type, tagArgs = [], children = false) {
+    const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
     let lastOutput = null;
@@ -52,7 +52,7 @@ class LisaUtil {
           const method = this.methods.find(m => m.name === name);
           if (method) {
             try {
-              result = method.parseSimple(env);
+              result = await method.parseSimple(env);
             } catch (e) {
               result = e.message;
             }
@@ -63,7 +63,7 @@ class LisaUtil {
           const method = this.methods.find(m => m.name === name);
           if (method) {
             try {
-              result = method.parseComplex(env, params);
+              result = await method.parseComplex(env, params);
             } catch (e) {
               result = e.message;
             }
