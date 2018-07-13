@@ -61,10 +61,10 @@ exports.badges = {
 };
 
 exports.status = {
-  online: '<:online:420522894570029056>',
-  idle: '<:idle:420522947531374593>',
-  dnd: '<:dnd:420522920620720129>',
-  offline: '<:offline:420522970482606081>',
+  online: '<:online2:464520569975603200>',
+  idle: '<:away2:464520569862357002>',
+  dnd: '<:dnd2:464520569560498197>',
+  offline: '<:offline2:464520569929334784>',
 };
 
 exports.services = {
