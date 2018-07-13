@@ -63,13 +63,13 @@ class UserCommand extends Command {
       const orderedMembers = context.message.guild.members
         .sort((a, b) => a.joinedTimestamp - b.joinedTimestamp)
         .keyArray();
-      let index = orderedMembers.findIndex(m => m === member.id) - 3;
+      let index = orderedMembers.findIndex(m => m === member.id) - 2;
       if (index < 0) index = 0;
 
       const joinOrder = [];
       const m1 = this.client.users.get(orderedMembers[index]);
       joinOrder.push(m1.id === member.id ? `**${m1.username}**` : m1.username);
-      for (let i = (index + 1); i < (index + 5); i += 1) {
+      for (let i = (index + 2); i < (index + 6); i += 1) {
         if (i >= orderedMembers.length) break;
         const m2 = this.client.users.get(orderedMembers[i]);
         joinOrder.push(m2.id === member.id ? `**${m2.username}**` : m2.username);
