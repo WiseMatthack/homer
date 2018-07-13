@@ -128,9 +128,8 @@ class VolumeSubcommand extends Command {
     if (isNaN(parseInt(volume)) || volume < 0 || volume > 100) return context.replyError(context.__('radio.volume.invalidVolume'));
 
     volume = (volume / 100).toFixed(1);
-    await this.client.database.updateDocument('settings', context.message.guild.id, {
-      radio: { volume },
-    });
+    context.settings.radio.volume = volume;
+    await context.saveSettings();
 
     const currentBroadcast = this.client.voiceConnections.get(context.message.guild.id);
     if (currentBroadcast && currentBroadcast.dispatcher) await currentBroadcast.dispatcher.setVolume(volume);
