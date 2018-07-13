@@ -100,10 +100,14 @@ class TuneSubcommand extends Command {
 
       setTimeout(() => {
         if (!connection.dispatcher) {
-          connection.playBroadcast('/var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3', {
-            volume: context.settings.radio.volume || 0.5,
-            bitrate: hq ? 64 : 48,
-          });
+          const broadcast = await this.client.other.getRadio('NOPRG', 'file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3');
+          const dispatcher = await connection.playBroadcast(
+            broadcast,
+            {
+              volume: context.settings.radio.volume || 0.5,
+              bitrate: hq ? 64 : 48,
+            },
+          );
         }
       }, 2500);
     });
@@ -158,8 +162,10 @@ class StopSubcommand extends Command {
     this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
 
     const broad = this.client.voiceBroadcasts[radio];
-    broad.destroy();
-    this.client.voiceBroadcasts[radio] = undefined;
+    if (broard.dispatchers.length === 0) {
+      broad.destroy();
+      this.client.voiceBroadcasts[radio] = undefined;
+    }
 
     context.replySuccess(context.__('radio.stop.done'));
   }
