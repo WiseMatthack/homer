@@ -83,11 +83,13 @@ class Menu {
     });
   }
 
-  refreshMenu() {
+  async refreshMenu() {
     const embed = new RichEmbed()
       .setTitle(this.context.__('global.page', { num: (this.currentPage + 1) }))
       .setDescription(this.pages[this.currentPage])
       .setFooter(this.context.__('global.page', { num: `${this.currentPage + 1}/${this.pages.length}` }));
+
+    await this.menuMessage.edit(this.menuMessage.content, { embed: new RichEmbed().setDescription(this.context.__('global.loading')) });
 
     this.menuMessage.edit(this.menuMessage.content, { embed }).then((m) => {
       this.menuMessage = m;
