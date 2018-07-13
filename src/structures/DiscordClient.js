@@ -25,6 +25,7 @@ class DiscordClient extends Client {
     this.unavailable = [];
     this.fetchDone = [];
     this.currentBroadcasts = [];
+    this.voiceBroadcasts = [];
     this.ready = false;
 
     this.commands = new CommandManager(this);

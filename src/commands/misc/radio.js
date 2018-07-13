@@ -98,7 +98,7 @@ class TuneSubcommand extends Command {
 
       setTimeout(() => {
         if (!connection.dispatcher) {
-          connection.playFile('/var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3', {
+          connection.playBroadcast('/var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3', {
             volume: context.settings.radio.volume || 0.5,
             bitrate: hq ? 64 : 48,
           });
@@ -151,7 +151,13 @@ class StopSubcommand extends Command {
     const connection = this.client.voiceConnections.get(context.message.guild.id);
     if (!connection) return context.replyWarning(context.__('radio.stop.noActiveStream', { name: connection.channel.name }));
     await channel.leave();
+
+    let radio = this.client.currentBroadcasts.find(b => b.guild === context.message.guild.id).radio;
     this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
+
+    const broad = this.client.voiceBroadcasts[radio];
+    broad.destroy();
+    this.client.voiceBroadcasts[radio] = undefined;
 
     context.replySuccess(context.__('radio.stop.done'));
   }

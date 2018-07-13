@@ -17,6 +17,16 @@ class OtherUtil {
     return `${id.substring(id.length - 3)}-${(Math.random().toFixed(3).toString().substring(2))}`;
   }
 
+  async getRadio(id, url) {
+    const b1 = this.client.voiceBroadcasts[id];
+    if (b1) return b1;
+
+    const b2 = this.client.createVoiceBroadcast();
+    await b2.playStream(url, { bitrate: 64 });
+    this.client.voiceBroadcasts[id] = b2;
+    return b2;
+  }
+
   async handleCleverbot(context) {
     const cleverbotState = await this.client.database.getDocument('bot', 'settings').then(s => s.cleverbot);
     const text = context.args.join(' ');
