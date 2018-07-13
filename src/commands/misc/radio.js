@@ -161,7 +161,7 @@ class StopSubcommand extends Command {
     this.client.currentBroadcasts.splice(this.client.currentBroadcasts.findIndex(b => b.guild === context.message.guild.id), 1);
 
     const broad = this.client.voiceBroadcasts[radio];
-    if (broad.dispatchers.length === 0) {
+    if (broad && broad.dispatchers.length === 0) {
       broad.destroy();
       this.client.voiceBroadcasts[radio] = undefined;
     }
