@@ -138,6 +138,7 @@
   "google.result": "{{{ mention }}}, voici votre résultat: {{{ link }}}",
   "google.error.noResult": "Aucun résultat trouvé avec la requête donnée.",
   "google.error.unknown": "Une erreur inconnue est survenue.",
+  "google.searchTooLong": "The search length must be fewer than 256 characters.",
 
   "handler.remind": "⏰ {{{ text }}} • ajouté {{{ set }}}",
   "handler.poll.noResult": "Aucun résultat collecté pour le sondage !",

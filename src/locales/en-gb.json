@@ -139,6 +139,7 @@
   "google.result": "{{{ mention }}}, here is your result: {{{ link }}}",
   "google.error.noResult": "No result found for the given query",
   "google.error.unknown": "An unknown error occured",
+  "google.searchTooLong": "The search length must be fewer than 256 characters.",
 
   "handler.remind": "⏰ {{{ text }}} • set {{{ set }}}",
   "handler.poll.noResult": "No results were collected for the poll!",
