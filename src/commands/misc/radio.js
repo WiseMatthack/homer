@@ -98,10 +98,10 @@ class TuneSubcommand extends Command {
     dispatcher.once('speaking', () => {
       message.edit(context.__('radio.tune.playing', { name: radio.name }));
 
-      setTimeout(() => {
+      setTimeout(async () => {
         if (!connection.dispatcher) {
           const broadcast = await this.client.other.getRadio('NOPRG', 'file:///var/www/homer_cdn/assets/radios/NO_PROGRAMME.mp3');
-          const dispatcher = await connection.playBroadcast(
+          connection.playBroadcast(
             broadcast,
             {
               volume: context.settings.radio.volume || 0.5,
