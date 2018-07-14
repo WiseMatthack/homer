@@ -54,9 +54,9 @@ class CommandManager extends Manager {
       context.args.shift();
       command.run(context);
     } else if (context.settings.importedTags.includes(command)) {
-      const tagCommand = this.getCommand('tag');
+      const tagCommand = this.getCommand('tag'); console.log(tagCommand);
       if (!tagCommand) return;
-      context.args.shift();
+      context.args.shift(); console.log(context.args);
       tagCommand.run(context);
     } else if (context.prefix === `<@${context.guild && context.guild.me.nickname ? '!' : ''}${this.client.user.id}>`) {
       this.client.other.handleCleverbot(context);
