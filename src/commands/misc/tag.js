@@ -213,9 +213,7 @@ class ListSubcommand extends Command {
     const msgs = splitMessage([
       `${this.client.constants.emotes.success} ${context.__('tag.list.listFor', { name: `**${user.username}**#${user.discriminator}` })}`,
       userTags.map(t => t.id).join(' '),
-    ].join('\n'), {
-      char: ' ',
-    });
+    ].join('\n'));
 
     for (const msg of msgs) await context.reply(msg);
   }
