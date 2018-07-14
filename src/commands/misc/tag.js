@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const { splitMessage } = require('discord.js').Util;
 
 class TagCommand extends Command {
   constructor(client) {
@@ -14,6 +15,7 @@ class TagCommand extends Command {
         new OwnerSubcommand(client),
         new RawSubcommand(client),
         new RawtwoSubcommand(client),
+        new ListSubcommand(client),
         new ImportSubcommand(client),
         new UnimportSubcommand(client),
         new ExecSubcommand(client),
@@ -183,6 +185,39 @@ class RawtwoSubcommand extends Command {
     if (!existentTag) return context.replyWarning(context.__('tag.notFound', { name }));
 
     context.reply(existentTag.content, { code: 'js' });
+  }
+}
+
+class ListSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'list',
+      category: 'misc',
+      dm: true,
+    });
+  }
+
+  async execute(context) {
+    const search = context.args.join(' ');
+    let user = context.message.author;
+    if (search && context.message.guild) {
+      const foundMembers = this.client.finder.findMembers(context.message.guild.members, search);
+      if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search }));
+      if (foundMembers.length === 1) user = foundMembers[0].user;
+      else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
+    }
+
+    const userTags = await this.client.database.findDocuments('tags', { author: user.id });
+    if (userTags.length === 0) return context.replyWarning(context.__('tag.list.noTag', { name: `**${user.username}**#${user.discriminator}` }));
+
+    const msgs = splitMessage([
+      `${this.client.constants.emotes.success} ${context.__('tag.list.listFor', { name: `**${user.username}**#${user.discriminator}` })}`,
+      userTags.map(t => t.id).join(' '),
+    ].join('\n'), {
+      char: ' ',
+    });
+
+    for (const msg of msgs) await context.reply(msg);
   }
 }
 
