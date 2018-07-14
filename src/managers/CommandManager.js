@@ -48,15 +48,15 @@ class CommandManager extends Manager {
       .split(' ');
 
     const cmdSearch = (context.args[0] || '').toLowerCase();
-    const command = this.getCommand(cmdSearch);
+    const command = this.getCommand(cmdSearch); 
 
     if (command) {
       context.args.shift();
       command.run(context);
-    } else if (context.settings.importedTags.includes(command)) {
-      const tagCommand = this.getCommand('tag'); console.log(tagCommand);
+    } else if (context.settings.importedTags.includes(cmdSearch)) {
+      const tagCommand = this.getCommand('tag');
       if (!tagCommand) return;
-      context.args.shift(); console.log(context.args);
+      context.args.shift();
       tagCommand.run(context);
     } else if (context.prefix === `<@${context.guild && context.guild.me.nickname ? '!' : ''}${this.client.user.id}>`) {
       this.client.other.handleCleverbot(context);
