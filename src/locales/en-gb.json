@@ -529,7 +529,7 @@
   "tag.import.alreadyImported": "The tag \"{{{ name }}}\" has already been imported as a custom command!",
   "tag.import.imported": "The tag \"{{{ name }}}\" has been added as a custom command.",
   "tag.unimport.noTag": "You must provide a tag to unimport.",
-  "tag.unimport.alreadyImported": "The tag \"{{{ name }}}\" is not a custom command!",
+  "tag.unimport.notImported": "The tag \"{{{ name }}}\" is not a custom command!",
   "tag.unimport.unimported": "The tag \"{{{ name }}}\" has been been removed from the custom commands.",
   "tag.exec.noContent": "You must provide a content to execute (allows Lisa code).",
 

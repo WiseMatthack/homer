@@ -155,6 +155,8 @@ class RawSubcommand extends Command {
     super(client, {
       name: 'raw',
       usage: '<tag name>',
+      category: 'misc',
+      dm: true,
     });
   }
 
@@ -174,6 +176,8 @@ class RawtwoSubcommand extends Command {
     super(client, {
       name: 'raw2',
       usage: '<tag name>',
+      category: 'misc',
+      dm: true,
     });
   }
 
@@ -244,7 +248,7 @@ class ImportSubcommand extends Command {
     context.settings.importedTags.push(tag.id);
     await context.saveSettings();
 
-    context.replySuccess(context.__('tag.import.unimported', { name: tag.id }));
+    context.replySuccess(context.__('tag.import.imported', { name: tag.id }));
   }
 }
 
