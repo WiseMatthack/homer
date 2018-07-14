@@ -215,7 +215,10 @@ class ListSubcommand extends Command {
       userTags.map(t => t.id).join(' '),
     ].join('\n'));
 
-    for (const msg of msgs) await context.reply(msg);
+    if (typeof msgs === 'string') context.reply(msgs);
+    else {
+      for (const msg of msgs) await context.reply(msg);
+    }
   }
 }
 
