@@ -14,6 +14,8 @@ class TagCommand extends Command {
         new OwnerSubcommand(client),
         new RawSubcommand(client),
         new RawtwoSubcommand(client),
+        new ImportSubcommand(client),
+        new UnimportSubcommand(client),
         new ExecSubcommand(client),
       ],
       dm: true,
@@ -181,6 +183,58 @@ class RawtwoSubcommand extends Command {
     if (!existentTag) return context.replyWarning(context.__('tag.notFound', { name }));
 
     context.reply(existentTag.content, { code: 'js' });
+  }
+}
+
+class ImportSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'import',
+      usage: '<tag name>',
+      userPermissions: ['MANAGE_GUILD'],
+      category: 'misc',
+      dm: true,
+    });
+  }
+
+  async execute(context) {
+    const name = context.args[0];
+    if (!name) return context.replyError(context.__('tag.import.noTag'));
+
+    const tag = await this.client.database.getDocument('tags', name.toLowerCase());
+    if (!tag) return context.replyWarning(context.__('tag.notFound', { name }));
+
+    if (context.settings.importedTags.includes(tag.id)) return context.replyWarning(context.__('tag.import.alreadyImported', { name: tag.id }));
+    context.settings.importedTags.push(tag.id);
+    await context.saveSettings();
+
+    context.replySuccess(context.__('tag.import.unimported', { name: tag.id }));
+  }
+}
+
+class UnimportSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'unimport',
+      usage: '<tag name>',
+      userPermissions: ['MANAGE_GUILD'],
+      category: 'misc',
+      dm: true,
+    });
+  }
+
+  async execute(context) {
+    const name = context.args[0];
+    if (!name) return context.replyError(context.__('tag.unimport.noTag'));
+
+    const tag = await this.client.database.getDocument('tags', name.toLowerCase());
+    if (!tag) return context.replyWarning(context.__('tag.notFound', { name }));
+
+    if (!context.settings.importedTags.includes(tag.id)) return context.replyWarning(context.__('tag.unimport.notImported', { name: tag.id }));
+    context.settings.importedTags.splice(context.settings.importedTags.indexOf(tag.id), 1);
+    await context.saveSettings();
+
+    context.replySuccess(context.__('tag.unimport.unimported', { name: tag.id }));
   }
 }
 
