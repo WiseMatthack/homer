@@ -11,6 +11,7 @@ exports.defaultGuildSettings = id => ({
   ignored: [],
   prefixes: [],
   rolemeRoles: [],
+  importedTags: [],
   radio: {
     channel: '0',
     volume: 0.5,
