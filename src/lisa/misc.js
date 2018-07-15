@@ -56,13 +56,13 @@ module.exports = [
 
       const footer = params.find(p => p.startsWith('footer:'));
       if (footer) {
-        const [text, icon] = footer.split('\\');
+        const [text, icon] = footer.substring(7).split('\\');
         if (text && text.length < 2048) embed.setFooter(text, icon || null);
       }
 
       const author = params.find(p => p.startsWith('author:'));
       if (author) {
-        const [text, icon] = author.split('\\');
+        const [text, icon] = author.substring(7).split('\\');
         if (text && text.length < 256) embed.setAuthor(text, icon || null);
       }
 
