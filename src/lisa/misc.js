@@ -1,4 +1,5 @@
 const Method = require('../structures/Method');
+const { RichEmbed } = require('discord.js');
 
 module.exports = [
   // uid
@@ -22,7 +23,38 @@ module.exports = [
 
       return (await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true)) || '';
     },
-  )
+  ),
+
+  // embed
+  new Method(
+    'embed',
+    null,
+    (env, params) => {
+      const embed = new RichEmbed();
+
+      const title = params.find(p => p.startsWith('title:'));
+      if (title && title.length < 262) embed.setTitle(title.substring(6));
+
+      const description = params.find(p => p.startsWith('desc:'));
+      if (description) embed.setDescription(description.substring(5));
+
+      const fields = params.filter(p => p.startsWith('field:'));
+      for (const field of fields) {
+        const [name, value, inline] = field.split(':');
+        if (!value || name.length > 256 || value.length > 1024) continue;
+        embed.addField(name, value, inline === 'true' ? true : false);
+      }
+
+      const image = params.find(p => p.startsWith('image:'));
+      if (image) embed.setImage(image.substring(6));
+
+      const thumbnail = params.find(p => p.startsWith('thumb:'));
+      if (thumbnail) embed.setThumbnail(thumbnail.substring(6));
+
+      env.embed = embed;
+      return '';
+    },
+  ),
 ];
 
 function uuid() {
