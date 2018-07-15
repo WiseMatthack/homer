@@ -40,7 +40,7 @@ module.exports = [
 
       const fields = params.filter(p => p.startsWith('field:'));
       for (const field of fields) {
-        const [name, value, inline] = field.substring(6).split(':');
+        const [name, value, inline] = field.substring(6).split('\\');
         if (!value || name.length > 256 || value.length > 1024) continue;
         embed.addField(name, value, inline === 'true' ? true : false);
       }
@@ -52,7 +52,7 @@ module.exports = [
       if (thumbnail) embed.setThumbnail(thumbnail.substring(6));
 
       const color = params.find(p => p.startsWith('color:'));
-      if (color) embed.setColor(color.substring(6));
+      if (color) embed.setColor(color.substring(6).toUpperCase());
 
       env.embed = embed;
       return '';
