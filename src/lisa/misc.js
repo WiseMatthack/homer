@@ -51,6 +51,9 @@ module.exports = [
       const thumbnail = params.find(p => p.startsWith('thumb:'));
       if (thumbnail) embed.setThumbnail(thumbnail.substring(6));
 
+      const color = params.find(p => p.startsWith('color:'));
+      if (color) embed.setColor(color.substring(6));
+
       env.embed = embed;
       return '';
     },
