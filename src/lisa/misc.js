@@ -40,7 +40,7 @@ module.exports = [
 
       const fields = params.filter(p => p.startsWith('field:'));
       for (const field of fields) {
-        const [name, value, inline] = field.substring(6).split('\\');
+        const [name, value, inline] = field.substring(6).split('§');
         if (!value || name.length > 256 || value.length > 1024) continue;
         embed.addField(name, value, inline === 'true' ? true : false);
       }
@@ -56,13 +56,13 @@ module.exports = [
 
       const footer = params.find(p => p.startsWith('footer:'));
       if (footer) {
-        const [text, icon] = footer.substring(7).split('\\');
+        const [text, icon] = footer.substring(7).split('§');
         if (text && text.length < 2048) embed.setFooter(text, icon || null);
       }
 
       const author = params.find(p => p.startsWith('author:'));
       if (author) {
-        const [text, icon] = author.substring(7).split('\\');
+        const [text, icon] = author.substring(7).split('§');
         if (text && text.length < 256) embed.setAuthor(text, icon || null);
       }
 
