@@ -78,8 +78,10 @@ class LisaUtil {
     output = this.defilterAll(output);
     if (output.length > this.maxOutput) output = output.substring(0, this.maxOutput);
 
-    if (env.embed) return { content: output, embed: env.embed };
-    return output;
+    return ({
+      content: output,
+      embed: env.embed,
+    });
   }
 
   filterEscapes(string) {

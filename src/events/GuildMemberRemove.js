@@ -13,7 +13,8 @@ class GuildMemberRemoveEvent extends Event {
       if (!channel) return;
 
       member.settings = settings;
-      channel.send(await this.client.lisa.parseString(member, settings.leave.message, 'memberlog'));
+      const parsed = await this.client.lisa.parseString(member, settings.leave.message, 'memberlog');
+      channel.send(parsed.content || '', parsed.embed);
     });
   }
 }

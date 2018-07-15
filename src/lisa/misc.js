@@ -21,7 +21,8 @@ module.exports = [
       const tag = await env.client.database.getDocument('tags', name);
       if (!tag) return 'UNKNOWN_TAG';
 
-      return (await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true)) || '';
+      const parsed = await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true);
+      return parsed.content;
     },
   ),
 
