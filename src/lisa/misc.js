@@ -40,7 +40,7 @@ module.exports = [
 
       const fields = params.filter(p => p.startsWith('field:'));
       for (const field of fields) {
-        const [name, value, inline] = field.split(':');
+        const [name, value, inline] = field.substring(6).split(':');
         if (!value || name.length > 256 || value.length > 1024) continue;
         embed.addField(name, value, inline === 'true' ? true : false);
       }
