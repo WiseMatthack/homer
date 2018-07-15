@@ -63,7 +63,14 @@ class LisaUtil {
           const method = this.methods.find(m => m.name === name);
           if (method) {
             try {
-              result = await method.parseComplex(env, params);
+              const result2 = await method.parseComplex(env, params);
+              
+              if (typeof result2 === 'object') {
+                if (result2.embed) env.embed = result2.embed;
+                result = result2.content;
+              } else {
+                result = result2;
+              }
             } catch (e) {
               result = e.message;
             }

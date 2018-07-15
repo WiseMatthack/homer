@@ -22,8 +22,7 @@ module.exports = [
       if (!tag) return 'UNKNOWN_TAG';
 
       const parsed = await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true);
-      env.embed = parsed.embed;
-      return parsed.content || '';
+      return ({ content: parsed.content, embed: parsed.embed });
     },
   ),
 
@@ -68,8 +67,7 @@ module.exports = [
         if (text && text.length < 256) embed.setAuthor(text, icon || null);
       }
 
-      env.embed = embed;
-      return '';
+      return ({ content: '', embed });
     },
   ),
 ];
