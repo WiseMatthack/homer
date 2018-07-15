@@ -36,7 +36,7 @@ module.exports = [
       if (title && title.length < 262) embed.setTitle(title.substring(6));
 
       const description = params.find(p => p.startsWith('desc:'));
-      if (description) embed.setDescription(description.substring(5));
+      if (description && description.length < 2053) embed.setDescription(description.substring(5));
 
       const fields = params.filter(p => p.startsWith('field:'));
       for (const field of fields) {
@@ -53,6 +53,18 @@ module.exports = [
 
       const color = params.find(p => p.startsWith('color:'));
       if (color) embed.setColor(color.substring(6).toUpperCase());
+
+      const footer = params.find(p => p.startsWith('footer:'));
+      if (footer) {
+        const [text, icon] = footer.split('\\');
+        if (text && text.length < 2048) embed.setFooter(text, icon || null);
+      }
+
+      const author = params.find(p => p.startsWith('author:'));
+      if (author) {
+        const [text, icon] = author.split('\\');
+        if (text && text.length < 256) embed.setAuthor(text, icon || null);
+      }
 
       env.embed = embed;
       return '';
