@@ -1,4 +1,5 @@
 const Command = require('../../structures/Command');
+const Menu = require('../../structures/Menu');
 const { RichEmbed, Permissions } = require('discord.js');
 
 class RoleCommand extends Command {
@@ -6,6 +7,7 @@ class RoleCommand extends Command {
     super(client, {
       name: 'role',
       category: 'general',
+      children: [new MembersSubcommand(client)],
       usage: '<role>',
     });
   }
@@ -34,6 +36,7 @@ class RoleCommand extends Command {
       `${this.dot} ${context.__('role.embed.position')}: #**${context.message.guild.roles.sort((a, b) => b.position - a.position).array().findIndex(r => r.id === role.id) + 1}**`,
       `${this.dot} ${context.__('role.embed.managed')}: **${context.__(`global.${role.managed ? 'yes' : 'no'}`)}**`,
       `${this.dot} ${context.__('role.embed.mentionable')}: **${context.__(`global.${role.mentionable ? 'yes' : 'no'}`)}**`,
+      `${this.dot} ${context.__('role.embed.members')}: **${role.members.size}**`,
       `${this.dot} ${context.__('role.embed.hoisted')}: **${context.__(`global.${role.hoisted ? 'yes' : 'no'}`)}**`,
       `${this.dot} ${context.__('role.embed.permissions')}: ${permissionsString}`,
       `${this.dot} ${context.__('role.embed.creation')}: **${context.formatDate(role.createdTimestamp)}**`,
@@ -41,7 +44,8 @@ class RoleCommand extends Command {
 
     const embed = new RichEmbed()
       .setDescription(roleInformation)
-      .setColor(role.hexColor === '#000000' ? undefined : role.hexColor);
+      .setColor(role.hexColor === '#000000' ? undefined : role.hexColor)
+      .setFooter(context.__('role.embed.footer', { command: `${this.client.prefix}role members ${role.name}` }));
 
     context.reply(
       context.__('role.title', {
@@ -92,6 +96,38 @@ class GiveSubcommand extends Command {
 
     await member.addRole(role.id, `${this.client.prefix}role give`);
     context.replySuccess(context.__('roleme.give.roleGiven', { name: role.name }));
+  }
+}
+
+class MembersSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'members',
+      category: 'general',
+      usage: '<role>',
+    });
+  }
+
+  async execute(context) {
+    const search = context.args.join(' ');
+    let role = null;
+    if (search) {
+      const foundRoles = this.client.finder.findRolesOrChannels(context.message.guild.roles, search);
+      if (!foundRoles || foundRoles.length === 0) return context.replyError(context.__('finderUtil.findRoles.zeroResult', { search }));
+      if (foundRoles.length === 1) role = foundRoles[0];
+      else if (foundRoles.length > 1) return context.replyWarning(this.client.finder.formatRoles(foundRoles, context.settings.misc.locale));
+    } else {
+      return context.replyError(context.__('role.noQuery'));
+    }
+
+    if (role.members.size === 0) return context.replyWarning(context.__('role.members.noMembers', { role: role.name }));
+
+    const menu = new Menu(
+      context,
+      role.members.map(m => `${this.dot} ${m.user ? `*${context.__('global.unknown')}*` : `**${m.user.username}#${m.user.discriminator}`} (ID:${m.id})`),
+    );
+
+    menu.send(context.__('role.members.title', { role: role.name }));
   }
 }
 
