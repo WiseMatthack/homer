@@ -125,7 +125,7 @@ class MembersSubcommand extends Command {
     const m = [];
     for (const member of role.members.keyArray()) {
       const u = await this.client.fetchUser(member);
-      m.push(`${this.dot} **${u.username}#${u.discriminator} (ID:${u.id})`);
+      m.push(`${this.dot} **${u.username}**#${u.discriminator} (ID:${u.id})`);
     }
 
     const menu = new Menu(
