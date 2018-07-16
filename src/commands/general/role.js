@@ -122,9 +122,15 @@ class MembersSubcommand extends Command {
 
     if (role.members.size === 0) return context.replyWarning(context.__('role.members.noMembers', { role: role.name }));
 
+    const m = [];
+    for (const member of role.members.keyArray()) {
+      const u = await this.client.fetchUser(member);
+      m.push(`${this.dot} **${m.user.username}#${m.user.discriminator} (ID:${m.id})`);
+    }
+
     const menu = new Menu(
       context,
-      role.members.map(m => `${this.dot} ${m.user ? `*${context.__('global.unknown')}*` : `**${m.user.username}#${m.user.discriminator}`} (ID:${m.id})`),
+      m,
     );
 
     menu.send(context.__('role.members.title', { role: role.name }));
