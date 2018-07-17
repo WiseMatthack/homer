@@ -74,6 +74,28 @@ module.exports = [
     },
   ),
 
+  // game
+  new Method(
+    'game',
+    env => (env.user.presence.game ? env.user.presence.game.name : ''),
+    (env, params) => {
+      if (!env.guild) return;
+      const members = env.client.finder.findMembers(env.guild.members, params[0]);
+      return members.length > 0 ? (members[0].user.presence.game ? members[0].user.presence.game.name : '') : 'NOT_FOUND';
+    },
+  ),
+
+  // status
+  new Method(
+    'status',
+    env => env.user.presence.status,
+    (env, params) => {
+      if (!env.guild) return;
+      const members = env.client.finder.findMembers(env.guild.members, params[0]);
+      return members.length > 0 ? members[0].user.presence.status : 'NOT_FOUND';
+    },
+  ),
+
   // atuser
   new Method(
     'atuser',
@@ -132,5 +154,15 @@ module.exports = [
   new Method(
     'randchannel',
     env => (env.guild ? env.guild.channels.random().name : null),
+  ),
+
+  // count
+  new Method(
+    'count',
+    env => env.guild ? env.guild.members.filter(m => m.user.presence.status !== 'offline') : '',
+    (env, params) => {
+      if (!env.guild || params[0]) return;
+      return env.guild.members.filter(m => m.user.presence.status === params[0].toLowerCase()).size;
+    },
   ),
 ];
