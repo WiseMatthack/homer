@@ -52,7 +52,7 @@ module.exports = [
     (env, params) => {
       if (!env.guild) return;
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
-      return members.length > 0 ? (members[0].user.bot ? 'true' : 'false') : 'NOT_FOUND';
+      return members.length > 0 ? (members[0].user.bot ? '1' : '0') : 'NOT_FOUND';
     },
   ),
 
