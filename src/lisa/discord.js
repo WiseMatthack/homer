@@ -162,7 +162,7 @@ module.exports = [
     env => env.guild ? env.guild.members.filter(m => m.user.presence.status !== 'offline') : '',
     (env, params) => {
       if (!env.guild || params[0]) return;
-      return env.guild.members.filter(m => m.user.presence.status === params[0].toLowerCase()).size;
+      return env.guild.members.filter(m => m.user.presence.status === params[0].toLowerCase()).size.toString();
     },
   ),
 ];
