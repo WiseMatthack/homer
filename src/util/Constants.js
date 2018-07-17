@@ -66,6 +66,7 @@ exports.status = {
   idle: '<:away2:464520569862357002>',
   dnd: '<:dnd2:464520569560498197>',
   offline: '<:offline2:464520569929334784>',
+  streaming: '<:streaming2:464520569778601985>',
 };
 
 exports.services = {

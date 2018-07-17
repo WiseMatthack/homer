@@ -25,7 +25,7 @@ class UserCommand extends Command {
       } else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     }
 
-    let presence = `${this.client.constants.status[user.presence.status]} **${context.__(`user.status.${user.presence.status}`)}**`;
+    let presence = `${user.presence.game && user.presence.game.type === 1 ? this.client.constants.status.streaming : this.client.constants.status[user.presence.status]} **${context.__(`user.status.${user.presence.status}`)}**`;
     if (user.presence.game) {
       const gameType = user.presence.game.type;
       presence += ` (${context.__(`user.gameType.${gameType}`)} ${gameType === 1 ? `[${user.presence.game.name}](${user.presence.game.url})` : `*${user.presence.game.name}*`})`;
