@@ -45,6 +45,17 @@ module.exports = [
     },
   ),
 
+  // bot
+  new Method(
+    'bot',
+    env => env.user.bot ? 'true' : 'false',
+    (env, params) => {
+      if (!env.guild) return;
+      const members = env.client.finder.findMembers(env.guild.members, params[0]);
+      return members.length > 0 ? (members[0].user.bot ? 'true' : 'false') : '?';
+    },
+  ),
+
   // creation
   new Method(
     'creation',
