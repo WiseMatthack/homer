@@ -67,6 +67,11 @@ module.exports = [
   new Method(
     'userid',
     env => env.user.id,
+    (env, params) => {
+      if (!env.guild) return;
+      const members = env.client.finder.findMembers(env.guild.members, params[0]);
+      return members.length > 0 ? members[0].id.toString() : '?';
+    },
   ),
 
   // atuser
