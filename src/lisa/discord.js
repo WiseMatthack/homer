@@ -156,12 +156,12 @@ module.exports = [
     env => (env.guild ? env.guild.channels.random().name : null),
   ),
 
-  // statuscount
+  // presencecount
   new Method(
-    'statuscount',
+    'presencecount',
     env => env.guild ? env.guild.members.filter(m => m.user.presence.status !== 'offline').size.toString() : '',
     (env, params) => {
-      if (!env.guild || params[0]) return;
+      if (!env.guild || !params[0]) return;
       return env.guild.members.filter(m => m.user.presence.status === params[0].toLowerCase()).size.toString();
     },
   ),
