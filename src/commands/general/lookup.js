@@ -86,7 +86,7 @@ class LookupCommand extends Command {
           `${this.client.constants.status.dnd} **${guildObject.members.filter(m => m.status === 'dnd').length}**`,
         ];
 
-        if (i.memberCount) members.push(`${this.client.constants.status.offline} **${metadata.memberCount - guildObject.members.length}**`);
+        if (metadata.memberCount) members.push(`${this.client.constants.status.offline} **${metadata.memberCount - guildObject.members.length}**`);
 
         const guildInformation = [
           `${this.dot} ${context.__('server.embed.id')}: **${guildObject.id}**`,
