@@ -118,7 +118,7 @@ class LookupCommand extends Command {
 
     // Invite
     await this.client.rest.makeRequest('get', `/invites/${this.client.resolver.resolveInviteCode(search)}?with_counts=true`, true)
-      .then((invite) => {
+      .then(async (invite) => {
         done = true;
 
         const inviter = invite.inviter
