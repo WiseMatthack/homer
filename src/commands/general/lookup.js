@@ -125,11 +125,29 @@ class LookupCommand extends Command {
           ? `**${invite.inviter.username}**#${invite.inviter.discriminator} (ID:${invite.inviter.id})`
           : context.__('global.none');
 
+        const guildObject = invite.guild ? await snekfetch
+          .get(`https://discordapp.com/api/guilds/${invite.guild.id}/widget.json`)
+          .set({ 'User-Agent': this.client.constants.userAgent() })
+          .then(res => ({
+            online: res.members.filter(m => m.status === 'online').length,
+            idle: res.members.filter(m => m.status === 'idle').length,
+            dnd: res.members.filter(m => m.status === 'dnd').length,
+            offline: invite.approximate_member_count - res.members.length,
+          }))
+          .catch(() => ({})) : ({});
+
+        const members = guildObject.online ? [
+          `${this.client.constants.status.online} **${guildObject.members.filter(m => m.status === 'online').length}**`,
+          `${this.client.constants.status.idle} **${guildObject.members.filter(m => m.status === 'idle').length}**`,
+          `${this.client.constants.status.dnd} **${guildObject.members.filter(m => m.status === 'dnd').length}**`,
+          `${this.client.constants.status.offline} **${metadata.memberCount - guildObject.members.length}**`,
+        ] : null;
+
         const inviteInformation = [
           `${this.dot} ${context.__('lookup.invite.embed.server')}: ${invite.guild ? `**${invite.guild.name}** (ID:${invite.guild.id})` : context.__('global.none')}${invite.guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
           `${this.dot} ${context.__('lookup.invite.embed.inviter')}: ${inviter}`,
           `${this.dot} ${context.__('lookup.invite.embed.channel')}: **${invite.channel.name ? `#${invite.channel.name}` : context.__('global.groupDm')}** (ID:${invite.channel.id})`,
-          `${this.dot} ${context.__('lookup.invite.embed.members')}: **${invite.approximate_member_count}**${invite.approximate_presence_count ? ` (${this.client.constants.status.online} **${invite.approximate_presence_count}**)` : ''}`,
+          `${this.dot} ${context.__('lookup.invite.embed.members')}: ${members ? members.join(' - ') : `**${invite.approximate_member_count}**${invite.approximate_presence_count ? ` (${this.client.constants.status.online} **${invite.approximate_presence_count}**)` : ''}`}`,
           `${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`,
         ].join('\n');
 
