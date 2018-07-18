@@ -76,7 +76,7 @@ class LookupCommand extends Command {
         const metadata = await this.client.fetchInvite(guildObject.instant_invite)
           .then(i => ({
             icon: `https://cdn.discordapp.com/icons/${guildObject.id}/${i.guild.icon}`,
-            memberCount: i.approximate_member_count,
+            memberCount: i.memberCount,
           }))
           .catch(() => ({}));
 
