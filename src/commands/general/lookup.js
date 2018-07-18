@@ -134,8 +134,7 @@ class LookupCommand extends Command {
             dnd: res.members.filter(m => m.status === 'dnd').length,
             offline: invite.approximate_member_count - res.members.length,
           }))
-          .catch((r) => console.log('0:' + r.body));
-        console.log('1:' + guildObject)
+          .catch(r => r.body ? ({}) : undefined);
 
         const members = guildObject.online ? [
           `${this.client.constants.status.online} **${guildObject.online}**`,
@@ -143,7 +142,6 @@ class LookupCommand extends Command {
           `${this.client.constants.status.dnd} **${guildObject.dnd}**`,
           `${this.client.constants.status.offline} **${guildObject.offline}**`,
         ] : null;
-        console.log('2:' + members)
 
         const inviteInformation = [
           `${this.dot} ${context.__('lookup.invite.embed.server')}: ${invite.guild ? `**${invite.guild.name}** (ID:${invite.guild.id})` : context.__('global.none')}${invite.guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
