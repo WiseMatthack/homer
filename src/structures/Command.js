@@ -166,6 +166,7 @@ class Command {
         author: context.message.author.id,
         guild: context.message.guild ? context.message.guild.id : 'dm',
         command: parent.join(' '),
+        args: context.args,
         time: Date.now(),
       });
     }

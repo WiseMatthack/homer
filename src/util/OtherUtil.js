@@ -41,7 +41,19 @@ class OtherUtil {
         text,
         nick: this.client.user.id,
       })
-      .then((res) => { context.reply(res.body.response); context.message.channel.stopTyping(); })
+      .then((res) => {
+        context.reply(res.body.response);
+        context.message.channel.stopTyping();
+
+        this.client.database.insertDocument('commandStats', {
+          author: context.message.author.id,
+          guild: context.message.guild ? context.message.guild.id : 'dm',
+          command: 'cleverbot',
+          question: text,
+          answer: res.body.response,
+          time: Date.now(),
+        });
+      })
       .catch((res) => { context.replyError(`ERROR: \`${res.body ? res.body.status : 'UNKNOWN'}\``); context.message.channel.stopTyping(true); });
   }
 }
