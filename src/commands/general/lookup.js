@@ -124,6 +124,7 @@ class LookupCommand extends Command {
         const inviter = invite.inviter
           ? `**${invite.inviter.username}**#${invite.inviter.discriminator} (ID:${invite.inviter.id})`
           : context.__('global.none');
+          console.log(invite)
 
         const guildObject = await snekfetch
           .get(`https://discordapp.com/api/guilds/${invite.guild.id}/widget.json`)
