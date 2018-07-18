@@ -125,7 +125,7 @@ class LookupCommand extends Command {
           ? `**${invite.inviter.username}**#${invite.inviter.discriminator} (ID:${invite.inviter.id})`
           : context.__('global.none');
 
-        const guildObject = invite.guild ? await snekfetch
+        const guildObject = await snekfetch
           .get(`https://discordapp.com/api/guilds/${invite.guild.id}/widget.json`)
           .set({ 'User-Agent': this.client.constants.userAgent() })
           .then(res => ({
@@ -134,7 +134,7 @@ class LookupCommand extends Command {
             dnd: res.members.filter(m => m.status === 'dnd').length,
             offline: invite.approximate_member_count - res.members.length,
           }))
-          .catch(() => ({})) : ({});
+          .catch((r) => console.log(r.text));
         console.log(guildObject)
 
         const members = guildObject.online ? [
