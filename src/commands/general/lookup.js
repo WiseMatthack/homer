@@ -134,7 +134,7 @@ class LookupCommand extends Command {
             dnd: res.members.filter(m => m.status === 'dnd').length,
             offline: invite.approximate_member_count - res.members.length,
           }))
-          .catch((r) => console.log('0:' + r.text));
+          .catch((r) => console.log('0:' + r.body));
         console.log('1:' + guildObject)
 
         const members = guildObject.online ? [
