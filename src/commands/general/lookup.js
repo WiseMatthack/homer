@@ -149,9 +149,10 @@ class LookupCommand extends Command {
           `${this.dot} ${context.__('lookup.invite.embed.channel')}: **${invite.channel.name ? `#${invite.channel.name}` : context.__('global.groupDm')}** (ID:${invite.channel.id})`,
           `${this.dot} ${context.__('lookup.invite.embed.members')}: ${members ? members.join(' - ') : `**${invite.approximate_member_count}**${invite.approximate_presence_count ? ` (${this.client.constants.status.online} **${invite.approximate_presence_count}**)` : ''}`}`,
           `${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`,
-        ].join('\n');
+        ];
 
-        embed.setDescription(inviteInformation);
+        if (invite.guild) inviteInformation.push(`${this.dot} ${context.__('server.embed.creation')}: **${context.formatDate(deconstruct(invite.guild.id).timestamp)}**`);
+        embed.setDescription(inviteInformation.join('\n'));
         if (invite.guild) {
           if (invite.guild.icon) embed.setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
           if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512`);
