@@ -9,9 +9,8 @@ class ReconnectingEvent extends Event {
   async handle() {
     if (this.client.reconnectTimes >= 5) {
       this.client.emit('disconnect');
-      await this.client.destroy();
-      process.exit(666);
     }
+
     this.client.reconnectTimes += 1;
 
     // Sending message in logChannel
