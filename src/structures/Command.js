@@ -24,6 +24,9 @@ class Command {
   }
 
   async run(context, parent = []) {
+    // Goodbye if maintenance
+    if (this.client.maintenance) return;
+
     // We stop right now if there is 'SEND_MESSAGES' or 'EMBED_LINKS' missing
     if (context.message.guild) {
       const missing = context.message.channel.permissionsFor(this.client.user).missing(['SEND_MESSAGES', 'EMBED_LINKS']);
