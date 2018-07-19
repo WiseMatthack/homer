@@ -72,7 +72,7 @@ class OtherUtil {
     return ({
       online: `${this.client.constants.status.online} Online`,
       reconnecting: `${this.client.constants.status.idle} Reconnecting`,
-      maintenance: `${this.client.constants.status.online} Maintenance`,
+      maintenance: `${this.client.constants.status.dnd} Maintenance`,
       offline: `${this.client.constants.status.offline} Offline`,
     });
   }

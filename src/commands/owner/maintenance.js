@@ -17,9 +17,11 @@ class MaintenanceCommand extends Command {
     } else {
       if (this.client.maintenance) {
         this.client.maintenance = false;
+        this.client.shardStatus = 'online';
         context.replySuccess(`Maintenance mode disabled successfully on shard **${this.client.shard.id}**.`);
       } else {
         this.client.maintenance = true;
+        this.client.shardStatus = 'maintenance';
         context.replySuccess(`Maintenance mode enabled successfully on shard **${this.client.shard.id}**.`);
       }
     }
