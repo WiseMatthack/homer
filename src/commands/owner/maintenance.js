@@ -11,12 +11,17 @@ class MaintenanceCommand extends Command {
   }
 
   async execute(context) {
-    if (this.client.maintenance) {
-      this.client.maintenance = false;
-      context.replySuccess('Maintenance mode disabled successfully!');
+    if (context.args[0] === 'all') {
+      await this.client.shard.broadcastEval('this.maintenance ? this.maintenance = false : this.maintenance = true');
+      context.replySuccess('Maintenance mode changed on all shards.');
     } else {
-      this.client.maintenance = true;
-      context.replySuccess('Maintenance mode enabled successfully!');
+      if (this.client.maintenance) {
+        this.client.maintenance = false;
+        context.replySuccess(`Maintenance mode disabled successfully on shard **${this.client.shard.id}**.`);
+      } else {
+        this.client.maintenance = true;
+        context.replySuccess(`Maintenance mode enabled successfully on shard **${this.client.shard.id}**.`);
+      }
     }
   }
 }
