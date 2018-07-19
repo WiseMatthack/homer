@@ -8,7 +8,7 @@ class ReconnectingEvent extends Event {
 
   async handle() {
     if (this.client.reconnectTimes >= 5) {
-      this.client.emit('disconnect');
+      return this.client.emit('disconnect');
     }
 
     this.client.reconnectTimes += 1;
