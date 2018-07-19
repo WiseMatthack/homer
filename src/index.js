@@ -20,6 +20,11 @@ sharder.on('message', (shard, mail) => {
   } else if (mail.type === 'error') {
     console.error(`[Shard ${shard.id}] ${mail.message}`);
   }
+
+  // Code
+  else if (mail.type === 'code') {
+    sharder.eval(mail.code);
+  }
 });
 
 // Spawn shards

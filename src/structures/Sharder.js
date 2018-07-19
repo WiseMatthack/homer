@@ -10,6 +10,10 @@ class Sharder extends ShardingManager {
     this.createBot();
   }
 
+  async eval(code) {
+    await eval(code);
+  }
+
   createBot() {
     snekfetch
       .post('https://cleverbot.io/1.0/create')
