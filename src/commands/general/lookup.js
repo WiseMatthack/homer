@@ -151,13 +151,13 @@ class LookupCommand extends Command {
           `${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`,
         ];
 
-        if (invite.guild) inviteInformation.push(`${this.dot} ${context.__('server.embed.creation')}: **${context.formatDate(deconstruct(invite.guild.id).timestamp)}**`);
-        embed.setDescription(inviteInformation.join('\n'));
         if (invite.guild) {
           if (invite.guild.icon) embed.setThumbnail(`https://cdn.discordapp.com/icons/${invite.guild.id}/${invite.guild.icon}.png`);
-          if (invite.guild.splash) embed.setImage(`https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512`);
+          if (invite.guild.splash) inviteInformation.push(`${this.dot} ${context.__('lookup.invite.embed.splash')}: **[${context.__('global.image')}](https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512)**`);
+          inviteInformation.push(`${this.dot} ${context.__('server.embed.creation')}: **${context.formatDate(deconstruct(invite.guild.id).timestamp)}**`);
         }
 
+        embed.setDescription(inviteInformation.join('\n'));
         message.edit(
           context.__('lookup.invite.title', { invite: invite.code }),
           { embed },

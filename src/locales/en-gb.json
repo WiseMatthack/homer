@@ -292,6 +292,7 @@
   "lookup.invite.embed.channel": "Channel",
   "lookup.invite.embed.members": "Members",
   "lookup.invite.embed.channels": "Channels",
+  "lookup.invite.embed.splash": "Splash",
   "lookup.invite.embed.quickAccess": "Quick access",
   "lookup.nothingFound": "No guild, user or invite found matching `{{{ search }}}`.",
 
