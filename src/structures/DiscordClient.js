@@ -27,6 +27,7 @@ class DiscordClient extends Client {
     this.currentBroadcasts = [];
     this.voiceBroadcasts = [];
     this.ready = false;
+    this.reconnectTimes = 0;
 
     this.commands = new CommandManager(this);
     this.database = new DatabaseManager(this);
