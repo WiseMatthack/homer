@@ -148,7 +148,6 @@ class LookupCommand extends Command {
           `${this.dot} ${context.__('lookup.invite.embed.inviter')}: ${inviter}`,
           `${this.dot} ${context.__('lookup.invite.embed.channel')}: **${invite.channel.name ? `#${invite.channel.name}` : context.__('global.groupDm')}** (ID:${invite.channel.id})`,
           `${this.dot} ${context.__('lookup.invite.embed.members')}: ${members ? members.join(' - ') : `**${invite.approximate_member_count}**${invite.approximate_presence_count ? ` (${this.client.constants.status.online} **${invite.approximate_presence_count}**)` : ''}`}`,
-          `${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`,
         ];
 
         if (invite.guild) {
@@ -157,6 +156,7 @@ class LookupCommand extends Command {
           inviteInformation.push(`${this.dot} ${context.__('server.embed.creation')}: **${context.formatDate(deconstruct(invite.guild.id).timestamp)}**`);
         }
 
+        inviteInformation.push(`${this.dot} ${context.__('lookup.invite.embed.quickAccess')}: **[${invite.code}](https://discord.gg/${invite.code})**`);
         embed.setDescription(inviteInformation.join('\n'));
         message.edit(
           context.__('lookup.invite.title', { invite: invite.code }),
