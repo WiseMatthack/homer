@@ -17,15 +17,17 @@ class ReadyEvent extends Event {
 
     // Sending message in logChannel
     this.client.sendMessage(this.client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${this.client.shard.id}** is now **READY**.`);
-    this.client.updateMessage(this.client.config.statusChannel, this.client.config.status[`shard_${this.client.shard.id}`], `◻ Shard ${this.client.shard.id}: **${this.client.constants.status.online} Online**`);
+    this.client.shardStatus = 'online';
 
     // Update game & bot list count
     this.client.update.updateGame();
     this.client.update.updateBotList();
+    this.client.other.updateShardStatus();
     this.client.setInterval(() => {
       this.client.update.updateGame();
       this.client.update.updateBotList();
     }, 30000);
+    this.client.setInterval(() => this.client.other.updateShardStatus(), 1000);
   }
 }
 

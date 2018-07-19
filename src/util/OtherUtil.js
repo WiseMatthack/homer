@@ -17,6 +17,17 @@ class OtherUtil {
     return `${id.substring(id.length - 3)}-${(Math.random().toFixed(3).toString().substring(2))}`;
   }
 
+  async updateShardStatus() {
+    if (this.client.shardStatus === this.client.oldShardStatus) return;
+
+    this.client.oldShardStatus = this.client.shardStatus;
+    await this.client.updateMessage(
+      this.client.config.statusChannel,
+      this.client.config.status[`shard_${this.client.shard.id}`],
+      `◻ Shard ${this.client.shard.id}: **${this.status[this.client.shardStatus]}** (**${this.client.unavailable.length}**/**${this.client.guilds.size}** unavailable guilds)`,
+    );
+  }
+
   async getRadio(id, url) {
     const b1 = this.client.voiceBroadcasts[id];
     if (b1) return b1;
@@ -55,6 +66,15 @@ class OtherUtil {
         });
       })
       .catch((res) => { context.replyError(`ERROR: \`${res.body ? res.body.status : 'UNKNOWN'}\``); context.message.channel.stopTyping(true); });
+  }
+
+  get status() {
+    return ({
+      online: `${this.client.constants.status.online} Online`,
+      reconnecting: `${this.client.constants.status.idle} Reconnecting`,
+      maintenance: `${this.client.constants.status.online} Maintenance`,
+      offline: `${this.client.constants.status.offline} Offline`,
+    });
   }
 }
 

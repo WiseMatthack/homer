@@ -11,7 +11,8 @@ class DisconnectEvent extends Event {
 
     // Sending message in logChannel
     await this.client.sendMessage(this.client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${this.client.shard.id}** is now **OFFLINE**.`);
-    await this.client.updateMessage(this.client.config.statusChannel, this.client.config.status[`shard_${this.client.shard.id}`], `◻ Shard ${this.client.shard.id}: **${this.client.constants.status.offline} Offline**`);
+    this.client.shardStatus = 'offline';
+    await this.client.other.updateShardStatus();    
 
     // Shutdown
     await this.client.destroy();

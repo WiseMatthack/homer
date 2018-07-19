@@ -28,6 +28,8 @@ class DiscordClient extends Client {
     this.voiceBroadcasts = [];
     this.ready = false;
     this.reconnectTimes = 0;
+    this.shardStatus = 'offline';
+    this.oldShardStatus = null;
 
     this.commands = new CommandManager(this);
     this.database = new DatabaseManager(this);
