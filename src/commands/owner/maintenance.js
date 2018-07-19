@@ -12,7 +12,7 @@ class MaintenanceCommand extends Command {
 
   async execute(context) {
     if (context.args[0] === 'all') {
-      await this.client.shard.broadcastEval('this.maintenance ? this.maintenance = false : this.maintenance = true');
+      await this.client.shard.broadcastEval('if (this.maintenance) { this.maintenance = false; this.shardStatus = \'online\'; } else { this.maintenance = true; this.shardStatus = \'maintenance\'; }');
       context.replySuccess('Maintenance mode changed on all shards.');
     } else {
       if (this.client.maintenance) {
