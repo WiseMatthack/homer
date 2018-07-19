@@ -25,7 +25,7 @@ class Command {
 
   async run(context, parent = []) {
     // Goodbye if maintenance
-    if (this.client.maintenance) return;
+    if (this.client.maintenance && !this.client.config.owners.includes(context.message.author.id)) return;
 
     // We stop right now if there is 'SEND_MESSAGES' or 'EMBED_LINKS' missing
     if (context.message.guild) {
