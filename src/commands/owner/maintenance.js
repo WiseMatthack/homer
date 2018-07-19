@@ -26,4 +26,4 @@ class MaintenanceCommand extends Command {
   }
 }
 
-module.exports = ExecCommand;
+module.exports = MaintenanceCommand;
