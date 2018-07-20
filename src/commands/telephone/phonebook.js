@@ -18,6 +18,17 @@ class PhonebookCommand extends Command {
         .filter(l => l.phonebook && (l.number.includes(search || l.number) || l.phonebook.toLowerCase().includes(search.toLowerCase())))
         .sort((a, b) => a.number === 'SUPPORT' ? -1 : parseInt(a.number.replace('-', '')) - parseInt(b.number.replace('-', ''))));
 
+    const numbers = await this.client.database.getDocuments('telephone').then((subscriptions) => {
+      const lines = [subscriptions.find(s => s.number === 'SUPPORT')];
+
+      for (const subscription of subscriptions.sort((a, b) => parseInt(a.number.replace('-', '')) - parseInt(b.number.replace('-', '')))) {
+        if (subscription.number === 'SUPPORT') continue;
+        lines.push(subscription);
+      }
+
+      return lines;
+    });
+
     if (numbers.length === 0) return context.replyWarning(context.__('phonebook.notFound'));
 
     const menu = new Menu(
