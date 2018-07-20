@@ -13,8 +13,13 @@ class OtherUtil {
     return new BigInt(id).shiftRight('22').mod(this.client.config.sharder.totalShards);
   }
 
+  ran() {
+    const list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    return list[Math.floor(Math.random() * list.length)];
+  }
+
   generateNumber(id) {
-    return `${id.substring(id.length - 3)}-${(Math.random().toFixed(3).toString().substring(2))}`;
+    return `${id.substring(id.length - 3)}-${this.ran()}${this.ran()}${this.ran()}`;
   }
 
   async updateShardStatus() {
