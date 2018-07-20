@@ -26,8 +26,8 @@ class RoleCommand extends Command {
 
     const permissions = new Permissions(role.permissions).serialize();
     const permissionsString = Object.keys(permissions)
-      .filter(p => permissions[p])
-      .map(p => `\`${p}\``)
+      .filter(p => permissions[p] && !this.client.constants.deprecatedPermissions.includes(p))
+      .map(p => `\`${context.__(`permission.${p}`)}\``)
       .join(', ') || context.__('global.none');
 
     const roleInformation = [
