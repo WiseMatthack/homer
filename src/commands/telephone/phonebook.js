@@ -12,13 +12,11 @@ class PhonebookCommand extends Command {
   }
 
   async execute(context) {
-    const collator = new Intl.Collator(context.settings.misc.locale, { numeric: true, sensitivity: 'base' });
-
     const search = context.args.join(' ');
     const numbers = await this.client.database.getDocuments('telephone')
       .then(lines => lines
         .filter(l => l.phonebook && (l.number.includes(search || l.number) || l.phonebook.toLowerCase().includes(search.toLowerCase())))
-        .sort((a, b) => collator.compare(b, a)));
+        .sort((a, b) => parseInt(a.replace('-', '')) - parseInt(b.replace('-', ''))));
 
     if (numbers.length === 0) return context.replyWarning(context.__('phonebook.notFound'));
 
