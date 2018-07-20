@@ -16,7 +16,7 @@ class PhonebookCommand extends Command {
     const numbers = await this.client.database.getDocuments('telephone')
       .then(lines => lines
         .filter(l => l.phonebook && (l.number.includes(search || l.number) || l.phonebook.toLowerCase().includes(search.toLowerCase())))
-        .sort((a, b) => a.number === 'SUPPORT' ? 1 : parseInt(a.number.replace('-', '')) - parseInt(b.number.replace('-', ''))));
+        .sort((a, b) => a.number === 'SUPPORT' ? -1 : parseInt(a.number.replace('-', '')) - parseInt(b.number.replace('-', ''))));
 
     if (numbers.length === 0) return context.replyWarning(context.__('phonebook.notFound'));
 
