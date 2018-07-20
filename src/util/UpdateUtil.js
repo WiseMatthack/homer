@@ -27,7 +27,8 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      });
+      })
+      .catch(() => null);
 
     snekfetch
       .post(`https://discordbots.org/api/bots/${this.client.user.id}/stats`)
@@ -37,7 +38,8 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      });
+      })
+      .catch(() => null);
 
     snekfetch
       .post(`https://listcord.com/api/bot/${this.client.user.id}/guilds`)
@@ -46,7 +48,8 @@ class UpdateUtil {
       .send({
         shard: this.client.shard.id,
         guilds: this.client.guilds.size,
-      });
+      })
+      .catch(() => null);
   }
 }
 
