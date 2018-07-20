@@ -49,6 +49,7 @@ class MessageEvent extends Event {
         if (!afk) continue;
 
         msg.push(`${this.client.constants.emotes.dot} **${user.username}**#${user.discriminator}: ${afk.message || this.client.__(guildSettings.misc.locale, 'global.noReason')} • ${this.client.time.timeSince(afk.time, guildSettings.misc.locale, true, true)}`);
+        expression.lastIndex = 0;
       }
 
       if (msg.length > 0) {
