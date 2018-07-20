@@ -306,7 +306,7 @@
   "permission.MANAGE_CHANNELS": "Manage Channels",
   "permission.MANAGE_GUILD": "Manage Server",
   "permission.ADD_REACTIONS": "Add Reactions",
-  "permission.VIEW_AUDIT_LOGS": "View Audit Logs",
+  "permission.VIEW_AUDIT_LOG": "View Audit Log",
   "permission.VIEW_CHANNEL": "View Channel",
   "permission.SEND_MESSAGES": "Send Messages",
   "permission.SEND_TTS_MESSAGES": "Send TTS Messages",
