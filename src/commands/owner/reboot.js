@@ -11,7 +11,6 @@ class RebootCommand extends Command {
   }
 
   async execute(context) {
-    // Todo
   }
 }
 

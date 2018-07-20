@@ -6,17 +6,16 @@ class UpdateUtil {
   }
 
   async updateGame() {
-    const customGame = await this.client.database.getDocument('bot', 'settings')
-      .then(settings => settings.customGame);
+    const game = await this.client.database.getDocument('bot', 'settings')
+      .then(settings => settings.customGame) || 'Type {prefix}help! On {servers} servers on shard {shard}.';
 
-    return this.client.user.setActivity(customGame
-      ? customGame
+    return this.client.user.setActivity(game
         .replace(/{prefix}/g, this.client.prefix)
         .replace(/{servers}/g, this.client.guilds.size)
         .replace(/{users}/g, this.client.users.size)
         .replace(/{shard}/g, this.client.shard.id)
         .replace(/{shards}/g, this.client.config.sharder.totalShards)
-      : `Type ${this.client.prefix}help! - !BETA VERSION!`);
+    );
   }
 
   updateBotList() {
@@ -28,8 +27,7 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      })
-      .catch(r => console.error(r.body));
+      });
 
     snekfetch
       .post(`https://discordbots.org/api/bots/${this.client.user.id}/stats`)
@@ -39,8 +37,16 @@ class UpdateUtil {
         shard_id: this.client.shard.id,
         shard_count: this.client.shard.count,
         server_count: this.client.guilds.size,
-      })
-      .catch(r => console.error(r.body));
+      });
+
+    snekfetch
+      .post(`https://listcord.com/api/bot/${this.client.user.id}/guilds`)
+      .set('Authorization', this.client.config.api.listcord)
+      .set('Content-Type', 'application/json')
+      .send({
+        shard: this.client.shard.id,
+        guilds: this.client.guilds.size,
+      });
   }
 }
 
