@@ -13,11 +13,6 @@ class PhonebookCommand extends Command {
 
   async execute(context) {
     const search = context.args.join(' ');
-    const numbers = await this.client.database.getDocuments('telephone')
-      .then(lines => lines
-        .filter(l => l.phonebook && (l.number.includes(search || l.number) || l.phonebook.toLowerCase().includes(search.toLowerCase())))
-        .sort((a, b) => a.number === 'SUPPORT' ? -1 : parseInt(a.number.replace('-', '')) - parseInt(b.number.replace('-', ''))));
-
     const numbers = await this.client.database.getDocuments('telephone').then((subscriptions) => {
       const lines = [subscriptions.find(s => s.number === 'SUPPORT')];
 
