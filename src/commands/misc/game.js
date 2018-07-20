@@ -46,7 +46,8 @@ class GameCommand extends Command {
         .get(`${this.baseURL}/companies/${publisher}`)
         .set('Accept', 'application/json')
         .set('user-key', this.client.config.api.igdb)
-        .then(res => res.body[0]);
+        .then(res => res.body[0])
+        .catch(() => ({ name: '?' }));
 
       publishers.push(`**${r.name}**`);
     }
@@ -57,7 +58,8 @@ class GameCommand extends Command {
         .get(`${this.baseURL}/companies/${developer}`)
         .set('Accept', 'application/json')
         .set('user-key', this.client.config.api.igdb)
-        .then(res => res.body[0]);
+        .then(res => res.body[0])
+        .catch(() => ({ name: '?' }));
 
       developers.push(`**${r.name}**`);
     }
@@ -68,7 +70,8 @@ class GameCommand extends Command {
         .get(`${this.baseURL}/platforms/${platform}`)
         .set('Accept', 'application/json')
         .set('user-key', this.client.config.api.igdb)
-        .then(res => res.body[0]);
+        .then(res => res.body[0])
+        .catch(() => ({ name: '?' }));
 
       platforms.push(`**${r.name}**`);
     }

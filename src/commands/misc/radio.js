@@ -268,7 +268,7 @@ async function parseURL(url) {
   const extension = url.split('?')[0];
 
   if (extension.endsWith('m3u')) {
-    const data = await snekfetch.get(url).then(r => r.text);
+    const data = await snekfetch.get(url).then(r => r.text).catch(() => '');
     return parser.M3U.parse(data)[0].file;
   }
 
