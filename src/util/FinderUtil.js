@@ -91,6 +91,7 @@ class FinderUtil {
 
     list.forEach((item) => {
       const name = item.name;
+      if (name === '@everyone') return;
 
       if (name === query || name === query) {
         exact.push(item);

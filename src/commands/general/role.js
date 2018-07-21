@@ -7,7 +7,7 @@ class RoleCommand extends Command {
     super(client, {
       name: 'role',
       category: 'general',
-      children: [new MembersSubcommand(client)],
+      children: [new MembersSubcommand(client), new GiveSubcommand(client), new TakeSubcommand(client)],
       usage: '<role>',
     });
   }
@@ -87,15 +87,74 @@ class GiveSubcommand extends Command {
       if (foundMembers.length === 1) member = foundMembers[0];
       else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
     } else {
-      return context.replyError(context.__('roleme.give.noUserQuery'));
+      return context.replyError(context.__('role.noUserQuery'));
+    }
+
+    if (context.message.guild.me.highestRole.position < role.position) {
+      return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
+    }
+
+    if (context.message.member.highestRole.position < role.position) {
+      return context.replyError(context.__('role.cannotInteract', { name: role.name }));
     }
 
     if (member.roles.has(role.id)) {
-      return context.replyError(context.__('roleme.give.alreadyHave', { name: role.name }));
+      return context.replyError(context.__('roleme.give.alreadyHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
     }
 
-    await member.addRole(role.id, `${this.client.prefix}role give`);
-    context.replySuccess(context.__('roleme.give.roleGiven', { name: role.name }));
+    member.addRole(role.id, `${this.client.prefix}role give`);
+    context.replySuccess(context.__('roleme.give.roleGiven', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+  }
+}
+
+class TakeSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'take',
+      category: 'general',
+      userPermissions: ['MANAGE_ROLES'],
+      botPermissions: ['MANAGE_ROLES'],
+    });
+  }
+
+  async execute(context) {
+    const [roleSearch, userSearch] = context.args.join(' ').split(' from ');
+    if (!roleSearch || !userSearch) return context.replyError(context.__('role.take.missingParameters'));
+
+    let role = null;
+    if (roleSearch) {
+      const foundRoles = this.client.finder.findRolesOrChannels(context.message.guild.roles, roleSearch);
+      if (!foundRoles || foundRoles.length === 0) return context.replyError(context.__('finderUtil.findRoles.zeroResult', { search: roleSearch }));
+      if (foundRoles.length === 1) role = foundRoles[0];
+      else if (foundRoles.length > 1) return context.replyWarning(this.client.finder.formatRoles(foundRoles, context.settings.misc.locale));
+    } else {
+      return context.replyError(context.__('role.noQuery'));
+    }
+
+    let member = null;
+    if (userSearch) {
+      const foundMembers = this.client.finder.findMembers(context.message.guild.members, userSearch);
+      if (!foundMembers || foundMembers.length === 0) return context.replyError(context.__('finderUtil.findMembers.zeroResult', { search: userSearch }));
+      if (foundMembers.length === 1) member = foundMembers[0];
+      else if (foundMembers.length > 1) return context.replyWarning(this.client.finder.formatMembers(foundMembers, context.settings.misc.locale));
+    } else {
+      return context.replyError(context.__('role.noUserQuery'));
+    }
+
+    if (context.message.guild.me.highestRole.position < role.position) {
+      return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
+    }
+
+    if (context.message.member.highestRole.position < role.position) {
+      return context.replyError(context.__('role.cannotInteract', { name: role.name }));
+    }
+
+    if (!member.roles.has(role.id)) {
+      return context.replyError(context.__('roleme.take.doesntHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+    }
+
+    member.removeRole(role.id, `${this.client.prefix}role take`);
+    context.replySuccess(context.__('roleme.take.roleTaken', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
   }
 }
 
