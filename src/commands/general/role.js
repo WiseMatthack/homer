@@ -99,11 +99,11 @@ class GiveSubcommand extends Command {
     }
 
     if (member.roles.has(role.id)) {
-      return context.replyError(context.__('roleme.give.alreadyHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+      return context.replyError(context.__('role.give.alreadyHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
     }
 
     member.addRole(role.id, `${this.client.prefix}role give`);
-    context.replySuccess(context.__('roleme.give.roleGiven', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+    context.replySuccess(context.__('role.give.roleGiven', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
   }
 }
 
@@ -150,11 +150,11 @@ class TakeSubcommand extends Command {
     }
 
     if (!member.roles.has(role.id)) {
-      return context.replyError(context.__('roleme.take.doesntHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+      return context.replyError(context.__('role.take.doesntHave', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
     }
 
     member.removeRole(role.id, `${this.client.prefix}role take`);
-    context.replySuccess(context.__('roleme.take.roleTaken', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
+    context.replySuccess(context.__('role.take.roleTaken', { name: `**${member.user.username}**#${member.user.discriminator}`, role: role.name }));
   }
 }
 
