@@ -474,8 +474,10 @@
   "role.botCannotInteract": "I cannot interact with **{{{ name }}}** due to order of roles.",
   "role.give.alreadyHave": "{{{ name }}} already has the role **{{{ role }}}**.",
   "role.give.roleGiven": "You have given the role **{{{ role }}}** to {{{ name }}}.",
+  "role.give.missingParameters": "Correct syntax: `{{{ prefix }}}role give <role> to <user>`",
   "role.take.doesntHave": "{{{ name }}} does not have the role **{{{ role }}}**.",
   "role.take.roleTaken": "You have taken the role **{{{ role }}}** from {{{ name }}}.",
+  "role.take.missingParameters": "Correct syntax: `{{{ prefix }}}role take <role> from <user>`",
   
   "roleme.noQuery": "You must provide the name of a role to find",
   "roleme.unavailableRole": "The role **{{{ name }}}** is not available for roleme!",
