@@ -33,23 +33,18 @@ class MessageEvent extends Event {
       });
 
     // AFK notification
-    const expression = /<@!?(\d{17,20})>/g;
-    const mentions = message.content.match(expression);
-    if (message.guild && mentions && !message.author.bot) {
+    const mentions = message.mentions.members.keyArray();
+    if (message.guild && !message.author.bot && mentions.length > 0) {
       const guildSettings = await this.client.database.getDocument('settings', message.guild.id) || this.client.constants.defaultGuildSettings(message.guild.id);
       const msg = [];
-      for (const mention of mentions) {
-        const id = expression.exec(mention);
-        if (!id || !id[1]) continue;
-
-        const user = await this.client.fetchUser(id[1]);
+      for (const id of mentions) {
+        const user = await this.client.fetchUser(id);
         if (!user) continue;
 
         const afk = await this.client.database.getDocument('afk', user.id);
         if (!afk) continue;
 
         msg.push(`${this.client.constants.emotes.dot} **${user.username}**#${user.discriminator}: ${afk.message || this.client.__(guildSettings.misc.locale, 'global.noReason')} • ${this.client.time.timeSince(afk.time, guildSettings.misc.locale, true, true)}`);
-        expression.lastIndex = 0;
       }
 
       if (msg.length > 0) {
