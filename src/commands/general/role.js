@@ -90,11 +90,11 @@ class GiveSubcommand extends Command {
       return context.replyError(context.__('role.noUserQuery'));
     }
 
-    if (context.message.guild.me.highestRole.position < role.position) {
+    if (context.message.guild.me.highestRole.position <= role.position) {
       return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
     }
 
-    if (context.message.member.highestRole.position < role.position) {
+    if (context.message.member.highestRole.position <= role.position) {
       return context.replyError(context.__('role.cannotInteract', { name: role.name }));
     }
 
@@ -141,11 +141,11 @@ class TakeSubcommand extends Command {
       return context.replyError(context.__('role.noUserQuery'));
     }
 
-    if (context.message.guild.me.highestRole.position < role.position) {
+    if (context.message.guild.me.highestRole.position <= role.position) {
       return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
     }
 
-    if (context.message.member.highestRole.position < role.position) {
+    if (context.message.member.highestRole.position <= role.position) {
       return context.replyError(context.__('role.cannotInteract', { name: role.name }));
     }
 
