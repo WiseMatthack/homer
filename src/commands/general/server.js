@@ -27,7 +27,7 @@ class ServerCommand extends Command {
     ].join(', ');
 console.log('debug 36')
     const status = { online: 0, idle: 0, dnd: 0, offline: 0, bot: 0 };
-    for (const member of guild.members) {
+    for (const member of guild.members.array()) {
       status[member.user.presence.status] += 1;
       if (member.user.bot) status.bot += 1;
     }
