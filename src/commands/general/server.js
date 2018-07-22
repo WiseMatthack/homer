@@ -20,10 +20,12 @@ class ServerCommand extends Command {
       `**${context.message.guild.channels.filter(c => c.type === 'voice').size}** ${context.__('channel.type.voice')}`,
     ].join(', ');
 
+    const region = guild.region.startsWith('vip-') ? guild.region.substring(4) : guild.region;
+
     const serverInformation = [
       `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**${guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
       `${this.dot} ${context.__('server.embed.owner')}: **${guildOwner.username}**#${guildOwner.discriminator} (ID:${guild.ownerID})`,
-      `${this.dot} ${context.__('server.embed.region')}: ${this.client.constants.regionFlags[guild.region]} **${context.__(`server.region.${guild.region}`)}**`,
+      `${this.dot} ${context.__('server.embed.region')}: ${this.client.constants.regionFlags[region]} **${context.__(`server.region.${region}`)}${guild.region.startsWith('vip-') ? ' (VIP)' : ''}**`,
       `${this.dot} ${context.__('server.embed.channels')}: ${channels}`,
       `${this.dot} ${context.__('server.embed.members')}: **${guild.memberCount}**`,
       `${this.dot} ${context.__('server.embed.verificationLevel')}: **${context.__(`server.verificationLevel.${guild.verificationLevel}`)}**`,
