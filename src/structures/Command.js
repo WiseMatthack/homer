@@ -17,6 +17,7 @@ class Command {
     this.children = commandOptions.children || [];
     this.private = commandOptions.private || false;
     this.hidden = commandOptions.hidden || this.private;
+    this.needFetch = false;
   }
 
   get dot() {
@@ -37,6 +38,8 @@ class Command {
         )}`);
       }
     }
+
+    console.log('Debug 4');
 
     // We use this for help
     parent.push(this.name);
@@ -97,6 +100,8 @@ class Command {
       if (context.settings.ignored.find(i => i.id === this.name)) return;
     }
 
+    console.log('Debug 6');
+
     // Blacklist
     const blacklistEntry = await this.client.database.getDocument('blacklist', context.message.author.id);
     if (blacklistEntry && this.category !== 'owner') {
@@ -145,6 +150,8 @@ class Command {
       }
     }
 
+    console.log('Debug 8');
+
     // Check cooldown
     const cooldownObject = await this.client.database.getDocument('cooldown', context.message.author.id);
     if (cooldownObject) {
@@ -155,10 +162,9 @@ class Command {
       ));
     }
 
-    // We fetch members in the guild IF they have not been
+    // We fetch members in the guild IF they have not been and IF command needs user fetching
     if (context.message.guild && !this.client.fetchDone.includes(context.message.guild.id)) {
-      console.log('Debug');
-      await context.message.guild.fetchMembers();
+      context.message.guild.fetchMembers();
       this.client.fetchDone.push(context.message.guild.id);
     }
 
@@ -177,6 +183,7 @@ class Command {
 
     // Execute command
     try {
+      console.log('Debug 10');
       await this.execute(context);
     } catch (e) {
       context.replyError(context.__('commandHandler.error'));

@@ -13,7 +13,7 @@ class ServerCommand extends Command {
   async execute(context) {
     const guild = context.message.guild;
     const guildOwner = await this.client.fetchUser(guild.ownerID);
-    const defaultMessageNotification = await this.client.rest.makeRequest('get', `/guilds/${context.message.guild.id}`, true).then(a => a.default_message_notifications);
+    //const defaultMessageNotification = await this.client.rest.makeRequest('get', `/guilds/${context.message.guild.id}`, true).then(a => a.default_message_notifications);
 
     const channels = [
       `**${context.message.guild.channels.filter(c => c.type === 'text').size}** ${context.__('channel.type.text')}`,
