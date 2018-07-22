@@ -157,6 +157,7 @@ class Command {
 
     // We fetch members in the guild IF they have not been
     if (context.message.guild && !this.client.fetchDone.includes(context.message.guild.id)) {
+      console.log('Debug');
       await context.message.guild.fetchMembers();
       this.client.fetchDone.push(context.message.guild.id);
     }
