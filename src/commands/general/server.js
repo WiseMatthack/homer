@@ -12,14 +12,16 @@ class ServerCommand extends Command {
 
   async execute(context) {
     const guild = context.message.guild;
-    const guildOwner = await this.client.fetchUser(guild.ownerID);
+    console.log('debug 30')
+    const guildOwner = guild.owner ? guild.owner.user : await this.client.fetchUser(guild.ownerID);
+    console.log('debug 32')
     const defaultMessageNotification = await this.client.rest.makeRequest('get', `/guilds/${context.message.guild.id}`, true).then(a => a.default_message_notifications);
-
+    console.log('debug 34')
     const channels = [
       `**${context.message.guild.channels.filter(c => c.type === 'text').size}** ${context.__('channel.type.text')}`,
       `**${context.message.guild.channels.filter(c => c.type === 'voice').size}** ${context.__('channel.type.voice')}`,
     ].join(', ');
-
+console.log('debug 36')
     const members = [
       `${this.client.constants.status.online} **${guild.members.filter(m => m.user.presence.status === 'online').size}**`,
       `${this.client.constants.status.idle} **${guild.members.filter(m => m.user.presence.status === 'idle').size}**`,
@@ -27,7 +29,7 @@ class ServerCommand extends Command {
       `${this.client.constants.status.offline} **${guild.members.filter(m => m.user.presence.status === 'offline').size}**`,
       `${this.client.constants.emotes.botIcon} **${guild.members.filter(m => m.user.bot).size}**`,
     ];
-
+console.log('debug 38')
     const serverInformation = [
       `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**${guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
       `${this.dot} ${context.__('server.embed.owner')}: **${guildOwner.username}**#${guildOwner.discriminator} (ID:${guild.ownerID})`,
@@ -39,18 +41,18 @@ class ServerCommand extends Command {
       `${this.dot} ${context.__('server.embed.defaultMessageNotifications')}: **${context.__(`server.defaultMessageNotifications.${defaultMessageNotification}`)}**`,
       `${this.dot} ${context.__('server.embed.creation')}: **${context.formatDate(guild.createdTimestamp)}**`,
     ].join('\n');
-
+console.log('debug 40')
     const embed = new RichEmbed()
       .setDescription(serverInformation)
       .setThumbnail(guild.icon ? `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}` : undefined)
       .setImage(guild.splash ? `https://cdn.discordapp.com/splashes/${invite.guild.id}/${invite.guild.splash}.png?size=512` : undefined);
-
+console.log('debug 42')
     context.reply(
       context.__('server.title', {
         name: guild.name,
       }),
       { embed },
-    );
+    ).then(() => console.log('debug 44'));
   }
 
   getDefaultAvatar(discriminator) {
