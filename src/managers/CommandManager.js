@@ -30,8 +30,6 @@ class CommandManager extends Manager {
   async handleCommand(message) {
     if (message.author.bot || !message.content) return;
 
-    console.log('Debug 2')
-
     const context = new Context(this.client, message);
     await context.getSettings();
 
@@ -50,9 +48,7 @@ class CommandManager extends Manager {
       .split(' ');
 
     const cmdSearch = (context.args[0] || '').toLowerCase();
-    const command = this.getCommand(cmdSearch); 
-
-    console.log('debug 2 bis');
+    const command = this.getCommand(cmdSearch);
 
     if (command) {
       context.args.shift();

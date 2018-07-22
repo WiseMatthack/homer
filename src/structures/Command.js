@@ -17,7 +17,6 @@ class Command {
     this.children = commandOptions.children || [];
     this.private = commandOptions.private || false;
     this.hidden = commandOptions.hidden || this.private;
-    this.needFetch = false;
   }
 
   get dot() {
@@ -38,8 +37,6 @@ class Command {
         )}`);
       }
     }
-
-    console.log('Debug 4');
 
     // We use this for help
     parent.push(this.name);
@@ -100,8 +97,6 @@ class Command {
       if (context.settings.ignored.find(i => i.id === this.name)) return;
     }
 
-    console.log('Debug 6');
-
     // Blacklist
     const blacklistEntry = await this.client.database.getDocument('blacklist', context.message.author.id);
     if (blacklistEntry && this.category !== 'owner') {
@@ -150,8 +145,6 @@ class Command {
       }
     }
 
-    console.log('Debug 8');
-
     // Check cooldown
     const cooldownObject = await this.client.database.getDocument('cooldown', context.message.author.id);
     if (cooldownObject) {
@@ -183,7 +176,6 @@ class Command {
 
     // Execute command
     try {
-      console.log('Debug 10');
       await this.execute(context);
     } catch (e) {
       context.replyError(context.__('commandHandler.error'));
