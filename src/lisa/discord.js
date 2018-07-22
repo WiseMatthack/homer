@@ -8,6 +8,7 @@ module.exports = [
     env => env.user.username,
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? members[0].user.username : 'NOT_FOUND';
     },
@@ -19,6 +20,7 @@ module.exports = [
     env => ((env.member && env.member.nickname) ? env.member.nickname : env.user.username),
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? (members[0].nickname || members[0].user.username) : 'NOT_FOUND';
     },
@@ -29,6 +31,7 @@ module.exports = [
     env => env.user.discriminator,
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? members[0].user.discriminator : 'NOT_FOUND';
     },
@@ -40,6 +43,7 @@ module.exports = [
     env => (env.user.avatar ? `https://cdn.discordapp.com/avatars/${env.user.id}/${env.user.avatar}.png` : this.getDefaultAvatar(env.user.discriminator)),
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? (members[0].user.avatar ? `https://cdn.discordapp.com/avatars/${members[0].user.id}/${members[0].user.avatar}.png` : this.getDefaultAvatar(members[0].user.discriminator)) : 'NOT_FOUND';
     },
@@ -51,6 +55,7 @@ module.exports = [
     env => env.user.bot ? 'true' : 'false',
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? (members[0].user.bot ? '1' : '0') : 'NOT_FOUND';
     },
@@ -69,6 +74,7 @@ module.exports = [
     env => env.user.id,
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? members[0].id.toString() : 'NOT_FOUND';
     },
@@ -80,6 +86,7 @@ module.exports = [
     env => (env.user.presence.game ? env.user.presence.game.name : ''),
     (env, params) => {
       if (!env.guild) return;
+      if (!params[0]) return 'NOT_FOUND';
       const members = env.client.finder.findMembers(env.guild.members, params[0]);
       return members.length > 0 ? (members[0].user.presence.game ? members[0].user.presence.game.name : '') : 'NOT_FOUND';
     },
