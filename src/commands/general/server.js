@@ -32,7 +32,7 @@ class ServerCommand extends Command {
       `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**${guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
       `${this.dot} ${context.__('server.embed.owner')}: **${guildOwner.username}**#${guildOwner.discriminator} (ID:${guild.ownerID})`,
       `${this.dot} ${context.__('server.embed.region')}: ${this.client.constants.regionFlags[guild.region]} **${context.__(`server.region.${guild.region}`)}**`,
-      `${this.dot} ${context.__('server.embed.members')}: **${guild.memberCount}** (${members.join(' - ')})`,
+      `${this.dot} ${context.__('server.embed.members')}: ${members.join(' - ')}`,
       `${this.dot} ${context.__('server.embed.channels')}: ${channels}`,
       `${this.dot} ${context.__('server.embed.verificationLevel')}: **${context.__(`server.verificationLevel.${guild.verificationLevel}`)}**`,
       `${this.dot} ${context.__('server.embed.explicitContentFilter')}: **${context.__(`server.explicitContentFilter.${guild.explicitContentFilter}`)}**`,
