@@ -1,9 +1,5 @@
 const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
-const status = {
-  online: 0,
-  
-}
 
 class ServerCommand extends Command {
   constructor(client) {
@@ -27,9 +23,9 @@ class ServerCommand extends Command {
     ].join(', ');
 console.log('debug 36')
     const status = { online: 0, idle: 0, dnd: 0, offline: 0, bot: 0 };
-    const members = guild.members.array();
-    for (let i = 0; i < members.length; i += 1) {
-      const user = members[i].user;
+    const membersList = guild.members.array();
+    for (let i = 0; i < membersList.length; i += 1) {
+      const user = membersList[i].user;
       if (!user) continue;
       status[user.presence.status] += 1;
       if (user.bot) status.bot += 1;
