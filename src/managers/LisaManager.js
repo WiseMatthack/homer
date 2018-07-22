@@ -86,7 +86,7 @@ class LisaUtil {
     if (output.length > this.maxOutput) output = output.substring(0, this.maxOutput);
 
     return ({
-      content: output,
+      content: output.length === 0 ? '​' : output,
       embed: env.embed,
     });
   }
