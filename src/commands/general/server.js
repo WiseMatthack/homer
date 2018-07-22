@@ -1,5 +1,9 @@
 const Command = require('../../structures/Command');
 const { RichEmbed } = require('discord.js');
+const status = {
+  online: 0,
+  
+}
 
 class ServerCommand extends Command {
   constructor(client) {
@@ -22,12 +26,18 @@ class ServerCommand extends Command {
       `**${context.message.guild.channels.filter(c => c.type === 'voice').size}** ${context.__('channel.type.voice')}`,
     ].join(', ');
 console.log('debug 36')
+    const status = { online: 0, idle: 0, dnd: 0, offline: 0, bot: 0 };
+    for (const member of guild.members) {
+      status[member.user.presence.status] += 1;
+      if (member.user.bot) status.bot += 1;
+    }
+
     const members = [
-      `${this.client.constants.status.online} **${guild.members.filter(m => m.user.presence.status === 'online').size}**`,
-      `${this.client.constants.status.idle} **${guild.members.filter(m => m.user.presence.status === 'idle').size}**`,
-      `${this.client.constants.status.dnd} **${guild.members.filter(m => m.user.presence.status === 'dnd').size}**`,
-      `${this.client.constants.status.offline} **${guild.members.filter(m => m.user.presence.status === 'offline').size}**`,
-      `${this.client.constants.emotes.botIcon} **${guild.members.filter(m => m.user.bot).size}**`,
+      `${this.client.constants.status.online} **${status.online}**`,
+      `${this.client.constants.status.idle} **${status.idle}**`,
+      `${this.client.constants.status.dnd} **${status.dnd}**`,
+      `${this.client.constants.status.offline} **${status.offline}**`,
+      `${this.client.constants.emotes.botIcon} **${status.bot}**`,
     ];
 console.log('debug 38')
     const serverInformation = [
