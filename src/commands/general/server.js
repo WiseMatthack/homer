@@ -20,11 +20,19 @@ class ServerCommand extends Command {
       `**${context.message.guild.channels.filter(c => c.type === 'voice').size}** ${context.__('channel.type.voice')}`,
     ].join(', ');
 
+    const members = [
+      `${this.client.constants.status.online} **${guild.members.filter(m => m.user.presence.status === 'online').size}**`,
+      `${this.client.constants.status.idle} **${guild.members.filter(m => m.user.presence.status === 'idle').size}**`,
+      `${this.client.constants.status.dnd} **${guild.members.filter(m => m.user.presence.status === 'dnd').size}**`,
+      `${this.client.constants.status.offline} **${guild.members.filter(m => m.user.presence.status === 'offline').size}**`,
+      `${this.client.constants.emotes.botIcon} **${guild.members.filter(m => m.user.bot).size}**`,
+    ];
+
     const serverInformation = [
       `${this.dot} ${context.__('server.embed.id')}: **${guild.id}**${guild.features.includes('VERIFIED') ? ` ${this.client.constants.emotes.verifiedServer}` : ''}`,
       `${this.dot} ${context.__('server.embed.owner')}: **${guildOwner.username}**#${guildOwner.discriminator} (ID:${guild.ownerID})`,
       `${this.dot} ${context.__('server.embed.region')}: ${this.client.constants.regionFlags[guild.region]} **${context.__(`server.region.${guild.region}`)}**`,
-      `${this.dot} ${context.__('server.embed.members')}: **${guild.memberCount}** (${this.client.constants.emotes.botIcon} **${guild.members.filter(m => m.user.bot).size}** - ${this.client.constants.status.online} **${guild.members.filter(m => m.user.presence.status === 'online').size}**)`,
+      `${this.dot} ${context.__('server.embed.members')}: **${guild.memberCount}** (${members.join(' - ')})`,
       `${this.dot} ${context.__('server.embed.channels')}: ${channels}`,
       `${this.dot} ${context.__('server.embed.verificationLevel')}: **${context.__(`server.verificationLevel.${guild.verificationLevel}`)}**`,
       `${this.dot} ${context.__('server.embed.explicitContentFilter')}: **${context.__(`server.explicitContentFilter.${guild.explicitContentFilter}`)}**`,
