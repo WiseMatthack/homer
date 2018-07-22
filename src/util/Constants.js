@@ -88,6 +88,7 @@ exports.regionFlags = {
   'us-south': ':flag_us:',
   'us-west': ':flag_us:',
   singapore: ':flag_sg:',
+  southafrica: ':flag_za:',
   sydney: ':flag_au:',
 };
 

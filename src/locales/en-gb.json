@@ -529,6 +529,7 @@
   "server.region.us-south": "Southern US",
   "server.region.us-west": "Western US",
   "server.region.singapore": "Singapore",
+  "server.region.southafrica": "South Africa",
   "server.region.sydney": "Sydney",
 
   "settings.title": "🔧 Settings for {{{ name }}}:",
