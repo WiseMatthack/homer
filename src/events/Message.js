@@ -7,8 +7,6 @@ class MessageEvent extends Event {
   }
 
   async handle(message) {
-    console.log('Debug 2');
-
     // Command handling
     this.client.commands.handleCommand(message);
 
