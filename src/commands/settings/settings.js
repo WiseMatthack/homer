@@ -13,15 +13,23 @@ class SettingsCommand extends Command {
   }
 
   async execute(context) {
-    const embed = new RichEmbed()
-      .setDescription([
-        `${this.dot} ${context.__('settings.embed.locale')}: ${context.__('lang.flag')} **${context.__('lang.name')}** (\`${context.__('lang.code')}\`)`,
+    const description = [`${this.dot} ${context.__('settings.embed.locale')}: ${context.__('lang.flag')} **${context.__('lang.name')}** (\`${context.__('lang.code')}\`)`];
+
+    if (context.message.guild) {
+      description.push(
         `${this.dot} ${context.__('settings.embed.welcome')}: ${(context.settings.welcome.message && context.settings.welcome.channel) ? `<#${context.settings.welcome.channel}>: ${context.settings.welcome.message}` : context.__('global.none')}`,
         `${this.dot} ${context.__('settings.embed.leave')}: ${(context.settings.leave.message && context.settings.leave.channel) ? `<#${context.settings.leave.channel}>: ${context.settings.leave.message}` : context.__('global.none')}`,
-        `${this.dot} ${context.__('settings.embed.timezone')}: **${context.settings.misc.timezone}**`,
-        `${this.dot} ${context.__('settings.embed.dateFormat')}: **${context.settings.misc.dateFormat}**`,
-        `${this.dot} ${context.__('settings.embed.timeFormat')}: **${context.settings.misc.timeFormat}**`,
-      ].join('\n'))
+      );
+    }
+
+    description.push(
+      `${this.dot} ${context.__('settings.embed.timezone')}: **${context.settings.misc.timezone}**`,
+      `${this.dot} ${context.__('settings.embed.dateFormat')}: **${context.settings.misc.dateFormat}**`,
+      `${this.dot} ${context.__('settings.embed.timeFormat')}: **${context.settings.misc.timeFormat}**`,
+    );
+
+    const embed = new RichEmbed()
+      .setDescription(description.join('\n'))
       .setFooter(context.__('settings.embed.footer', { command: `${this.client.prefix}settings reset` }));
 
     context.reply(

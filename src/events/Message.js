@@ -33,7 +33,7 @@ class MessageEvent extends Event {
       });
 
     // AFK notification
-    const mentions = message.mentions.members.keyArray();
+    const mentions = message.guild ? message.mentions.members.keyArray() : [];
     if (message.guild && !message.author.bot && mentions.length > 0) {
       const guildSettings = await this.client.database.getDocument('settings', message.guild.id) || this.client.constants.defaultGuildSettings(message.guild.id);
       const msg = [];
