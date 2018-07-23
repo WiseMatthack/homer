@@ -131,4 +131,13 @@ module.exports = [
       return repeated.join(separator || '');
     },
   ),
+
+  // reverse
+  new Method(
+    'reverse',
+    null,
+    (env, params) => {
+      return params[0].split('').reverse().join('');
+    },
+  ),
 ];
