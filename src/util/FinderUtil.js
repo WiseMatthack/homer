@@ -24,9 +24,9 @@ class FinderUtil {
 
       if (foundMembers.size > 0) return foundMembers;
     } else if (mentionTest) {
-      return [members.get(mentionTest[2])];
+      if (members.has(mentionTest[2])) return [members.get(mentionTest[2])];
     } else if (idTest) {
-      return [members.get(idTest[1])];
+      if (members.has(idTest[1])) return [members.get(idTest[1])];
     }
 
     const exact = [];
