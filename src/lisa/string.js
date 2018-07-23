@@ -95,4 +95,24 @@ module.exports = [
     null,
     (env, params) => params[0].hashCode().toString(),
   ),
+
+  // encode
+  new Method(
+    'encode',
+    null,
+    (env, params) => {
+      if (!params[0] || !params[1]) return;
+      return Buffer.from(params[0]).toString(params[1]);
+    },
+  ),
+
+  // decode
+  new Method(
+    'decode',
+    null,
+    (env, params) => {
+      if (!params[0] || !params[1]) return;
+      return Buffer.from(params[0], params[1]).toString();
+    },
+  ),
 ];
