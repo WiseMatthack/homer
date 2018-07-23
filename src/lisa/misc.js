@@ -2,7 +2,7 @@ const Method = require('../structures/Method');
 const { RichEmbed } = require('discord.js');
 const snekfetch = require('snekfetch');
 
-const domainExpression = /^(?:https?://)?(?:[^@\n]+@)?(?:www.)?([^:/\n?=]+)/im;
+const domainExpression = /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n\?\=]+)/im;
 
 module.exports = [
   // uid
