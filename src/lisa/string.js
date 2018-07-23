@@ -137,7 +137,11 @@ module.exports = [
     'reverse',
     null,
     (env, params) => {
-      return params[0].split('').reverse().join('');
+      const original = params[0];
+      let str = '';
+
+      for (let i = (original.length - 1); i >= 0; i -= 1) str += original[i];
+      return str;
     },
   ),
 ];
