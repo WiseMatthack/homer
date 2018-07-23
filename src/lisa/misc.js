@@ -1,5 +1,8 @@
 const Method = require('../structures/Method');
 const { RichEmbed } = require('discord.js');
+const snekfetch = require('snekfetch');
+
+const domainExpression = /^(?:https?://)?(?:[^@\n]+@)?(?:www.)?([^:/\n?=]+)/im;
 
 module.exports = [
   // uid
@@ -68,6 +71,55 @@ module.exports = [
       }
 
       return ({ content: '', embed });
+    },
+  ),
+
+  // http
+  new Method(
+    'http',
+    null,
+    async (env, params) => {
+      const url = params[0];
+
+      const domainTest = domainExpression.exec(url);
+      if (!domainTest) return 'NO_URL';
+
+      const whitelist = await env.client.database.getDocument('bot', 'settings').then(s => s.domainWhitelist);
+      if (whitelist.includes(domainTest[1].toLowerCase())) return 'UNAUTHORIZED_DOMAIN';
+
+      const result = await snekfetch
+        .get(url)
+        .set('User-Agent', 'HomerBot using Lisa Tags')
+        .then(r => r.text)
+        .catch(r => `HTTP_ERROR_${r.status}`);
+
+      return result;
+    },
+  ),
+
+  // json
+  new Method(
+    'json',
+    null,
+    (env, params) => {
+      let json = null;
+      try { json = JSON.parse(params[0]); }
+      catch (e) { return e.message; }
+
+      if (!params[1]) return;
+      const path = params.slice(1);
+
+      let current = json;
+      for (let i = 0; i < path.length; i += 1) {
+        try { current = current[path[i]]; }
+        catch (e) { return 'undefined'; }
+      }
+
+      if (Array.isArray(current) || typeof current === 'object') return JSON.stringify(current);
+      else if (typeof current === 'number') return current.toString();
+      else if (typeof current === 'boolean') return (current ? 'true' : 'false');
+      else if (typeof current === 'function') return 'CANNOT_RETURN_FUNCTION';
+      return current;
     },
   ),
 ];
