@@ -73,7 +73,8 @@ module.exports = [
       const timestamp = params.find(p => p.startsWith('timestamp:'));
       if (timestamp) {
         const parsed = Date.parse(timestamp.substring(10));
-        if (!Number.isNaN(parsed)) embed.setTimestamp(parsed);
+        if (!Number.isNaN(parsed)) embed.setTimestamp(new Date(parsed));
+        else embed.setTimestamp(new Date());
       }
 
       return ({ content: '', embed });
