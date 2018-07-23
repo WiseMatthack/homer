@@ -70,6 +70,12 @@ module.exports = [
         if (text && text.length < 256) embed.setAuthor(text, icon || null);
       }
 
+      const timestamp = params.find(p => p.startsWith('timestamp:'));
+      if (timestamp) {
+        const parsed = Date.parse(timestamp.substring(10));
+        if (!Number.isNaN(parsed)) embed.setTimestamp(parsed);
+      }
+
       return ({ content: '', embed });
     },
   ),
