@@ -106,6 +106,7 @@ class DeleteSubcommand extends Command {
   constructor(client) {
     super(client, {
       name: 'delete',
+      aliases: ['remove'],
       usage: '<tag name>',
       category: 'misc',
       dm: true,
