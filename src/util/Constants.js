@@ -62,11 +62,11 @@ exports.badges = {
 };
 
 exports.status = {
-  online: '<:online2:464520569975603200>',
-  idle: '<:away2:464520569862357002>',
-  dnd: '<:dnd2:464520569560498197>',
-  offline: '<:offline2:464520569929334784>',
-  streaming: '<:streaming2:464520569778601985>',
+  online: '<:online:470860030116233217>',
+  idle: '<:idle:470860043940790272>',
+  dnd: '<:dnd:470860101545230337>',
+  offline: '<:offline:470860118821699584>',
+  streaming: '<:streaming:470860133656690701>',
 };
 
 exports.services = {
