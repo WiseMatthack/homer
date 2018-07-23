@@ -115,4 +115,20 @@ module.exports = [
       return Buffer.from(params[0], params[1]).toString();
     },
   ),
+
+  // repeat
+  new Method(
+    'repeat',
+    null,
+    (env, params) => {
+      let [text, times, separator] = params;
+      if (!text || !times) return;
+      times = parseInt(times);
+      if (times < 2 || times > 100) return 'RANGE_ERROR';
+
+      const repeated = [];
+      for (let i = 0; i < times; i += 1) repeated.push(text);
+      return repeated.join(separator || '');
+    },
+  ),
 ];
