@@ -85,7 +85,7 @@ module.exports = [
       if (!domainTest) return 'NO_URL';
 
       const whitelist = await env.client.database.getDocument('bot', 'settings').then(s => s.domainWhitelist);
-      if (whitelist.includes(domainTest[1].toLowerCase())) return 'UNAUTHORIZED_DOMAIN';
+      if (!whitelist.includes(domainTest[1].toLowerCase())) return 'UNAUTHORIZED_DOMAIN';
 
       const result = await snekfetch
         .get(url)
