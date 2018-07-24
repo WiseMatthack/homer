@@ -197,7 +197,7 @@
   "helpUtil.prefix": "Adicionar ou remover os prefixos do servidor",
   "helpUtil.profile": "Ver o perfil de um usuário",
   "helpUtil.profile.set": "Definir um campo do perfil",
-  "helpUtil.profile.clear": "Apagar um campo do perfil,
+  "helpUtil.profile.clear": "Apagar um campo do perfil",
   "helpUtil.profile.fields": "Obter a lista de campos de perfil disponíveis",
   "helpUtil.quote": "Obter uma mensagem usando seu ID Discord",
   "helpUtil.radio": "Ouvir rádio no canal de voz",
