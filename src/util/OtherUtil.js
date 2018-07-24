@@ -20,7 +20,7 @@ class OtherUtil {
 
   humanizePermissions(permissions, lang) {
     return permissions
-      .filter(p => permissions[p] && !this.client.constants.deprecatedPermissions.includes(p))
+      .filter(p => !this.client.constants.deprecatedPermissions.includes(p))
       .map(p => `\`${this.client.__(lang, `permission.${p}`)}\``)
       .join(', ') || this.client.__(lang, 'global.none');
   }

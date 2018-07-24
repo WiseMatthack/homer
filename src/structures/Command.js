@@ -132,7 +132,7 @@ class Command {
       if (missingUserPermissions.length > 0) {
         return context.replyError(context.__(
           'commandHandler.missingUserPermissions',
-          { permissions: this.client.other.humanizePermissions(missingUserPermissions) },
+          { permissions: this.client.other.humanizePermissions(missingUserPermissions, context.settings.misc.locale) },
         ));
       }
 
@@ -140,7 +140,7 @@ class Command {
       if (missingBotPermissions.length > 0) {
         return context.replyError(context.__(
           'commandHandler.missingBotPermissions',
-          { permissions: this.client.other.humanizePermissions(missingBotPermissions) },
+          { permissions: this.client.other.humanizePermissions(missingBotPermissions, context.settings.misc.locale) },
         ));
       }
     }

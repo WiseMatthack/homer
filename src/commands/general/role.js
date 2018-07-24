@@ -25,7 +25,7 @@ class RoleCommand extends Command {
     }
 
     const permissions = new Permissions(role.permissions).serialize();
-    const permissionsString = this.client.other.humanizePermissions(Object.keys(permissions));
+    const permissionsString = this.client.other.humanizePermissions(Object.keys(permissions), context.settings.misc.locale);
 
     const roleInformation = [
       `${this.dot} ${context.__('role.embed.id')}: **${role.id}**`,
