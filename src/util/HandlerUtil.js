@@ -56,7 +56,7 @@ class HandlerUtil {
     if (job.color) embed.setColor(job.color);
 
     const winMsg = winners.length > 1
-      ? this.client.__(settings.misc.settings, 'handler.poll.tie', { count: max })
+      ? this.client.__(settings.misc.locale, 'handler.poll.tie', { count: max })
       : this.client.__(settings.misc.locale, 'handler.poll.one', { count: max });
     embed.setDescription(`${winMsg}\n\n${winners.map(r => r.emoji).join(' ')}`);
 
