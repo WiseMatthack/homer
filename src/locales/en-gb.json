@@ -245,6 +245,7 @@
   "helpUtil.timezone.search": "Search for timezones",
   "helpUtil.translate": "Translate the given text into the specified language",
   "helpUtil.user": "Get information about a member",
+  "helpUtil.vip": "Get the list of VIPs on Homer",
   "helpUtil.weather": "Get current weather for the specified location",
   "helpUtil.welcome": "Manage the welcome feed settings",
   "helpUtil.welcome.channel": "Set the welcome channel",
@@ -657,6 +658,11 @@
   "user.gameType.2": "Listening to",
   "user.gameType.3": "Watching",
 
+  "vip.title": "🎖 VIPs on **{{{ name }}}**:",
+  "vip.embed.description": "VIPs have a special rank, for the moment there are no perks.\nThe only thing they have is a cool badge on their user info.\nGive me ideas about what I could add to the list of perks!",
+  "vip.embed.list": "VIPs",
+  "vip.noPeople": "There is no VIPs at the moment.",
+  
   "weather.title": "🌥 Weather for {{{ location }}}:",
   "weather.embed.weather": "Weather",
   "weather.embed.temperature": "Temperature",
