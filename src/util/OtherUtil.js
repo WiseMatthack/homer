@@ -18,6 +18,13 @@ class OtherUtil {
     if (subscription) this.client.database.deleteDocument('telephone', id);
   }
 
+  humanizePermissions(permissions, lang) {
+    return permissions
+      .filter(p => permissions[p] && !this.client.constants.deprecatedPermissions.includes(p))
+      .map(p => `\`${this.client.__(lang, `permission.${p}`)}\``)
+      .join(', ') || this.client.__(lang, 'global.none');
+  }
+
   ran() {
     const list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     return list[Math.floor(Math.random() * list.length)];

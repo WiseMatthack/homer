@@ -132,7 +132,7 @@ class Command {
       if (missingUserPermissions.length > 0) {
         return context.replyError(context.__(
           'commandHandler.missingUserPermissions',
-          { permissions: missingUserPermissions.map(p => `\`${p}\``).join(', ') },
+          { permissions: this.client.other.humanizePermissions(missingUserPermissions) },
         ));
       }
 
@@ -140,7 +140,7 @@ class Command {
       if (missingBotPermissions.length > 0) {
         return context.replyError(context.__(
           'commandHandler.missingBotPermissions',
-          { permissions: missingBotPermissions.map(p => `\`${p}\``).join(', ') },
+          { permissions: this.client.other.humanizePermissions(missingBotPermissions) },
         ));
       }
     }

@@ -25,10 +25,7 @@ class RoleCommand extends Command {
     }
 
     const permissions = new Permissions(role.permissions).serialize();
-    const permissionsString = Object.keys(permissions)
-      .filter(p => permissions[p] && !this.client.constants.deprecatedPermissions.includes(p))
-      .map(p => `\`${context.__(`permission.${p}`)}\``)
-      .join(', ') || context.__('global.none');
+    const permissionsString = this.client.other.humanizePermissions(Object.keys(permissions));
 
     const roleInformation = [
       `${this.dot} ${context.__('role.embed.id')}: **${role.id}**`,
