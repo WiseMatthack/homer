@@ -52,6 +52,7 @@ exports.emotes = {
   loading: '<a:loading:455113752984027163>',
   dbans: '<:discordbans:420715963718041641>',
   verifiedServer: '<:verified:452764762699464724>',
+  vip: '🎖',
 };
 
 exports.badges = {
