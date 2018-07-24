@@ -144,4 +144,26 @@ module.exports = [
       return str;
     },
   ),
+
+  // emote
+  new Method(
+    'emote',
+    null,
+    (env, params) => {
+      const name = params[0];
+      if (!name) return;
+
+      if (name === 'success') return this.client.constants.emotes.success;
+      else if (name === 'warning') return this.client.constants.emotes.warning;
+      else if (name === 'error') return this.client.constants.emotes.error;
+      else if (name === 'online') return this.client.constants.status.online;
+      else if (name === 'idle') return this.client.constants.status.success;
+      else if (name === 'dnd') return this.client.constants.status.dnd;
+      else if (name === 'offline') return this.client.constants.status.offline;
+      else if (name === 'streaming') return this.client.constants.status.streaming;
+      else if (name === 'dot') return this.client.constants.emotes.dot;
+      else if (name === 'loading') return this.client.constants.emotes.loading;
+      return '';
+    },
+  ),
 ];
