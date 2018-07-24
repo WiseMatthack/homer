@@ -28,6 +28,10 @@ class RolemeCommand extends Command {
       return context.replyError(context.__('roleme.unavailableRole', { name: role.name }));
     }
 
+    if (context.message.guild.me.highestRole.position <= role.position) {
+      return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
+    }
+
     if (context.message.member.roles.has(role.id)) {
       await context.message.member.removeRole(role.id, 'Roleme');
       context.replySuccess(context.__('roleme.removedRole', { name: role.name }));
@@ -95,6 +99,14 @@ class AddSubcommand extends Command {
       return context.replyError(context.__('roleme.noQuery'));
     }
 
+    if (context.message.guild.me.highestRole.position <= role.position) {
+      return context.replyError(context.__('role.botCannotInteract', { name: role.name }));
+    }
+
+    if (context.message.member.highestRole.position <= role.position) {
+      return context.replyError(context.__('role.cannotInteract', { name: role.name }));
+    }
+
     if (!context.settings.rolemeRoles.includes(role.id)) {
       context.settings.rolemeRoles.push(role.id);
       await context.saveSettings();
@@ -126,6 +138,10 @@ class RemoveSubcommand extends Command {
       else if (foundRoles.length > 1) return context.replyWarning(this.client.finder.formatRoles(foundRoles, context.settings.misc.locale));
     } else {
       return context.replyError(context.__('roleme.noQuery'));
+    }
+
+    if (context.message.member.highestRole.position <= role.position) {
+      return context.replyError(context.__('role.cannotInteract', { name: role.name }));
     }
 
     if (context.settings.rolemeRoles.includes(role.id)) {
