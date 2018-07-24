@@ -158,7 +158,7 @@ module.exports = [
       else if (name === 'warning') return constants.emotes.warning;
       else if (name === 'error') return constants.emotes.error;
       else if (name === 'online') return constants.status.online;
-      else if (name === 'idle') return constants.status.success;
+      else if (name === 'idle') return constants.status.idle;
       else if (name === 'dnd') return constants.status.dnd;
       else if (name === 'offline') return constants.status.offline;
       else if (name === 'streaming') return constants.status.streaming;
