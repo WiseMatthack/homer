@@ -13,6 +13,11 @@ class OtherUtil {
     return new BigInt(id).shiftRight('22').mod(this.client.config.sharder.totalShards);
   }
 
+  async deleteSub(id) {
+    const subscription = await this.client.database.getDocument('telephone', id);
+    if (subscription) this.client.database.deleteDocument('telephone', id);
+  }
+
   ran() {
     const list = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
     return list[Math.floor(Math.random() * list.length)];

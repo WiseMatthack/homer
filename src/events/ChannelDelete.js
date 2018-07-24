@@ -22,10 +22,8 @@ class ChannelDeleteEvent extends Event {
       });
     }
 
-    this.client.database.getDocument('telephone', channel.id).then((subscription) => {
-      if (!subscription) return;
-      this.client.database.deleteDocument('telephone', channel.id);
-    });
+    // Deleting phone subscription
+    this.client.other.deleteSub(channel.id);
   }
 }
 
