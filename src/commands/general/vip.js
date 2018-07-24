@@ -51,7 +51,7 @@ class AddSubcommand extends Command {
       .catch(() => null);
     if (!user) return context.replyWarning(`No user found matching ID \`${id}\`.`);
 
-    await this.client.database.insert(
+    await this.client.database.insertDocument(
       'vip',
       {
         id: user.id,
