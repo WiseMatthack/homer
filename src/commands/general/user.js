@@ -31,12 +31,7 @@ class UserCommand extends Command {
       presence += ` (${context.__(`user.gameType.${gameType}`)} ${gameType === 1 ? `[${user.presence.game.name}](${user.presence.game.url})` : `*${user.presence.game.name}*`})`;
     }
 
-    const badges = [];
-    if (context.message.guild && context.message.guild.ownerID === user.id) badges.push(this.client.constants.badges.owner);
-    if (this.client.config.owners.includes(user.id)) badges.push(this.client.constants.badges.botDev);
-    if (user.avatar && user.avatar.startsWith('a_')) badges.push(this.client.constants.badges.nitro);
-    await this.client.database.getDocument('donators', user.id).then(a => (a ? badges.push(this.client.constants.badges.donator) : undefined));
-    await this.client.database.getDocument('vip', user.id).then(a => (a ? badges.push(this.client.constants.emotes.vip) : undefined));
+    const badges = (await this.client.other.getBadges(user.id));
 
     const lastactive = await this.client.database.getDocument('lastactive', user.id)
       .then((lastactiveObject) => {
@@ -44,7 +39,7 @@ class UserCommand extends Command {
         return this.client.time.timeSince(lastactiveObject.time, context.settings.misc.locale, false, true);
       });
 
-    const userInformation = [`${this.dot} ${context.__('user.embed.id')}: **${user.id}**${badges.length > 0 ? ` ${badges.join(' ')}` : ''}`];
+    const userInformation = [`${this.dot} ${context.__('user.embed.id')}: **${user.id}**${badges ? ` ${badges}` : ''}`];
     if (context.message.guild) {
       userInformation.push(`${this.dot} ${context.__('user.embed.nickname')}: ${member.nickname ? `**${member.nickname}**` : context.__('global.none')}`);
     }

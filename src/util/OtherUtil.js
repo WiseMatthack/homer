@@ -13,6 +13,23 @@ class OtherUtil {
     return new BigInt(id).shiftRight('22').mod(this.client.config.sharder.totalShards);
   }
 
+  async getBadges(id) {
+    const owner = this.client.config.owners.includes(id);
+    const donator = await this.client.database.getDocument('donators', id).then(a => (a ? true : false));
+    const vip = await this.client.database.getDocument('vip', id).then(a => (a ? true : false));
+    const nitro = await this.client.fetchUser(id)
+      .then(u => u.avatar ? (u.avatar.startsWith('a_')) : false)
+      .catch(() => false);
+
+    const badges = [];
+    if (owner) badges.push(this.client.constants.badges.owner);
+    if (donator) badges.push(this.client.constants.badges.donator);
+    if (vip) badges.push(this.client.constants.badges.vip);
+    if (nitro) badges.push(this.client.constants.badges.nitro);
+
+    return badges.join(' ');
+  }
+
   async deleteSub(id) {
     const subscription = await this.client.database.getDocument('telephone', id);
     if (subscription) this.client.database.deleteDocument('telephone', id);

@@ -52,14 +52,13 @@ exports.emotes = {
   loading: '<a:loading:455113752984027163>',
   dbans: '<:discordbans:420715963718041641>',
   verifiedServer: '<:verified:452764762699464724>',
-  vip: '🎖',
 };
 
 exports.badges = {
-  donator: '<:donator:458192052866383873>',
+  owner: '<:owner:471599105957953537>',
+  donator: '<:donator:471599103126536202>',
+  vip: '<:vip:471599120830955530>',
   nitro: '<:nitro:452417495341727763>',
-  botDev: '<:botDev:458194202908426262>',
-  owner: '<:ownerCrown:460019597027049472>',
 };
 
 exports.status = {

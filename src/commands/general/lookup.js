@@ -25,11 +25,7 @@ class LookupCommand extends Command {
       .then(async (user) => {
         done = true;
 
-        const badges = [];
-        if (this.client.config.owners.includes(user.id)) badges.push(this.client.constants.badges.botDev);
-        if (user.avatar && user.avatar.startsWith('a_')) badges.push(this.client.constants.badges.nitro);
-        await this.client.database.getDocument('donators', user.id).then(a => (a ? badges.push(this.client.constants.badges.donator) : undefined));
-        await this.client.database.getDocument('vip', user.id).then(a => (a ? badges.push(this.client.constants.emotes.vip) : undefined));
+        const badges = (await this.client.other.getBadges(user.id));
 
         const lastactive = await this.client.database.getDocument('lastactive', user.id)
           .then((lastactiveObject) => {
@@ -38,7 +34,7 @@ class LookupCommand extends Command {
           });
 
         const userInformation = [
-          `${this.dot} ${context.__('user.embed.id')}: **${user.id}**${badges.length > 0 ? ` ${badges.join(' ')}` : ''}`,
+          `${this.dot} ${context.__('user.embed.id')}: **${user.id}**${badges ? ` ${badges}` : ''}`,
           `${this.dot} ${context.__('user.embed.lastactive')}: ${lastactive}`,
           `${this.dot} ${context.__('user.embed.creation')}: **${context.formatDate(user.createdTimestamp)}**`,
         ].join('\n');
