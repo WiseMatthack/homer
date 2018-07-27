@@ -43,7 +43,7 @@ sharder.on('message', async (shard, mail) => {
 
     if (reboot === 'true') {
       sharder.shards.deleteAll();
-      await spawnShards();
+      await spawnShards(true);
       editMessage(channel, message, `${Constants.emotes.success} **${shards.length}** shards restarted successfully!`);
     } else {
       await editMessage(channel, message, `${Constants.emotes.success} **${shards.length}** shards shut down successfully! Ending sharder process.`);
@@ -63,10 +63,17 @@ async function editMessage(channel, message, content) {
 }
 
 // Spawn shards
-async function spawnShards() {
-  return (await sharder.spawn(sharder.config.sharder.totalShards, sharder.config.sharder.delay)
-    .then(shards => console.log(`[Sharder] Spawning ${shards.size} shards...`))
-    .catch(console.error));
+async function spawnShards(respawn = false) {
+  if (respawn) {
+    for (let i = 0; i < config.sharder.totalShards; i += 1) {
+      if (i !== 0 && config.sharder.delay) await wait(config.sharder.delay);
+      await sharder.createShard(i);
+    }
+  } else {
+    await sharder.spawn(sharder.config.sharder.totalShards, sharder.config.sharder.delay)
+      .then(shards => console.log(`[Sharder] Spawning ${shards.size} shards...`))
+      .catch(console.error);
+  }
 }
 
 spawnShards();
