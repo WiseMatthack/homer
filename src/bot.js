@@ -49,6 +49,15 @@ process.on('unhandledRejection', (err) => {
   );
 });
 
+// Shutdown
+process.on('SIGINT', async () => {
+  client.removeAllListeners();
+  await client.destroy();
+  await client.database.provider.getPoolMaster().drain();
+
+  process.exit();
+});
+
 // Misc
 String.prototype.replaceAll = function (search, replacement) {
   if (typeof search === 'string') {
