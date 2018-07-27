@@ -32,7 +32,7 @@ sharder.on('message', async (shard, mail) => {
   // Action
   else if (mail.type === 'shutdown') {
     const [channel, message, reboot] = mail.message.split('|');
-    const shards = Array.from(sharder.shards);
+    //const shards = Array.from(sharder.shards);
 
     for (let i = 0; i < shards.length; i += 1) {
       const shard = shards[i];
