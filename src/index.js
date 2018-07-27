@@ -32,17 +32,17 @@ sharder.on('message', async (shard, mail) => {
   // Action
   else if (mail.type === 'shutdown') {
     const [channel, message, reboot] = mail.message.split('|');
-    //const shards = Array.from(sharder.shards);
+    const shards = sharder.shards.array();
 
     for (let i = 0; i < shards.length; i += 1) {
       const shard = shards[i];
-      await shard.process.kill('SIGINT');
+      shard.process.kill('SIGINT');
     }
 
     await wait(2500); // Security
 
     if (reboot === 'true') {
-      sharder.shards.forEach((a, b) => sharder.shards.delete(b));
+      sharder.shards.deleteAll();
       await spawnShards();
       editMessage(channel, message, `${Constants.emotes.success} **${shards.length}** shards restarted successfully!`);
     } else {
