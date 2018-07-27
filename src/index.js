@@ -42,7 +42,7 @@ sharder.on('message', async (shard, mail) => {
     await wait(2500); // Security
 
     if (reboot === 'true') {
-      sharder.shards = [];
+      sharder.shards.forEach((s, id) => sharder.shards.delete(id));
       await spawnShards();
       editMessage(channel, message, `${Constants.emotes.success} **${shards.length}** shards restarted successfully!`);
     } else {
