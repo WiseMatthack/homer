@@ -51,9 +51,9 @@ process.on('unhandledRejection', (err) => {
 
 // Shutdown
 process.on('SIGINT', async () => {
-  await this.client.sendMessage(this.client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${this.client.shard.id}** is now **RESTARTING**.`);
-  this.client.shardStatus = 'offline';
-  await this.client.other.updateShardStatus();
+  await client.sendMessage(client.config.logChannel, `\`[${mtz().format('HH:mm:ss')}]\` 📡 Shard ID **${client.shard.id}** is now **RESTARTING**.`);
+  client.shardStatus = 'offline';
+  await client.other.updateShardStatus();
 
   client.removeAllListeners();
   await client.destroy();
