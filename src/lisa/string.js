@@ -47,7 +47,6 @@ module.exports = [
     (env, params) => {
       const last = (params.length - 1);
       const expression = params.slice(0, last - 1).join('|');
-      console.log(`Expression: ${expression} - Text: ${params[last]} - With: ${params[last - 1]}`)
 
       if (params[last].startsWith('in:')) params[last] = params[last].substring(3);
       if (params[last - 1].startsWith('with:')) params[last - 1] = params[last - 1].substring(5);
