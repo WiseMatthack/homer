@@ -6,7 +6,7 @@ module.exports = [
     'set',
     null,
     (env, params) => {
-      env.vars[params[0]] = params[1];
+      env.vars[params[0]] = params.slice(1).join('|');
       return '';
     },
   ),
