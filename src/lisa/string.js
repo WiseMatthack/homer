@@ -5,28 +5,28 @@ module.exports = [
   new Method(
     'lower',
     null,
-    (env, params) => params[0].toLowerCase(),
+    (env, params) => params.join('|').toLowerCase(),
   ),
 
   // upper
   new Method(
     'upper',
     null,
-    (env, params) => params[0].toUpperCase(),
+    (env, params) => params.join('|').toUpperCase(),
   ),
 
   // length
   new Method(
     'length',
     null,
-    (env, params) => params[0].length.toString(),
+    (env, params) => params.join('|').length.toString(),
   ),
 
   // url
   new Method(
     'url',
     null,
-    (env, params) => encodeURIComponent(params[0]),
+    (env, params) => encodeURIComponent(params.join('|')),
   ),
 
   // replace
@@ -50,7 +50,7 @@ module.exports = [
     'substring',
     null,
     (env, params) => {
-      const string = params[2];
+      const string = params.slice(2).join('|');
       let start;
       let end;
 
@@ -72,7 +72,7 @@ module.exports = [
       if (end > string.length) end = string.length;
       if (start < 0) start = 0;
 
-      return params[2].substring(start, end);
+      return params.slice(2).join('|').substring(start, end);
     },
   ),
 
@@ -80,14 +80,14 @@ module.exports = [
   new Method(
     'oneline',
     null,
-    (env, params) => params[0].replace(/\\s+/g, ' ').trim(),
+    (env, params) => params.join('|').replace(/\\s+/g, ' ').trim(),
   ),
 
   // hash
   new Method(
     'hash',
     null,
-    (env, params) => params[0].hashCode().toString(),
+    (env, params) => params.join('|').hashCode().toString(),
   ),
 
   // encode
@@ -131,7 +131,7 @@ module.exports = [
     'reverse',
     null,
     (env, params) => {
-      const original = params[0];
+      const original = params.join('|');
       let str = '';
 
       for (let i = (original.length - 1); i >= 0; i -= 1) str += original[i];
