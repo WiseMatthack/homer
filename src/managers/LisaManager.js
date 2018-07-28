@@ -51,7 +51,6 @@ class LisaManager extends Manager {
 
       const split = content.indexOf(':');
       if (split === -1) {
-        console.log(`Debug ${i}: Simple`)
         const name = content.trim().toLowerCase();
         const method = this.methods.find(m => m.name === name);
 
@@ -60,7 +59,6 @@ class LisaManager extends Manager {
           catch (e) { result = `<invalid ${name} statement>`; }
         }
       } else {
-        console.log(`Debug ${i}: Complex`)
         const name = content.substring(0, split).toLowerCase();
         const method = this.methods.find(m => m.name === name);
         const splitter = (method && method.split.length > 0) ?
