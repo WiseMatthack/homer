@@ -45,6 +45,7 @@ module.exports = [
     'replaceregex',
     null,
     (env, params) => {
+      console.log(params)
       if (params[2].startsWith('in:')) params[2] = params[2].substring(3);
       if (params[1].startsWith('with:')) params[1] = params[1].substring(5);
       return params[2].replace(new RegExp(params[0], 'ig'), params[1]);
