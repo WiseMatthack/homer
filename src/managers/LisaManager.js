@@ -38,18 +38,13 @@ class LisaManager extends Manager {
     const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
-    let done = false;
+    let lastOutput;
 
-    let i = 0;
-    while (!done) {
+    while (output !== lastOutput) {
+      lastOutput = output;
+
       const end = output.indexOf('}');
-      const start = (end === -1 ? -1 : output.lastIndexOf('{'));
-      i += 1;
-      console.log(`Debug ${i}: Before end/start check`)
-      if ((start === -1) && (end === -1)) {
-        done = true;
-        break;
-      }
+      const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
 
       const content = output.substring((start + 1), end);
       let result;
