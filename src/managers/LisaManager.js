@@ -125,4 +125,4 @@ class LisaManager extends Manager {
   }
 }
 
-module.exports = LisaUtil;
+module.exports = LisaManager;
