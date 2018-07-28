@@ -14,7 +14,7 @@ class LisaManager extends Manager {
     super(client);
 
     this.maxOutput = 1900;
-    this.iterations = 1000;
+    this.maxIterations = 1000;
     this.methods = [];
 
     this.loadMethods();
@@ -39,8 +39,9 @@ class LisaManager extends Manager {
 
     let output = this.filterEscapes(string);
     let lastOutput;
+    let iterations = 0;
 
-    while (output !== lastOutput) {
+    while ((output !== lastOutput) && (iterations < this.maxIterations)) {
       lastOutput = output;
 
       const end = output.indexOf('}');
