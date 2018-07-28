@@ -196,6 +196,7 @@ function evaluateStatement(statement) {
   if (index === -1) index = statement.lastIndexOf('|>|');
   if (index === -1) index = statement.lastIndexOf('|~|');
   if (index === -1) index = statement.lastIndexOf('|?|');
+  if (index === -1) index = statement.lastIndexOf('|%|');
   if (index === -1) return statement;
 
   const s1 = statement.substring(0, index).trim();
@@ -227,7 +228,7 @@ function evaluateStatement(statement) {
         return (s1.compareTo(s2) < 0);
       case '|?|':
         try { return s1.match(new RegExp(s2, 'igm')); } catch (e) { return null; }
-      case '|in|':
+      case '|%|':
         return s2.toLowerCase().includes(s1.toLowerCase());
     }
   }
