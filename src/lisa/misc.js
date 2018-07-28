@@ -25,7 +25,8 @@ module.exports = [
       if (!tag) return 'UNKNOWN_TAG';
 
       const parsed = await env.client.lisa.parseString(env, tag.content, 'childrenTag', args, true);
-      return ({ content: parsed.content, embed: parsed.embed });
+      env.embed = parsed.embed;
+      return parsed.content;
     },
   ),
 
@@ -76,7 +77,8 @@ module.exports = [
         try { embed.setTimestamp(new Date(parsed)); } catch (e) {}
       }
 
-      return ({ content: '', embed });
+      env.embed = embed;
+      return '';
     },
   ),
 

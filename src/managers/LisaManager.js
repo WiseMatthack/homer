@@ -38,62 +38,56 @@ class LisaManager extends Manager {
     const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
-    let lastOutput = null;
-    while (output !== lastOutput) {
-      lastOutput = output;
-      const i1 = output.indexOf('}');
-      const i2 = (i1 === -1 ? -1 : output.lastIndexOf('{', i1));
+    let done = false;
 
-      if (i1 !== -1 && i2 !== -1) {
-        const contents = output.substring(i2 + 1, i1);
-        let result = null;
+    while (!done) {
+      const end = output.indexOf('}');
+      const start = (i1 === -1 ? -1 : output.lastIndexOf('{'));
 
-        const split = contents.indexOf(':');
-        if (split === -1) {
-          const name = contents.trim().toLowerCase();
-          const method = this.methods.find(m => m.name === name);
-          if (method) {
-            try {
-              result = await method.parseSimple(env);
-            } catch (e) {
-              result = e.message;
-            }
-          }
-        } else {
-          const name = contents.substring(0, split).toLowerCase();
-          const method = this.methods.find(m => m.name === name);
-
-          const params = contents
-            .substring(split + 1)
-            .split(method.split.length > 0 ? new RegExp(method.split.map(s => `\\${s}`).join('|')) : '|')
-            .map(a => this.defilterAll(a));
-
-          if (method) {
-            try {
-              const result2 = await method.parseComplex(env, params);
-              
-              if (typeof result2 === 'object') {
-                if (result2.embed) env.embed = result2.embed;
-                result = result2.content;
-              } else {
-                result = result2;
-              }
-            } catch (e) {
-              result = e.message;
-            }
-          }
-        }
-
-        if (typeof result !== 'string') result = `{${contents}}`;
-        output = output.substring(0, i2) + this.filterAll(result) + output.substring(i1 + 1);
+      if ((start === -1) && (end === -1)) {
+        done = true;
+        break;
       }
+
+      const content = output.substring((start + 1), end);
+      let result;
+
+      const split = content.indexOf(':');
+      if (split === -1) {
+        const name = content.trim().toLowerCase();
+        const method = this.methods.find(m => m.name === name);
+
+        if (method) {
+          try { result = await method.parseSimple(env); }
+          catch (e) { result = `<invalid ${name} statement>`; }
+        }
+      } else {
+        const name = content.substring(0, split).toLowerCase();
+        const method = this.methods.find(m => m.name === name);
+        const splitter = method.split.length > 0 ?
+          new RegExp(method.split.map(s => `\\${s}`).join('|')) :
+          '|';
+
+        const params = content
+          .substring(split + 1)
+          .split(splitter)
+          .map(a => this.defilterAll(a));
+
+        if (method) {
+          try { result = await this.parseComplex(env, params); }
+          catch (e) { result = `<invalid ${name} statement>`; }
+        }
+      }
+
+      if (typeof result !== 'string') result = `{${content}}`;
+      output = output.substring(0, i2) + this.filterAll(result) + output.substring(i1 + 1);
     }
 
     output = this.defilterAll(output);
-    if (output.length > this.maxOutput) output = output.substring(0, this.maxOutput);
+    if (output.length >= 2000) output = output.substring(0, 1999);
 
     return ({
-      content: output.length === 0 ? '​' : output,
+      content: output || '​',
       embed: env.embed,
     });
   }
