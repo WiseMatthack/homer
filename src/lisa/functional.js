@@ -42,11 +42,13 @@ module.exports = [
     'if',
     null,
     (env, params) => {
-      if (params[0].toLowerCase() === 'true' || evaluateStatement(params.join('|'))) {
-        return params[3].replace('then:', '');
-      }
-      return params[4].replace('else:', '');
+      if (params[0].toLowerCase() === 'true') return params[1];
+      if (params[0].toLowerCase() === 'false') return params[2];
+
+      const result = evaluateStatement(params[0]);
+      return (result ? params[1] : params[2]);
     },
+    ['|then:', '|else:'],
   ),
 
   // math

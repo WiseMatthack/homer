@@ -33,25 +33,16 @@ module.exports = [
   new Method(
     'replace',
     null,
-    (env, params) => {
-      if (params[2].startsWith('in:')) params[2] = params[2].substring(3);
-      if (params[1].startsWith('with:')) params[1] = params[1].substring(5);
-      return params[2].replace(new RegExp(params[0], 'ig'), params[1]);
-    },
+    (env, params) => params[2].replaceAll(params[0], params[1]),
+    ['|with:', '|in:'],
   ),
 
   // replaceregex
   new Method(
     'replaceregex',
     null,
-    (env, params) => {
-      const last = (params.length - 1);
-      const expression = params.slice(0, last - 1).join('|');
-
-      if (params[last].startsWith('in:')) params[last] = params[last].substring(3);
-      if (params[last - 1].startsWith('with:')) params[last - 1] = params[last - 1].substring(5);
-      return params[last - 2].replace(new RegExp(expression, 'ig'), params[last - 1]);
-    },
+    (env, params) => params[2].replace(new RegExp(params[0], 'ig'), params[1]),
+    ['|with:', '|in:'],
   ),
 
   // substring

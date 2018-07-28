@@ -1,8 +1,9 @@
 class Method {
-  constructor(name, simple, complex) {
+  constructor(name, simple, complex, split = []) {
     this.name = name;
     this.simple = simple;
     this.complex = complex;
+    this.split = split;
   }
 
   parseSimple(env) {

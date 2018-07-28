@@ -1,5 +1,6 @@
 const readdir = require('util').promisify(require('fs').readdir);
 const Environment = require('../structures/Environment');
+const Manager = require('../structures/Manager');
 
 /** ****************************************************************
  * Lisa scripting language                                        *
@@ -8,9 +9,10 @@ const Environment = require('../structures/Environment');
  * Copyright (c) 2018 - iDroid27210 & John A. Grosh (jagrosh)     *
  ***************************************************************** */
 
-class LisaUtil {
+class LisaManager extends Manager {
   constructor(client) {
-    this.client = client;
+    super(client);
+
     this.maxOutput = 1900;
     this.iterations = 1000;
     this.methods = [];
@@ -59,8 +61,13 @@ class LisaUtil {
           }
         } else {
           const name = contents.substring(0, split).toLowerCase();
-          const params = contents.substring(split + 1).split('|').map(a => this.defilterAll(a));
           const method = this.methods.find(m => m.name === name);
+
+          const params = contents
+            .substring(split + 1)
+            .split(method.split.length > 0 ? new RegExp(method.split.map(s => `\\${s}`).join('|')) : '|')
+            .map(a => this.defilterAll(a));
+
           if (method) {
             try {
               const result2 = await method.parseComplex(env, params);
