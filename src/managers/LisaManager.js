@@ -41,7 +41,7 @@ class LisaManager extends Manager {
     let lastOutput = null;
 
     while (output !== lastOutput) {
-      console.log(`WTF: output: ${output} - lastOutput: ${lastOutput}`)
+      console.log(`WTF: output: ${output} - lastOutput: ${lastOutput} - non-sense: ${output === lastOutput}`)
       lastOutput = output;
 
       const end = output.indexOf('}');
