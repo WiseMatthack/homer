@@ -59,7 +59,7 @@ class LisaManager extends Manager {
 
         if (method) {
           try { result = await method.parseSimple(env); }
-          catch (e) { result = `<invalid ${name} statement>`; }
+          catch (e) { result = `DEBUG: ${e} - <invalid ${name} statement>`; }
         }
       } else {
         const name = content.substring(0, split).toLowerCase();
@@ -75,7 +75,7 @@ class LisaManager extends Manager {
 
         if (method) {
           try { result = await this.parseComplex(env, params); }
-          catch (e) { result = `<invalid ${name} statement>`; }
+          catch (e) { result = `DEBUG: ${e} - <invalid ${name} statement>`; }
         }
       }
 
