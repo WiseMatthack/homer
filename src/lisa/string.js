@@ -45,10 +45,12 @@ module.exports = [
     'replaceregex',
     null,
     (env, params) => {
-      console.log(params)
-      if (params[2].startsWith('in:')) params[2] = params[2].substring(3);
-      if (params[1].startsWith('with:')) params[1] = params[1].substring(5);
-      return params[2].replace(new RegExp(params[0], 'ig'), params[1]);
+      const last = (params.length - 1);
+      const expression = params.slice(last - 2).join('|');
+
+      if (params[last].startsWith('in:')) params[last] = params[last].substring(3);
+      if (params[last - 1].startsWith('with:')) params[last - 1] = params[last - 1].substring(5);
+      return params[last - 2].replace(new RegExp(expression, 'ig'), params[last - 1]);
     },
   ),
 
