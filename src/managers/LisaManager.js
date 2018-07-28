@@ -41,39 +41,39 @@ class LisaManager extends Manager {
     let lastOutput = null;
 
     while (output !== lastOutput) {
-      console.log(`WTF: output: ${output} - lastOutput: ${lastOutput} - non-sense: ${output === lastOutput}`)
-      lastOutput = output;
-
       const end = output.indexOf('}');
       const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
+      lastOutput = output;
 
-      const content = output.substring((start + 1), end);
-      let result;
+      if ((start !== -1) && (end !== -1)) {
+        const content = output.substring((start + 1), end);
+        let result;
 
-      const split = content.indexOf(':');
-      if (split === -1) {
-        const name = content.trim().toLowerCase();
-        const method = this.methods.find(m => m.name === name);
+        const split = content.indexOf(':');
+        if (split === -1) {
+          const name = content.trim().toLowerCase();
+          const method = this.methods.find(m => m.name === name);
 
-        if (method) {
-          try { result = await method.parseSimple(env); }
-          catch (e) { result = `<invalid ${name} statement>`; }
-        }
-      } else {
-        const name = content.substring(0, split).toLowerCase();
-        const method = this.methods.find(m => m.name === name);
-        const splitter = (method && method.split.length > 0) ?
-          new RegExp(method.split.map(s => `\\${s}`).join('|')) :
-          '|';
+          if (method) {
+            try { result = await method.parseSimple(env); }
+            catch (e) { result = `<invalid ${name} statement>`; }
+          }
+        } else {
+          const name = content.substring(0, split).toLowerCase();
+          const method = this.methods.find(m => m.name === name);
+          const splitter = (method && method.split.length > 0) ?
+            new RegExp(method.split.map(s => `\\${s}`).join('|')) :
+            '|';
 
-        const params = content
-          .substring(split + 1)
-          .split(splitter)
-          .map(a => this.defilterAll(a));
+          const params = content
+            .substring(split + 1)
+            .split(splitter)
+            .map(a => this.defilterAll(a));
 
-        if (method) {
-          try { result = await method.parseComplex(env, params); }
-          catch (e) { result = `<invalid ${name} statement>`; }
+          if (method) {
+            try { result = await method.parseComplex(env, params); }
+            catch (e) { result = `<invalid ${name} statement>`; }
+          }
         }
       }
 
