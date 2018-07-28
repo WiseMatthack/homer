@@ -229,7 +229,7 @@ function evaluateStatement(statement) {
       case '|?|':
         try { return s1.match(new RegExp(s2, 'igm')); } catch (e) { return null; }
       case '|%|':
-        return s2.toLowerCase().includes(s1.toLowerCase());
+        return s1.toLowerCase().includes(s2.toLowerCase());
     }
   }
 
