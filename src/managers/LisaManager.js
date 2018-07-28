@@ -75,10 +75,10 @@ class LisaManager extends Manager {
             catch (e) { result = `<invalid ${name} statement>`; }
           }
         }
-      }
 
-      if (typeof result !== 'string') result = `{${content}}`;
-      output = output.substring(0, start) + this.filterAll(result) + output.substring(end + 1);
+        if (typeof result !== 'string') result = `{${content}}`;
+        output = output.substring(0, start) + this.filterAll(result) + output.substring(end + 1);
+      }
     }
 
     output = this.defilterAll(output);
