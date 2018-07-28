@@ -38,10 +38,10 @@ class LisaManager extends Manager {
     const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
-    let lastOutput;
-    let iterations = 0;
+    let lastOutput = null;
 
-    while ((output !== lastOutput) && (iterations < this.maxIterations)) {
+    while (output !== lastOutput) {
+      console.log(`WTF: output: ${output} - lastOutput: ${lastOutput}`)
       lastOutput = output;
 
       const end = output.indexOf('}');
