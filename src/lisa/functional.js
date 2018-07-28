@@ -227,6 +227,8 @@ function evaluateStatement(statement) {
         return (s1.compareTo(s2) < 0);
       case '|?|':
         try { return s1.match(new RegExp(s2, 'igm')); } catch (e) { return null; }
+      case '|in|':
+        return s1.toLowerCase().includes(s2.toLowerCase());
     }
   }
 
