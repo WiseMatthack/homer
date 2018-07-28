@@ -548,7 +548,7 @@
   "telephone.phonebook.enabled": "The message for your phonebook entry has been successfully updated!",
   
   "timefor.title": "🕐 Heure actuelle pour {{{ name }}}: {{{ time }}}",
-  "timefor.noSettings": "Aucun paramétre trouvé pour {{{ name }}}. To set your timezone, run `{{{ command }}}` in **Direct Messages**.",
+  "timefor.noSettings": "Aucun paramètre trouvé pour {{{ name }}}. Pour régler votre fuseau horaire, tapez `{{{ command }}}` en **Messages Privés**.",
 
   "timeUtil.timeSince.ago": "il y a {{{ time }}}",
   "timeUtil.timeSince.years.long": " ans",
@@ -565,13 +565,13 @@
   "timeUtil.timeSince.seconds.short": "s",
   "timeUtil.timeSince.noTime": "Il n'y a pas si longtemps",
 
-  "timezone.noTimezone": "Vous devez régler une temps de zone pour chercher. Trouvez des temps de zone avec `{{{ command }}}`.",
-  "timezone.invalidTimezone": "Le temps de zone `{{{ timezone }}}` n'est pas reconnu!",
-  "timezone.setTimezone": "Le temps de zone du serveur a été régle vers `{{{ timezone }}}`.",
-  "timezone.search.noSearch": "Vous devez (une partie) d'une temps de zone pour chercher.",
-  "timezone.search.invalidSearch": "La longeur doit etre plus que 4 **est** moins que 64 caractéres.",
-  "timezone.search.noResult": "Aucune temps de zone a été trouvé pour `{{{ search }}}`.",
-  "timezone.search.results": "🕐 Temps de zone trouvé: `{{{ search }}}`:\n{{{ found }}}",
+  "timezone.noTimezone": "Vous devez fuseau horaire de zone à régler. Trouvez des fuseaux horaire avec `{{{ command }}}`.",
+  "timezone.invalidTimezone": "Le fuseau horaire `{{{ timezone }}}` n'est pas reconnu !",
+  "timezone.setTimezone": "Le fuseau horaire a été réglé sur `{{{ timezone }}}`.",
+  "timezone.search.noSearch": "Vous devez (une partie) d'un fuseau horaire pour chercher.",
+  "timezone.search.invalidSearch": "La longeur de la recherche doit être plus que 4 **et** moins que 64 caractéres.",
+  "timezone.search.noResult": "Aucun fuseau horaire a été trouvé pour `{{{ search }}}`.",
+  "timezone.search.results": "🕐 Fuseaux horaires trouvé: `{{{ search }}}`:\n{{{ found }}}",
   
   "translate.noTargetLanguage": "Vous devez séléctionnez une langue cible (ISO 639-1 format)",
   "translate.invalidTarget": "La langue cible n'est pas valide",
@@ -582,7 +582,7 @@
   "translate.footer": "Traduction par l'API Google Traduction.",
   
   "user.title": "{{{ emote }}} Informations à propos de {{{ name }}}:",
-  "user.embed.id": "ID Discord",
+  "user.embed.id": "Discord ID",
   "user.embed.nickname": "Pseudonyme",
   "user.embed.status": "Status",
   "user.embed.roles": "Rôles",
