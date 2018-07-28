@@ -35,7 +35,6 @@ class LisaManager extends Manager {
   }
 
   async parseString(context, string, type, tagArgs = [], children = false) {
-    try {
     const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
@@ -65,17 +64,16 @@ class LisaManager extends Manager {
       } else {
         const name = content.substring(0, split).toLowerCase();
         const method = this.methods.find(m => m.name === name);
+        const splitter = (method && method.split.length > 0) ?
+          new RegExp(method.split.map(s => `\\${s}`).join('|')) :
+          '|';
+
+        const params = content
+          .substring(split + 1)
+          .split(splitter)
+          .map(a => this.defilterAll(a));
 
         if (method) {
-          const splitter = method.split.length > 0 ?
-            new RegExp(method.split.map(s => `\\${s}`).join('|')) :
-            '|';
-
-          const params = content
-            .substring(split + 1)
-            .split(splitter)
-            .map(a => this.defilterAll(a));
-
           try { result = await method.parseComplex(env, params); }
           catch (e) { result = `<invalid ${name} statement>`; }
         }
@@ -92,7 +90,6 @@ class LisaManager extends Manager {
       content: output || '​',
       embed: env.embed,
     });
-  } catch (e) { console.error(e) }
   }
 
   filterEscapes(string) {
