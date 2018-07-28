@@ -42,7 +42,7 @@ class LisaManager extends Manager {
 
     while (!done) {
       const end = output.indexOf('}');
-      const start = (i1 === -1 ? -1 : output.lastIndexOf('{'));
+      const start = (end === -1 ? -1 : output.lastIndexOf('{'));
 
       if ((start === -1) && (end === -1)) {
         done = true;
@@ -80,7 +80,7 @@ class LisaManager extends Manager {
       }
 
       if (typeof result !== 'string') result = `{${content}}`;
-      output = output.substring(0, i2) + this.filterAll(result) + output.substring(i1 + 1);
+      output = output.substring(0, start) + this.filterAll(result) + output.substring(end + 1);
     }
 
     output = this.defilterAll(output);
