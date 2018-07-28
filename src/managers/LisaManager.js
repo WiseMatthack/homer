@@ -35,6 +35,7 @@ class LisaManager extends Manager {
   }
 
   async parseString(context, string, type, tagArgs = [], children = false) {
+    try {
     const env = new Environment(this.client, context, type, tagArgs, children);
 
     let output = this.filterEscapes(string);
@@ -91,6 +92,7 @@ class LisaManager extends Manager {
       content: output || '​',
       embed: env.embed,
     });
+  } catch (e) { console.error(e) }
   }
 
   filterEscapes(string) {
