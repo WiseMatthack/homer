@@ -40,10 +40,12 @@ class LisaManager extends Manager {
     let output = this.filterEscapes(string);
     let done = false;
 
+    let i = 0;
     while (!done) {
       const end = output.indexOf('}');
       const start = (end === -1 ? -1 : output.lastIndexOf('{'));
-
+      i += 1;
+      console.log(`Debug ${i}: Before end/start check`)
       if ((start === -1) && (end === -1)) {
         done = true;
         break;
@@ -54,6 +56,7 @@ class LisaManager extends Manager {
 
       const split = content.indexOf(':');
       if (split === -1) {
+        console.log(`Debug ${i}: Simple`)
         const name = content.trim().toLowerCase();
         const method = this.methods.find(m => m.name === name);
 
@@ -62,6 +65,7 @@ class LisaManager extends Manager {
           catch (e) { result = `<invalid ${name} statement>`; }
         }
       } else {
+        console.log(`Debug ${i}: Complex`)
         const name = content.substring(0, split).toLowerCase();
         const method = this.methods.find(m => m.name === name);
         const splitter = (method && method.split.length > 0) ?
