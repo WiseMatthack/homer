@@ -60,61 +60,24 @@ class LisaManager extends Manager {
           }
         } else {
           const name = content.substring(0, split).toLowerCase();
-          console.log(name)
+          const method = this.methods.find(m => m.name === name);
+          const splitter = (method && method.split.length > 0) ?
+            new RegExp(method.split.map(s => `\\${s}`).join('|')) :
+            '|';
 
-          if (name !== this.client.config.secretEmbedMethod) {
-            console.log(`name: ${name} - ok`)
-            const method = this.methods.find(m => m.name === name);
-            const splitter = (method && method.split.length > 0) ?
-              new RegExp(method.split.map(s => `\\${s}`).join('|')) :
-              '|';
+          const params = content
+            .substring(split + 1)
+            .split(splitter)
+            .map(a => this.defilterAll(a));
 
-            const params = content
-              .substring(split + 1)
-              .split(splitter)
-              .map(a => this.defilterAll(a));
-
-            if (method) {
-              try { result = await method.parseComplex(env, params); }
-              catch (e) { result = `<invalid ${name} statement>`; }
-            }
+          if (method) {
+            try { result = await method.parseComplex(env, params); }
+            catch (e) { result = `<invalid ${name} statement>`; }
           }
         }
 
         if (typeof result !== 'string') result = `{${content}}`;
         output = output.substring(0, start) + this.filterAll(result) + output.substring(end + 1);
-      }
-    }
-
-    lastOutput = null;
-    console.log('WTF')
-    while (output !== lastOutput) {
-      const end = output.indexOf('}');
-      const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
-      lastOutput = output;
-
-      console.log(`end: ${end} - start: ${start}`)
-      if ((start !== -1) && (end !== -1)) {
-        const content = output.substring((start + 1), end);
-        const split = content.indexOf(':');
-        console.log(`Content: ${content}`)
-        console.log(`Split: ${split}`)
-        if (split === -1) break;
-
-        const name = content.substring(0, split).toLowerCase();
-        const value = content.substring(split + 1);
-        console.log(`Name: ${name}`)
-        console.log(`Value: ${value}`)
-
-        if (name !== this.client.config.secretEmbedMethod) break;
-
-        output = output.substring(0, start) + '' + output.substring(end + 1);
-        
-        try {
-          const decoded = Buffer.from(value, 'base64').toString();
-          const parsed = JSON.parse(decoded);
-          env.embed = parsed;
-        } catch (e) { env.embed = ({ description: '<failed to parse embed>' }); }
       }
     }
 
