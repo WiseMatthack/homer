@@ -127,7 +127,7 @@ class DeleteSubcommand extends Command {
 
     this.client.database.getDocuments('settings').then((settings) => {
       const affected = settings.filter(s => s.importedTags.includes(existentTag.id));
-      for (const setting of settings) {
+      for (const setting of affected) {
         const newImported = setting.importedTags.splice(setting.importedTags.indexOf(existentTag.id), 1);
         this.client.database.updateDocument('settings', setting.id, { importedTags: newImported });
       }
