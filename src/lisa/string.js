@@ -98,7 +98,7 @@ module.exports = [
       if (!params[0] || !params[1]) return;
       return Buffer.from(params[0]).toString(params[1]);
     },
-    ['in:'],
+    ['|in:'],
   ),
 
   // decode
@@ -109,7 +109,7 @@ module.exports = [
       if (!params[0] || !params[1]) return;
       return Buffer.from(params[0], params[1]).toString();
     },
-    ['from:'],
+    ['|from:'],
   ),
 
   // repeat
