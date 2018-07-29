@@ -70,6 +70,7 @@ class LisaManager extends Manager {
             .split(splitter)
             .map(a => this.defilterAll(a));
 
+          console.log(`Name: ${name} - Params: ${params}`)
           if (method) {
             try { result = await method.parseComplex(env, params); }
             catch (e) { result = `<invalid ${name} statement>`; }

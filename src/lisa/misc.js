@@ -78,7 +78,7 @@ module.exports = [
       }
 
       env.embed = embed;
-      return 'test';
+      return '';
     },
   ),
 
