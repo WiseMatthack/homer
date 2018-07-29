@@ -72,7 +72,7 @@ class LisaManager extends Manager {
 
           if (method) {
             try { result = await method.parseComplex(env, params); }
-            catch (e) { result = `<invalid ${name} statement>`; }
+            catch (e) { console.error(e); result = `<invalid ${name} statement>`; }
           }
         }
 

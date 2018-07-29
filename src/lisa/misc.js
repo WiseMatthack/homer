@@ -88,10 +88,7 @@ module.exports = [
         author: embed.author,
         timestamp: embed.timestamp,
       };
-      const str = JSON.stringify(object);
-      const buf = Buffer.from(str).toString('base64')
-      console.log(`str: ${str}`)
-      console.log(`buf: ${buf}`)
+
       return `{${this.client.config.secretEmbedMethod}:${Buffer.from(JSON.stringify(object)).toString('base64')}}`;
     },
   ),
