@@ -100,7 +100,7 @@ class LisaManager extends Manager {
         try {
           const parsed = JSON.parse(value);
           const decoded = Buffer.from(parsed, 'base64').toString();
-          env.embed = JSON.parse(decoded);
+          env.embed = decoded;
         } catch (e) { env.embed = ({ description: '<failed to parse embed>' }); }
       }
     }
