@@ -124,6 +124,14 @@ class DeleteSubcommand extends Command {
 
     await this.client.database.deleteDocument('tags', existentTag.id);
     context.replySuccess(context.__('tag.delete.deleted', { name }));
+
+    this.client.database.getDocuments('settings').then((settings) => {
+      const affected = settings.filter(s => s.importedTags.includes(existentTag.id));
+      for (const setting of settings) {
+        const newImported = setting.importedTags.splice(setting.importedTags.indexOf(existentTag.id), 1);
+        this.client.database.updateDocument('settings', setting.id, { importedTags: newImported });
+      }
+    });
   }
 }
 
