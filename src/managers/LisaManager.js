@@ -46,6 +46,7 @@ class LisaManager extends Manager {
       lastOutput = output;
 
       if ((start !== -1) && (end !== -1)) {
+        console.log(`Output: ${output}`)
         const content = output.substring((start + 1), end);
         let result;
 
@@ -72,7 +73,7 @@ class LisaManager extends Manager {
 
           console.log(`Name: ${name} - Params: ${params}`)
           if (method) {
-            try { result = await method.parseComplex(env, params); }
+            try { const r = await method.parseComplex(env, params); console.log(`Result: ${r}`); result = r; }
             catch (e) { result = `<invalid ${name} statement>`; }
           }
         }
