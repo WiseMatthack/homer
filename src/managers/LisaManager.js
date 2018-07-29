@@ -93,6 +93,7 @@ class LisaManager extends Manager {
       const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
       lastOutput = output;
 
+      console.log(`end: ${end} - start: ${start}`)
       if ((start !== -1) && (end !== -1)) {
         const content = output.substring((start + 1), end);
         const split = content.indexOf(':');
