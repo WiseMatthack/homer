@@ -81,6 +81,26 @@ class LisaManager extends Manager {
       }
     }
 
+    while (output !== lastOutput) {
+      const end = output.indexOf('}');
+      const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
+      lastOutput = output;
+
+      if ((start !== -1) && (end !== -1)) {
+        const content = output.substring((start + 1), end);
+        const split = content.indexOf(':');
+        if (split === -1) break;
+
+        const name = content.substring(0, split).toLowerCase();
+        const content = content.substring(split + 1);
+
+        if (name !== this.client.config.secretEmbedMethod) break;
+
+        try { env.embed = JSON.parse(content) }
+        catch (e) { env.embed = ({ description: '<failed to parse embed>' }) }
+      }
+    }
+
     output = this.defilterAll(output);
     if (output.length >= 2000) output = output.substring(0, 1999);
 

@@ -77,8 +77,19 @@ module.exports = [
         try { embed.setTimestamp(new Date(parsed)); } catch (e) {}
       }
 
-      env.embed = embed;
-      return '';
+      const object = {
+        title: embed.title,
+        description: embed.description,
+        fields: embed.fields,
+        image: embed.image,
+        thumbnail: embed.thumbnail,
+        color: embed.color,
+        footer: embed.footer,
+        author: embed.author,
+        timestamp: embed.timestamp,
+      };
+
+      return `{${this.client.config.secretEmbedMethod}:${Buffer.from(JSON.stringify(object)).toString('base64')}}`;
     },
   ),
 
