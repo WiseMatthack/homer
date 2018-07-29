@@ -89,7 +89,7 @@ module.exports = [
         timestamp: embed.timestamp,
       };
 
-      return `{${this.client.config.secretEmbedMethod}:${Buffer.from(JSON.stringify(object)).toString('base64')}}`;
+      return `{${env.client.config.secretEmbedMethod}:${Buffer.from(JSON.stringify(object)).toString('base64')}}`;
     },
   ),
 
