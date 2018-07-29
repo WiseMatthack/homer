@@ -89,6 +89,7 @@ class LisaManager extends Manager {
       if ((start !== -1) && (end !== -1)) {
         const content = output.substring((start + 1), end);
         const split = content.indexOf(':');
+        console.log(content)
         if (split === -1) break;
 
         const name = content.substring(0, split).toLowerCase();
