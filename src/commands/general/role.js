@@ -187,7 +187,7 @@ class MembersSubcommand extends Command {
     const menu = new Menu(
       context,
       m
-        .sort((a, b) => a.username > b.username)
+        .sort((a, b) => a.username.toLowerCase().localeCompare(b.username.toLowerCase()))
         .map(mm => `${this.dot} **${mm.username}**#${mm.discriminator} (ID:${mm.id})`),
     );
 
