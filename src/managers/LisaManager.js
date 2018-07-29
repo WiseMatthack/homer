@@ -61,7 +61,7 @@ class LisaManager extends Manager {
         } else {
           const name = content.substring(0, split).toLowerCase();
 
-          if (name === this.client.config.secretEmbedMethod) {
+          if (name !== this.client.config.secretEmbedMethod) {
             const method = this.methods.find(m => m.name === name);
             const splitter = (method && method.split.length > 0) ?
               new RegExp(method.split.map(s => `\\${s}`).join('|')) :
