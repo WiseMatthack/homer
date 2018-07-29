@@ -89,10 +89,14 @@ class LisaManager extends Manager {
       if ((start !== -1) && (end !== -1)) {
         const content = output.substring((start + 1), end);
         const split = content.indexOf(':');
+        console.log(`Content: ${content}`)
+        console.log(`Split: ${split}`)
         if (split === -1) break;
 
         const name = content.substring(0, split).toLowerCase();
         const value = content.substring(split + 1);
+        console.log(`Name: ${name}`)
+        console.log(`Value: ${value}`)
 
         if (name !== this.client.config.secretEmbedMethod) break;
 
