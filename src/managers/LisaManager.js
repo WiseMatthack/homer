@@ -97,8 +97,9 @@ class LisaManager extends Manager {
         if (name !== this.client.config.secretEmbedMethod) break;
 
         output = output.substring(0, start) + output.substring(end + 1);
+        
         try {
-          const decoded = Buffer.from(parsed, 'base64').toString();
+          const decoded = Buffer.from(value, 'base64').toString();
           const parsed = JSON.parse(decoded);
           env.embed = parsed;
         } catch (e) { env.embed = ({ description: '<failed to parse embed>' }); }
