@@ -27,6 +27,7 @@ exports.defaultGuildSettings = id => ({
 exports.defaultUserSettings = id => ({
   id,
   prefixes: [],
+  importedTags: [],
   misc: {
     timezone: 'UTC',
     locale: 'en-gb',
