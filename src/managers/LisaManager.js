@@ -93,6 +93,7 @@ class LisaManager extends Manager {
 
         const name = content.substring(0, split).toLowerCase();
         const value = content.substring(split + 1);
+        console.log(value)
 
         if (name !== this.client.config.secretEmbedMethod) break;
 
