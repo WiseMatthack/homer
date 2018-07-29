@@ -181,12 +181,14 @@ class MembersSubcommand extends Command {
     const m = [];
     for (const member of role.members.keyArray()) {
       const u = await this.client.fetchUser(member);
-      m.push(`${this.dot} **${u.username}**#${u.discriminator} (ID:${u.id})`);
+      m.push({ username: u.username, discriminator: u.discriminator, id: u.id });
     }
 
     const menu = new Menu(
       context,
-      m,
+      m
+        .sort((a, b) => a.username > b.username)
+        .map(mm => `${this.dot} **${mm.username}**#${mm.discriminator} (ID:${mm.id})`),
     );
 
     menu.send(context.__('role.members.title', { role: role.name }));
