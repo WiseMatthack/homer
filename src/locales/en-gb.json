@@ -235,6 +235,7 @@
   "helpUtil.tag.list": "List all tags made by the given user",
   "helpUtil.tag.import": "Import a tag as a custom command",
   "helpUtil.tag.unimport": "Remove a tag from the custom commands",
+  "helpUtil.tag.commands": "Get the list of tag commands (imported).",
   "helpUtil.tag.exec": "Run a tag without creating it (allows Lisa code)",
   "helpUtil.telephone": "Manage your telephone subscription",
   "helpUtil.telephone.subscribe": "Subscribe to the telephone",
@@ -580,6 +581,8 @@
   "tag.unimport.notImported": "The tag \"{{{ name }}}\" is not a custom command!",
   "tag.unimport.unimported": "The tag \"{{{ name }}}\" has been been removed from the custom commands.",
   "tag.exec.noContent": "You must provide a content to execute (allows Lisa code).",
+  "tag.commands.title": "🏷 Tag commands for {{{ name }}}:",
+  "tag.commands.noImportedTag": "No tag command found for {{{ name }}}.",
 
   "telephone.notAssigned": "The provided number is not assigned.",
   "telephone.refusedConnection": "The connection with your correspondent has been refused. You may have been **blacklisted** or the telephone service is currently **under maintenance**.",

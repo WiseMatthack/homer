@@ -18,6 +18,7 @@ class TagCommand extends Command {
         new ListSubcommand(client),
         new ImportSubcommand(client),
         new UnimportSubcommand(client),
+        new CommandsSubcommand(client),
         new ExecSubcommand(client),
       ],
       dm: true,
@@ -296,6 +297,31 @@ class ExecSubcommand extends Command {
 
     const parsed = await this.client.lisa.parseString(context, content, 'tag');
     context.reply(parsed.content || '', { embed: parsed.embed });
+  }
+}
+
+class CommandsSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'commands',
+      aliases: ['imported'],
+      category: 'misc',
+      dm: true,
+    });
+  }
+
+  async execute(context) {
+    const name = context.message.guild ? `**${context.message.guild.name}**` : `**${context.message.author.username}**#${context.message.author.discriminator}`;
+    const importedTags = context.settings.importedTags;
+    if (importedTags.length === 0) return context.replyWarning(context.__('tag.commands.noImportedTag', { name }));
+
+    const message = splitMessage([
+      `${context.__('tag.commands.title', { name })}`,
+      importedTags.join(' '),
+    ].join('\n'));
+
+    if (typeof message === 'string') return context.reply(message);
+    for (const m of message) await context.reply(m);
   }
 }
 
