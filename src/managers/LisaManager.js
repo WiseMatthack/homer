@@ -56,7 +56,7 @@ class LisaManager extends Manager {
           const method = this.methods.find(m => m.name === name);
 
           if (method) {
-            try { result = await method.parseSimple(env); }
+            try { result = await method.parseSimple(env) || ''; }
             catch (e) { result = `<invalid ${name} statement>`; }
           }
         } else {
@@ -73,7 +73,7 @@ class LisaManager extends Manager {
 
           console.log(`Name: ${name} - Params: ${params}`)
           if (method) {
-            try { const r = await method.parseComplex(env, params); console.log(`Result: ${r}`); result = r; }
+            try { result = await method.parseComplex(env, params) || ''; }
             catch (e) { result = `<invalid ${name} statement>`; }
           }
         }
