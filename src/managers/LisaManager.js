@@ -60,19 +60,22 @@ class LisaManager extends Manager {
           }
         } else {
           const name = content.substring(0, split).toLowerCase();
-          const method = this.methods.find(m => m.name === name);
-          const splitter = (method && method.split.length > 0) ?
-            new RegExp(method.split.map(s => `\\${s}`).join('|')) :
-            '|';
 
-          const params = content
-            .substring(split + 1)
-            .split(splitter)
-            .map(a => this.defilterAll(a));
+          if (name === this.client.config.secretEmbedMethod) {
+            const method = this.methods.find(m => m.name === name);
+            const splitter = (method && method.split.length > 0) ?
+              new RegExp(method.split.map(s => `\\${s}`).join('|')) :
+              '|';
 
-          if (method) {
-            try { result = await method.parseComplex(env, params); }
-            catch (e) { result = `<invalid ${name} statement>`; }
+            const params = content
+              .substring(split + 1)
+              .split(splitter)
+              .map(a => this.defilterAll(a));
+
+            if (method) {
+              try { result = await method.parseComplex(env, params); }
+              catch (e) { result = `<invalid ${name} statement>`; }
+            }
           }
         }
 
