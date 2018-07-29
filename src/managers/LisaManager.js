@@ -84,6 +84,7 @@ class LisaManager extends Manager {
       }
     }
 
+    lastOutput = null;
     while (output !== lastOutput) {
       const end = output.indexOf('}');
       const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
@@ -103,7 +104,7 @@ class LisaManager extends Manager {
 
         if (name !== this.client.config.secretEmbedMethod) break;
 
-        output = output.substring(0, start) + output.substring(end + 1);
+        output = output.substring(0, start) + '' + output.substring(end + 1);
         
         try {
           const decoded = Buffer.from(value, 'base64').toString();
