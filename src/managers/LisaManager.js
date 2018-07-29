@@ -60,8 +60,10 @@ class LisaManager extends Manager {
           }
         } else {
           const name = content.substring(0, split).toLowerCase();
+          console.log(name)
 
           if (name !== this.client.config.secretEmbedMethod) {
+            console.log(`name: ${name} - ok`)
             const method = this.methods.find(m => m.name === name);
             const splitter = (method && method.split.length > 0) ?
               new RegExp(method.split.map(s => `\\${s}`).join('|')) :
@@ -85,6 +87,7 @@ class LisaManager extends Manager {
     }
 
     lastOutput = null;
+    console.log('WTF')
     while (output !== lastOutput) {
       const end = output.indexOf('}');
       const start = (end === -1 ? -1 : output.lastIndexOf('{', end));
