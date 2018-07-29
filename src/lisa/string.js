@@ -41,7 +41,10 @@ module.exports = [
   new Method(
     'replaceregex',
     null,
-    (env, params) => params[2].replace(new RegExp(params[0], 'igm'), params[1] || ''),
+    (env, params) => {
+      try { params[2].replace(new RegExp(params[0], 'igm'), params[1] || ''); }
+      catch (e) { console.error(e); }
+    },
     ['|with:', '|in:'],
   ),
 
