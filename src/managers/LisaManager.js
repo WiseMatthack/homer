@@ -69,6 +69,7 @@ class LisaManager extends Manager {
           const params = content
             .substring(split + 1)
             .split(splitter)
+            .filter(a => Boolean(a))
             .map(a => this.defilterAll(a));
 
           console.log(`Name: ${name} - Params: ${params}`)
