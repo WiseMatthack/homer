@@ -89,18 +89,19 @@ class LisaManager extends Manager {
       if ((start !== -1) && (end !== -1)) {
         const content = output.substring((start + 1), end);
         const split = content.indexOf(':');
-        console.log(content)
         if (split === -1) break;
 
         const name = content.substring(0, split).toLowerCase();
         const value = content.substring(split + 1);
-        console.log(value)
 
         if (name !== this.client.config.secretEmbedMethod) break;
 
         output = output.substring(0, start) + output.substring(end + 1);
-        try { env.embed = JSON.parse(value) }
-        catch (e) { env.embed = ({ description: '<failed to parse embed>' }) }
+        try {
+          const parsed = JSON.parse(value);
+          const decoded = Buffer.from(parsed, 'base64').toString();
+          env.embed = JSON.parse(decoded);
+        } catch (e) { env.embed = ({ description: '<failed to parse embed>' }); }
       }
     }
 
