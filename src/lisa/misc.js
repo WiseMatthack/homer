@@ -77,8 +77,19 @@ module.exports = [
         try { embed.setTimestamp(new Date(parsed)); } catch (e) {}
       }
 
-      env.embed = embed;
-      return '';
+      const object = {
+        title: embed.title,
+        description: embed.description,
+        fields: embed.fields,
+        thumbnail: embed.thumbnail,
+        image: embed.image,
+        color: embed.color,
+        author: embed.author,
+        timestamp: embed.timestamp,
+        footer: embed.footer,
+      };
+
+      return `{embedok:${JSON.stringify(object)}}`;
     },
   ),
 
