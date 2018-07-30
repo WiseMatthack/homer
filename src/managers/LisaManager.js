@@ -107,7 +107,7 @@ class LisaManager extends Manager {
     if (output.length >= 2000) output = output.substring(0, 1999);
     console.log('After defilter');
 
-    console.log(`Final output: ${output || ''} - Embed: ${embed}`);
+    console.log(`Final output: ${output || ''} - Embed: ${env.embed}`);
     return ({
       content: output || '​',
       embed: env.embed,
