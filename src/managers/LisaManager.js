@@ -83,14 +83,17 @@ class LisaManager extends Manager {
 
     const embedEnd = output.indexOf('|||]|||');
     const embedStart = embedEnd === -1 ? -1 : output.lastIndexOf('|||[|||', embedEnd);
+    console.log(embedStart + ' - ' + embedEnd)
 
     if ((embedStart !== -1) && (embedEnd !== -1)) {
       const content = output.substring((embedStart + 7), embedEnd);
+      console.log(content)
       const split = output.indexOf(':');
-
+      console.log(split)
       if (split !== -1) {
         const name = content.substring(0, split).toLowerCase();
         const value = (name === 'embedok') ? this.defilterAll(content.substring(split + 1)) : undefined;
+        console.log(name + ' - ' + value)
         try { env.embed = JSON.stringify(value); }
         catch (e) { console.error(e); }
         output = output.substring(0, embedStart) + output.substring(embedEnd + 7);
