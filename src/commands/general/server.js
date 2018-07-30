@@ -7,6 +7,7 @@ class ServerCommand extends Command {
       name: 'server',
       aliases: ['guild', 'serverinfo'],
       category: 'general',
+      children: [new StaffSubcommand(client)],
     });
   }
 
