@@ -116,9 +116,9 @@ class LisaManager extends Manager {
 
   defilterEscapes(string) {
     return string
-      .replaceAll('\u0012', '\\{')
-      .replaceAll('\u0013', '\\|')
-      .replaceAll('\u0014', '\\}');
+      .replaceAll('\u0012', '{')
+      .replaceAll('\u0013', '|')
+      .replaceAll('\u0014', '}');
   }
 
   filterAll(string) {
