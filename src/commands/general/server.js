@@ -65,11 +65,15 @@ class StaffSubcommand extends Command {
 
   async execute(context) {
     const staff = context.message.guild.members
-      .filter(m => !m.user.bot && m.permissions.has(['MANAGE_GUILD', 'KICK_MEMBERS']))
+      .filter(m =>
+        !m.user.bot &&
+        m.user.presence.status !== 'offline' &&
+        (m.permissions.has('MANAGE_GUILD') || m.permissions.has('KICK_MEMBERS'))
+      )
       .map(m => ({ username: m.user.username, discrim: m.user.discriminator, status: m.user.presence.status, type: (m.permissions.has('MANAGE_GUILD') ? 'admin' : 'mod') }))
       .sort((a, b) => {
         if (a.status === b.status) return b.type.localeCompare(a.type);
-        return b.status.localeCompare(a.status);
+        return this.statusOrder[b.status].localeCompare(this.statusOrder[a.status]);
       });
 
     const embed = new RichEmbed()
@@ -79,6 +83,14 @@ class StaffSubcommand extends Command {
       context.__('server.staff.title', { name: context.message.guild.name }),
       { embed },
     );
+  }
+
+  get statusOrder() {
+    return ({
+      'online': 'a',
+      'idle': 'b',
+      'dnd': 'c',
+    });
   }
 }
 
