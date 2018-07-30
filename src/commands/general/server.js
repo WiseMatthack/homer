@@ -53,4 +53,32 @@ class ServerCommand extends Command {
   }
 }
 
+class StaffSubcommand extends Command {
+  constructor(client) {
+    super(client, {
+      name: 'staff',
+      aliases: ['mods', 'admins'],
+      category: 'general',
+    });
+  }
+
+  async execute(context) {
+    const staff = context.message.guild.members
+      .filter(m => m.permissions.has(['MANAGE_GUILD', 'KICK_MEMBERS']))
+      .map(m => ({ username: m.user.username, discrim: m.user.discriminator, status: m.user.presence.status, type: (m.permissions.has('MANAGE_GUILD') ? 'admin' : 'mod') }))
+      .sort((a, b) => {
+        if (a.status === b.status) return a.type.localeCompare(b.type);
+        return a.status.localeCompare(b.status);
+      });
+
+    const embed = new RichEmbed()
+      .setDescription(staff.map(m => `${this.client.constants.status[m.status]} **${m.username}**#${m.discriminator} (\`${m.type.toUpperCase()}\`)`).join('\n'));
+
+    context.reply(
+      context.__('server.staff.title', { name: context.message.guild.name }),
+      { embed },
+    );
+  }
+}
+
 module.exports = ServerCommand;

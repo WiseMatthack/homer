@@ -222,6 +222,7 @@
   "helpUtil.roleme.remove": "Remove a role from the roleme list",
   "helpUtil.say": "Repeat what you just said",
   "helpUtil.server": "Get information about the server",
+  "helpUtil.server.staff": "All online staff on the server",
   "helpUtil.settings": "Overview the server settings",
   "helpUtil.stats": "Get statistics about the bot",
   "helpUtil.support": "Join the support server",
@@ -533,6 +534,7 @@
   "server.region.singapore": "Singapore",
   "server.region.southafrica": "South Africa",
   "server.region.sydney": "Sydney",
+  "server.staff.title": "🛠 Online staff on **{{{ name }}}**:",
 
   "settings.title": "🔧 Settings for {{{ name }}}:",
   "settings.embed.locale": "Language",
