@@ -65,15 +65,15 @@ class StaffSubcommand extends Command {
 
   async execute(context) {
     const staff = context.message.guild.members
-      .filter(m => m.permissions.has(['MANAGE_GUILD', 'KICK_MEMBERS']))
+      .filter(m => !m.user.bot && m.permissions.has(['MANAGE_GUILD', 'KICK_MEMBERS']))
       .map(m => ({ username: m.user.username, discrim: m.user.discriminator, status: m.user.presence.status, type: (m.permissions.has('MANAGE_GUILD') ? 'admin' : 'mod') }))
       .sort((a, b) => {
-        if (a.status === b.status) return a.type.localeCompare(b.type);
-        return a.status.localeCompare(b.status);
+        if (a.status === b.status) return b.type.localeCompare(a.type);
+        return b.status.localeCompare(a.status);
       });
 
     const embed = new RichEmbed()
-      .setDescription(staff.map(m => `${this.client.constants.status[m.status]} **${m.username}**#${m.discriminator} (\`${m.type.toUpperCase()}\`)`).join('\n'));
+      .setDescription(staff.map(m => `${this.client.constants.status[m.status]} **${m.username}**#${m.discrim} (\`${m.type.toUpperCase()}\`)`).join('\n'));
 
     context.reply(
       context.__('server.staff.title', { name: context.message.guild.name }),
