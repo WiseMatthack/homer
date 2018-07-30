@@ -89,7 +89,7 @@ module.exports = [
         footer: embed.footer,
       };
 
-      return `{embedok:${JSON.stringify(object)}}`;
+      return `|||[|||embedok:${JSON.stringify(object)}|||]|||`;
     },
   ),
 
