@@ -83,31 +83,24 @@ class LisaManager extends Manager {
 
     const embedEnd = output.indexOf('|||]|||');
     const embedStart = embedEnd === -1 ? -1 : output.lastIndexOf('|||[|||', embedEnd);
-    console.log(`Start: ${embedStart} - End: ${embedEnd}`)
 
     if ((embedStart !== -1) && (embedEnd !== -1)) {
       const content = output.substring((embedStart + 7), embedEnd);
       const split = content.indexOf(':');
-      console.log(`Content: ${content} - Split: ${split}`)
 
       if (split !== -1) {
         const name = content.substring(0, split).toLowerCase();
-        const value = (name === 'embedok') ? this.defilterAll(content.substring(split + 1)) : undefined;
-        console.log(`Name: ${name} - Value: ${value}`)
+        const value = (name === this.client.config.secretEmbedMethod) ? this.defilterAll(content.substring(split + 1)) : undefined;
 
-        try { env.embed = JSON.parse(value); console.log('Try: OK'); }
-        catch (e) { console.error(e); console.log('Try: Not OK'); }
+        try { env.embed = JSON.parse(value); }
+        catch (e) {}
         output = output.substring(0, embedStart) + output.substring(embedEnd + 7);
-        console.log('Output done');
       }
     }
 
-    console.log('Before defilter');
     output = this.defilterAll(output);
     if (output.length >= 2000) output = output.substring(0, 1999);
-    console.log('After defilter');
 
-    console.log(`Final output: ${output || ''} - Embed: ${env.embed}`);
     return ({
       content: output || '​',
       embed: env.embed,

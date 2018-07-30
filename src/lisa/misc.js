@@ -77,7 +77,7 @@ module.exports = [
         try { embed.setTimestamp(new Date(parsed)); } catch (e) {}
       }
 
-      return `|||[|||embedok:${JSON.stringify(embed)}|||]|||`;
+      return `|||[|||${env.client.config.secretEmbedMethod}:${JSON.stringify(embed)}|||]|||`;
     },
   ),
 
