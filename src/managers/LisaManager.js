@@ -92,7 +92,7 @@ class LisaManager extends Manager {
         const name = content.substring(0, split).toLowerCase();
         const value = (name === 'embedok') ? this.defilterAll(content.substring(split + 1)) : undefined;
         try { env.embed = JSON.stringify(value); }
-        catch (e) {}
+        catch (e) { console.error(e); }
         output = output.substring(0, embedStart) + output.substring(embedEnd + 7);
       }
     }
