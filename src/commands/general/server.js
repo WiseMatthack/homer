@@ -72,8 +72,8 @@ class StaffSubcommand extends Command {
       )
       .map(m => ({ username: m.user.username, discrim: m.user.discriminator, status: m.user.presence.status, type: (m.permissions.has('MANAGE_GUILD') ? 'admin' : 'mod') }))
       .sort((a, b) => {
-        if (a.status === b.status) return b.type.localeCompare(a.type);
-        return this.statusOrder[b.status].localeCompare(this.statusOrder[a.status]);
+        if (a.status === b.status) return a.type.localeCompare(b.type);
+        return this.statusOrder[a.status].localeCompare(this.statusOrder[b.status]);
       });
 
     const embed = new RichEmbed()
