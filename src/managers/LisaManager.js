@@ -95,9 +95,10 @@ class LisaManager extends Manager {
         const value = (name === 'embedok') ? this.defilterAll(content.substring(split + 1)) : undefined;
         console.log(`Name: ${name} - Value: ${value}`)
 
-        try { env.embed = JSON.stringify(value); }
-        catch (e) { console.error(e); }
+        try { env.embed = JSON.stringify(value); console.log('Try: OK'); }
+        catch (e) { console.error(e); console.log('Try: Not OK'); }
         output = output.substring(0, embedStart) + output.substring(embedEnd + 7);
+        console.log('Output done');
       }
     }
 
